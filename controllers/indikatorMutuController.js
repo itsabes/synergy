@@ -221,6 +221,9 @@ sikatApp.controller("indikatorMutuNewController", function(
 
   $rootScope.currPage = "indikatorMutu";
   $scope.profileType = {};
+
+  var today = new Date();
+  $scope.tahun = today.getFullYear() + "";
   
   $scope.save = () => {
     $http
