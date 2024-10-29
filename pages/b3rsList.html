@@ -1,0 +1,89 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">
+      Laporan Tumpahan B3 - List
+    </h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Laporan Tumpahan B3</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="lokasi" class="col-sm-3 control-label">Jenis Bahan</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="jenisBahan" class="form-control" id="jenisBahan" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="fasa" class="col-sm-3 control-label">Fasa</label>
+            <div class="col-sm-9">
+              <select class="form-control custom-select" ng-model="fasa">
+                <option value="CAIR">Cair</option>
+                <option value="PADAT">Padat</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="lokasi" class="form-control" id="lokasi" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tanggal" class="col-sm-3 control-label">Tanggal</label>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalDariDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalDari"
+                max-view="month" start-view="month" id="tanggalDariRegistrasi" />
+            </div>
+            <div class="col-sm-1">s/d</div>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalSampaiDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalSampai"
+                max-view="month" start-view="month" id="tanggalSampaiRegistrasi" />
+            </div>
+          </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
+                Cari Data
+              </button>
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="addB3rs()">
+                <i class="fa fa-plus"></i> Laporan Tumpahan B3
+              </button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
+          show-filter="false">
+          <tr ng-repeat="row in $data track by $index">
+            <td title="'Tanggal Kejadian'" sortable="'tgl_kejadian'">
+              <a style="display: block;" href="javascript:void(0)"
+                ng-click="showB3rs(row.tgl_kejadian, row.jenis_bahan)">{{ row.tgl_kejadian }}
+              </a>
+            </td>
+            <td title="'Jenis Bahan'" sortable="'jenis_bahan'">
+              {{ row.jenis_bahan }}
+            </td>
+            <td title="'Fasa'" sortable="'fasa'">
+              {{ row.fasa }}
+            </td>
+            <td title="'Lokasi'" sortable="'lokasi'">
+              {{ row.lokasi }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

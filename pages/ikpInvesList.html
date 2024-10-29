@@ -1,0 +1,581 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Laporan Insiden Pasien - List</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Form Investivigasi</li>
+    </ol>
+  </div>
+</div>
+
+<div
+  class="modal fade ikpLapor-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="longmodal"
+  aria-hidden="true"
+  style="display: none;"
+>
+  <div class="modal-dialog" style="max-width: 80%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="longmodal">Detail Laporan Insiden</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          ×
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-outline-info">
+              <div class="card-body">
+                <form action="#">
+                  <div class="form-body">
+                    <div class="row align-items-start">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">No Rawat</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_noRawat"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">No Rekam Medis</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_noRekamMedis"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Nama Pasien</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_namaPasien"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Umur</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_umur"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Jenis Kelamin</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_jenisKelamin"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">DPJP</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_namaDokter"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Kamar</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_kodeKamar"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Tanggal dan Waktu Kejadian*</label
+                          >
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_tanggal"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Petugas</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_petugas"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Lokasi Insiden</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_lokasi"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Unit Terkait</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_unitTerkait"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Orang Pertama yg melaporkan</label
+                          >
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_pertamaMelaporkan"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Unit kerja penyebab</label
+                          >
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_unitPenyebab"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Pernah Terjadi di unit kerja lain?</label
+                          >
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_kejadianSebelumnya"
+                            disabled
+                          >
+                            <option value="IYA">Ya</option>
+                            <option value="TIDAK">Tidak </option>
+                          </select>
+                        </div>
+                        <div
+                          class="form-group"
+                          ng-show="kejadianSebelumnya == 'IYA'"
+                        >
+                          <label class="control-label"
+                            >Kapan? dan Langkah apa yang telah diambil untuk
+                            mencegah terulang?</label
+                          >
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_pencegahanTerulang"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Jenis Insiden</label>
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_jenisInsiden"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="jenisInsiden in jenisInsidenList"
+                              value="{{ jenisInsiden.id }}"
+                              >{{ jenisInsiden.id + " - " + jenisInsiden.nama
+                              }}</option
+                            >
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Nama Insiden</label>
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_namaInsiden"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="namaInsiden in namaInsidenList| filter:{jenis_insiden:jenisInsiden}"
+                              value="{{ namaInsiden.id }}"
+                              >{{ namaInsiden.id + " - " + namaInsiden.nama
+                              }}</option
+                            >
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Skor Dampak</label>
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_skorDampak"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="skorDampak in skorDampakList"
+                              value="{{ skorDampak.id }}"
+                              >{{ skorDampak.id + " - " + skorDampak.nama
+                              }}</option
+                            >
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Tipe Insiden</label>
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_tipeInsiden"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="tipeInsiden in tipeInsidenList"
+                              value="{{ tipeInsiden.id }}"
+                              >{{ tipeInsiden.id + " - " + tipeInsiden.nama
+                              }}</option
+                            >
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Subtipe Insiden</label>
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_subtipeInsiden"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="subtipeInsiden in subtipeInsidenList| filter:{tipe_insiden:tipeInsiden}"
+                              value="{{ subtipeInsiden.id }}"
+                              >{{ subtipeInsiden.id + " - " +
+                              subtipeInsiden.nama }}</option
+                            >
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Tanggal Registrasi</label
+                          >
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_tglRegistrasi"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Cara Bayar</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_caraBayar"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Tanggal Lapor</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_tanggalLapor"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Frekuensi Kejadian</label
+                          >
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_frekuensiKejadian"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="frekuensiKejadian in frekuensiKejadianList"
+                              value="{{ frekuensiKejadian.id }}"
+                              >{{ frekuensiKejadian.id + " - " +
+                              frekuensiKejadian.nama }}</option
+                            >
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Kronologis</label>
+                          <textarea
+                            class="form-control"
+                            rows="5"
+                            ng-model="ikpLapor_identifikasi"
+                            disabled
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Akibat Insiden</label>
+                          <textarea
+                            class="form-control"
+                            rows="5"
+                            ng-model="ikpLapor_akibat"
+                            disabled
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label"
+                            >Tindakan yang dilakukan setelah Insiden</label
+                          >
+                          <textarea
+                            class="form-control"
+                            rows="5"
+                            ng-model="ikpLapor_tindakanInsiden"
+                            disabled
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Tindak Lanjut</label>
+                          <textarea
+                            class="form-control"
+                            rows="5"
+                            ng-model="ikpLapor_rtl"
+                            disabled
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Tindakan Oleh</label>
+                          <select
+                            class="form-control custom-select"
+                            ng-model="ikpLapor_tindakanOleh"
+                            disabled
+                          >
+                            <option
+                              ng-repeat="tindakanOleh in tindakanOlehList"
+                              value="{{ tindakanOleh.id }}"
+                              >{{ tindakanOleh.id + " - " + tindakanOleh.nama
+                              }}</option
+                            >
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Nama Penerima</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_namaPenerima"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Tanggal Terima</label>
+                          <input
+                            type="text"
+                            ng-model="ikpLapor_tanggalTerima"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger waves-effect text-left"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="noRawat" class="col-sm-3 control-label">No Rawat</label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="noRawat"
+                class="form-control"
+                id="noRawat"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaInsiden" class="col-sm-3 control-label"
+              >Nama Insiden</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="namaInsiden"
+                class="form-control"
+                id="namaInsiden"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaPetugas" class="col-sm-3 control-label"
+              >Nama Petugas</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="namaPetugas"
+                class="form-control"
+                id="namaPetugas"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaPasien" class="col-sm-3 control-label"
+              >Nama Pasien</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="namaPasien"
+                class="form-control"
+                id="namaPasien"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaDokter" class="col-sm-3 control-label"
+              >Nama Dokter</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="namaDokter"
+                class="form-control"
+                id="namaDokter"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tanggalKejadian" class="col-sm-3 control-label"
+              >Tanggal Kejadian</label
+            >
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                format="YYYY-MM-DD"
+                ng-model="tanggalDariDate"
+                ng-model-options="{ updateOn: 'blur' }"
+                placeholder="- Select a date -"
+                moment-picker="tanggalDari"
+                max-view="month"
+                start-view="month"
+                id="tanggalDariKejadian"
+              />
+            </div>
+            <div class="col-sm-1">s/d</div>
+            <div class="col-sm-4">
+              <input
+                class="form-control"
+                format="YYYY-MM-DD"
+                ng-model="tanggalSampaiDate"
+                ng-model-options="{ updateOn: 'blur' }"
+                placeholder="- Select a date -"
+                moment-picker="tanggalSampai"
+                max-view="month"
+                start-view="month"
+                id="tanggalSampaiKejadian"
+              />
+            </div>
+          </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-3 col-sm-9">
+              <button
+                type="button"
+                class="btn btn-success waves-effect waves-light"
+                ng-click="loadData()"
+              >
+                Cari Data
+              </button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <table
+          ng-table="tableParams"
+          class="table table-condensed table-bordered table-striped table-responsive"
+          show-filter="false"
+        >
+          <tr ng-repeat="row in $data track by $index">
+            <td title="'Tanggal Kejadian'" sortable="'tgl_kejadian'">
+              <a
+                ng-if="row.inves_no"
+                style="display: block;"
+                href="javascript:void(0)"
+                ng-click="showIkpInves(row.tgl_kejadian, row.no_rawat)"
+                >{{ row.tgl_kejadian }}
+              </a>
+              <span ng-if="!row.inves_no">{{ row.tgl_kejadian }}</span>
+            </td>
+            <td title="'No Rawat'" sortable="'no_rawat'">
+              {{ row.no_rawat }}
+            </td>
+            <td title="'Nama Insiden'" sortable="'nama_insiden'">
+              {{ row.nama_insiden }}
+            </td>
+            <td title="'Nama Petugas'" sortable="'nama_petugas'">
+              {{ row.nama_petugas }}
+            </td>
+            <td title="'Nama Pasien'" sortable="'nm_pasien'">
+              {{ row.nm_pasien }}
+            </td>
+            <td title="'Nama Dokter'" sortable="'nm_dokter'">
+              {{ row.nm_dokter }}{{ row.inves_no }}
+            </td>
+            <td title="'Action'" sortable="'inves_no'">
+              <span ng-if="row.inves_no">&nbsp;</span>
+              <button
+                ng-if="!row.inves_no"
+                type="button"
+                class="btn btn-success waves-effect waves-light"
+                ng-click="addIkpInves(row.tgl_kejadian, row.no_rawat)"
+              >
+                <i class="fa fa-plus"></i> Investivigasi
+              </button>
+              <button
+                type="button"
+                ng-click="showIkpLapor(row)"
+                class="btn btn-success waves-effect waves-light"
+                data-toggle="modal"
+                data-target=".ikpLapor-modal"
+              >
+                View Laporan
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

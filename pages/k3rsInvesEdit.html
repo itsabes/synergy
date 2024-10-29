@@ -1,0 +1,360 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Form Investivigasi - Edit</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Form Investivigasi</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Modifikasi Form Investivigasi</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label"
+                    >Tanggal dan Waktu Kejadian</label
+                  >
+                  <input
+                    class="form-control"
+                    format="YYYY-MM-DD hh:mm:ss"
+                    ng-model="tglKejadianDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    placeholder="- Select a datetime -"
+                    moment-picker="tglKejadian"
+                    max-view="minute"
+                    start-view="month"
+                    id="tglKejadian"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">No Rekam Medis / Nama</label>
+                  <input
+                    type="text"
+                    ng-model="noRkmMedis"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <h4>Penyebab Langsung</h4>
+                <div class="form-group">
+                  <label class="control-label">Kondisi</label>
+                  <input type="text" ng-model="kondisi" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tindakan</label>
+                  <input type="text" ng-model="tindakan" class="form-control" />
+                </div>
+                <h4>Penyebab Tidak Langsung</h4>
+                <div class="form-group">
+                  <label class="control-label">Pribadi</label>
+                  <input type="text" ng-model="pribadi" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Pekerjaan</label>
+                  <input
+                    type="text"
+                    ng-model="pekerjaan"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <h4>Penyebab Dasar</h4>
+                <div class="form-group">
+                  <label class="control-label">Kurang Prosedur</label>
+                  <input
+                    type="text"
+                    ng-model="kurangProsedur"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kurang Sarana</label>
+                  <input
+                    type="text"
+                    ng-model="kurangSarana"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kurang Taat</label>
+                  <input
+                    type="text"
+                    ng-model="kurangTaat"
+                    class="form-control"
+                  />
+                </div>
+                <h4>Perbaikan dan Pencegahan</h4>
+                <div class="row m-b-15">
+                  <div class="col-6">
+                    <div>Rencana Tindakan</div>
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan1"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan2"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan3"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan4"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan5"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan6"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="rencanaTindakan7"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-3">
+                    <div>Target</div>
+                    <input
+                      type="text"
+                      ng-model="target1"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="target2"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="target3"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="target4"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="target5"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="target6"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="target7"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-3">
+                    <div>Wewenang</div>
+                    <input
+                      type="text"
+                      ng-model="wewenang1"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="wewenang2"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="wewenang3"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="wewenang4"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="wewenang5"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="wewenang6"
+                      class="form-control m-b-5"
+                    />
+                    <input
+                      type="text"
+                      ng-model="wewenang7"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="row align-items-start">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Nama Saksi</label>
+                      <input
+                        type="text"
+                        ng-model="namaSaksi"
+                        class="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Tanggal Paraf</label>
+                      <div
+                        class="form-control datetime-picker"
+                        format="YYYY-MM-DD"
+                        ng-model="tglParafSaksiDate"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        moment-picker="tglParafSaksi"
+                        max-view="month"
+                        start-view="month"
+                        id="tglParafSaksi"
+                      >
+                        <a
+                          href="javascript:void(0);"
+                          onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tglParafSaksi = ''; scope.$apply();"
+                          class="pull-right"
+                          ng-if="tglParafSaksi"
+                        >
+                          &times;
+                        </a>
+                        <span ng-class="{'text-muted': !tglParafSaksi}">
+                          {{ tglParafSaksi || "- Select a date -" }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Nama Penanggung Jawab</label>
+                      <input
+                        type="text"
+                        ng-model="namaPenanggung"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Tanggal Paraf</label>
+                      <div
+                        class="form-control datetime-picker"
+                        format="YYYY-MM-DD"
+                        ng-model="tglParafPenanggungDate"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        moment-picker="tglParafPenanggung"
+                        max-view="month"
+                        start-view="month"
+                        id="tglParafPenanggung"
+                      >
+                        <a
+                          href="javascript:void(0);"
+                          onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tglParafPenanggung = ''; scope.$apply();"
+                          class="pull-right"
+                          ng-if="tglParafPenanggung"
+                        >
+                          &times;
+                        </a>
+                        <span ng-class="{'text-muted': !tglParafPenanggung}">
+                          {{ tglParafPenanggung || "- Select a date -" }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Nama Kasir Penunjang</label>
+                      <input
+                        type="text"
+                        ng-model="namaKasir"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Tanggal Paraf</label>
+                      <div
+                        class="form-control datetime-picker"
+                        format="YYYY-MM-DD"
+                        ng-model="tglParafKasirDate"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        moment-picker="tglParafKasir"
+                        max-view="month"
+                        start-view="month"
+                        id="tglParafKasir"
+                      >
+                        <a
+                          href="javascript:void(0);"
+                          onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tglParafKasir = ''; scope.$apply();"
+                          class="pull-right"
+                          ng-if="tglParafKasir"
+                        >
+                          &times;
+                        </a>
+                        <span ng-class="{'text-muted': !tglParafKasir}">
+                          {{ tglParafKasir || "- Select a date -" }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button
+              type="button"
+              class="btn btn-success pull-right m-l-10"
+              ng-click="update()"
+            >
+              <i class="fa fa-check"></i> Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning pull-right m-l-10"
+              ng-click="delete()"
+            >
+              <i class="fa fa-ban"></i> Delete
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right m-l-10"
+              ng-click="report()"
+            >
+              <i class="fa fa-ban"></i> Report
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right"
+              ng-click="backToList()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

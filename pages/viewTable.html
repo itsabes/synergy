@@ -1,0 +1,173 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Tampilkan Tabel Data</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Tabel Data</li>
+    </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <!-- Column -->
+    <div class="card">
+      <div class="card-header">
+        <span class="table-title">{{ namaTable }}</span>
+        <button class="btn btn-success pull-right" ng-click="csv.generate($event, namaTable + '.csv')">Export to
+          Excel</a>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div ng-show="isMinggu" class="form-group row">
+            <label for="minggu" class="col-sm-3 control-label">Minggu</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="minggu" ng-change="getData()">
+                <option value="1">Minggu-1</option>
+                <option value="2">Minggu-2</option>
+                <option value="3">Minggu-3</option>
+                <option value="4">Minggu-4</option>
+                <option value="5">Minggu-5</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isBulan" class="form-group row">
+            <label for="bulan" class="col-sm-3 control-label">Bulan</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="bulan" ng-change="getData()">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isTahun" class="form-group row">
+            <label for="tahun" class="col-sm-3 control-label">Tahun</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="tahun" ng-change="getData()">
+                <option ng-repeat="n in yearRange" value="{{ n }}">{{
+                  n
+                }}</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isUnit" class="form-group row">
+            <label for="unit" class="col-sm-3 control-label">Unit</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="unit" ng-change="getData()">
+                <option ng-repeat="unit in unitList" value="{{ unit.kd_poli }}">{{
+                unit.kd_poli + ' - ' + unit.nm_poli
+              }}</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isDokter" class="form-group row">
+            <label for="dokter" class="col-sm-3 control-label">Dokter</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="dokter" ng-change="getData()">
+                <option ng-repeat="dokter in dokterList" value="{{ dokter.kd_dokter }}">{{
+                  dokter.kd_dokter + ' - ' + dokter.nm_dokter
+                }}</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isRuang" class="form-group row">
+            <label for="ruang" class="col-sm-3 control-label">Ruang</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="ruang" ng-change="getData()">
+                <option ng-repeat="ruang in ruangList" value="{{ ruang.kd_bangsal }}">{{
+                  ruang.kd_bangsal + ' - ' + ruang.nm_bangsal
+                }}</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isUmumBpjs" class="form-group row">
+            <label for="umum" class="col-sm-3 control-label">UMUM / BPJS</label>
+            <div class="col-sm-9">
+              <select class="custom-select col-12" ng-model="umum" ng-change="getData()">
+                <option value="UMUM">UMUM</option>
+                <option value="BPJS">BPJS</option>
+              </select>
+            </div>
+          </div>
+          <div ng-show="isStartDate" class="form-group row">
+            <label for="start" class="col-sm-3 control-label"
+              >Mulai Dari</label
+            >
+            <div class="col-sm-9">
+              <div
+                class="form-control datetime-picker"
+                format="YYYY-MM-DD"
+                ng-model="tglStartDate"
+                ng-model-options="{ updateOn: 'blur' }"
+                moment-picker="start"
+                max-view="month"
+                start-view="month"
+                id="start"
+                change="getData()"
+              >
+                <a
+                  href="javascript:void(0);"
+                  onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.start = ''; scope.$apply();"
+                  class="pull-right"
+                  ng-if="start"
+                >
+                  &times;
+                </a>
+                <span ng-class="{'text-muted': !start}">
+                  {{ start || "- Select a date -" }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div ng-show="isEndDate" class="form-group row">
+            <label for="end" class="col-sm-3 control-label"
+              >Sampai Dengan</label
+            >
+            <div class="col-sm-9">
+              <div
+                class="form-control datetime-picker"
+                format="YYYY-MM-DD"
+                ng-model="tglEndDate"
+                ng-model-options="{ updateOn: 'blur' }"
+                moment-picker="end"
+                max-view="month"
+                start-view="month"
+                id="end"
+                change="getData()"
+              >
+                <a
+                  href="javascript:void(0);"
+                  onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.end = ''; scope.$apply();"
+                  class="pull-right"
+                  ng-if="end"
+                >
+                  &times;
+                </a>
+                <span ng-class="{'text-muted': !end}">
+                  {{ end || "- Select a date -" }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br />
+        <div class="tableJexcelWrapper m-b-20">
+          <div id="tableView"></div>
+        </div>
+        <!-- <div ng-if="dataCount == 0" style="text-align: center; border: solid 1px #dee2e6; color: orangered;">No Record
+          Found</div> -->
+      </div>
+    </div>
+  </div>
+</div>

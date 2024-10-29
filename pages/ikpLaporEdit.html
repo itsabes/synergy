@@ -1,0 +1,425 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Laporan Insiden - Edit</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Laporan Insiden</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Ubah Laporan Insiden</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">No Rawat</label>
+                  <input
+                    type="text"
+                    ng-model="noRawat"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">No Rekam Medis</label>
+                  <input
+                    type="text"
+                    ng-model="noRekamMedis"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Nama Pasien</label>
+                  <input
+                    type="text"
+                    ng-model="namaPasien"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Umur</label>
+                  <input
+                    type="text"
+                    ng-model="umur"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Jenis Kelamin</label>
+                  <input
+                    type="text"
+                    ng-model="jenisKelamin"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">DPJP</label>
+                  <input
+                    type="text"
+                    ng-model="namaDokter"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kamar</label>
+                  <input
+                    type="text"
+                    ng-model="kodeKamar"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Tanggal dan Waktu Kejadian*</label
+                  >
+                  <input
+                    class="form-control"
+                    format="YYYY-MM-DD hh:mm:ss"
+                    ng-model="tanggalDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    placeholder="- Select a datetime -"
+                    moment-picker="tanggal"
+                    max-view="minute"
+                    start-view="month"
+                    id="tanggal"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Petugas</label>
+                  <ui-select
+                    ng-model="petugasObj.selected"
+                    on-select="onSelectedPetugas($item)"
+                  >
+                    <ui-select-match placeholder="Cari Petugas"
+                      >{{ $select.selected.nip }} - {{ $select.selected.nama
+                      }}</ui-select-match
+                    >
+                    <ui-select-choices
+                      refresh="searchPetugas($select)"
+                      refresh-delay="200"
+                      repeat="petugas in petugasList"
+                    >
+                      <span>{{ petugas.nip }} - {{ petugas.nama }}</span>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Lokasi Kejadian</label>
+                  <input type="text" ng-model="lokasi" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Unit Terkait</label>
+                  <input
+                    type="text"
+                    ng-model="unitTerkait"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Orang Pertama yg melaporkan</label
+                  >
+                  <input
+                    type="text"
+                    ng-model="pertamaMelaporkan"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Unit kerja penyebab</label>
+                  <input
+                    type="text"
+                    ng-model="unitPenyebab"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Pernah Terjadi di unit kerja lain?</label
+                  >
+                  <select
+                    class="form-control custom-select"
+                    ng-model="kejadianSebelumnya"
+                  >
+                    <option value="IYA">Ya</option>
+                    <option value="TIDAK">Tidak </option>
+                  </select>
+                </div>
+                <div class="form-group" ng-show="kejadianSebelumnya == 'IYA'">
+                  <label class="control-label"
+                    >Kapan? dan Langkah apa yang telah diambil untuk mencegah
+                    terulang?</label
+                  >
+                  <input
+                    type="text"
+                    ng-model="pencegahanTerulang"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Jenis Insiden</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="jenisInsiden"
+                    ng-change="changeJenisInsiden"
+                  >
+                    <option
+                      ng-repeat="jenisInsiden in jenisInsidenList"
+                      value="{{ jenisInsiden.id }}"
+                    >
+                      {{ jenisInsiden.id + " - " + jenisInsiden.nama }}</option
+                    >
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Nama Insiden</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="namaInsiden"
+                    ng-disabled="!jenisInsiden"
+                  >
+                    <option
+                      ng-repeat="namaInsiden in namaInsidenList| filter:{jenis_insiden:jenisInsiden}"
+                      value="{{ namaInsiden.id }}"
+                      >{{ namaInsiden.id + " - " + namaInsiden.nama }}</option
+                    >
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Skor Dampak</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="skorDampak"
+                  >
+                    <option
+                      ng-repeat="skorDampak in skorDampakList"
+                      value="{{ skorDampak.id }}"
+                    >
+                      {{ skorDampak.id + " - " + skorDampak.nama }}</option
+                    >
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tipe Insiden</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="tipeInsiden"
+                    ng-change="changeTipeInsiden"
+                  >
+                    <option
+                      ng-repeat="tipeInsiden in tipeInsidenList"
+                      value="{{ tipeInsiden.id }}"
+                    >
+                      {{ tipeInsiden.id + " - " + tipeInsiden.nama }}</option
+                    >
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Subtipe Insiden</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="subtipeInsiden"
+                    ng-disabled="!tipeInsiden"
+                  >
+                    <option
+                      ng-repeat="subtipeInsiden in subtipeInsidenList| filter:{tipe_insiden:tipeInsiden}"
+                      value="{{ subtipeInsiden.id }}"
+                      >{{ subtipeInsiden.id + " - " + subtipeInsiden.nama
+                      }}</option
+                    >
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">Tanggal Registrasi</label>
+                  <input
+                    type="text"
+                    ng-model="tglRegistrasi"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Cara Bayar</label>
+                  <input
+                    type="text"
+                    ng-model="caraBayar"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tanggal Lapor</label>
+                  <div
+                    class="form-control datetime-picker"
+                    format="YYYY-MM-DD hh:mm:ss"
+                    ng-model="tanggalLaporDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    moment-picker="tanggalLapor"
+                    max-view="minute"
+                    start-view="month"
+                    id="tanggalLapor"
+                  >
+                    <a
+                      href="javascript:void(0);"
+                      onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tanggalLapor = ''; scope.$apply();"
+                      class="pull-right"
+                      ng-if="tanggalLapor"
+                    >
+                      &times;
+                    </a>
+                    <span ng-class="{'text-muted': !tanggalLapor}">
+                      {{ tanggalLapor || "- Select a date -" }}
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Frekuensi Kejadian</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="frekuensiKejadian"
+                  >
+                    <option
+                      ng-repeat="frekuensiKejadian in frekuensiKejadianList"
+                      value="{{ frekuensiKejadian.id }}"
+                      >{{ frekuensiKejadian.id + " - " + frekuensiKejadian.nama
+                      }}</option
+                    >
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kronologis</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="identifikasi"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Akibat Insiden</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="akibat"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Tindakan yang dilakukan setelah Insiden</label
+                  >
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="tindakanInsiden"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tindak Lanjut</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="rtl"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tindakan Oleh</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="tindakanOleh"
+                  >
+                    <option
+                      ng-repeat="tindakanOleh in tindakanOlehList"
+                      value="{{ tindakanOleh.id }}"
+                    >
+                      {{ tindakanOleh.id + " - " + tindakanOleh.nama }}</option
+                    >
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Nama Penerima</label>
+                  <input
+                    type="text"
+                    ng-model="namaPenerima"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tanggal Terima</label>
+                  <div
+                    class="form-control datetime-picker"
+                    format="YYYY-MM-DD"
+                    ng-model="tanggalTerimaDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    moment-picker="tanggalTerima"
+                    max-view="month"
+                    start-view="month"
+                    id="tanggalTerima"
+                  >
+                    <a
+                      href="javascript:void(0);"
+                      onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tanggalTerima = ''; scope.$apply();"
+                      class="pull-right"
+                      ng-if="tanggalTerima"
+                    >
+                      &times;
+                    </a>
+                    <span ng-class="{'text-muted': !tanggalTerima}">
+                      {{ tanggalTerima || "- Select a date -" }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button
+              type="button"
+              class="btn btn-success pull-right m-l-10"
+              ng-click="update()"
+            >
+              <i class="fa fa-check"></i> Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-success waves-effect waves-light pull-right m-l-10"
+              ng-click="downloadExcel()"
+            >
+              <i class="fas fa-file-excel"></i> Download Excel Report
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning pull-right m-l-10"
+              ng-click="delete()"
+            >
+              <i class="fa fa-ban"></i> Delete
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right"
+              ng-click="backToList()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

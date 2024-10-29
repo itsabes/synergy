@@ -1,0 +1,363 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">PPI - Edit</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">PPI</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row" id="ppiEdit">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Ubah PPI</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">No Rawat</label>
+                  <input
+                    type="text"
+                    ng-model="noRawat"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">No Rekam Medis</label>
+                  <input
+                    type="text"
+                    ng-model="noRekamMedis"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nama Pasien</label>
+                    <input
+                      type="text"
+                      ng-model="namaPasien"
+                      class="form-control"
+                      disabled
+                    />
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label">Tanggal Periksa</label>
+                      <input
+                        class="form-control"
+                        format="YYYY-MM-DD"
+                        ng-model="tanggalDate"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        placeholder="- Select a date -"
+                        moment-picker="tanggal"
+                        max-view="month"
+                        start-view="month"
+                        id="tanggal"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">DPJP</label>
+                        <input
+                          type="text"
+                          ng-model="namaDokter"
+                          class="form-control"
+                          disabled
+                        />
+                      </div>
+                      <div class="form-group" ng-show="currPageParam == 'ranap'">
+                          <label class="control-label">Kamar</label>
+                          <input
+                            type="text"
+                            ng-model="kodeKamar"
+                            class="form-control"
+                            disabled
+                          />
+                        </div>
+              </div>
+              <div class="col">
+                <div class="form-group" ng-show="currPageParam == 'ranap'">
+                  <label class="control-label">Deku</label>
+                  <select class="form-control custom-select" ng-model="deku">
+                    <option value="IYA">Ya</option>
+                    <option value="TIDAK">Tidak</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Sputum</label>
+                  <input
+                    type="text"
+                    ng-model="sputum"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Darah</label>
+                    <input
+                      type="text"
+                      ng-model="darah"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label">Urine</label>
+                      <input
+                        type="text"
+                        ng-model="urine"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Antibiotik</label>
+                        <input
+                          type="text"
+                          ng-model="antibiotik"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label">Cairan Konsentrat</label>
+                          <input
+                            type="text"
+                            ng-model="konsentrat"
+                            class="form-control"
+                          />
+                        </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">Tanggal Sampel</label>
+                  <div class="form-control datetime-picker"
+                    format="YYYY-MM-DD"
+                    ng-model="tanggalSampelDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    moment-picker="tanggalSampel"
+                    max-view="month"
+                    start-view="month"
+                    id="tanggalSampel">
+                    <a href="javascript:void(0);" 
+                      onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tanggalSampel = ''; scope.$apply();" class="pull-right"
+                      ng-if="tanggalSampel">
+                      &times;
+                    </a>
+                    <span ng-class="{'text-muted': !tanggalSampel}">
+                      {{ tanggalSampel || '- Select a date -' }}
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tanggal Kirim</label>
+                  <div class="form-control datetime-picker"
+                    format="YYYY-MM-DD"
+                    ng-model="tanggalKirimDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    moment-picker="tanggalKirim"
+                    max-view="month"
+                    start-view="month"
+                    id="tanggalKirim">
+                    <a href="javascript:void(0);" 
+                      onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tanggalKirim = ''; scope.$apply();" class="pull-right"
+                      ng-if="tanggalKirim">
+                      &times;
+                    </a>
+                    <span ng-class="{'text-muted': !tanggalKirim}">
+                      {{ tanggalKirim || '- Select a date -' }}
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tanggal Hasil</label>
+                  <div class="form-control datetime-picker"
+                    format="YYYY-MM-DD"
+                    ng-model="tanggalHasilDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    moment-picker="tanggalHasil"
+                    max-view="month"
+                    start-view="month"
+                    id="tanggalHasil">
+                    <a href="javascript:void(0);" 
+                      onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tanggalHasil = ''; scope.$apply();" class="pull-right"
+                      ng-if="tanggalHasil">
+                      &times;
+                    </a>
+                    <span ng-class="{'text-muted': !tanggalHasil}">
+                      {{ tanggalHasil || '- Select a date -' }}
+                    </span>
+                  </div>
+                </div>
+                <div class="ribbon-wrapper card">
+                  <div class="ribbon ribbon-default ribbon-bookmark">
+                    Pemasangan Alat dan Infeksi
+                  </div>
+                  <p class="ribbon-content">
+                    <div class="row" ng-show="currPageParam == 'ranap'">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">ETT</label>
+                          <input
+                            type="number"
+                            ng-model="ett"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">CVL</label>
+                          <input
+                            type="number"
+                            ng-model="cvl"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">IVL</label>
+                          <input
+                            type="number"
+                            ng-model="ivl"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">UC</label>
+                          <input type="number" ng-model="uc" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" ng-show="currPageParam == 'ranap'">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">VAP</label>
+                          <input
+                            type="number"
+                            ng-model="vap"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">PLEB</label>
+                          <input
+                            type="number"
+                            ng-model="pleb"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">ISK</label>
+                          <input
+                            type="number"
+                            ng-model="isk"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">IAD</label>
+                          <input
+                            type="number"
+                            ng-model="iad"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">ILO</label>
+                          <input
+                            type="number"
+                            ng-model="ilo"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">HAP</label>
+                          <input
+                            type="number"
+                            ng-model="hap"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col" ng-show="currPageParam == 'ranap'">
+                        <div class="form-group">
+                          <label class="control-label">TINEA</label>
+                          <input
+                            type="number"
+                            ng-model="tinea"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">SCABIES</label>
+                          <input
+                            type="number"
+                            ng-model="scabies"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">MDR</label>
+                          <input
+                            type="number"
+                            ng-model="mdr"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">DIFTERI</label>
+                          <input
+                            type="number"
+                            ng-model="difteri"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button type="button" class="btn btn-success pull-right m-l-10" ng-click="update()">
+              <i class="fa fa-check"></i> Update
+            </button>
+            <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="delete()">
+                <i class="fa fa-ban"></i> Delete
+              </button>
+            <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

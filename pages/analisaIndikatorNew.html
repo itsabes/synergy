@@ -1,0 +1,89 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+      <h3 class="text-themecolor m-b-0 m-t-0">Analisa Indikator Data - New</h3>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="javascript:void(0)">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Analisa Indikator Data</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-outline-info">
+        <div class="card-body">
+          <form action="#">
+            <div class="form-body">
+              <h3 class="card-title">Masukkan Analisa Indikator Data</h3>
+              <hr />
+              <div class="row align-items-start">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="control-label">Judul Indikator</label>
+                    <input type="text" ng-model="judulIndikator" class="form-control" readonly/>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Numerator</label>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      ng-model="numerator"
+                      readonly
+                    ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Denumerator</label>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      ng-model="denumerator"
+                      readonly
+                    ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Target Pencapaian</label>
+                    <input type="text" ng-model="targetPencapaian" class="form-control" readonly/>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Analisa</label>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      ng-model="analisa"
+                    ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Rekomendasi</label>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      ng-model="rekomendasi"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions m-t-10">
+              <button
+                type="button"
+                class="btn btn-success pull-right m-l-10"
+                ng-click="save()"
+              >
+                <i class="fa fa-check"></i> Save
+              </button>
+              <button
+                type="button"
+                class="btn btn-inverse pull-right"
+                ng-click="backToList()"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

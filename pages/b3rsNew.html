@@ -1,0 +1,130 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Laporan Tumpahan B3 - New</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Laporan Tumpahan B3</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Masukkan Laporan Tumpahan B3</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label"
+                    >Tanggal dan Waktu Kejadian*</label
+                  >
+                  <div
+                    class="form-control datetime-picker"
+                    format="YYYY-MM-DD hh:mm:ss"
+                    ng-model="tglKejadianDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    moment-picker="tglKejadian"
+                    max-view="minute"
+                    start-view="month"
+                    id="tglKejadian"
+                  >
+                    <a
+                      href="javascript:void(0);"
+                      onclick="event.stopPropagation();var scope = angular.element($('#viewPage')).scope(); scope.tglKejadian = ''; scope.$apply();"
+                      class="pull-right"
+                      ng-if="tglKejadian"
+                    >
+                      &times;
+                    </a>
+                    <span ng-class="{'text-muted': !tglKejadian}">
+                      {{ tglKejadian || "- Select a date -" }}
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Jenis Bahan</label>
+                  <input
+                    type="text"
+                    ng-model="jenisBahan"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Fasa</label>
+                  <select class="form-control custom-select" ng-model="fasa">
+                    <option value="CAIR">Cair</option>
+                    <option value="PADAT">Padat</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Lokasi</label>
+                  <input type="text" ng-model="lokasi" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Jumlah (Estimasi/Perkiraan)</label
+                  >
+                  <input type="text" ng-model="jumlah" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Liter/Kg</label>
+                  <input type="text" ng-model="liter" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Penanganan Yang telah Dilakukan</label
+                  >
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="penanganan"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Kondisi Lokasi Setelah Penanganan</label
+                  >
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="kondisiSetelah"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Nama Pelapor</label>
+                  <input
+                    type="text"
+                    ng-model="namaPelapor"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button
+              type="button"
+              class="btn btn-success pull-right m-l-10"
+              ng-click="save()"
+            >
+              <i class="fa fa-check"></i> Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right"
+              ng-click="backToList()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

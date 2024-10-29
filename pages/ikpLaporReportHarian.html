@@ -1,0 +1,75 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Laporan Insiden - Report Harian</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Laporan Insiden</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="noRawat" class="col-sm-3 control-label">No Rawat</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="noRawat" class="form-control" id="noRawat" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="noRekamMedis" class="col-sm-3 control-label">No Rekam Medis</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="noRekamMedis" class="form-control" id="noRekamMedis" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaPasien" class="col-sm-3 control-label">Nama Pasien</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="namaPasien" class="form-control" id="namaPasien" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaDokter" class="col-sm-3 control-label">Nama Dokter</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="namaDokter" class="form-control" id="namaDokter" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tanggalPeriksa" class="col-sm-3 control-label">Tanggal Periksa</label>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalDariDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalDari"
+                max-view="month" start-view="month" id="tanggalDariPeriksa" />
+            </div>
+            <div class="col-sm-1">s/d</div>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalSampaiDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalSampai"
+                max-view="month" start-view="month" id="tanggalSampaiPeriksa" />
+            </div>
+          </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
+                Tampilkan Data
+              </button>
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="downloadData()">
+                Download Excel
+              </button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <div class="tableJexcelWrapper m-t-20 m-b-20">
+          <div id="tableIkpLaporHarian"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

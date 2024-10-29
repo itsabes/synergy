@@ -1,0 +1,61 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">
+      User - List
+    </h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">User</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-success waves-effect waves-light pull-right" ng-click="addUser()">
+              <i class="fa fa-plus"></i> User
+            </button>
+          </div>
+        </div>
+        <br />
+        <div class="hidden-lg-up">
+          <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
+            show-filter="false">
+            <tr ng-repeat="row in $data track by $index">
+              <td title="'Username'" sortable="'username'">
+                <a style="display: block;" href="javascript:void(0)" ng-click="showUser(row.id)">{{ row.username }}
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="hidden-lg-down">
+          <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
+            show-filter="false">
+            <tr ng-repeat="row in $data track by $index">
+              <td title="'Username'" sortable="'username'">
+                <a style="display: block;" href="javascript:void(0)" ng-click="showUser(row.id)">{{ row.username }}
+                </a>
+              </td>
+              <td title="'Nama'" sortable="'name'">
+                {{ row.name }}
+              </td>
+              <td title="'Email'" sortable="'email'">
+                {{ row.email }}
+              </td>
+              <td title="'Role'" sortable="'role'">
+                {{ row.role }}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

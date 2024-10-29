@@ -1,0 +1,123 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Settings</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Settings</li>
+    </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="namaDirektur" class="col-sm-3 control-label"
+              >Nama Direktur</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="namaDirektur"
+                class="form-control"
+                id="namaDirektur"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="nipDirektur" class="col-sm-3 control-label"
+              >NIP Direktur</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="nipDirektur"
+                class="form-control"
+                id="nipDirektur"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaRumahSakit" class="col-sm-3 control-label"
+              >Nama Rumah Sakit</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="namaRumahSakit"
+                class="form-control"
+                id="namaRumahSakit"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="waktuKunciPmkp" class="col-sm-3 control-label"
+              >Waktu Kunci PMKP</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="waktuKunciPmkp"
+                class="form-control"
+                id="waktuKunciPmkp"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="waktuSembunyiIkp" class="col-sm-3 control-label"
+              >Waktu Penyembunyian IKP</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="waktuSembunyiIkp"
+                class="form-control"
+                id="waktuSembunyiIkp"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="notifEmailIkp" class="col-sm-3 control-label"
+              >Daftar Notifikasi Email IKP</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="notifEmailIkp"
+                class="form-control"
+                id="notifEmailIkp"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="notifEmailK3rs" class="col-sm-3 control-label"
+              >Daftar Notifikasi Email K3RS</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                ng-model="notifEmailK3rs"
+                class="form-control"
+                id="notifEmailK3rs"
+              />
+            </div>
+          </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-3 col-sm-9">
+              <button
+                type="button"
+                class="btn btn-success waves-effect waves-light"
+                ng-click="update()"
+              >
+                Save Settings
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	 <title>
+      Laporan RS - Laporan untuk Rumah Sakit
+    </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	 <link rel="icon" type="image/png" sizes="16x16"  href="assets/images/favicon.png" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="login/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="login/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="login/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="login/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="login/css/main.css">
+	
+<!--===============================================================================================-->
+  <script>
+      var SERVER_URL = "/synergy-server-2020";
+    </script>
+</head>
+<body>
+<img src="login/images/monasdki.jpg" id="bg" alt="" style="position:fixed; top:0; left:50; min-width:100%; min-height:100%; z-index: -2;">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="login100-pic js-tilt" data-tilt>
+					<img src="login/images/img-01.png" alt="IMG">
+					
+				</div>
+				<form class="login100-form validate-form" id="loginform"
+              action="main.html" style="margin-top:110px; margin-left: 200px;">
+			  <center><h5><font color="#00CED1"><script language="JavaScript">
+var text="Sistem Informasi Terintegrasi 2021";
+var delay=19;
+var currentChar=1;
+var destination="[none]";
+function type()
+{
+//if (document.all)
+{
+var dest=document.getElementById(destination);
+if (dest)// && dest.innerHTML)
+{
+dest.innerHTML=text.substr(0, currentChar)+"";
+currentChar++;
+if (currentChar>text.length)
+{
+currentChar=1;
+setTimeout("type()", 5000);
+}
+else
+{
+setTimeout("type()", delay);
+}
+}
+}
+}
+function startTyping(textParam, delayParam, destinationParam)
+{
+text=textParam;
+delay=delayParam;
+currentChar=1;
+destination=destinationParam;
+type();
+}
+</script> <b><br><div 0px="" 12px="" arial="" color:="" ff0000="" font:="" id="textDestination" margin:="" style="background-color: none;"></div></b><br> <script language="JavaScript">
+javascript:startTyping(text, 50, "textDestination");
+</script>
+
+			<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						         <input
+                    id="username"
+                    class="form-control"
+                    type="text"
+                    required=""
+                    placeholder="Email"
+                    onkeypress="enterKeypress(event, login)"
+                  />
+						<span class="focus-input100"></span>
+						
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						 <input
+                    id="password"
+                    class="form-control"
+                    type="password"
+                    required=""
+                    placeholder="Password"
+                    onkeypress="enterKeypress(event, login)"
+                  />
+					</div>
+					 <div class="form-group text-center m-t-12">
+                <div
+                  id="errorMessage"
+                  class="col-xs-12 login-error-message">
+				  </div>
+              </div>
+			 
+			  <div class="container-login100-form-btn">
+					<button
+                     class="login100-form-btn"
+                    type="button"
+                    onclick="login()"
+                  >
+                    Log In
+                  </button>
+				</div>
+				
+				<div class="text-center p-t-136">
+					
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="login/vendor/bootstrap/js/popper.js"></script>
+	<script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="login/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="login/js/main.js"></script>
+	<script src="custom/login.js"></script>
+	
+	
+
+</body>
+</html>

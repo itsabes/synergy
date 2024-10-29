@@ -1,0 +1,168 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">
+      Manajemen Tabel dan Query - Edit
+    </h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Manajemen Tabel dan Query</li>
+    </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <!-- Column -->
+    <div class="card">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Modifikasi Informasi Tabel dan Query</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">Nama Menu</label>
+                  <input
+                    type="text"
+                    ng-model="namaMenu"
+                    class="form-control monospaced"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Judul Tabel</label>
+                  <input
+                    type="text"
+                    ng-model="namaTable"
+                    class="form-control monospaced"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Parameter</label>
+                  <div class="row">
+                    <div class="col">
+                      <div class="checkbox checkbox-success">
+                        <input id="tahun" type="checkbox" ng-model="isTahun" />
+                        <label for="tahun"> Tahun </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input id="bulan" type="checkbox" ng-model="isBulan" />
+                        <label for="bulan"> Bulan </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input
+                          id="minggu"
+                          type="checkbox"
+                          ng-model="isMinggu"
+                        />
+                        <label for="minggu"> Minggu </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input
+                          id="startDate"
+                          type="checkbox"
+                          ng-model="isStartDate"
+                        />
+                        <label for="startDate"> Tanggal Mulai </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input
+                          id="endDate"
+                          type="checkbox"
+                          ng-model="isEndDate"
+                        />
+                        <label for="endDate"> Tanggal Akhir </label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="checkbox checkbox-success">
+                        <input id="unit" type="checkbox" ng-model="isUnit" />
+                        <label for="unit"> Unit </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input
+                          id="dokter"
+                          type="checkbox"
+                          ng-model="isDokter"
+                        />
+                        <label for="dokter"> Dokter </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input id="ruang" type="checkbox" ng-model="isRuang" />
+                        <label for="ruang"> Ruang </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input
+                          id="umumBpjs"
+                          type="checkbox"
+                          ng-model="isUmumBpjs"
+                        />
+                        <label for="umumBpjs"> UMUM/BPJS </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Span Header</label>
+                  <input
+                    type="text"
+                    ng-model="spanHeader1"
+                    class="form-control monospaced"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Column Title</label>
+                  <input
+                    type="text"
+                    ng-model="columnTitle"
+                    class="form-control monospaced"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Column Key</label>
+                  <input
+                    type="text"
+                    ng-model="columnKey"
+                    class="form-control monospaced"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Query</label>
+                  <textarea
+                    class="form-control monospaced"
+                    rows="20"
+                    ng-model="query"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button
+              type="button"
+              class="btn btn-success pull-right m-l-10"
+              ng-click="update()"
+            >
+              <i class="fa fa-check"></i> Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning pull-right m-l-10"
+              ng-click="delete()"
+            >
+              <i class="fa fa-ban"></i> Delete
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right"
+              ng-click="backToList()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

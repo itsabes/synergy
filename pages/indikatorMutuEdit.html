@@ -1,0 +1,245 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Pengajuan Indikator Mutu - Edit</h3>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0)">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Pengajuan Indikator Mutu</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="row" id="ppiEdit">
+    <div class="col-12">
+      <div class="card card-outline-info">
+        <div class="card-body">
+          <form action="#">
+            <div class="form-body">
+                <h3 class="card-title">Ubah Pengajuan Indikator Mutu</h3>
+                <hr />
+                <div class="row align-items-start">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Tahun Kegiatan</label>
+                      <select class="custom-select col-12" ng-model="tahun">
+                        <option ng-repeat="n in yearRange" value="{{ n }}">{{ n }}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Judul Indikator</label>
+                      <input type="text" ng-model="judulIndikator" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Dasar Pemikiran</label>
+                      <p style="font-size: 12px; ">*(1. Ketentuan/ Peraturan, 2. Data, 3. Literatur, dan 4. Analisis Situasi)</p>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="dasarPemikiran"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Dimensi Mutu</label>
+                      <div class="row">
+                        <div class="col">
+                          <div class="checkbox checkbox-success">
+                            <input id="efisien" type="checkbox" ng-model="isEfisien" />
+                            <label for="efisien"> Efisien </label>
+                          </div>
+                          <div class="checkbox checkbox-success">
+                            <input id="efektif" type="checkbox" ng-model="isEfektif" />
+                            <label for="efektif"> Efektif </label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="checkbox checkbox-success">
+                            <input id="tepatWaktu" type="checkbox" ng-model="isTepatWaktu" />
+                            <label for="tepatWaktu"> Tepat Waktu </label>
+                          </div>
+                          <div class="checkbox checkbox-success">
+                            <input id="aman" type="checkbox" ng-model="isAman" />
+                            <label for="aman"> Aman </label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="checkbox checkbox-success">
+                            <input id="adil" type="checkbox" ng-model="isAdil" />
+                            <label for="adil"> Adil </label>
+                          </div>
+                          <div class="checkbox checkbox-success">
+                            <input id="berPasien" type="checkbox" ng-model="isBerPasien" />
+                            <label for="berPasien"> Berorientasi Pasien </label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="checkbox checkbox-success">
+                            <input id="integrasi" type="checkbox" ng-model="isIntegrasi" />
+                            <label for="integrasi"> Integrasi </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Tujuan</label>
+                      <input type="text" ng-model="dasarPemikiran" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Definisi Operasional</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="defPemikiran"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label"
+                        >Tipe Indikator</label
+                      >
+                      <select
+                        class="form-control custom-select"
+                        ng-model="tipeIndikator"
+                      >
+                        <option value="Input">Input</option>
+                        <option value="Proses">Proses </option>
+                        <option value="Output">Output</option>
+                        <option value="Outcome">Outcome </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label"
+                        >Ukuran Indikator</label
+                      >
+                      <select
+                        class="form-control custom-select"
+                        ng-model="ukuranIndikator"
+                      >
+                        <option value="Presentase Rate">Presentase Rate</option>
+                        <option value="Presentase Waktu">Presentase Waktu</option>
+                        <option value="Presentase Jumlah">Presentase Jumlah</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Numerator</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="numerator"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Denumerator</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="denumerator"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Target Pencapaian</label>
+                      <input type="text" ng-model="dasarPemikiran" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Kriteria</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="kriteria"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Formula</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="formula"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Sumber Data</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        ng-model="sumberData"
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Frekuensi Pengumpulan</label>
+                      <select
+                        class="form-control custom-select"
+                        ng-model="frekPengumpulan"
+                      >
+                        <option value="Harian">Harian</option>
+                        <option value="Bulanan">Bulanan</option>
+                        <option value="Triwulan">Triwulan</option>
+                        <option value="Semester">Semester</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Periode Pelaporan Data</label>
+                      <input type="text" ng-model="periodePelaporan" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Periode Analisa</label>
+                      <select
+                        class="form-control custom-select"
+                        ng-model="frekPengumpulan"
+                      >
+                        <option value="Triwulan">Triwulan</option>
+                        <option value="Semester">Semester</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Metode Pengumpulan</label>
+                      <select
+                        class="form-control custom-select"
+                        ng-model="frekPengumpulan"
+                      >
+                        <option value="Concurent">Concurent</option>
+                        <option value="Retrospektif">Retrospektif</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Populasi/ Sampel</label>
+                      <select
+                        class="form-control custom-select"
+                        ng-model="frekPengumpulan"
+                      >
+                        <option value="Populasi">Populasi</option>
+                        <option value="Sampel">Sampel</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Rencana Analisis Data</label>
+                      <input type="text" readonly ng-model="rencanaAnalisis" class="form-control" value="Run Chart"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Instrumen Pengambilan Data</label>
+                      <input type="text" ng-model="instrumenPengambilan" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Penanggung Jawab</label>
+                      <input type="text" ng-model="pj" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-actions m-t-10">
+              <button type="button" class="btn btn-success pull-right m-l-10" ng-click="update()">
+                <i class="fa fa-check"></i> Update
+              </button>
+              <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="delete()">
+                  <i class="fa fa-ban"></i> Delete
+                </button>
+              <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

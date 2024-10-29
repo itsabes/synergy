@@ -1,0 +1,106 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">PMKP - Rekapitulasi</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Rekapitulasi</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <!-- Column -->
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group row">
+          <label
+            for="example-text-input"
+            class="col-xs-12 col-lg-2 col-form-label"
+            >Unit</label
+          >
+          <div class="col-xs-12 col-lg-10">
+            <input
+              class="form-control"
+              type="text"
+              ng-model="currPage"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label
+            for="example-month-input"
+            class="col-xs-12 col-lg-2 col-form-label"
+            >Year</label
+          >
+          <div class="col-xs-12 col-lg-10">
+            <select
+              class="custom-select col-12"
+              ng-model="yearSelect"
+              ng-change="getData()"
+            >
+              <!-- <option ng-repeat="n in yearRange" value="{{ n }}">{{
+                n
+              }}</option> -->
+              <option value="2024">2024</option>
+            </select>
+          </div>
+        </div>
+        <div class="tableJexcelWrapper m-t-20 m-b-20">
+          <div id="tableRekap"></div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn btn-success waves-effect waves-light pull-right m-r-5 m-b-5"
+              ng-click="downloadExcel()"
+            >
+              <i class="fas fa-file-excel m-r-5"></i> Download Excel Report
+            </button>
+            <div class="btn-group pull-right m-r-5 m-b-5">
+              <button
+                type="button"
+                class="btn btn-success waves-effect waves-light dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fas fa-chart-line m-r-5"></i> Download Chart
+              </button>
+              <div class="dropdown-menu">
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  ng-click="$event.preventDefault();downloadChart(0)"
+                  >Januari-Maret</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  ng-click="$event.preventDefault();downloadChart(1)"
+                  >Januari-Juni</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  ng-click="$event.preventDefault();downloadChart(2)"
+                  >Januari-September</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  ng-click="$event.preventDefault();downloadChart(3)"
+                  >Januari-Desember</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

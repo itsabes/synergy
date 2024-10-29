@@ -1,0 +1,111 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Form Investivigasi - Edit</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Form Investivigasi</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Modifikasi Form Investivigasi</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">Tanggal dan Waktu Kejadian</label>
+                  <input class="form-control" format="YYYY-MM-DD hh:mm:ss" ng-model="tglKejadianDate"
+                    ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a datetime -"
+                    moment-picker="tglKejadian" max-view="minute" start-view="month" id="tglKejadian" disabled />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">No Rawat</label>
+                  <input type="text" ng-model="noRawat" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Penyebab Langsung Kejadian</label>
+                  <textarea class="form-control" rows="5" ng-model="penyebabLangsung"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Penyebab yang Melatarbelakangi Kejadian</label>
+                  <textarea class="form-control" rows="5" ng-model="latarBelakang"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Rekomendasi</label>
+                  <textarea class="form-control" rows="5" ng-model="rekomendasi"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tindakan yang akan dilakukan</label>
+                  <textarea class="form-control" rows="5" ng-model="tindakanAkan"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Grading Risiko</label>
+                  <select class="form-control custom-select" ng-model="gradingRisiko"
+                    ng-class="{'blue-grade': gradingRisiko == 'BIRU', 'green-grade': gradingRisiko == 'HIJAU', 'yellow-grade': gradingRisiko == 'KUNING', 'red-grade': gradingRisiko == 'MERAH'}">
+                    <option value="BIRU" class="blue-grade">Biru</option>
+                    <option value="HIJAU" class="green-grade">Hijau</option>
+                    <option value="KUNING" class="yellow-grade">Kuning</option>
+                    <option value="MERAH" class="red-grade">Merah</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tanggal Mulai</label>
+                  <input class="form-control" format="YYYY-MM-DD" ng-model="tglMulaiDate"
+                    ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tglMulai"
+                    max-view="month" start-view="month" id="tglMulai" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tanggal Selesai</label>
+                  <input class="form-control" format="YYYY-MM-DD" ng-model="tglSelesaiDate"
+                    ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tglSelesai"
+                    max-view="month" start-view="month" id="tglSelesai" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Laporan Lengkap?</label>
+                  <select class="form-control custom-select" ng-model="lengkap">
+                    <option value="IYA">Ya</option>
+                    <option value="TIDAK">Tidak</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Laporan Perlu investivigasi Lebih Lanjut?</label>
+                  <select class="form-control custom-select" ng-model="invesLanjut">
+                    <option value="IYA">Ya</option>
+                    <option value="TIDAK">Tidak</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Penanggung Jawab</label>
+                  <input type="text" ng-model="penanggungJawab" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button type="button" class="btn btn-success pull-right m-l-10" ng-click="update()">
+              <i class="fa fa-check"></i> Update
+            </button>
+            <button type="button" class="btn btn-success waves-effect waves-light pull-right m-l-10"
+              ng-click="downloadExcel()">
+              <i class="fas fa-file-excel"></i> Download Excel Report
+            </button>
+            <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="delete()">
+              <i class="fa fa-ban"></i> Delete
+            </button>
+            <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

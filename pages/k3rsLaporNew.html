@@ -1,0 +1,157 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">
+      Laporan Kejadian Kecelakaan - New
+    </h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Laporan Kejadian Kecelakaan</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Masukkan Laporan Kejadian Kecelakaan</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label"
+                    >Tanggal dan Waktu Kejadian*</label
+                  >
+                  <input
+                    class="form-control"
+                    format="YYYY-MM-DD hh:mm:ss"
+                    ng-model="tglKejadianDate"
+                    ng-model-options="{ updateOn: 'blur' }"
+                    placeholder="- Select a datetime -"
+                    moment-picker="tglKejadian"
+                    max-view="minute"
+                    start-view="month"
+                    id="tglKejadian"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Lokasi</label>
+                  <input type="text" ng-model="lokasi" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Pekerjaan</label>
+                  <input
+                    type="text"
+                    ng-model="pekerjaan"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kerusakan Aset</label>
+                  <input
+                    type="text"
+                    ng-model="kerusakanAset"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Cidera/Luka</label>
+                  <input type="text" ng-model="cidera" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Nama Pelapor</label>
+                  <input
+                    type="text"
+                    ng-model="namaPelapor"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Penanggung Jawab</label>
+                  <input
+                    type="text"
+                    ng-model="penanggungJawab"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label">No Rekam Medis / Nama</label>
+                  <ui-select
+                    ng-model="noRkmMedisObj"
+                    on-select="onSelectedPasien($item)"
+                    tagging="onTaggingPasien"
+                    tagging-label="false"
+                  >
+                    <ui-select-match placeholder="Cari Pasien"
+                      >{{ $select.selected.no_rkm_medis }}
+                      {{
+                        $select.selected.nm_pasien
+                          ? " - " + $select.selected.nm_pasien
+                          : ""
+                      }}</ui-select-match
+                    >
+                    <ui-select-choices
+                      refresh="searchPasien($select)"
+                      refresh-delay="200"
+                      repeat="pasien in pasienList"
+                    >
+                      <span
+                        >{{ pasien.no_rkm_medis }}-{{ pasien.nm_pasien }}</span
+                      >
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Nama Saksi</label>
+                  <input
+                    type="text"
+                    ng-model="namaSaksi"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kronologi</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="kronologi"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Tindakan Penanganan</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="penanganan"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button
+              type="button"
+              class="btn btn-success pull-right m-l-10"
+              ng-click="save()"
+            >
+              <i class="fa fa-check"></i> Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right"
+              ng-click="backToList()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../ppid"
+		},
+		{
+			"path": "../report-template-server"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../synergy-server-2024"
+		}
+	]
+}

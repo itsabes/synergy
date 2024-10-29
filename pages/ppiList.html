@@ -1,0 +1,104 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">PPI - List</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">PPI</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="noRawat" class="col-sm-3 control-label">No Rawat</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="noRawat" class="form-control" id="noRawat" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="noRekamMedis" class="col-sm-3 control-label">No Rekam Medis</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="noRekamMedis" class="form-control" id="noRekamMedis" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaPasien" class="col-sm-3 control-label">Nama Pasien</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="namaPasien" class="form-control" id="namaPasien" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaDokter" class="col-sm-3 control-label">Nama Dokter</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="namaDokter" class="form-control" id="namaDokter" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tanggalRegistrasi" class="col-sm-3 control-label">Tanggal Registrasi</label>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalDariDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalDari"
+                max-view="month" start-view="month" id="tanggalDariRegistrasi" />
+            </div>
+            <div class="col-sm-1">s/d</div>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalSampaiDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalSampai"
+                max-view="month" start-view="month" id="tanggalSampaiRegistrasi" />
+            </div>
+          </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
+                Cari Data
+              </button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
+          show-filter="false">
+          <tr ng-repeat="row in $data track by $index">
+            <td title="'Daftar PPI'" sortable="'ppi_tanggal_list'">
+              <a style="display: block;" href="javascript:void(0)"
+                ng-repeat="tanggal_ppi in row.ppi_tanggal_list.split(',') track by $index"
+                ng-click="showPpi(tanggal_ppi, row.no_rawat, row.no_rkm_medis, row.nm_pasien, row.nm_dokter, row.kd_kamar)">{{ tanggal_ppi }}
+              </a>
+            </td>
+            <td title="'No Rawat'" sortable="'no_rawat'">
+              {{ row.no_rawat }}
+            </td>
+            <td title="'No Rekam Medis'" sortable="'no_rkm_medis'">
+              {{ row.no_rkm_medis }}
+            </td>
+            <td ng-if="currPageParam == 'ranap'" title="'Kode Kamar'" sortable="'kd_kamar'">
+              {{ row.kd_kamar }}
+            </td>
+
+            <td title="'Nama Pasien'" sortable="'nm_pasien'">
+              {{ row.nm_pasien }}
+            </td>
+            <td title="'Nama Dokter'" sortable="'nm_dokter'">
+              {{ row.nm_dokter }}
+            </td>
+            <td title="'Tanggal Registrasi'" sortable="'tgl_registrasi'">
+              {{ row.tgl_registrasi }}
+            </td>
+            <td title="'Action'" sortable="'jumlah_ppi'">
+              <button type="button" class="btn btn-success waves-effect waves-light"
+                ng-click="addPpi(row.no_rawat, row.no_rkm_medis, row.nm_pasien, row.nm_dokter, row.kd_kamar)">
+                <i class="fa fa-plus"></i> PPI
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="row page-titles">
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">
+      Laporan Kejadian Kecelakaan - List
+    </h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Laporan Kejadian Kecelakaan</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="noRkmMedis" class="col-sm-3 control-label">No Rekam Medis</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="noRkmMedis" class="form-control" id="noRkmMedis" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="lokasi" class="form-control" id="lokasi" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="pekerjaan" class="col-sm-3 control-label">Pekerjaan</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="pekerjaan" class="form-control" id="pekerjaan" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="namaPasien" class="col-sm-3 control-label">Nama Korban</label>
+            <div class="col-sm-9">
+              <input type="text" ng-model="namaPasien" class="form-control" id="namaPasien" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tanggal" class="col-sm-3 control-label">Tanggal</label>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalDariDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalDari"
+                max-view="month" start-view="month" id="tanggalDariRegistrasi" />
+            </div>
+            <div class="col-sm-1">s/d</div>
+            <div class="col-sm-4">
+              <input class="form-control" format="YYYY-MM-DD" ng-model="tanggalSampaiDate"
+                ng-model-options="{ updateOn: 'blur' }" placeholder="- Select a date -" moment-picker="tanggalSampai"
+                max-view="month" start-view="month" id="tanggalSampaiRegistrasi" />
+            </div>
+          </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
+                Cari Data
+              </button>
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="addK3rsLapor()">
+                <i class="fa fa-plus"></i> Laporan Kejadian Kecelakaan
+              </button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
+          show-filter="false">
+          <tr ng-repeat="row in $data track by $index">
+            <td title="'Tanggal Kejadian'" sortable="'tgl_kejadian'">
+              <a style="display: block;" href="javascript:void(0)"
+                ng-click="showK3rsLapor(row.tgl_kejadian, row.no_rkm_medis, row.nm_pasien)">{{ row.tgl_kejadian }}
+              </a>
+            </td>
+            <td title="'No Rekam Medis'" sortable="'no_rkm_medis'">
+              {{ isNumeric(row.no_rkm_medis) ? row.no_rkm_medis : "" }}
+            </td>
+            <td title="'Lokasi'" sortable="'lokasi'">
+              {{ row.lokasi }}
+            </td>
+            <td title="'Pekerjaan'" sortable="'pekerjaan'">
+              {{ row.pekerjaan }}
+            </td>
+            <td title="'Nama Korban'" sortable="'nm_pasien'">
+              {{
+                isNumeric(row.no_rkm_medis) ? row.nm_pasien : row.no_rkm_medis
+              }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
