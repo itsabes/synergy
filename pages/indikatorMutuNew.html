@@ -32,9 +32,15 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">Unit</label>
-                  <select class="custom-select col-12" ng-model="unit" aria-label="label for the select">
+                  <!-- <select class="custom-select col-12" ng-model="unit" aria-label="label for the select">
                     <option ng-repeat="(key, value) in profileType" ng-value="{{value.ID}}" ng-selected="{{unit === value.ID}}"> {{ value.TYPE }}</option>
-                  </select>
+                  </select> -->
+                  <input
+                    class="form-control"
+                    type="text"
+                    ng-model="currPage"
+                    disabled
+                  />
                 </div>
                 <div class="form-group">
                   <label class="control-label">Dasar Pemikiran</label>

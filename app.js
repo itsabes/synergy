@@ -44,15 +44,15 @@ sikatApp.config(function ($routeProvider) {
       templateUrl: "pages/settings.html",
       controller: "settingsController"
     })
-    .when("/indikatorMutu", {
+    .when("/indikatorMutu/:id", {
       templateUrl: "pages/indikatorMutuList.html",
       controller: "indikatorMutuListController"
     })
-    .when("/indikatorMutu_new", {
+    .when("/indikatorMutu_new/:id", {
       templateUrl: "pages/indikatorMutuNew.html",
       controller: "indikatorMutuNewController"
     })
-    .when("/indikatorMutu_edit", {
+    .when("/indikatorMutu_edit/:id", {
       templateUrl: "pages/indikatorMutuEdit.html",
       controller: "indikatorMutuEditController"
     })

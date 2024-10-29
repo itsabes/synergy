@@ -8,8 +8,16 @@ sikatApp.controller("indikatorMutuListController", function(
   NgTableParams
 ) {
 
-  $rootScope.currPage = "indikatorMutu";
-  $rootScope.currPageParam = $routeParams.param;
+  $rootScope.currPage = $routeParams.id;
+  $rootScope.currForm = "indikatorMutu";
+
+  // Tambahkan log halaman saat ini
+  console.log("Halaman saat ini:", $rootScope.currPage);
+  // Jika ingin melog semua $routeParams
+  console.log("Parameter URL saat ini:", $routeParams);
+
+  $scope.dataId = null;
+  $scope.typeSelect = $routeParams.id;
   $scope.profileType = {};
 
   var today = new Date();
@@ -19,9 +27,9 @@ sikatApp.controller("indikatorMutuListController", function(
   // if ($routeParams.tahun) 
   //   $scope.tahun = $routeParams.tahun;
 
-  $scope.unit = "";
-  if ($routeParams.unit) 
-    $scope.unit = $routeParams.unit;
+  // $scope.unit = "";
+  // if ($routeParams.unit) 
+  //   $scope.unit = $routeParams.unit;
 
   $scope.yearDynamic = [];
   const startYear = 2016;
@@ -219,7 +227,16 @@ sikatApp.controller("indikatorMutuNewController", function(
   $http
 ) {
 
-  $rootScope.currPage = "indikatorMutu";
+  $rootScope.currPage = $routeParams.id;
+  $rootScope.currForm = "indikatorMutu";
+
+  // Tambahkan log halaman saat ini
+  console.log("Halaman saat ini:", $rootScope.currPage);
+  // Jika ingin melog semua $routeParams
+  console.log("Parameter URL saat ini:", $routeParams);
+  
+  $scope.dataId = null;
+  $scope.typeSelect = $routeParams.id;
   $scope.profileType = {};
 
   var today = new Date();

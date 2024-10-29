@@ -561,19 +561,28 @@
                   ><span class="hide-menu">Manajemen <br>Data Mutu</span></a
                 >
                 <ul aria-expanded="true" class="collapse">
-                  <li>
-                    <a
-                      href="#!/indikatorMutu"
-                      ng-class="[{active: currPage == 'indikatorMutu'}]"
-                      >Pengajuan Indikator Mutu</a
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'">
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Rawat Jalan</a
                     >
-                  </li>
-                  <li>
-                    <a
-                      href="#!/lembarPdsa"
-                      ng-class="[{active: currPage == 'lembarPdsa'}]"
-                      >Lembar Kerja PDSA</a
-                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/rawatJalan"
+                          ng-class="[{active: currPage == 'indikatorMutu'}]"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'rawatJalan'}]"
+                          >Pengajuan Indikator Mutu</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/rawatJalan"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'rawatJalan'}]"
+                          >Lembar Kerja PDSA</a
+                        >
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>
@@ -583,9 +592,7 @@
                   ><span class="hide-menu">Peningkatan Mutu</span></a
                 >
                 <ul aria-expanded="true" class="collapse">
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'">
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
                       >Rawat Jalan</a
