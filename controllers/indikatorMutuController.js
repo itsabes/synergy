@@ -12,9 +12,12 @@ sikatApp.controller("indikatorMutuListController", function(
   $rootScope.currPageParam = $routeParams.param;
   $scope.profileType = {};
 
-  $scope.tahun = "";
-  if ($routeParams.tahun) 
-    $scope.tahun = $routeParams.tahun;
+  var today = new Date();
+  $scope.tahun = today.getFullYear() + "";
+
+  // $scope.tahun = "";
+  // if ($routeParams.tahun) 
+  //   $scope.tahun = $routeParams.tahun;
 
   $scope.unit = "";
   if ($routeParams.unit) 
