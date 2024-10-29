@@ -69,7 +69,7 @@ sikatApp.controller("mainController", function(
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("role");
-    window.location = "/synergy-2024";
+    window.location = "/synergy";
   };
   $scope.getData();
   $rootScope.isNumeric = function(value) {
