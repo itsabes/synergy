@@ -101,8 +101,7 @@ sikatApp.controller("indikatorMutuListController", function(
     if ($scope.tahun) 
       url += "&tahun=" + $scope.tahun;
 
-    if ($scope.unit) 
-      url += "&unit=" + $scope.unit;
+    url += "&unit=" + $rootScope.currPage;
     
     $http
       .get(url, { headers: { Authorization: localStorage.getItem("token") } })
