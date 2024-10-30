@@ -246,8 +246,6 @@ sikatApp.controller("indikatorMutuNewController", function(
 
   $scope.save = () => {
 
-    let isValid =false;
-
     if (!$scope.tahun) {
       Swal.fire("Error!", "Tahun tidak boleh kosong.", "error");
       return;
@@ -271,7 +269,7 @@ sikatApp.controller("indikatorMutuNewController", function(
       $scope.isIntegrasi == null) {
       Swal.fire("Error!", "Dimensi Mutu tidak boleh kosong.", "error");
       return;
-  }
+    }
     if (!$scope.tujuan) {
         Swal.fire("Error!", $scope.unit+" Tujuan tidak boleh kosong.", "error");
         return;
