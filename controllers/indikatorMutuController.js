@@ -469,6 +469,10 @@ sikatApp.controller("indikatorMutuNewController", function(
       $scope.yearDynamic.push(year);
   }
 
+  $scope.backToList = () => {
+    window.history.back();
+  };
+
 });
 
 sikatApp.controller("indikatorMutuEditController", function(
