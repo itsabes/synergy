@@ -214,7 +214,7 @@ sikatApp.controller("indikatorMutuNewController", function(
       return;
     }
     if (!$scope.judulIndikator) {
-        Swal.fire("Error!",  $rootScope.currPage+" sJudul Indikator tidak boleh kosong.", "error");
+        Swal.fire("Error!",  $rootScope.currPage+" Judul Indikator tidak boleh kosong.", "error");
         return;
     }
     if (!$scope.dasarPemikiran) {
@@ -517,7 +517,7 @@ sikatApp.controller("indikatorMutuEditController", function(
       return;
     }
     if (!$scope.judulIndikator) {
-        Swal.fire("Error!",  $rootScope.currPage+" sJudul Indikator tidak boleh kosong.", "error");
+        Swal.fire("Error!",  $rootScope.currPage+" Judul Indikator tidak boleh kosong.", "error");
         return;
     }
     if (!$scope.dasarPemikiran) {
