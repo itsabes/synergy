@@ -89,15 +89,15 @@
                 <button type="button"
                         class="btn waves-effect waves-light"
                         ng-click="addPpi(row.no_rawat, row.no_rkm_medis, row.nm_pasien, row.nm_dokter, row.kd_kamar)"
-                        ng-class="{'btn-danger': row.STATUS === '1', 'btn-success inactive': row.STATUS === '0'}">
-                  <i class="fa" ng-class="{'fa-check': row.STATUS === '1', 'fa-plus': row.STATUS === '0'}"></i>
-                  {{ row.STATUS === '1' ? 'Disabled ACC' : 'ACC' }}
+                        ng-class="{'btn-danger': row.STATUS_ACC === '1', 'btn-success inactive': row.STATUS_ACC === '0'}">
+                  <i class="fa" ng-class="{'fa-check': row.STATUS_ACC === '1', 'fa-plus': row.STATUS_ACC === '0'}"></i>
+                  {{ row.STATUS_ACC === '1' ? 'Disabled ACC' : 'ACC' }}
                 </button>
               </td>
             <td title="'Action'">
               <button type="button" class="btn btn-success waves-effect waves-light"
                 ng-click="showIndikatorMutu(row.ID)">
-                <i class="fa fa-plus"></i> Update
+                <i class="fa fa-edit"></i> Update
               </button>
             </td>
           </tr>
