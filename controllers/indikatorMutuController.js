@@ -241,15 +241,117 @@ sikatApp.controller("indikatorMutuNewController", function(
 
   var today = new Date();
   $scope.tahun = today.getFullYear() + "";
-  
+
+
+
   $scope.save = () => {
+
+    let isValid =false;
+
+    if (!$scope.tahun) {
+      Swal.fire("Error!", "Tahun tidak boleh kosong.", "error");
+      return;
+    }
+    if (!$scope.judulIndikator) {
+        Swal.fire("Error!",  $rootScope.currPage+" sJudul Indikator tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.dasarPemikiran) {
+        Swal.fire("Error!", "Dasar Pemikiran tidak boleh kosong.", "error");
+        return;
+    }
+    
+    // Cek jika semua field tidak dipilih
+    if ($scope.isEfisien == null && 
+      $scope.isEfektif == null && 
+      $scope.isTepatWaktu == null && 
+      $scope.isAman == null && 
+      $scope.isAdil == null && 
+      $scope.isBerPasien == null && 
+      $scope.isIntegrasi == null) {
+      Swal.fire("Error!", "Dimensi Mutu tidak boleh kosong.", "error");
+      return;
+  }
+    if (!$scope.tujuan) {
+        Swal.fire("Error!", $scope.unit+" Tujuan tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.defPemikiran) {
+        Swal.fire("Error!", "Definisi Pemikiran tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.tipeIndikator) {
+        Swal.fire("Error!", "Tipe Indikator tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.ukuranIndikator) {
+        Swal.fire("Error!", "Ukuran Indikator tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.numerator) {
+        Swal.fire("Error!", "Numerator tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.denumerator) {
+        Swal.fire("Error!", "Denumerator tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.targetPencapaian) {
+        Swal.fire("Error!", "Target Pencapaian tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.kriteria) {
+        Swal.fire("Error!", "Kriteria tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.formula) {
+        Swal.fire("Error!", "Formula tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.sumberData) {
+        Swal.fire("Error!", "Sumber Data tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.frekPengumpulan) {
+        Swal.fire("Error!", "Frekuensi Pengumpulan tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.periodePelaporan) {
+        Swal.fire("Error!", "Periode Pelaporan tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.periodeAnalisa) {
+        Swal.fire("Error!", "Periode Analisa tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.metodePengumpulan) {
+        Swal.fire("Error!", "Metode Pengumpulan tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.populasiSampel) {
+        Swal.fire("Error!", "Populasi Sampel tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.isiSampel) {
+        Swal.fire("Error!", "Isi Sampel tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.instrumenPengambilan) {
+        Swal.fire("Error!", "Instrumen Pengambilan tidak boleh kosong.", "error");
+        return;
+    }
+    if (!$scope.penanggungJawab) {
+        Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
+        return;
+    }
+
     $http
       .post(
         SERVER_URL + "/api/indikatorMutu",
         {
           tahun: $scope.tahun,
           judulIndikator: $scope.judulIndikator,
-          unit : $scope.unit,
+          unit : $rootScope.currPage,
           dasarPemikiran: $scope.dasarPemikiran,
           isEfisien: $scope.isEfisien != null ? $scope.isEfisien : 0,
           isEfektif: $scope.isEfektif != null ? $scope.isEfektif : 0,

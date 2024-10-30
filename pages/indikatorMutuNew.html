@@ -14,7 +14,7 @@
   <div class="col-12">
     <div class="card card-outline-info">
       <div class="card-body">
-        <form action="#">
+        <form action="#" name="myForm" novalidate>
           <div class="form-body">
             <h3 class="card-title">Masukkan Pengajuan Indikator Mutu</h3>
             <hr />
@@ -41,6 +41,7 @@
                 <div class="form-group">
                   <label class="control-label">Judul Indikator</label>
                   <input type="text" ng-model="judulIndikator" class="form-control" />
+                  <input type="hidden" ng-model="unit" class="form-control" value="currPage"/>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Dasar Pemikiran</label>
