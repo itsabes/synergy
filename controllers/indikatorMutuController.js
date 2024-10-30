@@ -702,11 +702,8 @@ sikatApp.controller("indikatorMutuEditController", function(
 
   $scope.delete = () => {
     var url =
-      SERVER_URL +
-      "/api/ppi/delete?id=" +
-      $scope.tanggal +
-      ";" +
-      $scope.noRawat;
+      SERVER_URL + "/api/indikatorMutu/delete?id="+$scope.id;
+
     $http
       .get(url, { headers: { Authorization: localStorage.getItem("token") } })
       .then(
