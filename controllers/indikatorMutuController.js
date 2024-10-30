@@ -59,6 +59,38 @@ sikatApp.controller("indikatorMutuListController", function(
     );
   };
 
+  $scope.showStatusAcc = (
+    id,statusAcc
+  ) => {
+    $location.url(
+      "/indikatorMutu/"+$rootScope.currPage+"?uniqIdx=" +
+      id +
+      "&status_acc=" +
+      statusAcc
+    );
+
+    $http
+    .put(
+      SERVER_URL + "/api/indikatorMutu/updateStatusAcc",
+      {
+        id : id,
+        statusAcc: statusAcc,
+      },
+      { headers: { Authorization: localStorage.getItem("token") } }
+    )
+    .then(
+      function(data) {
+        swal("Success!", "Data is successfully updated.", "success");
+        window.history.back();
+      },
+      function(data) {
+        swal("Error!", "Data is failed to be updated.", "error");
+      }
+    );
+
+
+  };
+
   $scope.addIndikatorMutu = () => {
     $location.url("/indikatorMutu_new");
   };
@@ -142,83 +174,6 @@ sikatApp.controller("indikatorMutuListController", function(
       console.log("No data or error occurred.");
     }
   });
-
-  $scope.update = () => {
-    $http
-      .put(
-        SERVER_URL + "/api/ppi",
-        {
-          id: $scope.tanggal + ";" + $scope.noRawat,
-          ett: $scope.ett,
-          cvl: $scope.cvl,
-          ivl: $scope.ivl,
-          uc: $scope.uc,
-          vap: $scope.vap,
-          iad: $scope.iad,
-          pleb: $scope.pleb,
-          isk: $scope.isk,
-          ilo: $scope.ilo,
-          hap: $scope.hap,
-          tinea: $scope.tinea,
-          scabies: $scope.scabies,
-          deku: $scope.deku,
-          sputum: $scope.sputum,
-          darah: $scope.darah,
-          urine: $scope.urine,
-          antibiotik: $scope.antibiotik,
-          kd_kamar: $scope.kodeKamar != "" ? $scope.kodeKamar : null,
-          tgl_sampel: $scope.tanggalSampel,
-          tgl_kirim: $scope.tanggalKirim,
-          tgl_hasil: $scope.tanggalHasil,
-          mdr: $scope.mdr,
-          difteri: $scope.difteri,
-          konsentrat: $scope.konsentrat
-        },
-        { headers: { Authorization: localStorage.getItem("token") } }
-      )
-      .then(
-        function(data) {
-          swal("Success!", "Data is successfully updated.", "success");
-          window.history.back();
-        },
-        function(data) {
-          swal("Error!", "Data is failed to be updated.", "error");
-        }
-      );
-  };
-
-  $scope.delete = () => {
-    var url =
-      SERVER_URL +
-      "/api/ppi/delete?id=" +
-      $scope.tanggal +
-      ";" +
-      $scope.noRawat;
-    $http
-      .get(url, { headers: { Authorization: localStorage.getItem("token") } })
-      .then(
-        function(reqRes) {
-          if (reqRes.data && reqRes.data != "") {
-            swal("Success!", "Data is successfully updated.", "success");
-            window.history.back();
-          }
-        },
-        function() {
-          $.toast({
-            heading: "Error",
-            text:
-              "Error happen when trying to delete data on " +
-              url +
-              ", please try again or contact support.",
-            position: "top-right",
-            loaderBg: "#ff6849",
-            icon: "error",
-            hideAfter: 4000,
-            stack: 6
-          });
-        }
-      );
-  };
   
   $scope.backToList = () => {
     window.history.back();

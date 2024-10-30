@@ -88,7 +88,7 @@
             <td title="'Acc Koordinator'">
                 <button type="button"
                         class="btn waves-effect waves-light"
-                        ng-click="addPpi(row.no_rawat, row.no_rkm_medis, row.nm_pasien, row.nm_dokter, row.kd_kamar)"
+                        ng-click="showStatusAcc(row.ID,row.STATUS_ACC)"
                         ng-class="{'btn-danger': row.STATUS_ACC === '1', 'btn-success inactive': row.STATUS_ACC === '0'}">
                   <i class="fa" ng-class="{'fa-check': row.STATUS_ACC === '1', 'fa-plus': row.STATUS_ACC === '0'}"></i>
                   {{ row.STATUS_ACC === '1' ? 'Disabled ACC' : 'ACC' }}
