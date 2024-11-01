@@ -339,7 +339,7 @@ sikatApp.controller("indikatorMutuNewController", function(
           isiSampel: $scope.isiSampel,
           rencanaAnalisis: $scope.rencanaAnalisis != null ? $scope.rencanaAnalisis : "",
           instrumenPengambilan: $scope.instrumenPengambilan,
-          penanggungJawab: $scope.penanggungJawab
+          penanggungJawab: $rootScope.currPage
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )

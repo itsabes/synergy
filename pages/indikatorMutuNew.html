@@ -40,7 +40,11 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">Judul Indikator</label>
-                  <input type="text" ng-model="judulIndikator" class="form-control" />
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="judulIndikator"
+                  ></textarea>
                   <input type="hidden" ng-model="unit" class="form-control" value="currPage"/>
                 </div>
                 <div class="form-group">
@@ -107,7 +111,7 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label"
-                    >Tipe Indikator</label
+                    >Jenis Indikator</label
                   >
                   <select
                     class="form-control custom-select"
@@ -121,19 +125,19 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label"
-                    >Ukuran Indikator</label
+                    >Satuan Pengukuran</label
                   >
                   <select
                     class="form-control custom-select"
                     ng-model="ukuranIndikator"
                   >
-                    <option value="Presentase Rate">Presentase Rate</option>
-                    <option value="Presentase Waktu">Presentase Waktu</option>
-                    <option value="Presentase Jumlah">Presentase Jumlah</option>
+                    <option value="Jumlah">Jumlah</option>
+                    <option value="Presentase">Presentase</option>
+                    <option value="Waktu">Waktu</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Numerator</label>
+                  <label class="control-label">Numerator (Pembilang)</label>
                   <textarea
                     class="form-control"
                     rows="5"
@@ -141,7 +145,7 @@
                   ></textarea>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Denumerator</label>
+                  <label class="control-label">Denumerator (Penyebut)</label>
                   <textarea
                     class="form-control"
                     rows="5"
@@ -171,61 +175,67 @@
                   ></textarea>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Sumber Data</label>
-                  <textarea
-                    class="form-control"
-                    rows="5"
-                    ng-model="sumberData"
-                  ></textarea>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Frekuensi Pengumpulan</label>
-                  <select
-                    class="form-control custom-select"
-                    ng-model="frekPengumpulan"
-                  >
-                    <option value="Harian">Harian</option>
-                    <option value="Bulanan">Bulanan</option>
-                    <option value="Triwulan">Triwulan</option>
-                    <option value="Semester">Semester</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Periode Pelaporan Data</label>
-                  <input type="text" ng-model="periodePelaporan" class="form-control" />
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Periode Analisa</label>
-                  <select
-                    class="form-control custom-select"
-                    ng-model="periodeAnalisa"
-                  >
-                    <option value="Triwulan">Triwulan</option>
-                    <option value="Semester">Semester</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Metode Pengumpulan</label>
+                  <label class="control-label">Metode Pengumpulan Data</label>
                   <select
                     class="form-control custom-select"
                     ng-model="metodePengumpulan"
                   >
-                    <option value="Concurent">Concurent</option>
                     <option value="Retrospektif">Retrospektif</option>
+                    <option value="Observasi">Observasi</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Populasi/ Sampel</label>
+                  <label class="control-label">Sumber Data</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="sumberData"
+                  >
+                    <option value="Data Primer">Data Primer</option>
+                    <option value="Data Sekunder">Data Sekunder</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Instrumen Pengambilan Data</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="instrumenPengambilan"
+                    id="instrumen"
+                  >
+                    <option value="Formulir">Formulir</option>
+                    <option value="EMR">EMR</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
+                </div>
+                <div class="form-group secInstrumen">
+                  <label class="control-label">Isi Instrumen Lainnya</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="isiInstrumen"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Besar Sampel</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="besarSampel"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Cara Pengambilan Sampel</label>
                   <select
                     class="form-control custom-select"
                     ng-model="populasiSampel"
+                    id="sampel"
                   >
-                    <option value="Populasi">Populasi</option>
-                    <option value="Sampel">Sampel</option>
+                    <option value="Probability Sampling">Probability Sampling</option>
+                    <option value="Non Probability Sampling">Non Probability Sampling</option>
+                    <option value="Lainnya">Lainnya</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label class="control-label">Isi Sampel</label>
+                <div class="form-group secSampel">
+                  <label class="control-label">Isi Cara Pengambilan Sampel Lainnya</label>
                   <textarea
                     class="form-control"
                     rows="5"
@@ -233,36 +243,65 @@
                   ></textarea>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Rencana Analisis Data</label>
-                  <input type="text" readonly ng-model="rencanaAnalisis" class="form-control" value="Run Chart"/>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Instrumen Pengambilan Data</label>
-                  <input type="text" ng-model="instrumenPengambilan" class="form-control" />
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Penanggung Jawab</label>
-                  <input type="text" ng-model="penanggungJawab" class="form-control" />
-                </div>
-                <!-- <div class="form-group">
-                  <label class="control-label">Penanggung Jawab</label>
-                  <ui-select
-                    ng-model="petugasObj.selected"
-                    on-select="onSelectedPetugas($item)"
+                  <label class="control-label">Periode Pengumpulan Data</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="periodePelaporan"
                   >
-                    <ui-select-match placeholder="Cari Petugas"
-                      >{{ $select.selected.nip }} - {{ $select.selected.nama
-                      }}</ui-select-match
-                    >
-                    <ui-select-choices
-                      refresh="searchPetugas($select)"
-                      refresh-delay="200"
-                      repeat="petugas in petugasList"
-                    >
-                      <span>{{ petugas.nip }} - {{ petugas.nama }}</span>
-                    </ui-select-choices>
-                  </ui-select>
-                </div> -->
+                    <option value="Harian">Harian</option>
+                    <option value="Bulanan">Bulanan</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Penyajian Data</label>
+                  <input type="text" readonly ng-model="rencanaAnalisis" class="form-control" value="Run Chart" placeholder="Run Chart"/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Periode Analisis dan Pelaporan</label>
+                  <select
+                    class="form-control custom-select"
+                    ng-model="periodeAnalisa"
+                  >
+                    <option value="Bulanan">Bulanan</option>
+                    <option value="Triwulan">Triwulan</option>
+                    <option value="Semester">Semester</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Penanggung Jawab</label>
+                  <!-- <input type="text" ng-model="penanggungJawab" class="form-control" /> -->
+                  <input
+                    class="form-control"
+                    type="text"
+                    ng-model="currPage"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Kode Indikator</label>
+                  <div class="row">
+                    <div class="col">
+                      <div class="checkbox checkbox-success">
+                        <input id="nasional" type="checkbox" ng-model="isNasional" />
+                        <label for="nasional"> Nasional </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input id="unit" type="checkbox" ng-model="isUnit" />
+                        <label for="unit"> Unit </label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="checkbox checkbox-success">
+                        <input id="prioritasUnit" type="checkbox" ng-model="isPrioritasUnit" />
+                        <label for="prioritasUnit"> Prioritas Unit </label>
+                      </div>
+                      <div class="checkbox checkbox-success">
+                        <input id="prioritasRS" type="checkbox" ng-model="isPrioritasRS" />
+                        <label for="prioritasRS"> Aman </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -287,3 +326,27 @@
     </div>
   </div>
 </div>
+
+<script>     
+  $(document).ready(function () {
+
+    $('.secSampel').hide();
+    $('#sampel').on('change', function () {
+        if (this.value == 'Lainnya') {
+            $('.secSampel').show();
+        } else {
+            $('.secSampel').hide();
+        }
+    });
+
+    $('.secInstrumen').hide();
+    $('#instrumen').on('change', function () {
+        if (this.value == 'Lainnya') {
+            $('.secInstrumen').show();
+        } else {
+            $('.secInstrumen').hide();
+        }
+    });
+
+  });
+</script>
