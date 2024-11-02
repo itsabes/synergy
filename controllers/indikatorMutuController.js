@@ -50,6 +50,23 @@ sikatApp.controller("indikatorMutuListController", function(
     );
   };
 
+  $scope.showAnalisaIndikator = (
+    judul,
+    numerator,
+    denumerator,
+    target,
+    id
+  ) => {
+    $location.url(
+      "/lembarPdsa_new/"+$rootScope.currPage+"?judul=" +
+      judul +
+      "&numerator="+ numerator +
+      "&denumerator="+ denumerator +
+      "&target="+ target +
+      "&idx="+ id
+    );
+  };
+
   $scope.showIndikatorMutu = (
     id
   ) => {

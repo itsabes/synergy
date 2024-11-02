@@ -1,3 +1,10 @@
+<style>
+   .disabled-link {
+      pointer-events: none;
+      color: gray;
+    }
+</style>
+
 <div class="row page-titles">
     <div class="col-md-5 col-8 align-self-center">
       <h3 class="text-themecolor m-b-0 m-t-0">Pengajuan Indikator Mutu - List</h3>
@@ -71,7 +78,10 @@
           show-filter="false">
           <tr ng-repeat="row in $data track by $index">
             <td title="'Judul'" sortable="'judul'">
-              {{ row.JUDUL_INDIKATOR }}
+              <a style="display: block;" href="javascript:void(0)"
+                ng-click="showAnalisaIndikator(row.JUDUL_INDIKATOR,row.NUMERATOR,row.DENUMERATOR,row.TARGET_PENCAPAIAN,row.ID)"
+                ng-class="{'disabled-link': row.id_analisa}"> {{row.JUDUL_INDIKATOR}}
+              </a>
             </td>
             <td title="'Registrasi'" sortable="'tgl_registrasi'">
               {{ row.CREATE_DATE }}
