@@ -584,6 +584,820 @@
                       </li>
                     </ul>
                   </li>
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'">
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Rawat Inap</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/rawatInap"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'rawatInap'}]"
+                          >Pengajuan Indikator Mutu</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/rawatInap"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'rawatInap'}]"
+                          >Lembar Kerja PDSA</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Rawat Inap Lt.3
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/rawatInapAnak"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'rawatInapAnak'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/rawatInapAnak"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'rawatInapAnak'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kamar Operasi
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/kamarOperasi"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'kamarOperasi'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/kamarOperasi"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'kamarOperasi'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Perinatologi
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/perinatologi"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'perinatologi'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/perinatologi"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'perinatologi'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kamar Bersalin
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/kamarBersalin"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'kamarBersalin'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/kamarBersalin"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'kamarBersalin'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> ICU
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/hcu"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'hcu'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/hcu"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'hcu'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> IGD
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/igd"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'igd'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/igd"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'igd'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Radiologi
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/radiologi"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'radiologi'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/radiologi"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'radiologi'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Laboratorium
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/laboratorium"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'laboratorium'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/laboratorium"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'laboratorium'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Farmasi
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/farmasi"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'farmasi'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/farmasi"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'farmasi'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Gizi
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/gizi"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'gizi'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/gizi"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'gizi'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Rekam Medis
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/rekamMedis"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'rekamMedis'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/rekamMedis"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'rekamMedis'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kesling
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/kesling"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'kesling'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/kesling"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'kesling'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> CSSD
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/cssdLinen"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'cssdLinen'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/cssdLinen"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'cssdLinen'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Linen
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/Linen"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'Linen'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/Linen"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'Linen'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> K3RS
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/k3rs"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'k3rs'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/k3rs"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'k3rs'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Manajemen & Kepegawaian
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/manajemenKepegawaian"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'manajemenKepegawaian'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/manajemenKepegawaian"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'manajemenKepegawaian'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Keuangan
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/keuangan"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'keuangan'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/keuangan"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'keuangan'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> IPSRS
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/ipsrs"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'ipsrs'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/ipsrs"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'ipsrs'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Loket Pendaftaran
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/loketPendaftaran"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'loketPendaftaran'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/loketPendaftaran"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'loketPendaftaran'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Ambulance
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/ambulance"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'ambulance'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/ambulance"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'ambulance'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kasir
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/kasir"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'kasir'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/kasir"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'kasir'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> PPI
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/ppi"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'ppi'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/ppi"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'ppi'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Komite Medis
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/komiteMedis"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'komiteMedis'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/komiteMedis"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'komiteMedis'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Komite Keperawatan
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/komiteKeperawatan"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'komiteKeperawatan'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/komiteKeperawatan"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'komiteKeperawatan'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Komite Nakes Lain
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/komiteNakesLain"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'komiteNakesLain'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/komiteNakesLain"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'komiteNakesLain'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Komite Etik
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/komiteEtik"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'komiteEtik'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/komiteEtik"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'komiteEtik'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim KPRS
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timKprs"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timKprs'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timKprs"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timKprs'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim PKRS
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timPkrs"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timPkrs'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timPkrs"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timPkrs'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim PPRA
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timPpra"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timPpra'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timPpra"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timPpra'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim Komplain
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timKomplain"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timKomplain'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timKomplain"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timKomplain'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim Ponek
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timPonek"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timPonek'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timPonek"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timPonek'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim TB
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timTb"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timTb'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timTb"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timTb'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim KB
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timKb"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timKb'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timKb"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timKb'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim HIV
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/timHiv"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'timHiv'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/timHiv"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'timHiv'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Pengurus Barang
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/pengurusBarang"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'pengurusBarang'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/pengurusBarang"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'pengurusBarang'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Stunting
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/stunting"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'stunting'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/stunting"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'stunting'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Casemix
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/casemix"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'casemix'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/casemix"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'casemix'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> IT
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/it"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'it'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/it"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'it'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li ng-if="user_role === 'ADMIN' || user_role === 'KARAWATJALAN' || user_role === 'RAWATJALAN' || user_role === 'KAKPRS' || user_role === 'KPRS'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Pengadaan
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/pengadaan"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'pengadaan'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/pengadaan"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'pengadaan'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                
                 </ul>
               </li>
               <li ng-if="user_role !=='SIYUKO' ">
