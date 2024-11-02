@@ -259,7 +259,7 @@ sikatApp.controller("indikatorMutuNewController", function(
         return;
     }
     if (!$scope.tipeIndikator) {
-        Swal.fire("Error!", "Tipe Indikator tidak boleh kosong.", "error");
+        Swal.fire("Error!", "Jenis Indikator tidak boleh kosong.", "error");
         return;
     }
     if (!$scope.ukuranIndikator) {
@@ -290,10 +290,10 @@ sikatApp.controller("indikatorMutuNewController", function(
         Swal.fire("Error!", "Sumber Data tidak boleh kosong.", "error");
         return;
     }
-    if (!$scope.frekPengumpulan) {
+    /*if (!$scope.frekPengumpulan) {
         Swal.fire("Error!", "Frekuensi Pengumpulan tidak boleh kosong.", "error");
         return;
-    }
+    }*/
     if (!$scope.periodePelaporan) {
         Swal.fire("Error!", "Periode Pelaporan tidak boleh kosong.", "error");
         return;
@@ -310,18 +310,37 @@ sikatApp.controller("indikatorMutuNewController", function(
         Swal.fire("Error!", "Populasi Sampel tidak boleh kosong.", "error");
         return;
     }
-    if (!$scope.isiSampel) {
+    /*if (!$scope.isiSampel) {
         Swal.fire("Error!", "Isi Sampel tidak boleh kosong.", "error");
         return;
-    }
+    }*/
     if (!$scope.instrumenPengambilan) {
         Swal.fire("Error!", "Instrumen Pengambilan tidak boleh kosong.", "error");
         return;
+    }else{
+      if($scope.instrumenPengambilan=="Lainnya"){
+        if (!$scope.isiInstrumen) {
+            Swal.fire("Error!", "Isi Instrumen tidak boleh kosong.", "error");
+            return;
+        }
+      }
     }
-    if (!$scope.penanggungJawab) {
-        Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
+    if (!$scope.besarSampel) {
+        Swal.fire("Error!", "Besar Sample tidak boleh kosong.", "error");
         return;
     }
+    /*if (!$scope.penanggungJawab) {
+      Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
+      return;
+    }*/
+    if ($scope.isNasional == null && 
+      $scope.isUnit == null && 
+      $scope.isPrioritasUnit == null && 
+      $scope.isPrioritasRS == null) {
+      Swal.fire("Error!", "Kode Indikator tidak boleh kosong.", "error");
+      return;
+    }
+
 
     $http
       .post(
@@ -348,15 +367,21 @@ sikatApp.controller("indikatorMutuNewController", function(
           kriteria: $scope.kriteria,
           formula: $scope.formula,
           sumberData: $scope.sumberData,
-          frekPengumpulan: $scope.frekPengumpulan,
+          frekPengumpulan: $scope.frekPengumpulan != null ? $scope.frekPengumpulan : "",
           periodePelaporan: $scope.periodePelaporan,
           periodeAnalisa: $scope.periodeAnalisa,
           metodePengumpulan: $scope.metodePengumpulan,
           populasiSampel: $scope.populasiSampel,
-          isiSampel: $scope.isiSampel,
+          isiSampel: $scope.isiSampel != null ? $scope.isiSampel : "",
           rencanaAnalisis: $scope.rencanaAnalisis != null ? $scope.rencanaAnalisis : "",
           instrumenPengambilan: $scope.instrumenPengambilan,
-          penanggungJawab: $rootScope.currPage
+          isiInstrumen: $scope.isiInstrumen != null ? $scope.isiInstrumen : "",
+          besarSampel: $scope.besarSampel,
+          penanggungJawab: $rootScope.currPage,
+          isNasional: $scope.isNasional != null ? $scope.isNasional : 0,
+          isUnit: $scope.isUnit != null ? $scope.isUnit : 0,
+          isPrioritasUnit: $scope.isPrioritasUnit != null ? $scope.isPrioritasUnit : 0,
+          isPrioritasRS: $scope.isPrioritasRS != null ? $scope.isPrioritasRS : 0
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
@@ -464,9 +489,12 @@ sikatApp.controller("indikatorMutuEditController", function(
       $scope.yearDynamic.push(year);
   }
 
-  $rootScope.currPage = "indikatorMutu";
+
   $rootScope.currPageParam = $routeParams.param;
   $scope.id = $routeParams.uniqIdx;
+  $rootScope.currPage = $routeParams.id;
+  $rootScope.currForm = "indikatorMutu";
+  
   console.log("$scope.id",$scope.id);
   console.log("$rootScope.currPageParam = $routeParams.param;",$rootScope.currPageParam);
 
@@ -482,13 +510,13 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.judulIndikator = reqRes.data.JUDUL_INDIKATOR,
             $scope.unit  = reqRes.data.UNIT,
             $scope.dasarPemikiran = reqRes.data.DASAR_PEMIKIRAN,
-            $scope.isEfisien = reqRes.data.IS_EFISIEN != null ? reqRes.data.IS_EFISIEN == 1 : false;
-            $scope.isEfektif = reqRes.data.IS_EFEKTIF != null ? reqRes.data.IS_EFEKTIF == 1 : false;
-            $scope.isTepatWaktu = reqRes.data.IS_TEPAT_WAKTU != null ? reqRes.data.IS_TEPAT_WAKTU == 1 : false;
-            $scope.isAman = reqRes.data.IS_AMAN != null ? reqRes.data.IS_AMAN == 1 : false;
-            $scope.isAdil = reqRes.data.IS_ADIL != null ? reqRes.data.IS_ADIL == 1 : false;
-            $scope.isBerPasien = reqRes.data.IS_BERPASIEN != null ? reqRes.data.IS_BERPASIEN == 1 : false;
-            $scope.isIntegrasi = reqRes.data.IS_INTEGRASI != null ? reqRes.data.IS_INTEGRASI == 1 : false;            
+            $scope.isEfisien = reqRes.data.IS_EFISIEN != null ? reqRes.data.IS_EFISIEN == 1 : false,
+            $scope.isEfektif = reqRes.data.IS_EFEKTIF != null ? reqRes.data.IS_EFEKTIF == 1 : false,
+            $scope.isTepatWaktu = reqRes.data.IS_TEPAT_WAKTU != null ? reqRes.data.IS_TEPAT_WAKTU == 1 : false,
+            $scope.isAman = reqRes.data.IS_AMAN != null ? reqRes.data.IS_AMAN == 1 : false,
+            $scope.isAdil = reqRes.data.IS_ADIL != null ? reqRes.data.IS_ADIL == 1 : false,
+            $scope.isBerPasien = reqRes.data.IS_BERPASIEN != null ? reqRes.data.IS_BERPASIEN == 1 : false,
+            $scope.isIntegrasi = reqRes.data.IS_INTEGRASI != null ? reqRes.data.IS_INTEGRASI == 1 : false,            
             $scope.tujuan = reqRes.data.TUJUAN,
             $scope.defPemikiran = reqRes.data.DEFINISI_PEMIKIRAN,
             $scope.tipeIndikator = reqRes.data.TIPE_INDIKATOR,
@@ -507,7 +535,13 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.isiSampel = reqRes.data.ISI_SAMPEL,
             $scope.rencanaAnalisis = reqRes.data.RENCANA_ANALISIS != null ? reqRes.data.RENCANA_ANALISIS  : "",
             $scope.instrumenPengambilan = reqRes.data.INSTRUMEN_PENGAMBILAN,
-            $scope.penanggungJawab = reqRes.data.PENANGGUNG_JAWAB
+            $scope.isiInstrumen = reqRes.data.ISI_INSTRUMEN,
+            $scope.besarSampel = reqRes.data.BESAR_SAMPEL,
+            $scope.penanggungJawab = reqRes.data.PENANGGUNG_JAWAB,
+            $scope.isNasional = reqRes.data.IS_NASIONAL != null ? reqRes.data.IS_NASIONAL == 1 : false,
+            $scope.isUnit = reqRes.data.IS_UNIT != null ? reqRes.data.IS_UNIT == 1 : false,
+            $scope.isPrioritasUnit = reqRes.data.IS_PRIORITAS_UNIT != null ? reqRes.data.IS_PRIORITAS_UNIT == 1 : false,
+            $scope.isPrioritasRS = reqRes.data.IS_PRIORITAS_RS != null ? reqRes.data.IS_PRIORITAS_RS == 1 : false
           }
         },
         function() {
@@ -562,7 +596,7 @@ sikatApp.controller("indikatorMutuEditController", function(
         return;
     }
     if (!$scope.tipeIndikator) {
-        Swal.fire("Error!", "Tipe Indikator tidak boleh kosong.", "error");
+        Swal.fire("Error!", "Jenis Indikator tidak boleh kosong.", "error");
         return;
     }
     if (!$scope.ukuranIndikator) {
@@ -593,10 +627,10 @@ sikatApp.controller("indikatorMutuEditController", function(
         Swal.fire("Error!", "Sumber Data tidak boleh kosong.", "error");
         return;
     }
-    if (!$scope.frekPengumpulan) {
+    /*if (!$scope.frekPengumpulan) {
         Swal.fire("Error!", "Frekuensi Pengumpulan tidak boleh kosong.", "error");
         return;
-    }
+    }*/
     if (!$scope.periodePelaporan) {
         Swal.fire("Error!", "Periode Pelaporan tidak boleh kosong.", "error");
         return;
@@ -613,17 +647,35 @@ sikatApp.controller("indikatorMutuEditController", function(
         Swal.fire("Error!", "Populasi Sampel tidak boleh kosong.", "error");
         return;
     }
-    if (!$scope.isiSampel) {
+    /*if (!$scope.isiSampel) {
         Swal.fire("Error!", "Isi Sampel tidak boleh kosong.", "error");
         return;
-    }
+    }*/
     if (!$scope.instrumenPengambilan) {
-        Swal.fire("Error!", "Instrumen Pengambilan tidak boleh kosong.", "error");
+       Swal.fire("Error!", "Instrumen Pengambilan tidak boleh kosong.", "error");
+       return;
+    }else{
+      if($scope.instrumenPengambilan=="Lainnya"){
+        if (!$scope.isiInstrumen) {
+            Swal.fire("Error!", "Isi Instrumen tidak boleh kosong.", "error");
+            return;
+        }
+      }
+    }
+    if (!$scope.besarSampel) {
+        Swal.fire("Error!", "Besar Sample tidak boleh kosong.", "error");
         return;
     }
-    if (!$scope.penanggungJawab) {
-        Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
-        return;
+    /*if (!$scope.penanggungJawab) {
+      Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
+      return;
+    }*/
+    if ($scope.isNasional == null && 
+      $scope.isUnit == null && 
+      $scope.isPrioritasUnit == null && 
+      $scope.isPrioritasRS == null) {
+      Swal.fire("Error!", "Kode Indikator tidak boleh kosong.", "error");
+      return;
     }
 
     $http
@@ -652,15 +704,21 @@ sikatApp.controller("indikatorMutuEditController", function(
           kriteria: $scope.kriteria,
           formula: $scope.formula,
           sumberData: $scope.sumberData,
-          frekPengumpulan: $scope.frekPengumpulan,
+          frekPengumpulan: $scope.frekPengumpulan != null ? $scope.frekPengumpulan : "",
           periodePelaporan: $scope.periodePelaporan,
           periodeAnalisa: $scope.periodeAnalisa,
           metodePengumpulan: $scope.metodePengumpulan,
           populasiSampel: $scope.populasiSampel,
-          isiSampel: $scope.isiSampel,
+          isiSampel: $scope.isiSampel != null ? $scope.isiSampel : "",
           rencanaAnalisis: $scope.rencanaAnalisis != null ? $scope.rencanaAnalisis : "",
           instrumenPengambilan: $scope.instrumenPengambilan,
-          penanggungJawab: $scope.penanggungJawab
+          isiInstrumen: $scope.isiInstrumen != null ? $scope.isiInstrumen : "",
+          besarSampel: $scope.besarSampel,
+          penanggungJawab: $rootScope.currPage,
+          isNasional: $scope.isNasional != null ? $scope.isNasional : 0,
+          isUnit: $scope.isUnit != null ? $scope.isUnit : 0,
+          isPrioritasUnit: $scope.isPrioritasUnit != null ? $scope.isPrioritasUnit : 0,
+          isPrioritasRS: $scope.isPrioritasRS != null ? $scope.isPrioritasRS : 0
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )

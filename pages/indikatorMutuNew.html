@@ -116,7 +116,9 @@
                   <select
                     class="form-control custom-select"
                     ng-model="tipeIndikator"
+                    ng-init="tipeIndikator = ''"
                   >
+                    <option value="">Pilih Jenis Indikator</option>
                     <option value="Input">Input</option>
                     <option value="Proses">Proses </option>
                     <option value="Output">Output</option>
@@ -130,8 +132,9 @@
                   <select
                     class="form-control custom-select"
                     ng-model="ukuranIndikator"
+                    ng-init="ukuranIndikator = ''"
                   >
-                    <option value="Jumlah">Jumlah</option>
+                    <option value="">Pilih Ukuran Indikator</option>
                     <option value="Presentase">Presentase</option>
                     <option value="Waktu">Waktu</option>
                   </select>
@@ -179,7 +182,9 @@
                   <select
                     class="form-control custom-select"
                     ng-model="metodePengumpulan"
+                    ng-init="metodePengumpulan = ''"
                   >
+                    <option value="">Pilih Metode Pengumpulan</option>
                     <option value="Retrospektif">Retrospektif</option>
                     <option value="Observasi">Observasi</option>
                   </select>
@@ -189,7 +194,9 @@
                   <select
                     class="form-control custom-select"
                     ng-model="sumberData"
+                    ng-init="sumberData = ''"
                   >
+                    <option value="">Pilih Sumber Data</option>
                     <option value="Data Primer">Data Primer</option>
                     <option value="Data Sekunder">Data Sekunder</option>
                   </select>
@@ -200,7 +207,9 @@
                     class="form-control custom-select"
                     ng-model="instrumenPengambilan"
                     id="instrumen"
+                    ng-init="instrumenPengambilan = ''"
                   >
+                    <option value="">Pilih Instrumen Pengambilan</option>
                     <option value="Formulir">Formulir</option>
                     <option value="EMR">EMR</option>
                     <option value="Lainnya">Lainnya</option>
@@ -228,7 +237,9 @@
                     class="form-control custom-select"
                     ng-model="populasiSampel"
                     id="sampel"
-                  >
+                    ng-init="populasiSampel = ''"
+                    >
+                    <option value="">Pilih Cara Pengambilan Sampel</option>
                     <option value="Probability Sampling">Probability Sampling</option>
                     <option value="Non Probability Sampling">Non Probability Sampling</option>
                     <option value="Lainnya">Lainnya</option>
@@ -247,7 +258,9 @@
                   <select
                     class="form-control custom-select"
                     ng-model="periodePelaporan"
-                  >
+                    ng-init="periodePelaporan = ''"
+                    >
+                    <option value="">Pilih Periode Pengumpulan Data</option>
                     <option value="Harian">Harian</option>
                     <option value="Bulanan">Bulanan</option>
                   </select>
@@ -261,7 +274,9 @@
                   <select
                     class="form-control custom-select"
                     ng-model="periodeAnalisa"
-                  >
+                    ng-init="periodeAnalisa = ''"
+                    >
+                    <option value="">Pilih Periode Analisis dan Pelaporan</option>
                     <option value="Bulanan">Bulanan</option>
                     <option value="Triwulan">Triwulan</option>
                     <option value="Semester">Semester</option>
