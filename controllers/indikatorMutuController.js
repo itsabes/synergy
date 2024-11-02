@@ -266,6 +266,7 @@ sikatApp.controller("indikatorMutuNewController", function(
         Swal.fire("Error!", "Ukuran Indikator tidak boleh kosong.", "error");
         return;
     }
+    /*
     if (!$scope.numerator) {
         Swal.fire("Error!", "Numerator tidak boleh kosong.", "error");
         return;
@@ -273,7 +274,7 @@ sikatApp.controller("indikatorMutuNewController", function(
     if (!$scope.denumerator) {
         Swal.fire("Error!", "Denumerator tidak boleh kosong.", "error");
         return;
-    }
+    }*/
     if (!$scope.targetPencapaian) {
         Swal.fire("Error!", "Target Pencapaian tidak boleh kosong.", "error");
         return;
@@ -361,8 +362,8 @@ sikatApp.controller("indikatorMutuNewController", function(
           defPemikiran: $scope.defPemikiran,
           tipeIndikator: $scope.tipeIndikator,
           ukuranIndikator: $scope.ukuranIndikator,
-          numerator: $scope.numerator,
-          denumerator: $scope.denumerator,
+          numerator: $scope.numerator != null ? $scope.numerator : "",
+          denumerator: $scope.denumerator = null ? $scope.denumerator : "",
           targetPencapaian: $scope.targetPencapaian,
           kriteria: $scope.kriteria,
           formula: $scope.formula,
@@ -603,6 +604,7 @@ sikatApp.controller("indikatorMutuEditController", function(
         Swal.fire("Error!", "Ukuran Indikator tidak boleh kosong.", "error");
         return;
     }
+    /*
     if (!$scope.numerator) {
         Swal.fire("Error!", "Numerator tidak boleh kosong.", "error");
         return;
@@ -611,6 +613,7 @@ sikatApp.controller("indikatorMutuEditController", function(
         Swal.fire("Error!", "Denumerator tidak boleh kosong.", "error");
         return;
     }
+    */
     if (!$scope.targetPencapaian) {
         Swal.fire("Error!", "Target Pencapaian tidak boleh kosong.", "error");
         return;
@@ -698,8 +701,8 @@ sikatApp.controller("indikatorMutuEditController", function(
           defPemikiran: $scope.defPemikiran,
           tipeIndikator: $scope.tipeIndikator,
           ukuranIndikator: $scope.ukuranIndikator,
-          numerator: $scope.numerator,
-          denumerator: $scope.denumerator,
+          numerator: $scope.numerator != null ? $scope.numerator : "",
+          denumerator: $scope.denumerator = null ? $scope.denumerator : "",
           targetPencapaian: $scope.targetPencapaian,
           kriteria: $scope.kriteria,
           formula: $scope.formula,

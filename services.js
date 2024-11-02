@@ -1782,14 +1782,14 @@ sikatApp.service("pmkpService", function($http) {
       );
   };
 
-  this.getDynamicData = function(process_type, type, callbackFunc) {
+  this.getDynamicData = function(process_type, callbackFunc) {
     var result = { data: null };
 
     // Create a new XMLHttpRequest object
     var xhr = new XMLHttpRequest();
 
     // Open a synchronous GET request
-    xhr.open("GET", SERVER_URL + "/api/dynamic/getHeaderData/proc_type/" + process_type + "/type/" + type, false); // `false` makes it synchronous
+    xhr.open("GET", SERVER_URL + "/api/dynamic/getHeaderData/proc_type/" + process_type, false); // `false` makes it synchronous
 
     // Set headers if needed
     xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
