@@ -275,7 +275,7 @@ sikatApp.controller("formBController", function(
 ) {
   $rootScope.currPage = $routeParams.id;
   $rootScope.currForm = "formB";
-  $scope.specialCalcDailyToMonthly = pmkpService.getDailyMonthlySpecialHasilCalculation($rootScope.currPage);
+  $scope.specialCalcDailyToMonthly = [];//pmkpService.getDailyMonthlySpecialHasilCalculation($rootScope.currPage);
   $scope.monthlyNames = [];
   $scope.monthlyDisable = [];//pmkpService.getMonthlyDisable($rootScope.currPage);
   $scope.monthNames = pmkpService.getMonthNames();
