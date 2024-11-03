@@ -56,7 +56,6 @@ sikatApp.controller("formAController", function(
 
                       //var specialCalc = result.data[key]['DAILYMONTHLYSPECIAL'];
                       //console.log("specialCalc", specialCalc);
-                      console.log(dailyData[numeratorIdx]+" -->");
 
                       if (monthlyData[key] === undefined)
                           monthlyData[key] = {};
@@ -289,10 +288,11 @@ sikatApp.controller("formAController", function(
               " " +
               today.getFullYear(),
           d: $scope.dailyData,
-          m: $scope.monthlyData
+          m: $scope.monthlyData,
+          unit:$rootScope.currPage
       };
-      const url = REPORT_URL + "/xlsx/" + $scope.currPage;
-      pmkpService.postDownload(url, data, $scope.currPage + ".xlsx");
+      const url = REPORT_URL + "/pdf_a/" + $scope.currPage;
+      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
   };
   $scope.getData();
 });
@@ -962,10 +962,11 @@ sikatApp.controller("formBController", function(
               " " +
               today.getFullYear(),
           d: $scope.dailyData,
-          m: $scope.monthlyData
+          m: $scope.monthlyData,
+          unit:$rootScope.currPage
       };
-      const url = REPORT_URL + "/xlsx/" + $scope.currPage;
-      pmkpService.postDownload(url, data, $scope.currPage + ".xlsx");
+      const url = REPORT_URL + "/pdf_b/" + $scope.currPage;
+      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
   };
   $scope.getData();
 });
