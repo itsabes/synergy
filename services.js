@@ -1813,6 +1813,37 @@ sikatApp.service("pmkpService", function($http) {
     callbackFunc(result);
 };
 
+this.getDynamicDataFormA = function(process_type, callbackFunc) {
+  var result = { data: null };
+
+  // Create a new XMLHttpRequest object
+  var xhr = new XMLHttpRequest();
+
+  // Open a synchronous GET request
+  xhr.open("GET", SERVER_URL + "/api/dynamic/getHeaderDataFormA/proc_type/" + process_type, false); // `false` makes it synchronous
+
+  // Set headers if needed
+  xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+
+  try {
+      // Send the request
+      xhr.send();
+
+      // Check the response status
+      if (xhr.status === 200) {
+          // Parse the response data if it is in JSON format
+          result.data = JSON.parse(xhr.responseText);
+      } else {
+          console.error("Error occurred: " + xhr.statusText);
+      }
+  } catch (error) {
+      console.error("Error occurred during AJAX call: ", error);
+  }
+
+  // Call the callback function with the result
+  callbackFunc(result);
+};
+
   this.getData = function(
     currPage,
     yearSelect,

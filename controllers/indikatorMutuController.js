@@ -702,7 +702,7 @@ sikatApp.controller("indikatorMutuEditController", function(
           tipeIndikator: $scope.tipeIndikator,
           ukuranIndikator: $scope.ukuranIndikator,
           numerator: $scope.numerator != null ? $scope.numerator : "",
-          denumerator: $scope.denumerator = null ? $scope.denumerator : "",
+          denumerator: $scope.denumerator != null ? $scope.denumerator : "",
           targetPencapaian: $scope.targetPencapaian,
           kriteria: $scope.kriteria,
           formula: $scope.formula,
