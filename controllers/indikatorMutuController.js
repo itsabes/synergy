@@ -222,6 +222,20 @@ sikatApp.controller("indikatorMutuNewController", function(
   var today = new Date();
   $scope.tahun = today.getFullYear() + "";
 
+   // Initialize the models
+   $scope.instrumenPengambilan = '';
+   $scope.isiInstrumen = '';
+
+  // Function to check the selected instrument
+  $scope.checkInstrumen = function() {
+    // This function can contain additional logic if needed
+    // Currently, the ng-show directive takes care of hiding/showing the textarea
+    if ($scope.instrumenPengambilan !== 'Lainnya') {
+      $scope.isiInstrumen = ''; // Clear the input if not "Lainnya"
+    }
+    // Add any other logic here if necessary
+  };
+
 
 
   $scope.save = () => {
