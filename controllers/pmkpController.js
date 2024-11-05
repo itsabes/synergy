@@ -1468,12 +1468,8 @@ sikatApp.controller(
         dataList: dataList,
         unit: $rootScope.currPage,
       };
-      const url = REPORT_URL + "/docx/pmkp";
-      pmkpService.postDownload(
-        url,
-        data,
-        $scope.currPage + "-chart-report.docx"
-      );
+      const url = REPORT_URL + "/pdf_c/" + $scope.currPage;
+      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
     };
     $scope.getData();
   }
