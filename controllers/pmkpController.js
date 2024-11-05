@@ -1466,6 +1466,7 @@ sikatApp.controller(
         tahun: $scope.yearSelect,
         part: partString,
         dataList: dataList,
+        unit: $rootScope.currPage,
       };
       const url = REPORT_URL + "/docx/pmkp";
       pmkpService.postDownload(
