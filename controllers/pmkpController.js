@@ -1286,9 +1286,12 @@ sikatApp.controller(
           " " +
           today.getFullYear(),
         y: $scope.yearlyData,
+        unit: $rootScope.currPage
       };
-      const url = REPORT_URL + "/xlsx/" + $scope.currPage + "Rekap";
-      pmkpService.postDownload(url, data, $scope.currPage + "Rekap.xlsx");
+
+      const url = REPORT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
+      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+
     };
     $scope.downloadChart = (part) => {
       for (var h = 0; h < $scope.yearlyData.length; h++) {
@@ -1468,8 +1471,12 @@ sikatApp.controller(
         dataList: dataList,
         unit: $rootScope.currPage,
       };
-      const url = REPORT_URL + "/pdf_c/" + $scope.currPage;
-      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+      const url = REPORT_URL + "/docx/pmkp";
+      pmkpService.postDownload(
+        url,
+        data,
+        $scope.currPage + "-chart-report.docx"
+      );
     };
     $scope.getData();
   }
