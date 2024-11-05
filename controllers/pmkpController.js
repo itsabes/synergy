@@ -979,7 +979,7 @@ sikatApp.controller(
 
 sikatApp.controller(
   "rekapController",
-  function ($scope, $rootScope, $routeParams, $http, pmkpService) {
+  function ($scope, $rootScope, $routeParams, $http, pmkpService,$location) {
     $rootScope.currPage = $routeParams.id;
     $rootScope.currForm = "rekap";
     $scope.monthlyNames = [];//pmkpService.getMonthlyNames($scope.currPage);
@@ -991,6 +991,9 @@ sikatApp.controller(
     $scope.targetHasil = [];//pmkpService.getMonthlyTargetHasil($scope.currPage);
     $scope.monthNames = pmkpService.getMonthNames();
     $scope.yearlyData = [];
+    $scope.numerator = [];
+    $scope.denumerator=[];
+    $scope.idx = [];
 
     pmkpService.getDynamicData($rootScope.currPage, (result) => {
       if (result) {
@@ -1000,6 +1003,9 @@ sikatApp.controller(
             $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
             $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
             $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+            $scope.idx.push(result.data[key]["ID"]);
+            $scope.numerator.push(result.data[key]["NUMERATOR"]);
+            $scope.denumerator.push(result.data[key]["DENUMERATOR"]);
 
             iterator++;
           }
@@ -1094,7 +1100,20 @@ sikatApp.controller(
             }
             data = [];
             for (var i = 0; i < $scope.monthlyNames.length; i++) {
-              var rowData = [$scope.monthlyNames[i], $scope.target[i]];
+              //var rowData = [$scope.monthlyNames[i], $scope.target[i]];
+              let urlLink = $location.protocol() + "://" + $location.host() + 
+              ($location.port() ? ":" + $location.port() : "") +
+              "/synergy/main.html#!/lembarPdsa_new/" + $rootScope.currPage +
+              "?judul=" + encodeURIComponent($scope.monthlyNames[i]) +
+              "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
+              "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
+              "&target=" + encodeURIComponent($scope.target[i] || "null") +
+              "&idx=" + encodeURIComponent($scope.idx[i]);
+
+              var rowData = [
+                '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
+                $scope.target[i]
+              ];
               for (var j = 0; j < 12; j++) {
                 if ($scope.yearlyData[j]) {
                   rowData.push($scope.yearlyData[j].monthlyData[i].hasil);
