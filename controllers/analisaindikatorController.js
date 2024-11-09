@@ -48,7 +48,7 @@ sikatApp.controller("analisaIndikatorController", function(
     target,
     id,
     analisa,
-    rekomendasi
+    rekomendasi,
   ) => {
     $location.url(
       "/analisaIndikator_edit/"+$rootScope.currPage+"?judul=" +
@@ -187,7 +187,8 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $scope,
   $rootScope,
   $routeParams,
-  $http
+  $http,
+  pmkpService
 ) {
 
   var today = new Date();
@@ -250,6 +251,16 @@ sikatApp.controller("analisaIndikatorEditController", function(
         }
       );
   };
+
+  $scope.downloadPdf = (idx) => {
+    const data = {
+      direkturName: localStorage.getItem("nama_direktur"),
+      direkturNip: localStorage.getItem("nip_direktur"),  
+      rsName: localStorage.getItem("nama_rumah_sakit"),
+    };
+    const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage + "/" + idx;
+    pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+  }
 
   $scope.delete = () => {
     var url =
