@@ -72,11 +72,11 @@ sikatApp.config(function ($routeProvider) {
       templateUrl: "pages/analisaIndikatorList.html",
       controller: "analisaIndikatorController"
     })
-    .when("/lembarPdsa_new/:id", {
+    .when("/analisaIndikator_new/:id", {
       templateUrl: "pages/analisaIndikatorNew.html",
       controller: "analisaIndikatorNewController"
     })
-    .when("/lembarPdsa_edit/:id", {
+    .when("/analisaIndikator_edit/:id", {
       templateUrl: "pages/analisaIndikatorEdit.html",
       controller: "analisaIndikatorEditController"
     })

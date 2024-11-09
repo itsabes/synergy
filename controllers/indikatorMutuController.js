@@ -59,7 +59,7 @@ sikatApp.controller("indikatorMutuListController", function(
     id
   ) => {
     $location.url(
-      "/lembarPdsa_new/"+$rootScope.currPage+"?judul=" +
+      "/analisaIndikator_new/"+$rootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +

@@ -51,7 +51,7 @@ sikatApp.controller("analisaIndikatorController", function(
     rekomendasi
   ) => {
     $location.url(
-      "/lembarPdsa_edit/"+$rootScope.currPage+"?judul=" +
+      "/analisaIndikator_edit/"+$rootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +
@@ -70,7 +70,7 @@ sikatApp.controller("analisaIndikatorController", function(
     id,
   ) => {
     $location.url(
-      "/lembarPdsa_new/"+$erootScope.currPage+"?judul=" +
+      "/analisaIndikator_new/"+$erootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +

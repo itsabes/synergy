@@ -994,6 +994,9 @@ sikatApp.controller(
     $scope.numerator = [];
     $scope.denumerator=[];
     $scope.idx = [];
+    $scope.analisaId = [];
+    $scope.analisa = [];
+    $scope.rekomendasi = [];
 
     pmkpService.getDynamicData($rootScope.currPage, (result) => {
       if (result) {
@@ -1006,6 +1009,9 @@ sikatApp.controller(
             $scope.idx.push(result.data[key]["ID"]);
             $scope.numerator.push(result.data[key]["NUMERATOR"]);
             $scope.denumerator.push(result.data[key]["DENUMERATOR"]);
+            $scope.analisaId.push(result.data[key]["analisa_id"]);
+            $scope.analisa.push(result.data[key]["analisa"]);
+            $scope.rekomendasi.push(result.data[key]["rekomendasi"]);
 
             iterator++;
           }
@@ -1101,19 +1107,36 @@ sikatApp.controller(
             data = [];
             for (var i = 0; i < $scope.monthlyNames.length; i++) {
               //var rowData = [$scope.monthlyNames[i], $scope.target[i]];
-              let urlLink = $location.protocol() + "://" + $location.host() + 
-              ($location.port() ? ":" + $location.port() : "") +
-              "/synergy/main.html#!/lembarPdsa_new/" + $rootScope.currPage +
-              "?judul=" + encodeURIComponent($scope.monthlyNames[i]) +
-              "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
-              "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
-              "&target=" + encodeURIComponent($scope.target[i] || "null") +
-              "&idx=" + encodeURIComponent($scope.idx[i]);
+              let urlLink = "";
+
+              if ($scope.analisaId[i]) {
+                urlLink = $location.protocol() + "://" + $location.host() + 
+                          ($location.port() ? ":" + $location.port() : "") +
+                          "/synergy/main.html#!/analisaIndikator_edit/" + $rootScope.currPage +
+                          "?judul=" + encodeURIComponent($scope.monthlyNames[i]) +
+                          "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
+                          "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
+                          "&target=" + encodeURIComponent($scope.target[i] || "null") +
+                          "&analisa=" + encodeURIComponent($scope.analisa[i] || "null") +
+                          "&rekomendasi=" + encodeURIComponent($scope.rekomendasi[i] || "null") +
+                          "&idx=" + encodeURIComponent($scope.analisaId[i]);
+              } else if (!$scope.analisaId[i]) {
+
+                  urlLink = $location.protocol() + "://" + $location.host() + 
+                            ($location.port() ? ":" + $location.port() : "") +
+                            "/synergy/main.html#!/analisaIndikator_new/" + $rootScope.currPage +
+                            "?judul=" + encodeURIComponent($scope.monthlyNames[i]) +
+                            "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
+                            "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
+                            "&target=" + encodeURIComponent($scope.target[i] || "null") +
+                            "&idx=" + encodeURIComponent($scope.idx[i]);
+              }
 
               var rowData = [
-                '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
-                $scope.target[i]
+                  '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
+                  $scope.target[i]
               ];
+
               for (var j = 0; j < 12; j++) {
                 if ($scope.yearlyData[j]) {
                   rowData.push($scope.yearlyData[j].monthlyData[i].hasil);
