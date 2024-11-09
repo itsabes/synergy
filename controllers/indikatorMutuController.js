@@ -502,7 +502,8 @@ sikatApp.controller("indikatorMutuEditController", function(
   $scope,
   $rootScope,
   $routeParams,
-  $http
+  $http,
+  pmkpService
 ) {
 
   var today = new Date();
@@ -587,6 +588,17 @@ sikatApp.controller("indikatorMutuEditController", function(
         }
       );
   };
+
+  $scope.downloadPdf = (id) => {
+    const data = {
+      direkturName: localStorage.getItem("nama_direktur"),
+      direkturNip: localStorage.getItem("nip_direktur"),  
+      rsName: localStorage.getItem("nama_rumah_sakit"),
+      id: id,
+    };
+    const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
+    pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+  }
   
   $scope.update = () => {
 
