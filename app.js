@@ -69,8 +69,8 @@ sikatApp.config(function ($routeProvider) {
       controller: "rekapController"
     })
     .when("/lembarPdsa/:id", {
-      templateUrl: "pages/analisaIndikatorList.html",
-      controller: "analisaIndikatorController"
+      templateUrl: "pages/lembarPdsa.html",
+      controller: "lembarPdsaNewController"
     })
     .when("/analisaIndikator_new/:id", {
       templateUrl: "pages/analisaIndikatorNew.html",

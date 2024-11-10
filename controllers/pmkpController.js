@@ -1335,6 +1335,7 @@ sikatApp.controller(
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
 
     };
+
     $scope.downloadChart = (part) => {
       for (var h = 0; h < $scope.yearlyData.length; h++) {
         let monthlyData = [];
@@ -1512,13 +1513,11 @@ sikatApp.controller(
         part: partString,
         dataList: dataList,
         unit: $rootScope.currPage,
+
       };
-      const url = REPORT_URL + "/docx/pmkp";
-      pmkpService.postDownload(
-        url,
-        data,
-        $scope.currPage + "-chart-report.docx"
-      );
+
+      const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage;
+      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
     };
     $scope.getData();
   }

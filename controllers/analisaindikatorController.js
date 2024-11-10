@@ -9,7 +9,7 @@ sikatApp.controller("analisaIndikatorController", function(
 ) {
 
   $rootScope.currPage = $routeParams.id;
-  $rootScope.currForm = "lembarPdsa";
+  $rootScope.currForm = "analisaIndikator";
 
   // Tambahkan log halaman saat ini
   console.log("Halaman saat ini:", $rootScope.currPage);
@@ -130,7 +130,7 @@ sikatApp.controller("analisaIndikatorNewController", function(
 ) {
 
   $rootScope.currPage = $routeParams.id;
-  $rootScope.currForm = "lembarPdsa";
+  $rootScope.currForm = "analisaIndikator";
 
   // Tambahkan log halaman saat ini
   console.log("Halaman saat ini:", $rootScope.currPage);
@@ -203,7 +203,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
   }
 
   $rootScope.currPage = $routeParams.id;
-  $rootScope.currForm = "lembarPdsa";
+  $rootScope.currForm = "analisaIndikator";
 
   // Tambahkan log halaman saat ini
   console.log("Halaman saat ini:", $rootScope.currPage);
