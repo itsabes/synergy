@@ -1,182 +1,112 @@
 <div class="row page-titles">
-    <div class="col-md-5 col-8 align-self-center">
-        <h3 class="text-themecolor m-b-0 m-t-0">Lembar Pdsa - New</h3>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="javascript:void(0)">Home</a>
-            </li>
-            <li class="breadcrumb-item active">Lembar Pdsa</li>
-        </ol>
-    </div>
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Lembar Pdsa - List</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Lembar Pdsa</li>
+    </ol>
+  </div>
 </div>
-
 <div class="row">
-    <div class="col-12">
-        <div class="card card-outline-info">
-            <div class="card-body">
-                <form action="#">
-                    <div class="form-body">
-                        <h3 class="card-title">Lembar Kerja Perbaikan Mutu
-                            dengan Metode PDSA</h3>
-                        <hr />
-                        <div class="row align-items-start">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="control-label">Judul Proyek
-                                        Perbaikan</label>
-                                    <input type="text" ng-model="judulProyek" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Ketua
-                                        Tim</label>
-                                    <input type="text" ng-model="ketuaTim" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="control-label">Anggota
-                                                Tim 1</label>
-                                            <input type="text" ng-model="anggota1" class="form-control" />
-                                        </div>
-                                        <div class="col">
-                                            <label class="control-label">Jabatan</label>
-                                            <input type="text" ng-model="jabatan1" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="control-label">Anggota
-                                                Tim 2</label>
-                                            <input type="text" ng-model="anggota2" class="form-control" />
-                                        </div>
-                                        <div class="col">
-                                            <label class="control-label">Jabatan</label>
-                                            <input type="text" ng-model="jabatan2" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col">
-                                            <label class="control-label">Anggota
-                                                Tim 3</label>
-                                            <input type="text" ng-model="anggota3" class="form-control" />
-                                        </div>
-                                        <div class="col">
-                                            <label class="control-label">Jabatan</label>
-                                            <input type="text" ng-model="jabatan3" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Benefit /
-                                        Keuntungan perbaikan untuk</label>
-                                    <input type="text" ng-model="benefit" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Masalah /
-                                        Peluang</label>
-                                    <textarea class="form-control" rows="5" ng-model="masalah"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Langkah 1.
-                                        Tujuan (Apa yang ingin dicapai)
-                                        ?</label>
-                                    <textarea class="form-control" rows="5" ng-model="tujuan"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Langkah 2.
-                                        Bagaimana kita mengukur jika perbaikan
-                                        menghasilkan perubahan ?</label>
-                                    <select class="form-control custom-select" ng-model="ukuran" ng-init="ukuran = ''">
-                                        <option value>Pilih ...</option>
-                                        <option value="struktur">Ukuran
-                                            Struktur</option>
-                                        <option value="proses">Ukuran
-                                            Proses</option>
-                                        <option value="outcome">Ukuran
-                                            Outcome</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Langkah 3.
-                                        Perbaikan apa yang akan dilakukan untuk
-                                        menghasilkan perbaikan?</label>
-                                    <textarea class="form-control" rows="5" ng-model="perbaikan"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Periode waktu
-                                        proyek perbaikan</label>
-                                    <input type="text" ng-model="periodeWaktu" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Anggaran</label>
-                                    <input type="text" ng-model="anggaran" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Tanggal
-                                        Mulai</label>
-                                    <input type="date" ng-model="tanggalMulai" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Tanggal
-                                        Selesai</label>
-                                    <input type="date" ng-model="tanggalSelesai" class="form-control" />
-                                </div>
-                                <div ng-repeat="siklus in siklusList">
-                                    <h4>Siklus {{ $index + 1 }}</h4>
-                                    <div class="form-group">
-                                        <label class="control-label">PLAN</label>
-                                        <label class="control-label">Saya
-                                            berencana</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.rencana"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Saya
-                                            berharap</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.berharap"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Tindakan</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.tindakan"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Apa yang
-                                            diamati ?</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.diamati"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">STUDY</label>
-                                        <label class="control-label">Apa yang
-                                            dapat dipelajari? Apakah sesuai
-                                            dengan tujuan?</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.pelajari"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">ACT</label>
-                                        <label class="control-label">Tindakan
-                                            selanjutnya</label>
-                                        <textarea class="form-control" rows="5"
-                                            ng-model="siklus.tindakanSelanjutnya"></textarea>
-                                    </div>
-                                </div>
-                                <button ng-click="tambahSiklus()" type="button" class="btn btn-success">Tambah
-                                    Siklus</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions m-t-10" >
-                        <button type="button" class="btn btn-success pull-right m-l-10" ng-click="save()">
-                            <i class="fa fa-check"></i> Save
-                        </button>
-                        <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
-                            Cancel
-                        </button>
-                    </div>
-                </form>
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+              <label
+                for="example-text-input"
+                class="col-xs-12 col-lg-2 col-form-label"
+                >Unit
+              </label>
+              <div class="col-xs-12 col-lg-10">
+                <!-- <select class="custom-select col-12" ng-model="unit" aria-label="label for the select">
+                  <option ng-repeat="(key, value) in profileType" ng-value="{{value.ID}}" ng-selected="{{unit === value.ID}}"> {{ value.TYPE }}</option>
+                </select> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  ng-model="currPage"
+                  disabled
+                />
+              </div>
+          </div>
+          <div class="form-group row">
+              <label
+                  for="example-month-input"
+                  class="col-xs-12 col-lg-2 col-form-label"
+                  >Year
+              </label>
+              <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
+              <div class="col-xs-12 col-lg-10">
+                <select
+                  class="custom-select col-12"
+                  ng-model="tahun">
+                  <!-- <option ng-repeat="(key, n) in yearDynamic" value="{{ n }}" ng-selected="{{n == currentYear}}">{{ n }}</option> -->
+                  <option ng-repeat="n in yearRange" value="{{ n }}">{{ n }}</option>
+                </select>
+              </div>
             </div>
-        </div>
+          <div class="form-group row m-b-0">
+            <div class="offset-sm-2 col-sm-9">
+              <!-- <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
+                Cari Data
+              </button> -->
+              <a class="btn btn-success waves-effect waves-light"
+                href="#!/lembarPdsa_new/rawatJalan"
+                ng-class="[{active: currPage == 'lembarPdsa'}]"
+                ng-class="[{active: currForm=='lembarPdsa' && currPage == 'rawatJalan'}]"
+                ><i class="fa fa-plus"></i> Pengajuan Lembar Pdsa</a
+              >
+              <!-- <button type="button" class="btn btn-success waves-effect waves-light" ng-click="addIndikatorMutu()">
+                <i class="fa fa-plus"></i> Pengajuan Indikator Mutu
+              </button> -->
+            </div>
+          </div>
+        </form>
+        <br />
+        <table ng-table="tableParams"
+          class="table table-condensed table-bordered table-striped table-responsive"
+          show-filter="false">
+          <tr ng-repeat="row in $data track by $index">
+            <td title="'Judul Proyek'" sortable="'id'">
+              {{row.JUDUL_PROYEK}}
+            </td>
+            <td title="'Ketua Tim'" sortable="'ketua_tim'">
+              {{ row.KETUA_TIM }}
+            </td>
+            <td title="'Benefit'" sortable="'benefit'">
+              {{ row.BENEFIT }}
+            </td>
+            <td title="'Masalah'" sortable="'masalah'">
+              {{ row.MASALAH }}
+            </td>
+            <td title="'Tujuan'" sortable="'tujuan'">
+              {{ row.TUJUAN }}
+            </td>
+            <td title="'Ukuran'" sortable="'ukuran'">
+              {{ row.UKURAN }}
+            </td>
+            <td title="'Perbaikan'" sortable="'perbaikan'">
+              {{ row.PERBAIKAN }}
+            </td>
+            <td title="'Tanggal Mulai'" sortable="'tanggal_mulai'">
+              {{ row.TANGGAL_MULAI }}
+            </td>
+            <td title="'Tanggal Selesai'" sortable="'tanggal_selesai'">
+              {{ row.TANGGAL_SELESAI }}
+            </td>
+            <td title="'Action'">
+              <button type="button"
+                class="btn btn-success waves-effect waves-light"
+                ng-click="showLembarPdsa(row.ID)">
+                <i class="fa fa-edit"></i> Update
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
+  </div>
 </div>

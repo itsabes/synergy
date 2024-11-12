@@ -70,7 +70,15 @@ sikatApp.config(function ($routeProvider) {
     })
     .when("/lembarPdsa/:id", {
       templateUrl: "pages/lembarPdsa.html",
+      controller: "lembarPdsaController"
+    })
+    .when("/lembarPdsa_new/:id", {
+      templateUrl: "pages/lembarPdsaNew.html",
       controller: "lembarPdsaNewController"
+    })
+    .when("/lembarPdsa_edit/:id", {
+      templateUrl: "pages/lembarPdsaEdit.html",
+      controller: "lembarPdsaEditController"
     })
     .when("/analisaIndikator_new/:id", {
       templateUrl: "pages/analisaIndikatorNew.html",
