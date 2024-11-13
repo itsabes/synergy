@@ -5,7 +5,8 @@ sikatApp.controller("indikatorMutuListController", function(
   $filter,
   $location,
   $routeParams,
-  NgTableParams
+  NgTableParams,
+  pmkpService
 ) {
 
   $rootScope.currPage = $routeParams.id;
@@ -58,7 +59,7 @@ sikatApp.controller("indikatorMutuListController", function(
     id
   ) => {
     $location.url(
-      "/lembarPdsa_new/"+$rootScope.currPage+"?judul=" +
+      "/analisaIndikator_new/"+$rootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +
@@ -75,6 +76,17 @@ sikatApp.controller("indikatorMutuListController", function(
       id
     );
   };
+
+  $scope.downloadPdf = (id) => {
+    const data = {
+      direkturName: localStorage.getItem("nama_direktur"),
+      direkturNip: localStorage.getItem("nip_direktur"),  
+      rsName: localStorage.getItem("nama_rumah_sakit"),
+      id: id,
+    };
+    const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
+    pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+  }
 
   $scope.showStatusAcc = (
     id,statusAcc
@@ -221,6 +233,20 @@ sikatApp.controller("indikatorMutuNewController", function(
 
   var today = new Date();
   $scope.tahun = today.getFullYear() + "";
+
+   // Initialize the models
+   $scope.instrumenPengambilan = '';
+   $scope.isiInstrumen = '';
+
+  // Function to check the selected instrument
+  $scope.checkInstrumen = function() {
+    // This function can contain additional logic if needed
+    // Currently, the ng-show directive takes care of hiding/showing the textarea
+    if ($scope.instrumenPengambilan !== 'Lainnya') {
+      $scope.isiInstrumen = ''; // Clear the input if not "Lainnya"
+    }
+    // Add any other logic here if necessary
+  };
 
 
 
@@ -476,7 +502,8 @@ sikatApp.controller("indikatorMutuEditController", function(
   $scope,
   $rootScope,
   $routeParams,
-  $http
+  $http,
+  pmkpService
 ) {
 
   var today = new Date();
@@ -561,6 +588,17 @@ sikatApp.controller("indikatorMutuEditController", function(
         }
       );
   };
+
+  $scope.downloadPdf = (id) => {
+    const data = {
+      direkturName: localStorage.getItem("nama_direktur"),
+      direkturNip: localStorage.getItem("nip_direktur"),  
+      rsName: localStorage.getItem("nama_rumah_sakit"),
+      id: id,
+    };
+    const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
+    pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+  }
   
   $scope.update = () => {
 

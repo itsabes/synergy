@@ -9,7 +9,7 @@ sikatApp.controller("analisaIndikatorController", function(
 ) {
 
   $rootScope.currPage = $routeParams.id;
-  $rootScope.currForm = "lembarPdsa";
+  $rootScope.currForm = "analisaIndikator";
 
   // Tambahkan log halaman saat ini
   console.log("Halaman saat ini:", $rootScope.currPage);
@@ -48,10 +48,10 @@ sikatApp.controller("analisaIndikatorController", function(
     target,
     id,
     analisa,
-    rekomendasi
+    rekomendasi,
   ) => {
     $location.url(
-      "/lembarPdsa_edit/"+$rootScope.currPage+"?judul=" +
+      "/analisaIndikator_edit/"+$rootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +
@@ -70,7 +70,7 @@ sikatApp.controller("analisaIndikatorController", function(
     id,
   ) => {
     $location.url(
-      "/lembarPdsa_new/"+$erootScope.currPage+"?judul=" +
+      "/analisaIndikator_new/"+$erootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +
@@ -130,7 +130,7 @@ sikatApp.controller("analisaIndikatorNewController", function(
 ) {
 
   $rootScope.currPage = $routeParams.id;
-  $rootScope.currForm = "lembarPdsa";
+  $rootScope.currForm = "analisaIndikator";
 
   // Tambahkan log halaman saat ini
   console.log("Halaman saat ini:", $rootScope.currPage);
@@ -187,7 +187,8 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $scope,
   $rootScope,
   $routeParams,
-  $http
+  $http,
+  pmkpService
 ) {
 
   var today = new Date();
@@ -202,7 +203,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
   }
 
   $rootScope.currPage = $routeParams.id;
-  $rootScope.currForm = "lembarPdsa";
+  $rootScope.currForm = "analisaIndikator";
 
   // Tambahkan log halaman saat ini
   console.log("Halaman saat ini:", $rootScope.currPage);
@@ -250,6 +251,16 @@ sikatApp.controller("analisaIndikatorEditController", function(
         }
       );
   };
+
+  $scope.downloadPdf = (idx) => {
+    const data = {
+      direkturName: localStorage.getItem("nama_direktur"),
+      direkturNip: localStorage.getItem("nip_direktur"),  
+      rsName: localStorage.getItem("nama_rumah_sakit"),
+    };
+    const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage + "/" + idx;
+    pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+  }
 
   $scope.delete = () => {
     var url =

@@ -17,6 +17,10 @@
           <form action="#">
             <div class="form-body">
               <h3 class="card-title">Ubah Pengajuan Indikator Mutu</h3>
+              <button type="button" class="btn btn-success waves-effect waves-light" ng-click="downloadPdf(id)">
+                Download Analisa Profil Indikator Data
+              </button>
+            <hr />
               <hr />
               <div class="row align-items-start">
                 <div class="col">
@@ -215,7 +219,7 @@
                       <option value="Lainnya">Lainnya</option>
                     </select>
                   </div>
-                  <div class="form-group secInstrumen">
+                  <div class="form-group secInstrumen" ng-show="instrumenPengambilan === 'Lainnya'">
                     <label class="control-label">Isi Instrumen Lainnya</label>
                     <textarea
                       class="form-control"
@@ -339,25 +343,23 @@
   
 
   <script>     
-    $(document).ready(function () {
-  
-      $('.secSampel').hide();
-      $('#sampel').on('change', function () {
-          if (this.value == 'Lainnya') {
-              $('.secSampel').show();
-          } else {
-              $('.secSampel').hide();
-          }
-      });
-  
-      $('.secInstrumen').hide();
-      $('#instrumen').on('change', function () {
-          if (this.value == 'Lainnya') {
-              $('.secInstrumen').show();
-          } else {
-              $('.secInstrumen').hide();
-          }
-      });
-  
+  $(document).ready(function () {
+        // Handle change for 'sampel' dropdown
+        $('#sampel').on('change', function () {
+            if (this.value === 'Lainnya') {
+                $('.secSampel').show();
+            } else {
+                $('.secSampel').hide();
+            }
+        });
+
+        // Handle change for 'instrumen' dropdown
+        $('#instrumen').on('change', function () {
+            if (this.value === 'Lainnya') {
+                $('.secInstrumen').show();
+            } else {
+                $('.secInstrumen').hide();
+            }
+        });
     });
   </script>
