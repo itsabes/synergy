@@ -142,6 +142,7 @@ sikatApp.controller("analisaIndikatorNewController", function(
   $scope.numerator = $routeParams.numerator;
   $scope.denumerator = $routeParams.denumerator;
   $scope.targetPencapaian = $routeParams.target;
+  $scope.periodeAnalisa = $routeParams.periode;
   $scope.idx = $routeParams.idx;
   $scope.id = $routeParams.id;
 
