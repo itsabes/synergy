@@ -96,14 +96,14 @@
               {{ row.DENUMERATOR }}
             </td>
             <td title="'Acc Koordinator'">
-                <button type="button"
-                        class="btn waves-effect waves-light"
-                        ng-click="showStatusAcc(row.ID,row.STATUS_ACC)"
-                        ng-class="{'btn-danger': row.STATUS_ACC === '1', 'btn-success inactive': row.STATUS_ACC === '0'}">
-                  <i class="fa" ng-class="{'fa-times': row.STATUS_ACC === '1', 'fa-check': row.STATUS_ACC === '0'}"></i>
-                  {{ row.STATUS_ACC === '1' ? 'Not ACC' : 'ACC' }}
-                </button>
-              </td>
+              <button type="button"
+                      class="btn waves-effect waves-light"
+                      ng-click="showStatusAcc(row.ID,row.STATUS_ACC)"
+                      ng-class="{'btn-danger': row.STATUS_ACC === '1', 'btn-success inactive': row.STATUS_ACC === '0'}">
+                <i class="fa" ng-class="{'fa-times': row.STATUS_ACC === '1', 'fa-check': row.STATUS_ACC === '0'}"></i>
+                {{ row.STATUS_ACC === '1' ? 'Not ACC' : 'ACC' }}
+              </button>
+            </td>
             <td title="'Action'" width="130px">
               <button type="button" class="btn btn-success waves-effect waves-light"
                 ng-click="showIndikatorMutu(row.ID)">
