@@ -16,32 +16,45 @@
             <div class="card-body">
                 <form action="#">
                     <div class="form-body">
-                        <h3 class="card-title">Lembar Kerja Perbaikan Mutu
+                        <h3 class="card-title">Ubah Lembar Kerja Perbaikan Mutu
                             dengan Metode PDSA</h3>
+                        <button type="button"
+                            class="btn btn-success waves-effect waves-light"
+                            ng-click="downloadPdf(idx)">
+                            Download Lembar Pdsa Data
+                        </button>
                         <hr />
                         <div class="row align-items-start">
                             <div class="col">
                                 <div class="form-group">
                                     <label class="control-label">Judul Proyek
                                         Perbaikan</label>
-                                    <input type="hidden" ng-model="lembarPdsaId" class="form-control" />
-                                    <input type="text" ng-model="judulProyek" class="form-control" />
+                                    <input type="hidden" ng-model="lembarPdsaId"
+                                        class="form-control" />
+                                    <input type="text" ng-model="judulProyek"
+                                        class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Ketua
                                         Tim</label>
-                                    <input type="text" ng-model="ketuaTim" class="form-control" />
+                                    <input type="text" ng-model="ketuaTim"
+                                        class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col">
                                             <label class="control-label">Anggota
                                                 Tim 1</label>
-                                            <input type="text" ng-model="anggota1" class="form-control" />
+                                            <input type="text"
+                                                ng-model="anggota1"
+                                                class="form-control" />
                                         </div>
                                         <div class="col">
-                                            <label class="control-label">Jabatan</label>
-                                            <input type="text" ng-model="jabatan1" class="form-control" />
+                                            <label
+                                                class="control-label">Jabatan</label>
+                                            <input type="text"
+                                                ng-model="jabatan1"
+                                                class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -50,11 +63,16 @@
                                         <div class="col">
                                             <label class="control-label">Anggota
                                                 Tim 2</label>
-                                            <input type="text" ng-model="anggota2" class="form-control" />
+                                            <input type="text"
+                                                ng-model="anggota2"
+                                                class="form-control" />
                                         </div>
                                         <div class="col">
-                                            <label class="control-label">Jabatan</label>
-                                            <input type="text" ng-model="jabatan2" class="form-control" />
+                                            <label
+                                                class="control-label">Jabatan</label>
+                                            <input type="text"
+                                                ng-model="jabatan2"
+                                                class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -63,35 +81,44 @@
                                         <div class="col">
                                             <label class="control-label">Anggota
                                                 Tim 3</label>
-                                            <input type="text" ng-model="anggota3" class="form-control" />
+                                            <input type="text"
+                                                ng-model="anggota3"
+                                                class="form-control" />
                                         </div>
                                         <div class="col">
-                                            <label class="control-label">Jabatan</label>
-                                            <input type="text" ng-model="jabatan3" class="form-control" />
+                                            <label
+                                                class="control-label">Jabatan</label>
+                                            <input type="text"
+                                                ng-model="jabatan3"
+                                                class="form-control" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Benefit /
                                         Keuntungan perbaikan untuk</label>
-                                    <input type="text" ng-model="benefit" class="form-control" />
+                                    <input type="text" ng-model="benefit"
+                                        class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Masalah /
                                         Peluang</label>
-                                    <textarea class="form-control" rows="5" ng-model="masalah"></textarea>
+                                    <textarea class="form-control" rows="5"
+                                        ng-model="masalah"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Langkah 1.
                                         Tujuan (Apa yang ingin dicapai)
                                         ?</label>
-                                    <textarea class="form-control" rows="5" ng-model="tujuan"></textarea>
+                                    <textarea class="form-control" rows="5"
+                                        ng-model="tujuan"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Langkah 2.
                                         Bagaimana kita mengukur jika perbaikan
                                         menghasilkan perubahan ?</label>
-                                    <select class="form-control custom-select" ng-model="ukuran" ng-init="ukuran = ''">
+                                    <select class="form-control custom-select"
+                                        ng-model="ukuran" ng-init="ukuran = ''">
                                         <option value>Pilih ...</option>
                                         <option value="struktur">Ukuran
                                             Struktur</option>
@@ -105,56 +132,72 @@
                                     <label class="control-label">Langkah 3.
                                         Perbaikan apa yang akan dilakukan untuk
                                         menghasilkan perbaikan?</label>
-                                    <textarea class="form-control" rows="5" ng-model="perbaikan"></textarea>
+                                    <textarea class="form-control" rows="5"
+                                        ng-model="perbaikan"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Periode waktu
                                         proyek perbaikan</label>
-                                    <input type="text" ng-model="periodeWaktu" class="form-control" />
+                                    <input type="text" ng-model="periodeWaktu"
+                                        class="form-control" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Anggaran</label>
-                                    <input type="text" ng-model="anggaran" class="form-control" />
+                                    <label
+                                        class="control-label">Anggaran</label>
+                                    <input type="text" ng-model="anggaran"
+                                        class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Tanggal
                                         Mulai</label>
-                                    <input type="date" ng-model="tanggalMulai" class="form-control" />
+                                    <input type="date" ng-model="tanggalMulai"
+                                        class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Tanggal
                                         Selesai</label>
-                                    <input type="date" ng-model="tanggalSelesai" class="form-control" />
+                                    <input type="date" ng-model="tanggalSelesai"
+                                        class="form-control" />
                                 </div>
                                 <div ng-repeat="siklus in siklusList">
                                     <h4>Siklus {{ $index + 1 }}</h4>
                                     <div class="form-group">
-                                        <label class="control-label">PLAN</label>
+                                        <label
+                                            class="control-label">PLAN</label>
                                         <label class="control-label">Saya
                                             berencana</label>
-                                        <input type="hidden" ng-model="siklus.siklusId" class="form-control" />
-                                        <textarea class="form-control" rows="5" ng-model="siklus.rencana"></textarea>
+                                        <input type="hidden"
+                                            ng-model="siklus.siklusId"
+                                            class="form-control" />
+                                        <textarea class="form-control" rows="5"
+                                            ng-model="siklus.rencana"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Saya
                                             berharap</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.berharap"></textarea>
+                                        <textarea class="form-control" rows="5"
+                                            ng-model="siklus.berharap"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label">Tindakan</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.tindakan"></textarea>
+                                        <label
+                                            class="control-label">Tindakan</label>
+                                        <textarea class="form-control" rows="5"
+                                            ng-model="siklus.tindakan"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Apa yang
                                             diamati ?</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.diamati"></textarea>
+                                        <textarea class="form-control" rows="5"
+                                            ng-model="siklus.diamati"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label">STUDY</label>
+                                        <label
+                                            class="control-label">STUDY</label>
                                         <label class="control-label">Apa yang
                                             dapat dipelajari? Apakah sesuai
                                             dengan tujuan?</label>
-                                        <textarea class="form-control" rows="5" ng-model="siklus.pelajari"></textarea>
+                                        <textarea class="form-control" rows="5"
+                                            ng-model="siklus.pelajari"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">ACT</label>
@@ -164,19 +207,25 @@
                                             ng-model="siklus.tindakanSelanjutnya"></textarea>
                                     </div>
                                 </div>
-                                <button ng-click="tambahSiklus()" type="button" class="btn btn-success">Tambah
+                                <button ng-click="tambahSiklus()" type="button"
+                                    class="btn btn-success">Tambah
                                     Siklus</button>
                             </div>
                         </div>
                     </div>
-                    <div class="form-actions m-t-10" >
-                        <button type="button" class="btn btn-success pull-right m-l-10" ng-click="update()">
+                    <div class="form-actions m-t-10">
+                        <button type="button"
+                            class="btn btn-success pull-right m-l-10"
+                            ng-click="update()">
                             <i class="fa fa-check"></i> update
                         </button>
-                        <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="delete()">
+                        <button type="button"
+                            class="btn btn-warning pull-right m-l-10"
+                            ng-click="delete()">
                             <i class="fa fa-ban"></i> Delete
-                          </button>
-                        <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
+                        </button>
+                        <button type="button" class="btn btn-inverse pull-right"
+                            ng-click="backToList()">
                             Cancel
                         </button>
                     </div>
