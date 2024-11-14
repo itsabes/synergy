@@ -51,7 +51,7 @@
                     <label class="control-label">Periode Analisis Data</label>
                     <input type="text" ng-model="periodeAnalisa" class="form-control" readonly/>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" ng-show="periodeAnalisa === 'Bulanan'">
                     <label class="control-label">Bulan</label>
                     <select
                       class="custom-select col-12"
@@ -71,7 +71,7 @@
                       <option value="12">December</option>
                     </select>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" ng-show="periodeAnalisa === 'Triwulan'"> 
                     <label class="control-label">Triwulan</label>
                     <select
                       class="custom-select col-12"
@@ -83,7 +83,7 @@
                       <option value="TW_4">October - December</option>
                     </select>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" ng-show="periodeAnalisa === 'Semester'">
                     <label class="control-label">Semester</label>
                     <select
                       class="custom-select col-12"

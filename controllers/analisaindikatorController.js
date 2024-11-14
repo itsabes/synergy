@@ -45,20 +45,24 @@ sikatApp.controller("analisaIndikatorController", function(
     judul,
     numerator,
     denumerator,
-    target,
+    targetPencapaian,
     id,
     analisa,
     rekomendasi,
+    periodeAnalisa,
+    monthSelect
   ) => {
     $location.url(
       "/analisaIndikator_edit/"+$rootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +
-      "&target="+ target +
+      "&targetPencapaian="+ encodeURIComponent(targetPencapaian) +
       "&idx="+ id +
       "&analisa="+analisa +
-      "&rekomendasi="+rekomendasi
+      "&rekomendasi="+rekomendasi + 
+      "&periodeAnalisa="+periodeAnalisa +
+      "&monthSelect="+monthSelect
     );
   };
 
@@ -67,14 +71,16 @@ sikatApp.controller("analisaIndikatorController", function(
     numerator,
     denumerator,
     target,
+    periodeAnalisa,
     id,
   ) => {
     $location.url(
-      "/analisaIndikator_new/"+$erootScope.currPage+"?judul=" +
+      "/analisaIndikator_new/"+$rootScope.currPage+"?judul=" +
       judul +
       "&numerator="+ numerator +
       "&denumerator="+ denumerator +
       "&target="+ target +
+      "&periode_analisa="+ periodeAnalisa +
       "&idx="+ id
     );
   };
@@ -141,8 +147,8 @@ sikatApp.controller("analisaIndikatorNewController", function(
   $scope.judulIndikator = $routeParams.judul;
   $scope.numerator = $routeParams.numerator;
   $scope.denumerator = $routeParams.denumerator;
-  $scope.targetPencapaian = $routeParams.target;
-  $scope.periodeAnalisa = $routeParams.periode;
+  $scope.targetPencapaian = $routeParams.targetPencapaian;
+  $scope.periodeAnalisa = $routeParams.periode_analisa;
   $scope.idx = $routeParams.idx;
   $scope.id = $routeParams.id;
 
@@ -156,6 +162,11 @@ sikatApp.controller("analisaIndikatorNewController", function(
         Swal.fire("Error!", "Rekomendasi tidak boleh kosong.", "error");
         return;
     }
+
+    if (!$scope.monthSelect) {
+      Swal.fire("Error!", "Periode Analisa tidak boleh kosong.", "error");
+      return;
+    }
     
     $http
       .post(
@@ -164,6 +175,7 @@ sikatApp.controller("analisaIndikatorNewController", function(
           idx: $scope.idx,
           analisa: $scope.analisa,
           rekomendasi : $scope.rekomendasi,
+          monthSelect : $scope.monthSelect,
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
@@ -215,9 +227,11 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $scope.judulIndikator = $routeParams.judul;
   $scope.numerator = $routeParams.numerator;
   $scope.denumerator = $routeParams.denumerator;
-  $scope.targetPencapaian = $routeParams.target;
+  $scope.targetPencapaian = $routeParams.targetPencapaian;
   $scope.analisa = $routeParams.analisa;
   $scope.rekomendasi = $routeParams.rekomendasi;
+  $scope.periodeAnalisa = $routeParams.periodeAnalisa;
+  $scope.monthSelect = $routeParams.monthSelect;
   $scope.idx = $routeParams.idx;
   $scope.id = $routeParams.id;
   
@@ -231,6 +245,11 @@ sikatApp.controller("analisaIndikatorEditController", function(
         Swal.fire("Error!", "Rekomendasi tidak boleh kosong.", "error");
         return;
     }
+
+    if (!$scope.monthSelect) {
+      Swal.fire("Error!", "Periode Analisa tidak boleh kosong.", "error");
+      return;
+    }
     
     $http
       .put(
@@ -239,6 +258,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
           idx: $scope.idx,
           analisa: $scope.analisa,
           rekomendasi : $scope.rekomendasi,
+          monthSelect : $scope.monthSelect,
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )

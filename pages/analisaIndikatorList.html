@@ -32,9 +32,15 @@
             <td title="'Denumerator'" sortable="'denumerator'">
               {{ row.DENUMERATOR }}
             </td>
+            <td title="'target'" sortable="'target'">
+              {{ row.TARGET_PENCAPAIAN }}
+            </td>
+            <td title="'Periode Analisa'" sortable="'periodeAnalisa'">
+              {{ row.PERIODE_ANALISA }}
+            </td>
             <td title="'Action'" width="130px">
               <button type="button" class="btn btn-success waves-effect waves-light"
-                ng-click="showAnalisaIndikatorEdit(row.JUDUL_INDIKATOR,row.NUMERATOR,row.DENUMERATOR,row.TARGET_PENCAPAIAN,row.id,row.analisa,row.rekomendasi)">
+                ng-click="showAnalisaIndikatorEdit(row.JUDUL_INDIKATOR,row.NUMERATOR,row.DENUMERATOR,row.TARGET_PENCAPAIAN,row.id,row.analisa,row.rekomendasi,row.PERIODE_ANALISA,row.period)">
                 <i class="fa fa-edit"></i> Update
               </button>
             </td>

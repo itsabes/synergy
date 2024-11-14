@@ -997,13 +997,16 @@ sikatApp.controller(
     $scope.analisaId = [];
     $scope.analisa = [];
     $scope.rekomendasi = [];
+    $scope.periodeAnalisa = [];
 
     pmkpService.getDynamicData($rootScope.currPage, (result) => {
       if (result) {
         let iterator = 1;
         Object.keys(result.data).forEach((key) => {
           if (result.data[key]["STATUS_ACC"] == 1) {
-            $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+            if (!$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])) {
+              $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+            }
             $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
             $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
             $scope.idx.push(result.data[key]["ID"]);
@@ -1012,6 +1015,7 @@ sikatApp.controller(
             $scope.analisaId.push(result.data[key]["analisa_id"]);
             $scope.analisa.push(result.data[key]["analisa"]);
             $scope.rekomendasi.push(result.data[key]["rekomendasi"]);
+            $scope.periodeAnalisa.push(result.data[key]["PERIODE_ANALISA"]);
 
             iterator++;
           }
@@ -1140,6 +1144,7 @@ sikatApp.controller(
                             "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
                             "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
                             "&target=" + encodeURIComponent($scope.target[i] || "null") +
+                            "&periode_analisa=" + encodeURIComponent($scope.periodeAnalisa[i] || "null") +
                             "&idx=" + encodeURIComponent($scope.idx[i]);
 
               var rowData = [
