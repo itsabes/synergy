@@ -1108,7 +1108,7 @@ sikatApp.controller(
             for (var i = 0; i < $scope.monthlyNames.length; i++) {
               //var rowData = [$scope.monthlyNames[i], $scope.target[i]];
               let urlLink = "";
-
+              /*
               if ($scope.analisaId[i]) {
                 urlLink = $location.protocol() + "://" + $location.host() + 
                           ($location.port() ? ":" + $location.port() : "") +
@@ -1131,6 +1131,16 @@ sikatApp.controller(
                             "&target=" + encodeURIComponent($scope.target[i] || "null") +
                             "&idx=" + encodeURIComponent($scope.idx[i]);
               }
+              */
+
+              urlLink = $location.protocol() + "://" + $location.host() + 
+                            ($location.port() ? ":" + $location.port() : "") +
+                            "/synergy/main.html#!/analisaIndikator_new/" + $rootScope.currPage +
+                            "?judul=" + encodeURIComponent($scope.monthlyNames[i]) +
+                            "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
+                            "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
+                            "&target=" + encodeURIComponent($scope.target[i] || "null") +
+                            "&idx=" + encodeURIComponent($scope.idx[i]);
 
               var rowData = [
                   '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
