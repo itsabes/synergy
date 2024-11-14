@@ -104,6 +104,7 @@ sikatApp.controller("indikatorMutuListController", function(
       {
         id : id,
         statusAcc: statusAcc,
+        userAcc: localStorage.getItem("user_email"),
       },
       { headers: { Authorization: localStorage.getItem("token") } }
     )
@@ -266,13 +267,13 @@ sikatApp.controller("indikatorMutuNewController", function(
     }
     
     // Cek jika semua field tidak dipilih
-    if ($scope.isEfisien == null && 
-      $scope.isEfektif == null && 
-      $scope.isTepatWaktu == null && 
-      $scope.isAman == null && 
-      $scope.isAdil == null && 
-      $scope.isBerPasien == null && 
-      $scope.isIntegrasi == null) {
+    if (!$scope.isEfisien  && 
+      !$scope.isEfektif  && 
+      !$scope.isTepatWaktu && 
+      !$scope.isAman  && 
+      !$scope.isAdil && 
+      !$scope.isBerPasien && 
+      !$scope.isIntegrasi) {
       Swal.fire("Error!", "Dimensi Mutu tidak boleh kosong.", "error");
       return;
     }
@@ -360,10 +361,9 @@ sikatApp.controller("indikatorMutuNewController", function(
       Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
       return;
     }*/
-    if ($scope.isNasional == null && 
-      $scope.isUnit == null && 
-      $scope.isPrioritasUnit == null && 
-      $scope.isPrioritasRS == null) {
+    if (!$scope.isINM  && 
+      !$scope.isIMPRs  && 
+      !$scope.isIMPUnit) {
       Swal.fire("Error!", "Kode Indikator tidak boleh kosong.", "error");
       return;
     }
@@ -408,7 +408,10 @@ sikatApp.controller("indikatorMutuNewController", function(
           isNasional: $scope.isNasional != null ? $scope.isNasional : 0,
           isUnit: $scope.isUnit != null ? $scope.isUnit : 0,
           isPrioritasUnit: $scope.isPrioritasUnit != null ? $scope.isPrioritasUnit : 0,
-          isPrioritasRS: $scope.isPrioritasRS != null ? $scope.isPrioritasRS : 0
+          isPrioritasRS: $scope.isPrioritasRS != null ? $scope.isPrioritasRS : 0,
+          isINM : $scope.isINM != null ? $scope.isINM : 0,
+          isIMPRs : $scope.isIMPRs != null ? $scope.isIMPRs : 0,
+          isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
@@ -566,10 +569,10 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.isiInstrumen = reqRes.data.ISI_INSTRUMEN,
             $scope.besarSampel = reqRes.data.BESAR_SAMPEL,
             $scope.penanggungJawab = reqRes.data.PENANGGUNG_JAWAB,
-            $scope.isNasional = reqRes.data.IS_NASIONAL != null ? reqRes.data.IS_NASIONAL == 1 : false,
-            $scope.isUnit = reqRes.data.IS_UNIT != null ? reqRes.data.IS_UNIT == 1 : false,
-            $scope.isPrioritasUnit = reqRes.data.IS_PRIORITAS_UNIT != null ? reqRes.data.IS_PRIORITAS_UNIT == 1 : false,
-            $scope.isPrioritasRS = reqRes.data.IS_PRIORITAS_RS != null ? reqRes.data.IS_PRIORITAS_RS == 1 : false
+            $scope.isINM = reqRes.data.isINM != null ? reqRes.data.isINM == 1 : false,
+            $scope.isIMPRs = reqRes.data.isIMPRs != null ? reqRes.data.isIMPRs == 1 : false,
+            $scope.isIMPUnit = reqRes.data.isIMPUnit != null ? reqRes.data.isIMPUnit == 1 : false
+
           }
         },
         function() {
@@ -616,16 +619,17 @@ sikatApp.controller("indikatorMutuEditController", function(
     }
     
     // Cek jika semua field tidak dipilih
-    if ($scope.isEfisien == null && 
-      $scope.isEfektif == null && 
-      $scope.isTepatWaktu == null && 
-      $scope.isAman == null && 
-      $scope.isAdil == null && 
-      $scope.isBerPasien == null && 
-      $scope.isIntegrasi == null) {
+    if (!$scope.isEfisien  && 
+      !$scope.isEfektif  && 
+      !$scope.isTepatWaktu && 
+      !$scope.isAman  && 
+      !$scope.isAdil && 
+      !$scope.isBerPasien && 
+      !$scope.isIntegrasi) {
       Swal.fire("Error!", "Dimensi Mutu tidak boleh kosong.", "error");
       return;
     }
+
     if (!$scope.tujuan) {
         Swal.fire("Error!", $scope.unit+" Tujuan tidak boleh kosong.", "error");
         return;
@@ -711,13 +715,12 @@ sikatApp.controller("indikatorMutuEditController", function(
       Swal.fire("Error!", "Penanggung Jawab tidak boleh kosong.", "error");
       return;
     }*/
-    if ($scope.isNasional == null && 
-      $scope.isUnit == null && 
-      $scope.isPrioritasUnit == null && 
-      $scope.isPrioritasRS == null) {
-      Swal.fire("Error!", "Kode Indikator tidak boleh kosong.", "error");
-      return;
-    }
+      if (!$scope.isINM  && 
+        !$scope.isIMPRs  && 
+        !$scope.isIMPUnit) {
+        Swal.fire("Error!", "Kode Indikator tidak boleh kosong.", "error");
+        return;
+      }
 
     $http
       .put(
@@ -756,10 +759,9 @@ sikatApp.controller("indikatorMutuEditController", function(
           isiInstrumen: $scope.isiInstrumen != null ? $scope.isiInstrumen : "",
           besarSampel: $scope.besarSampel,
           penanggungJawab: $rootScope.currPage,
-          isNasional: $scope.isNasional != null ? $scope.isNasional : 0,
-          isUnit: $scope.isUnit != null ? $scope.isUnit : 0,
-          isPrioritasUnit: $scope.isPrioritasUnit != null ? $scope.isPrioritasUnit : 0,
-          isPrioritasRS: $scope.isPrioritasRS != null ? $scope.isPrioritasRS : 0
+          isINM : $scope.isINM != null ? $scope.isINM : 0,
+          isIMPRs : $scope.isIMPRs != null ? $scope.isIMPRs : 0,
+          isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
