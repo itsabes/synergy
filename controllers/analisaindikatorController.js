@@ -201,7 +201,8 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $rootScope,
   $routeParams,
   $http,
-  pmkpService
+  pmkpService,
+  $location
 ) {
 
   $scope.monthlyNames = [];
@@ -240,6 +241,73 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $scope.monthSelect = $routeParams.monthSelect;
   $scope.idx = $routeParams.idx;
   $scope.id = $routeParams.id;
+
+  pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    if (result) {
+      let iterator = 1;
+      Object.keys(result.data).forEach((key) => {
+        if (result.data[key]["STATUS_ACC"] == 1 && result.data[key]["analisa_id"]==$scope.idx) {
+          if (!$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])) {
+            $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+          }
+          $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
+          $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+
+          console.log(result.data[key]["analisa_id"]+"----->");
+          console.log($scope.idx+"<----->");
+
+          
+
+          iterator++;
+        }
+      });
+    } else {
+      console.log("No data or error occurred.");
+    }
+  });
+
+  $scope.filterMonthly = (monthlyData) => {
+    for (var i = monthlyData.length; i < $scope.monthlyNames.length; i++) {
+      monthlyData[i] = {
+        numerator: "",
+        denumerator: "",
+        hasil: "",
+        analisa: "",
+      };
+    }
+    /*
+    var mappingArr = pmkpService.getMonthlyMapping($scope.currPage);
+    for (var i = 0; i < mappingArr.length; i++) {
+      var mappingUnit = mappingArr[i];
+      monthlyData[mappingUnit[0] - 1]["disable_hasil"] = true;
+    }
+    for (var i = 0; i < $scope.monthlyNames.length; i++) {
+      var target = $scope.target[i].toLowerCase();
+      if (target.includes("laporan")) {
+        monthlyData[i]["type_hasil"] = "laporan";
+      } else if (target.includes("mg/l")) {
+        monthlyData[i]["type_hasil"] = "mg/l";
+      } else if (target.includes("ph 6-9")) {
+        monthlyData[i]["type_hasil"] = "ph69";
+      } else if (target.includes("menit")) {
+        monthlyData[i]["type_hasil"] = "menit";
+      } else if (target.includes("jam")) {
+        monthlyData[i]["type_hasil"] = "jam";
+      } else if (target.includes("hari")) {
+        monthlyData[i]["type_hasil"] = "hari";
+      } else if (target.startsWith(" ") && target.endsWith(" ")) {
+        monthlyData[i]["type_hasil"] = "number";
+      } else if (target.includes("%")) {
+        monthlyData[i]["type_hasil"] = "percent";
+      } else if (target.includes("‰")) {
+        monthlyData[i]["type_hasil"] = "permil";
+      } else {
+        monthlyData[i]["type_hasil"] = "ya/tidak";
+      }
+    }
+      */
+  };
+
   
   $scope.update = () => {
 
@@ -316,6 +384,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
               if ($scope.yearlyData[dataParsed.month - 1] !== null) continue;
               dataParsed.dailyData = JSON.parse(dataParsed.dailyData);
               dataParsed.monthlyData = JSON.parse(dataParsed.monthlyData);
+              $scope.filterMonthly(dataParsed.monthlyData);
               dataParsed.d = dataParsed.dailyData;
               dataParsed.m = dataParsed.monthlyData;
               $scope.yearlyData[dataParsed.month - 1] = dataParsed;
@@ -471,8 +540,6 @@ sikatApp.controller("analisaIndikatorEditController", function(
 
   $scope.downloadChart = (idx,monthSelect) => {
 
-    console.log($scope.yearlyData+" yearly");
-
     for (var h = 0; h < $scope.yearlyData.length; h++) {
       let monthlyData = [];
       if ($scope.yearlyData[h]) monthlyData = $scope.yearlyData[h].m;
@@ -596,9 +663,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
         maxTarget=12;
       }
       
-
       for (let monthIdx = minTarget; monthIdx < maxTarget; monthIdx++) {
-        console.log('looping test:'+monthIdx)
         let val = $scope.yearlyData[monthIdx]
           ? $scope.yearlyData[monthIdx].m[i].hasil
             ? $scope.yearlyData[monthIdx].m[i].hasil
@@ -649,8 +714,6 @@ sikatApp.controller("analisaIndikatorEditController", function(
       });
     }
 
-    $scope.getData();
-
     const data = {
       direkturName: localStorage.getItem("nama_direktur"),
       direkturNip: localStorage.getItem("nip_direktur"),  
@@ -658,7 +721,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
       dataList: dataList,
       monthSelect:monthSelect
     };
-    const url = REPORT_URL + "/analisa_indikator_chart/" + $scope.currPage + "/" + idx;
+    const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage + "/" + idx;
     pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
   }
 
@@ -695,5 +758,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $scope.backToList = () => {
     window.history.back();
   };
+
+  $scope.getData();
 
 });

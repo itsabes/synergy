@@ -1034,6 +1034,7 @@ sikatApp.controller(
           analisa: "",
         };
       }
+      /*
       var mappingArr = pmkpService.getMonthlyMapping($scope.currPage);
       for (var i = 0; i < mappingArr.length; i++) {
         var mappingUnit = mappingArr[i];
@@ -1063,6 +1064,7 @@ sikatApp.controller(
           monthlyData[i]["type_hasil"] = "ya/tidak";
         }
       }
+      */
     };
     
     $scope.getData = () => {
