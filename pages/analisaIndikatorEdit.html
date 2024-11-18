@@ -70,7 +70,9 @@
                           <select
                             class="custom-select col-12"
                             ng-model="monthSelect"
-                            ng-change="getData()">
+                            ng-change="getData()"
+                            ng-init="monthSelect = ''">
+                            <option value="">Pilih Periode Bulan</option>
                             <option value="1">January</option>
                             <option value="2">February</option>
                             <option value="3">March</option>
@@ -90,7 +92,9 @@
                           <select
                             class="custom-select col-12"
                             ng-model="monthSelect"
-                            ng-change="getData()">
+                            ng-change="getData()"
+                            ng-init="monthSelect = ''">
+                            <option value="">Pilih Periode Triwulan</option>
                             <option value="TW_1">January - Maret</option>
                             <option value="TW_2">April - June</option>
                             <option value="TW_3">July - September</option>
@@ -102,7 +106,9 @@
                           <select
                             class="custom-select col-12"
                             ng-model="monthSelect"
-                            ng-change="getData()">
+                            ng-change="getData()"
+                            ng-init="monthSelect = ''">
+                            <option value="">Pilih Periode Semester</option>
                             <option value="SM_1">January - June</option>
                             <option value="SM_2">July - December</option>
                           </select>
