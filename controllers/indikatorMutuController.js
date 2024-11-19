@@ -563,7 +563,7 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.periodeAnalisa = reqRes.data.PERIODE_ANALISA,
             $scope.metodePengumpulan = reqRes.data.METODE_PENGUMPULAN,
             $scope.populasiSampel = reqRes.data.POPULASI_SAMPEL,
-            $scope.isiSampel = reqRes.data.ISI_SAMPEL,
+            $scope.isiSampel = reqRes.data.ISI_SAMPLE,
             $scope.rencanaAnalisis = reqRes.data.RENCANA_ANALISIS != null ? reqRes.data.RENCANA_ANALISIS  : "",
             $scope.instrumenPengambilan = reqRes.data.INSTRUMEN_PENGAMBILAN,
             $scope.isiInstrumen = reqRes.data.ISI_INSTRUMEN,
