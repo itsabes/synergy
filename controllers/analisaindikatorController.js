@@ -634,7 +634,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
       
       for(let i=1;i<=12;i++){
         if(monthSelect==i)
-          minTarget=0;
+          minTarget=i-1;
           maxTarget=i;
           break;
       }
@@ -643,19 +643,23 @@ sikatApp.controller("analisaIndikatorEditController", function(
         minTarget=0;
         maxTarget=3;
       }else  if(monthSelect=="TW_2"){
-        minTarget=3;
+        //minTarget=3;
+        minTarget=0;
         maxTarget=6;
       }else  if(monthSelect=="TW_3"){
-        minTarget=6;
+        //minTarget=6;
+        minTarget=0;
         maxTarget=9;
       }else  if(monthSelect=="TW_4"){
-        minTarget=9;
+        //minTarget=9;
+        minTarget=0;
         maxTarget=12;
       }else  if(monthSelect=="SM_1"){
         minTarget=0;
         maxTarget=6;
       }else  if(monthSelect=="SM_2"){
-        minTarget=6;
+        //minTarget=6;
+        minTarget=0;
         maxTarget=12;
       }
       
