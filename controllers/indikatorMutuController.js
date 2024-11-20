@@ -411,7 +411,8 @@ sikatApp.controller("indikatorMutuNewController", function(
           isPrioritasRS: $scope.isPrioritasRS != null ? $scope.isPrioritasRS : 0,
           isINM : $scope.isINM != null ? $scope.isINM : 0,
           isIMPRs : $scope.isIMPRs != null ? $scope.isIMPRs : 0,
-          isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0
+          isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0,
+          reviewUlang: $scope.reviewUlang,
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
@@ -560,6 +561,7 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.isiInstrumen = reqRes.data.ISI_INSTRUMEN,
             $scope.besarSampel = reqRes.data.BESAR_SAMPEL,
             $scope.penanggungJawab = reqRes.data.PENANGGUNG_JAWAB,
+            $scope.reviewUlang = reqRes.data.REVIEW_ULANG,
             $scope.isINM = reqRes.data.isINM != null ? reqRes.data.isINM == 1 : false,
             $scope.isIMPRs = reqRes.data.isIMPRs != null ? reqRes.data.isIMPRs == 1 : false,
             $scope.isIMPUnit = reqRes.data.isIMPUnit != null ? reqRes.data.isIMPUnit == 1 : false
@@ -752,7 +754,8 @@ sikatApp.controller("indikatorMutuEditController", function(
           penanggungJawab: $rootScope.currPage,
           isINM : $scope.isINM != null ? $scope.isINM : 0,
           isIMPRs : $scope.isIMPRs != null ? $scope.isIMPRs : 0,
-          isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0
+          isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0,
+          reviewUlang: $scope.reviewUlang != null ? $scope.reviewUlang : "",
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
