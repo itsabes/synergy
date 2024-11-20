@@ -158,6 +158,7 @@ sikatApp.controller(
         tindakan: "",
         diamati: "",
         pelajari: "",
+        photoPath: null,
         tindakanSelanjutnya: "",
       });
     };
