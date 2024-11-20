@@ -634,7 +634,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
       
       for(let i=1;i<=12;i++){
         if(monthSelect==i)
-          minTarget=i-1;
+          minTarget=0;
           maxTarget=i;
           break;
       }
