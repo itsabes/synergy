@@ -317,8 +317,10 @@
                     class="form-control"
                     rows="5"
                     ng-model="reviewUlang"
-                  ></textarea>
+                    ng-readonly="!isAuthorized(user_role)">
+                  </textarea>
                 </div>
+                
               </div>
             </div>
           </div>

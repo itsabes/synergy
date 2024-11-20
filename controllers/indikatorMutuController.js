@@ -41,6 +41,11 @@ sikatApp.controller("indikatorMutuListController", function(
       $scope.yearDynamic.push(year);
   }
 
+  $scope.isAuthorized = function (role) {
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU'];
+    return allowedRoles.includes(role);
+  };
+
   $scope.tableParams = new NgTableParams({}, { dataset: [] });
   $scope.loadData = () => {
     $location.url(
