@@ -149,13 +149,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Tanggal
-                                        Mulai</label>
+                                        Mulai Proyek</label>
                                     <input type="date" ng-model="tanggalMulai"
                                         class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Tanggal
-                                        Selesai</label>
+                                        Selesai Proyek</label>
                                     <input type="date" ng-model="tanggalSelesai"
                                         class="form-control" />
                                 </div>
@@ -171,6 +171,16 @@
                                             class="form-control" />
                                         <textarea class="form-control" rows="5"
                                             ng-model="siklus.rencana"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Tanggal
+                                            Mulai Siklus {{ $index + 1 }}</label>
+                                        <input type="date" ng-model="siklus.tanggalMulaiSiklus" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Tanggal
+                                            Selesai Siklus {{ $index + 1 }}</label>
+                                        <input type="date" ng-model="siklus.tanggalSelesaiSiklus" class="form-control" />
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Saya

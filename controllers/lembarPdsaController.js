@@ -133,6 +133,8 @@ sikatApp.controller(
       if (
         lastSiklus &&
         (!lastSiklus.rencana ||
+          !lastSiklus.tanggalMulaiSiklus ||
+          !lastSiklus.tanggalSelesaiSiklus ||
           !lastSiklus.berharap ||
           !lastSiklus.tindakan ||
           !lastSiklus.diamati ||
@@ -150,6 +152,8 @@ sikatApp.controller(
       // Tambahkan siklus baru jika validasi lolos
       $scope.siklusList.push({
         rencana: "",
+        tanggalMulaiSiklus: "",
+        tanggalSelesaiSiklus: "",
         berharap: "",
         tindakan: "",
         diamati: "",
@@ -175,77 +179,77 @@ sikatApp.controller(
       }
 
       if (!$scope.anggota1) {
-        Swal.fire("Error!", "anggota1 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggota1 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.jabatan1) {
-        Swal.fire("Error!", "jabatan1 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "jabatan1 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.anggota2) {
-        Swal.fire("Error!", "anggota2 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggota2 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.jabatan2) {
-        Swal.fire("Error!", "jabatan2 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "jabatan2 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.anggota3) {
-        Swal.fire("Error!", "anggota3 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggota3 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.jabatan3) {
-        Swal.fire("Error!", "jabatan3 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "jabatan3 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.benefit) {
-        Swal.fire("Error!", "benefit Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "benefit tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.masalah) {
-        Swal.fire("Error!", "masalah Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "masalah tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.tujuan) {
-        Swal.fire("Error!", "tujuan Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "tujuan tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.ukuran) {
-        Swal.fire("Error!", "ukuran Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "ukuran tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.perbaikan) {
-        Swal.fire("Error!", "perbaikan Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "perbaikan tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.periodeWaktu) {
-        Swal.fire("Error!", "periodeWaktu Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "periodeWaktu tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.anggaran) {
-        Swal.fire("Error!", "anggaran Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggaran tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.tanggalMulai) {
-        Swal.fire("Error!", "tanggalMulai Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "tanggalMulai Proyek tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.tanggalSelesai) {
-        Swal.fire("Error!", "tanggalSelesai Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "tanggalSelesai Proyek tidak boleh kosong.", "error");
         return;
       }
 
@@ -254,6 +258,25 @@ sikatApp.controller(
         return;
       }
 
+      // Cek jika ada siklus dengan id null dan field kosong
+      for (let i = 0; i < $scope.siklusList.length; i++) {
+        const currentSiklus = $scope.siklusList[i];
+
+        // Check if `id` is null and all other properties are empty
+        if (
+          (!currentSiklus.rencana ||
+            !currentSiklus.tanggalMulaiSiklus ||
+            !currentSiklus.tanggalSelesaiSiklus ||
+            !currentSiklus.berharap ||
+            !currentSiklus.tindakan ||
+            !currentSiklus.diamati ||
+            !currentSiklus.pelajari ||
+            !currentSiklus.tindakanSelanjutnya)
+        ) {
+          Swal.fire("Error!", "Siklus tidak boleh kosong", "error");
+          return;
+        }
+      }
       $http
         .post(
           SERVER_URL + "/api/lembarPdsa",
@@ -333,6 +356,8 @@ sikatApp.controller(
       if (
         lastSiklus &&
         (!lastSiklus.rencana ||
+          !lastSiklus.tanggalMulaiSiklus ||
+          !lastSiklus.tanggalSelesaiSiklus ||
           !lastSiklus.berharap ||
           !lastSiklus.tindakan ||
           !lastSiklus.diamati ||
@@ -351,6 +376,8 @@ sikatApp.controller(
       $scope.siklusList.push({
         siklusId: "",
         rencana: "",
+        tanggalMulaiSiklus: "",
+        tanggalSelesaiSiklus: "",
         berharap: "",
         tindakan: "",
         diamati: "",
@@ -409,8 +436,12 @@ sikatApp.controller(
                 reqRes.data.TANGGAL_SELESAI != null
                   ? new Date(reqRes.data.TANGGAL_SELESAI)
                   : "";
-              $scope.siklusList =
-                reqRes.data.SIKLUS != null ? reqRes.data.SIKLUS : [];
+              $scope.siklusList = reqRes.data.SIKLUS != null ? reqRes.data.SIKLUS.map(function(siklus) {
+                    siklus.tanggalMulaiSiklus = new Date(siklus.tanggalMulaiSiklus);
+                    siklus.tanggalSelesaiSiklus = new Date(siklus.tanggalSelesaiSiklus);
+                    return siklus;
+                }) : [];
+                
             }
           },
           function () {
@@ -441,72 +472,77 @@ sikatApp.controller(
       }
 
       if (!$scope.anggota1) {
-        Swal.fire("Error!", "anggota1 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggota1 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.jabatan1) {
-        Swal.fire("Error!", "jabatan1 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "jabatan1 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.anggota2) {
-        Swal.fire("Error!", "anggota2 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggota2 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.jabatan2) {
-        Swal.fire("Error!", "jabatan2 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "jabatan2 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.anggota3) {
-        Swal.fire("Error!", "anggota3 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggota3 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.jabatan3) {
-        Swal.fire("Error!", "jabatan3 Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "jabatan3 tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.benefit) {
-        Swal.fire("Error!", "benefit Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "benefit tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.masalah) {
-        Swal.fire("Error!", "masalah Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "masalah tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.tujuan) {
-        Swal.fire("Error!", "tujuan Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "tujuan tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.ukuran) {
-        Swal.fire("Error!", "ukuran Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "ukuran tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.perbaikan) {
-        Swal.fire("Error!", "perbaikan Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "perbaikan tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.periodeWaktu) {
-        Swal.fire("Error!", "periodeWaktu Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "periodeWaktu tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.anggaran) {
-        Swal.fire("Error!", "anggaran Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "anggaran tidak boleh kosong.", "error");
         return;
       }
 
       if (!$scope.tanggalMulai) {
-        Swal.fire("Error!", "tanggalMulai Tim tidak boleh kosong.", "error");
+        Swal.fire("Error!", "tanggalMulai Proyek tidak boleh kosong.", "error");
+        return;
+      }
+
+      if (!$scope.tanggalSelesai) {
+        Swal.fire("Error!", "tanggalSelesai Proyek tidak boleh kosong.", "error");
         return;
       }
 
@@ -518,6 +554,8 @@ sikatApp.controller(
         if (
           currentSiklus.id == null &&
           (!currentSiklus.rencana ||
+            !currentSiklus.tanggalMulaiSiklus ||
+            !currentSiklus.tanggalSelesaiSiklus ||
             !currentSiklus.berharap ||
             !currentSiklus.tindakan ||
             !currentSiklus.diamati ||
