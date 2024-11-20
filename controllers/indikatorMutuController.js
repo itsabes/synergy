@@ -42,7 +42,7 @@ sikatApp.controller("indikatorMutuListController", function(
   }
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
     return allowedRoles.includes(role);
   };
 

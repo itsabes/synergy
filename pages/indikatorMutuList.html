@@ -98,7 +98,7 @@
                 ng-class="{'btn-success': row.STATUS_ACC === '1', 'btn-warning inactive': row.STATUS_ACC === '0'}"
                 ng-disabled="!isAuthorized(user_role)">
                 <i class="fa"
-                  ng-class="{'fa-times': row.STATUS_ACC === '0', 'fa-check': row.STATUS_ACC === '1'}"></i>
+                  ng-class="{'fa-edit': row.STATUS_ACC === '0', 'fa-check': row.STATUS_ACC === '1'}"></i>
                 {{ row.STATUS_ACC === '1' ? 'Acc' : 'Pending' }}
               </button>
             </td>
