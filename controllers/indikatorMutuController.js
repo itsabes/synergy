@@ -33,13 +33,13 @@ sikatApp.controller("indikatorMutuListController", function(
   //   $scope.unit = $routeParams.unit;
 
   $scope.yearDynamic = [];
-  const startYear = 2016;
   const currentYear = new Date().getFullYear();
   $scope.currentYear = currentYear;
-  for (let year = startYear; year <= currentYear; year++) {
+  const startYear = 2020; // Tahun awal tetap
+  const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
+  for (let year = startYear; year <= endYear; year++) {
       $scope.yearDynamic.push(year);
   }
-  
 
   $scope.tableParams = new NgTableParams({}, { dataset: [] });
   $scope.loadData = () => {
@@ -488,12 +488,8 @@ sikatApp.controller("indikatorMutuNewController", function(
   };
 
   $scope.yearDynamic = [];
-  const startYear = 2023;
-  const currentYear = new Date().getFullYear();
-  $scope.currentYear = currentYear;
-  for (let year = startYear; year <= currentYear; year++) {
-      $scope.yearDynamic.push(year);
-  }
+  const currentYear = new Date().getFullYear(); // Tahun berjalan
+  $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
 
   $scope.backToList = () => {
     window.history.back();
@@ -513,13 +509,8 @@ sikatApp.controller("indikatorMutuEditController", function(
   $scope.tahun = today.getFullYear() + "";
 
   $scope.yearDynamic = [];
-  const startYear = 2016;
-  const currentYear = new Date().getFullYear();
-  $scope.currentYear = currentYear;
-  for (let year = startYear; year <= currentYear; year++) {
-      $scope.yearDynamic.push(year);
-  }
-
+  const currentYear = new Date().getFullYear(); // Tahun berjalan
+  $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
 
   $rootScope.currPageParam = $routeParams.param;
   $scope.id = $routeParams.uniqIdx;
