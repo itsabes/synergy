@@ -508,7 +508,8 @@ sikatApp.controller("indikatorMutuEditController", function(
   $rootScope,
   $routeParams,
   $http,
-  pmkpService
+  pmkpService,
+  $location
 ) {
 
   var today = new Date();
@@ -525,6 +526,11 @@ sikatApp.controller("indikatorMutuEditController", function(
   
   console.log("$scope.id",$scope.id);
   console.log("$rootScope.currPageParam = $routeParams.param;",$rootScope.currPageParam);
+
+  $scope.isAuthorized = function (role) {
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    return allowedRoles.includes(role);
+  };
 
   $scope.getData = () => {
     var url =
@@ -603,30 +609,30 @@ sikatApp.controller("indikatorMutuEditController", function(
   
   $scope.update = () => {
 
-    if (!$scope.tahun) {
-      Swal.fire("Error!", "Tahun tidak boleh kosong.", "error");
-      return;
-    }
-    if (!$scope.judulIndikator) {
-        Swal.fire("Error!",  $rootScope.currPage+" Judul Indikator tidak boleh kosong.", "error");
+      if (!$scope.tahun) {
+        Swal.fire("Error!", "Tahun tidak boleh kosong.", "error");
         return;
-    }
-    if (!$scope.dasarPemikiran) {
-        Swal.fire("Error!", "Dasar Pemikiran tidak boleh kosong.", "error");
+      }
+      if (!$scope.judulIndikator) {
+          Swal.fire("Error!",  $rootScope.currPage+" Judul Indikator tidak boleh kosong.", "error");
+          return;
+      }
+      if (!$scope.dasarPemikiran) {
+          Swal.fire("Error!", "Dasar Pemikiran tidak boleh kosong.", "error");
+          return;
+      }
+      
+      // Cek jika semua field tidak dipilih
+      if (!$scope.isEfisien  && 
+        !$scope.isEfektif  && 
+        !$scope.isTepatWaktu && 
+        !$scope.isAman  && 
+        !$scope.isAdil && 
+        !$scope.isBerPasien && 
+        !$scope.isIntegrasi) {
+        Swal.fire("Error!", "Dimensi Mutu tidak boleh kosong.", "error");
         return;
-    }
-    
-    // Cek jika semua field tidak dipilih
-    if (!$scope.isEfisien  && 
-      !$scope.isEfektif  && 
-      !$scope.isTepatWaktu && 
-      !$scope.isAman  && 
-      !$scope.isAdil && 
-      !$scope.isBerPasien && 
-      !$scope.isIntegrasi) {
-      Swal.fire("Error!", "Dimensi Mutu tidak boleh kosong.", "error");
-      return;
-    }
+      }
 
     if (!$scope.tujuan) {
         Swal.fire("Error!", $scope.unit+" Tujuan tidak boleh kosong.", "error");
@@ -773,6 +779,34 @@ sikatApp.controller("indikatorMutuEditController", function(
           swal("Error!", "Data is failed to be updated.", "error");
         }
       );
+  };
+
+  $scope.showStatusAcc = (
+    id,statusAcc,reviewUlang
+  ) => {
+
+    $http
+    .put(
+      SERVER_URL + "/api/indikatorMutu/updateStatusAcc",
+      {
+        id : id,
+        statusAcc: statusAcc,
+        userAcc: localStorage.getItem("user_email"),
+        reviewUlang: reviewUlang
+      },
+      { headers: { Authorization: localStorage.getItem("token") } }
+    )
+    .then(
+      function(data) {
+        swal("Success!", "Data is successfully updated.", "success");
+        window.history.back();
+      },
+      function(data) {
+        swal("Error!", "Data is failed to be updated.", "error");
+      }
+    );
+
+
   };
 
   $scope.delete = () => {
