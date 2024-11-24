@@ -1,3 +1,19 @@
+sikatApp.directive('fileModel', ['$parse', function ($parse) {
+  return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+          var model = $parse(attrs.fileModel);
+          var modelSetter = model.assign;
+
+          element.bind('change', function() {
+              scope.$apply(function() {
+                  modelSetter(scope, element[0].files); // Menyimpan FileList
+              });
+          });
+      }
+  };
+}]);
+
 sikatApp.controller(
   "lembarPdsaController",
   function (
@@ -121,6 +137,29 @@ sikatApp.controller(
     // Jika ingin melog semua $routeParams
     console.log("Parameter URL saat ini:", $routeParams);
 
+    $scope.uploadFile = function() {
+      var file = $scope.myFile; // file dari directive fileModel
+      var formData = new FormData(); // Membuat FormData untuk mengirim file
+      formData.append('file', file);
+
+      // Kirim file ke server menggunakan $http
+      $http.post(SERVER_URL + "/api/lembarPdsa", formData, {
+        transformRequest: angular.identity,
+        headers: { 
+            Authorization: localStorage.getItem("token"),
+            'Content-Type': undefined
+        } 
+      })
+      .then(function(response) {
+          console.log('Upload berhasil', response.data);
+          alert('File berhasil diunggah!');
+      })
+      .catch(function(error) {
+          console.error('Upload gagal', error);
+          alert('Terjadi kesalahan saat mengunggah file.');
+      });
+    };
+
     // Inisialisasi array untuk siklus
     $scope.siklusList = [];
 
@@ -158,10 +197,19 @@ sikatApp.controller(
         tindakan: "",
         diamati: "",
         pelajari: "",
-        photoPath: null,
+        files: [],
         tindakanSelanjutnya: "",
       });
     };
+
+    $scope.formatDate = (date) => {
+      if (!date) return ""; // Jika tanggal tidak ada, kembalikan string kosong
+      const d = new Date(date); // Pastikan objek Date
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0'); // Bulan dalam dua digit
+      const day = String(d.getDate()).padStart(2, '0'); // Hari dalam dua digit
+      return `${year}-${month}-${day}`;
+    }
 
     // Panggil fungsi sekali saat halaman dimuat untuk inisialisasi siklus pertama
     $scope.tambahSiklus();
@@ -170,6 +218,7 @@ sikatApp.controller(
     $scope.id = $routeParams.id;
 
     $scope.save = () => {
+
       if (!$scope.judulProyek) {
         Swal.fire("Error!", "judul Proyek tidak boleh kosong.", "error");
         return;
@@ -278,34 +327,56 @@ sikatApp.controller(
           return;
         }
       }
-      $http
-        .post(
-          SERVER_URL + "/api/lembarPdsa",
-          {
-            judulProyek: $scope.judulProyek != null ? $scope.judulProyek : "",
-            ketuaTim: $scope.ketuaTim != null ? $scope.ketuaTim : "",
-            anggota1: $scope.anggota1 != null ? $scope.anggota1 : "",
-            anggota2: $scope.anggota2 != null ? $scope.anggota2 : "",
-            anggota3: $scope.anggota3 != null ? $scope.anggota3 : "",
-            jabatan1: $scope.jabatan1 != null ? $scope.jabatan1 : "",
-            jabatan2: $scope.jabatan2 != null ? $scope.jabatan2 : "",
-            jabatan3: $scope.jabatan3 != null ? $scope.jabatan3 : "",
-            benefit: $scope.benefit != null ? $scope.benefit : "",
-            masalah: $scope.masalah != null ? $scope.masalah : "",
-            tujuan: $scope.tujuan != null ? $scope.tujuan : "",
-            ukuran: $scope.ukuran != null ? $scope.ukuran : "",
-            perbaikan: $scope.perbaikan != null ? $scope.perbaikan : "",
-            periodeWaktu:
-              $scope.periodeWaktu != null ? $scope.periodeWaktu : "",
-            anggaran: $scope.anggaran != null ? $scope.anggaran : "",
-            tanggalMulai:
-              $scope.tanggalMulai != null ? $scope.tanggalMulai : "",
-            tanggalSelesai:
-              $scope.tanggalSelesai != null ? $scope.tanggalSelesai : "",
-            siklus: $scope.siklusList,
-          },
-          { headers: { Authorization: localStorage.getItem("token") } }
-        )
+
+        var formData = new FormData();
+
+        // Tambahkan data satu per satu ke FormData
+        formData.append('judulProyek', $scope.judulProyek || "");
+        formData.append('ketuaTim', $scope.ketuaTim || "");
+        formData.append('anggota1', $scope.anggota1 || "");
+        formData.append('anggota2', $scope.anggota2 || "");
+        formData.append('anggota3', $scope.anggota3 || "");
+        formData.append('jabatan1', $scope.jabatan1 || "");
+        formData.append('jabatan2', $scope.jabatan2 || "");
+        formData.append('jabatan3', $scope.jabatan3 || "");
+        formData.append('benefit', $scope.benefit || "");
+        formData.append('anggaran', $scope.anggaran || "");
+        formData.append('masalah', $scope.masalah || "");
+        formData.append('tujuan', $scope.tujuan || "");
+        formData.append('ukuran', $scope.ukuran || "");
+        formData.append('perbaikan', $scope.perbaikan || "");
+        formData.append('periodeWaktu', $scope.periodeWaktu || "");
+        formData.append('anggaran', $scope.anggaran || "");
+        formData.append('tanggalMulai', $scope.formatDate($scope.tanggalMulai));
+        formData.append('tanggalSelesai', $scope.formatDate($scope.tanggalSelesai));
+
+        // Tambahkan data siklus (array) secara dinamis
+        $scope.siklusList.forEach((siklus, index) => {
+            // Iterasi setiap property dalam objek siklus
+            formData.append(`siklus[${index}][rencana]`, siklus.rencana || "");
+            formData.append(`siklus[${index}][tanggalMulaiSiklus]`, $scope.formatDate(siklus.tanggalMulaiSiklus));
+            formData.append(`siklus[${index}][tanggalSelesaiSiklus]`, $scope.formatDate(siklus.tanggalSelesaiSiklus));
+            formData.append(`siklus[${index}][berharap]`, siklus.berharap || "");
+            formData.append(`siklus[${index}][tindakan]`, siklus.tindakan || "");
+            formData.append(`siklus[${index}][diamati]`, siklus.diamati || "");
+            formData.append(`siklus[${index}][pelajari]`, siklus.pelajari || "");
+            formData.append(`siklus[${index}][tindakanSelanjutnya]`, siklus.tindakanSelanjutnya || "");
+
+            // Jika ada file dalam siklus, tambahkan ke FormData
+            if (siklus.files) {
+                for (let i = 0; i < siklus.files.length; i++) {
+                    formData.append(`siklus[${index}][files][]`, siklus.files[i]);
+                }
+            }
+        });
+
+        $http.post(SERVER_URL + "/api/lembarPdsa", formData, {
+          transformRequest: angular.identity,
+          headers: { 
+              Authorization: localStorage.getItem("token"),
+              'Content-Type': undefined
+          } 
+        })
         .then(
           function (data) {
             swal("Success!", "Data is successfully saved.", "success");
@@ -313,8 +384,8 @@ sikatApp.controller(
           },
           function (data) {
             swal("Error!", "Data is failed to be saved.", "error");
-          }
-        );
+        });
+
     };
 
     $scope.backToList = () => {
@@ -325,7 +396,7 @@ sikatApp.controller(
 
 sikatApp.controller(
   "lembarPdsaEditController",
-  function ($scope, $rootScope, $routeParams, $http, pmkpService) {
+  function ($scope, $rootScope, $routeParams, $http, pmkpService,$location) {
     var today = new Date();
     $scope.tahun = today.getFullYear() + "";
 
@@ -383,6 +454,8 @@ sikatApp.controller(
         tindakan: "",
         diamati: "",
         pelajari: "",
+        files: [],
+        imageUrl:[],
         tindakanSelanjutnya: "",
       });
     };
@@ -440,6 +513,9 @@ sikatApp.controller(
               $scope.siklusList = reqRes.data.SIKLUS != null ? reqRes.data.SIKLUS.map(function(siklus) {
                     siklus.tanggalMulaiSiklus = new Date(siklus.tanggalMulaiSiklus);
                     siklus.tanggalSelesaiSiklus = new Date(siklus.tanggalSelesaiSiklus);
+                    siklus.imageUrl = $location.protocol() + "://" + $location.host() + 
+                    ($location.port() ? ":" + $location.port() : "") +
+                    "/synergy-server/" + siklus.filePath;
                     return siklus;
                 }) : [];
                 
@@ -568,6 +644,7 @@ sikatApp.controller(
         }
       }
 
+      /*
       $http
         .put(
           SERVER_URL + "/api/lembarPdsa",
@@ -606,7 +683,90 @@ sikatApp.controller(
             swal("Error!", "Data is failed to be updated.", "error");
           }
         );
+        */
+
+        var formData = new FormData();
+
+        // Tambahkan data satu per satu ke FormData
+        formData.append('id', $scope.lembarPdsaId || "");
+        formData.append('judulProyek', $scope.judulProyek || "");
+        formData.append('ketuaTim', $scope.ketuaTim || "");
+        formData.append('anggota1', $scope.anggota1 || "");
+        formData.append('anggota2', $scope.anggota2 || "");
+        formData.append('anggota3', $scope.anggota3 || "");
+        formData.append('jabatan1', $scope.jabatan1 || "");
+        formData.append('jabatan2', $scope.jabatan2 || "");
+        formData.append('jabatan3', $scope.jabatan3 || "");
+        formData.append('benefit', $scope.benefit || "");
+        formData.append('anggaran', $scope.anggaran || "");
+        formData.append('masalah', $scope.masalah || "");
+        formData.append('tujuan', $scope.tujuan || "");
+        formData.append('ukuran', $scope.ukuran || "");
+        formData.append('perbaikan', $scope.perbaikan || "");
+        formData.append('periodeWaktu', $scope.periodeWaktu || "");
+        formData.append('anggaran', $scope.anggaran || "");
+        formData.append('tanggalMulai', $scope.formatDate($scope.tanggalMulai));
+        formData.append('tanggalSelesai', $scope.formatDate($scope.tanggalSelesai));
+
+        // Tambahkan data siklus (array) secara dinamis
+        $scope.siklusList.forEach((siklus, index) => {
+            // Iterasi setiap property dalam objek siklus
+            formData.append(`siklus[${index}][siklusId]`, siklus.siklusId || "");
+            formData.append(`siklus[${index}][rencana]`, siklus.rencana || "");
+            formData.append(`siklus[${index}][tanggalMulaiSiklus]`, $scope.formatDate(siklus.tanggalMulaiSiklus));
+            formData.append(`siklus[${index}][tanggalSelesaiSiklus]`, $scope.formatDate(siklus.tanggalSelesaiSiklus));
+            formData.append(`siklus[${index}][berharap]`, siklus.berharap || "");
+            formData.append(`siklus[${index}][tindakan]`, siklus.tindakan || "");
+            formData.append(`siklus[${index}][diamati]`, siklus.diamati || "");
+            formData.append(`siklus[${index}][pelajari]`, siklus.pelajari || "");
+            formData.append(`siklus[${index}][tindakanSelanjutnya]`, siklus.tindakanSelanjutnya || "");
+
+            // Jika ada file dalam siklus, tambahkan ke FormData
+            if (siklus.files) {
+                for (let i = 0; i < siklus.files.length; i++) {
+                    formData.append(`siklus[${index}][files][]`, siklus.files[i]);
+                }
+            }
+        });
+
+        $http.post(SERVER_URL + "/api/lembarPdsa", formData, {
+          transformRequest: angular.identity,
+          headers: { 
+              Authorization: localStorage.getItem("token"),
+              'Content-Type': undefined
+          } 
+        })
+        .then(
+          function (data) {
+            swal("Success!", "Data is successfully saved.", "success");
+            window.history.back();
+          },
+          function (data) {
+            swal("Error!", "Data is failed to be saved.", "error");
+        });
     };
+
+
+    $scope.formatDate = (date) => {
+      if (!date) return ""; // Jika tanggal tidak ada, kembalikan string kosong
+      const d = new Date(date); // Pastikan objek Date
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0'); // Bulan dalam dua digit
+      const day = String(d.getDate()).padStart(2, '0'); // Hari dalam dua digit
+      return `${year}-${month}-${day}`;
+    }
+
+    $scope.base64ToFile = (base64,fileName,contentType) => {
+      const byteString = atob(base64.split(',')[1]);
+      const byteNumbers = new Array(byteString.length);
+  
+      for (let i = 0; i < byteString.length; i++) {
+          byteNumbers[i] = byteString.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      return new File([byteArray], fileName, { type: contentType });
+    }
 
     $scope.downloadPdf = (idx) => {
       const data = {
