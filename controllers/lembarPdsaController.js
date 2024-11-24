@@ -513,9 +513,12 @@ sikatApp.controller(
               $scope.siklusList = reqRes.data.SIKLUS != null ? reqRes.data.SIKLUS.map(function(siklus) {
                     siklus.tanggalMulaiSiklus = new Date(siklus.tanggalMulaiSiklus);
                     siklus.tanggalSelesaiSiklus = new Date(siklus.tanggalSelesaiSiklus);
-                    siklus.imageUrl = $location.protocol() + "://" + $location.host() + 
-                    ($location.port() ? ":" + $location.port() : "") +
-                    "/synergy-server/" + siklus.filePath;
+                    siklus.imageUrl = siklus.filePath 
+                                      ? $location.protocol() + "://" + $location.host() + 
+                                        ($location.port() ? ":" + $location.port() : "") +
+                                        "/synergy-server/" + siklus.filePath 
+                                      : "";
+
                     return siklus;
                 }) : [];
                 
