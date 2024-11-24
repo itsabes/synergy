@@ -18,31 +18,25 @@
         <div class="form-group row">
           <label
             for="example-text-input"
-            class="col-xs-12 col-lg-2 col-form-label"
-            >Unit</label
-          >
+            class="col-xs-12 col-lg-2 col-form-label">Unit</label>
           <div class="col-xs-12 col-lg-10">
             <input
               class="form-control"
               type="text"
               ng-model="currPage"
-              disabled
-            />
+              disabled />
           </div>
         </div>
         <div class="form-group row">
           <label
             for="example-month-input"
-            class="col-xs-12 col-lg-2 col-form-label"
-            >Month-Year</label
-          >
+            class="col-xs-12 col-lg-2 col-form-label">Month-Year</label>
 
           <div class="col-xs-12 col-lg-6">
             <select
               class="custom-select col-12"
               ng-model="monthSelect"
-              ng-change="getData()"
-            >
+              ng-change="getData()">
               <option value="1">January</option>
               <option value="2">February</option>
               <option value="3">March</option>
@@ -86,9 +80,8 @@
             <button
               type="button"
               class="btn btn-success waves-effect waves-light pull-right m-b-5"
-              ng-click="downloadExcel()"
-            >
-              <i class="fas fa-file-excel"></i> Download Excel Report
+              ng-click="downloadExcel()">
+              <i class="fas fa-file-pdf"></i> Download Pdf Report
             </button>
           </div>
         </div>

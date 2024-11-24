@@ -476,7 +476,7 @@ sikatApp.controller(
             "Target",
             "Analisa",
           ];
-          var colWidths = [300, 150, 150, 150, 150, 300];
+          var colWidths = [500, 150, 150, 150, 150, 300];
           var colAlignments = [
             "left",
             "center",
