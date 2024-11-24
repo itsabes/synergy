@@ -904,54 +904,56 @@ sikatApp.controller(
       }
       const monthlyData = $scope.monthlyData;
       for (var i = 0; i < $scope.monthlyNames.length; i++) {
-        var target = $scope.target[i].toLowerCase();
-        if (target.includes("laporan")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " laporan"
-              : "";
-        } else if (target.includes("mg/l")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " mg/l"
-              : "";
-        } else if (target.includes("ph 6-9")) {
-          monthlyData[i].hasil_text = monthlyData[i].hasil;
-        } else if (target.includes("menit")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " menit"
-              : "";
-        } else if (target.includes("jam")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " jam"
-              : "";
-        } else if (target.includes("hari")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " hari"
-              : "";
-        } else if (target.startsWith(" ") && target.endsWith(" ")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + ""
-              : "";
-        } else if (target.includes("%")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " %"
-              : "";
-        } else if (target.includes("‰")) {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil || monthlyData[i].hasil === 0
-              ? monthlyData[i].hasil + " ‰"
-              : "";
-        } else {
-          monthlyData[i].hasil_text =
-            monthlyData[i].hasil && monthlyData[i].hasil === 100
-              ? "Memenuhi"
-              : "Tidak Memenuhi";
+        if($scope.target[i] !=null){
+          var target = $scope.target[i].toLowerCase();
+          if (target.includes("laporan")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " laporan"
+                : "";
+          } else if (target.includes("mg/l")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " mg/l"
+                : "";
+          } else if (target.includes("ph 6-9")) {
+            monthlyData[i].hasil_text = monthlyData[i].hasil;
+          } else if (target.includes("menit")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " menit"
+                : "";
+          } else if (target.includes("jam")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " jam"
+                : "";
+          } else if (target.includes("hari")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " hari"
+                : "";
+          } else if (target.startsWith(" ") && target.endsWith(" ")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + ""
+                : "";
+          } else if (target.includes("%")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " %"
+                : "";
+          } else if (target.includes("‰")) {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil || monthlyData[i].hasil === 0
+                ? monthlyData[i].hasil + " ‰"
+                : "";
+          } else {
+            monthlyData[i].hasil_text =
+              monthlyData[i].hasil && monthlyData[i].hasil === 100
+                ? "Memenuhi"
+                : "Tidak Memenuhi";
+          }
         }
       }
       const data = {
