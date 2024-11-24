@@ -303,6 +303,27 @@ sikatApp.controller(
         return;
       }
 
+      // Validasi: Tanggal Mulai tidak boleh di masa lalu
+      const today = new Date();
+      const tanggalMulai = new Date($scope.tanggalMulai);
+      if (tanggalMulai < today.setHours(0, 0, 0, 0)) {
+          Swal.fire("Error!", "Tanggal Mulai Proyek tidak boleh di masa lalu.", "error");
+          return;
+      }
+
+      // Validasi: Tanggal Mulai tidak boleh lebih dari Tanggal Selesai
+      const tanggalSelesai = new Date($scope.tanggalSelesai);
+      if (tanggalMulai > tanggalSelesai) {
+          Swal.fire("Error!", "Tanggal Mulai Proyek tidak boleh lebih dari Tanggal Selesai.", "error");
+          return;
+      }
+
+      // Validasi: Tanggal Selesai tidak boleh kurang dari Tanggal Mulai
+      if (tanggalSelesai < tanggalMulai) {
+        Swal.fire("Error!", "Tanggal Selesai Proyek tidak boleh kurang dari Tanggal Mulai.", "error");
+        return;
+      }
+
       if ($scope.siklusList.length == 0) {
         Swal.fire("Error!", "siklus tidak boleh kosong.", "error");
         return;
@@ -325,6 +346,22 @@ sikatApp.controller(
         ) {
           Swal.fire("Error!", "Siklus tidak boleh kosong", "error");
           return;
+        }
+
+        // Validasi tanggalMulaiSiklus dan tanggalSelesaiSiklus dalam rentang tanggalMulai dan tanggalSelesai proyek
+        const tanggalMulaiProyek = new Date($scope.tanggalMulai);
+        const tanggalSelesaiProyek = new Date($scope.tanggalSelesai);
+        const tanggalMulaiSiklus = new Date(currentSiklus.tanggalMulaiSiklus);
+        const tanggalSelesaiSiklus = new Date(currentSiklus.tanggalSelesaiSiklus);
+
+        if (tanggalMulaiSiklus < tanggalMulaiProyek || tanggalMulaiSiklus > tanggalSelesaiProyek) {
+            Swal.fire("Error!", "Tanggal Mulai Siklus harus berada dalam rentang Tanggal Mulai dan Tanggal Selesai proyek.", "error");
+            return;
+        }
+
+        if (tanggalSelesaiSiklus < tanggalMulaiProyek || tanggalSelesaiSiklus > tanggalSelesaiProyek) {
+            Swal.fire("Error!", "Tanggal Selesai Siklus harus berada dalam rentang Tanggal Mulai dan Tanggal Selesai proyek.", "error");
+            return;
         }
       }
 
@@ -626,6 +663,22 @@ sikatApp.controller(
         return;
       }
 
+      const today = new Date();
+      const tanggalMulai = new Date($scope.tanggalMulai);
+
+      // Validasi: Tanggal Mulai tidak boleh lebih dari Tanggal Selesai
+      const tanggalSelesai = new Date($scope.tanggalSelesai);
+      if (tanggalMulai > tanggalSelesai) {
+          Swal.fire("Error!", "Tanggal Mulai Proyek tidak boleh lebih dari Tanggal Selesai.", "error");
+          return;
+      }
+
+      // Validasi: Tanggal Selesai tidak boleh kurang dari Tanggal Mulai
+      if (tanggalSelesai < tanggalMulai) {
+        Swal.fire("Error!", "Tanggal Selesai Proyek tidak boleh kurang dari Tanggal Mulai.", "error");
+        return;
+      }
+
       // Cek jika ada siklus dengan id null dan field kosong
       for (let i = 0; i < $scope.siklusList.length; i++) {
         const currentSiklus = $scope.siklusList[i];
@@ -644,6 +697,22 @@ sikatApp.controller(
         ) {
           Swal.fire("Error!", "Siklus tidak boleh kosong", "error");
           return;
+        }
+
+        // Validasi tanggalMulaiSiklus dan tanggalSelesaiSiklus dalam rentang tanggalMulai dan tanggalSelesai proyek
+        const tanggalMulaiProyek = new Date($scope.tanggalMulai);
+        const tanggalSelesaiProyek = new Date($scope.tanggalSelesai);
+        const tanggalMulaiSiklus = new Date(currentSiklus.tanggalMulaiSiklus);
+        const tanggalSelesaiSiklus = new Date(currentSiklus.tanggalSelesaiSiklus);
+
+        if (tanggalMulaiSiklus < tanggalMulaiProyek || tanggalMulaiSiklus > tanggalSelesaiProyek) {
+            Swal.fire("Error!", "Tanggal Mulai Siklus harus berada dalam rentang Tanggal Mulai dan Tanggal Selesai proyek.", "error");
+            return;
+        }
+
+        if (tanggalSelesaiSiklus < tanggalMulaiProyek || tanggalSelesaiSiklus > tanggalSelesaiProyek) {
+            Swal.fire("Error!", "Tanggal Selesai Siklus harus berada dalam rentang Tanggal Mulai dan Tanggal Selesai proyek.", "error");
+            return;
         }
       }
 
