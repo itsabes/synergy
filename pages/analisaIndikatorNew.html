@@ -9,7 +9,7 @@
       </ol>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-12">
       <div class="card card-outline-info">
@@ -20,10 +20,25 @@
               <hr />
               <div class="row align-items-start">
                 <div class="col">
+                  <div class="form-group row">
+                    <label
+                      for="example-month-input"
+                      class="col-xs-12 col-lg-2 col-form-label">Pilih Unit
+                    </label>
+                    <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
+                    <div class="col-xs-12 col-lg-10">
+                      <select
+                        class="custom-select col-12" ng-model="unit" ng-init="unit = ''" ng-change="onUnitChange(unit)" >
+                        <option value="">Pilih Unit</option>
+                        <option ng-repeat="n in units" value="{{ n }}">{{ n }}</option>
+                      </select>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label class="control-label">Judul Indikator</label>
                     <input type="text" ng-model="judulIndikator" class="form-control" readonly/>
                     <input type="hidden" ng-model="idx" class="form-control"/>
+                    <input type="hidden" ng-model="periode" class="form-control"/>
                   </div>
                   <div class="form-group">
                     <label class="control-label">Numerator</label>
@@ -47,11 +62,11 @@
                     <label class="control-label">Target Pencapaian</label>
                     <input type="text" ng-model="targetPencapaian" class="form-control" readonly/>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" style="display: none;">
                     <label class="control-label">Periode Analisis Data</label>
                     <input type="text" ng-model="periodeAnalisa" class="form-control" readonly/>
                   </div>
-                  <div class="form-group" ng-show="periodeAnalisa === 'Bulanan'">
+                  <div class="form-group" ng-show="periodeAnalisa === 'Bulanan'" style="display: none;">
                     <label class="control-label">Bulan</label>
                     <select
                       class="custom-select col-12"
@@ -73,7 +88,7 @@
                       <option value="12">December</option>
                     </select>
                   </div>
-                  <div class="form-group" ng-show="periodeAnalisa === 'Triwulan'"> 
+                  <div class="form-group" ng-show="periodeAnalisa === 'Triwulan'" style="display: none;"> 
                     <label class="control-label">Triwulan</label>
                     <select
                       class="custom-select col-12"
@@ -87,7 +102,7 @@
                       <option value="TW_4">October - December</option>
                     </select>
                   </div>
-                  <div class="form-group" ng-show="periodeAnalisa === 'Semester'">
+                  <div class="form-group" ng-show="periodeAnalisa === 'Semester'" style="display: none;">
                     <label class="control-label">Semester</label>
                     <select
                       class="custom-select col-12"

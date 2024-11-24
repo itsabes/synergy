@@ -19,7 +19,6 @@ sikatApp.controller(
     $scope.yearSelect = today.getFullYear() + "";
     $scope.dailyData = [];
     $scope.monthlyData = [];
-
     // FUNCTIONS
     $scope.getTotalFor = function (idx) {
       var total = 0;
@@ -1114,8 +1113,8 @@ sikatApp.controller(
             }
             data = [];
             for (var i = 0; i < $scope.monthlyNames.length; i++) {
-              //var rowData = [$scope.monthlyNames[i], $scope.target[i]];
-              let urlLink = "";
+              var rowData = [$scope.monthlyNames[i], $scope.target[i]];
+              //let urlLink = "";
               /*
               if ($scope.analisaId[i]) {
                 urlLink = $location.protocol() + "://" + $location.host() + 
@@ -1140,7 +1139,7 @@ sikatApp.controller(
                             "&idx=" + encodeURIComponent($scope.idx[i]);
               }
               */
-
+              /*
               urlLink = $location.protocol() + "://" + $location.host() + 
                             ($location.port() ? ":" + $location.port() : "") +
                             "/synergy/main.html#!/analisaIndikator_new/" + $rootScope.currPage +
@@ -1155,7 +1154,7 @@ sikatApp.controller(
                   '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
                   $scope.target[i]
               ];
-
+              */
               for (var j = 0; j < 12; j++) {
                 if ($scope.yearlyData[j]) {
                   rowData.push($scope.yearlyData[j].monthlyData[i].hasil);

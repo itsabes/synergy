@@ -1,134 +1,156 @@
 <div class="row page-titles">
-    <div class="col-md-5 col-8 align-self-center">
-        <h3 class="text-themecolor m-b-0 m-t-0">Analisa Indikator Data - Edit</h3>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="javascript:void(0)">Home</a>
-          </li>
-          <li class="breadcrumb-item active">Analisa Indikator Data</li>
-      </ol>
-    </div>
+  <div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Analisa Indikator Data - New</h3>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="javascript:void(0)">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Analisa Indikator Data</li>
+    </ol>
   </div>
-  
-  <div class="row" id="ppiEdit">
-    <div class="col-12">
-      <div class="card card-outline-info">
-        <div class="card-body">
-          <form action="#">
-            <div class="form-body">
-                <h3 class="card-title">Ubah Analisa Indikator Data</h3>
-                  <button type="button" class="btn btn-success waves-effect waves-light" ng-click="downloadChart(idx,monthSelect)">
-                    Download Pdf Analisa Indikator Data
-                  </button>
-                <hr />
-                <div class="row align-items-start">
-                    <div class="col">
-                        <div class="form-group">
-                          <label class="control-label">Judul Indikator</label>
-                          <input type="text" ng-model="judulIndikator" class="form-control" readonly/>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label">Numerator</label>
-                          <textarea
-                            class="form-control"
-                            rows="5"
-                            ng-model="numerator"
-                            readonly
-                          ></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label">Denumerator</label>
-                          <textarea
-                            class="form-control"
-                            rows="5"
-                            ng-model="denumerator"
-                            readonly
-                          ></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label">Target Pencapaian</label>
-                          <input type="text" ng-model="targetPencapaian" class="form-control" readonly/>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label">Analisa</label>
-                          <textarea
-                            class="form-control"
-                            rows="5"
-                            ng-model="analisa"
-                          ></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label">Rekomendasi</label>
-                          <textarea
-                            class="form-control"
-                            rows="5"
-                            ng-model="rekomendasi"
-                          ></textarea>
-                        </div>
-                        <div class="form-group" ng-show="periodeAnalisa === 'Bulanan'">
-                          <label class="control-label">Bulan</label>
-                          <select
-                            class="custom-select col-12"
-                            ng-model="monthSelect"
-                            ng-change="getData()"
-                            ng-init="monthSelect = ''">
-                            <option value="">Pilih Periode Bulan</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                          </select>
-                        </div>
-                        <div class="form-group" ng-show="periodeAnalisa === 'Triwulan'"> 
-                          <label class="control-label">Triwulan</label>
-                          <select
-                            class="custom-select col-12"
-                            ng-model="monthSelect"
-                            ng-change="getData()"
-                            ng-init="monthSelect = ''">
-                            <option value="">Pilih Periode Triwulan</option>
-                            <option value="TW_1">January - Maret</option>
-                            <option value="TW_2">April - June</option>
-                            <option value="TW_3">July - September</option>
-                            <option value="TW_4">October - December</option>
-                          </select>
-                        </div>
-                        <div class="form-group" ng-show="periodeAnalisa === 'Semester'">
-                          <label class="control-label">Semester</label>
-                          <select
-                            class="custom-select col-12"
-                            ng-model="monthSelect"
-                            ng-change="getData()"
-                            ng-init="monthSelect = ''">
-                            <option value="">Pilih Periode Semester</option>
-                            <option value="SM_1">January - June</option>
-                            <option value="SM_2">July - December</option>
-                          </select>
-                        </div>
-                    </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-outline-info">
+      <div class="card-body">
+        <form action="#">
+          <div class="form-body">
+            <h3 class="card-title">Ubah Analisa Indikator Data</h3>
+            <hr />
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="form-group row">
+                  <label
+                    for="example-month-input"
+                    class="col-xs-12 col-lg-2 col-form-label">Pilih Unit
+                  </label>
+                  <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
+                  <div class="col-xs-12 col-lg-10">
+                    <select
+                      class="custom-select col-12" ng-model="unit" ng-init="unit = ''" ng-change="onUnitChange(unit)" >
+                      <option value="">Pilih Unit</option>
+                      <option ng-repeat="n in units" value="{{ n }}">{{ n }}</option>
+                    </select>
+                  </div>
                 </div>
-            <div class="form-actions m-t-10">
-              <button type="button" class="btn btn-success pull-right m-l-10" ng-click="update()">
-                <i class="fa fa-check"></i> Update
-              </button>
-              <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="delete()">
-                  <i class="fa fa-ban"></i> Delete
-                </button>
-              <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
-                Cancel
-              </button>
+                <div class="form-group">
+                  <label class="control-label">Judul Indikator</label>
+                  <input type="text" ng-model="judulIndikator" class="form-control" readonly/>
+                  <input type="hidden" ng-model="idx" class="form-control"/>
+                  <input type="hidden" ng-model="periode" class="form-control"/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Numerator</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="numerator"
+                    readonly
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Denumerator</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="denumerator"
+                    readonly
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Target Pencapaian</label>
+                  <input type="text" ng-model="targetPencapaian" class="form-control" readonly/>
+                </div>
+                <div class="form-group" style="display: none;">
+                  <label class="control-label">Periode Analisis Data</label>
+                  <input type="text" ng-model="periodeAnalisa" class="form-control" readonly/>
+                </div>
+                <div class="form-group" ng-show="periodeAnalisa === 'Bulanan'" style="display: none;">
+                  <label class="control-label">Bulan</label>
+                  <select
+                    class="custom-select col-12"
+                    ng-model="monthSelect"
+                    ng-change="getData()"
+                    ng-init="monthSelect = ''">
+                    <option value="">Pilih Periode Bulan</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
+                <div class="form-group" ng-show="periodeAnalisa === 'Triwulan'" style="display: none;"> 
+                  <label class="control-label">Triwulan</label>
+                  <select
+                    class="custom-select col-12"
+                    ng-model="monthSelect"
+                    ng-change="getData()"
+                    ng-init="monthSelect = ''">
+                    <option value="">Pilih Periode Triwulan</option>
+                    <option value="TW_1">January - Maret</option>
+                    <option value="TW_2">April - June</option>
+                    <option value="TW_3">July - September</option>
+                    <option value="TW_4">October - December</option>
+                  </select>
+                </div>
+                <div class="form-group" ng-show="periodeAnalisa === 'Semester'" style="display: none;">
+                  <label class="control-label">Semester</label>
+                  <select
+                    class="custom-select col-12"
+                    ng-model="monthSelect"
+                    ng-change="getData()"
+                    ng-init="monthSelect = ''">
+                    <option value="">Pilih Periode Semester</option>
+                    <option value="SM_1">January - June</option>
+                    <option value="SM_2">July - December</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Analisa</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="analisa"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Rekomendasi</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    ng-model="rekomendasi"
+                  ></textarea>
+                </div>
+              </div>
             </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-actions m-t-10">
+            <button
+              type="button"
+              class="btn btn-success pull-right m-l-10"
+              ng-click="update()"
+            >
+              <i class="fa fa-check"></i> Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-inverse pull-right"
+              ng-click="backToList()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  
+</div>

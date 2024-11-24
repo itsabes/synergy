@@ -87,7 +87,7 @@ sikatApp.controller("analisaIndikatorController", function(
     
   $scope.getData = () => {
 
-    var url = SERVER_URL + "/api/analisaIndikator/getByQuery?q=0";
+    var url = SERVER_URL + "/api/analisaIndikator/getByQueryUnit?q=0";
     url += "&unit=" + $rootScope.currPage;
     
     $http
@@ -119,6 +119,22 @@ sikatApp.controller("analisaIndikatorController", function(
         }
       );
   };
+
+  $scope.getPeriodeAnalisa = function(periodeAnalisa) {
+    switch (periodeAnalisa) {
+      case "0":
+        return "Januari-Maret";
+      case "1":
+        return "Januari-Juni";
+      case "2":
+        return "Januari-September";
+      case "3":
+        return "Januari-Desember";
+      default:
+        return "Periode tidak valid";
+    }
+  };
+  
   
   $scope.backToList = () => {
     window.history.back();
@@ -132,7 +148,8 @@ sikatApp.controller("analisaIndikatorNewController", function(
   $scope,
   $rootScope,
   $routeParams,
-  $http
+  $http,
+  pmkpService
 ) {
 
   $rootScope.currPage = $routeParams.id;
@@ -144,13 +161,248 @@ sikatApp.controller("analisaIndikatorNewController", function(
   console.log("Parameter URL saat ini:", $routeParams);
   
   $scope.dataId = null;
-  $scope.judulIndikator = $routeParams.judul;
-  $scope.numerator = $routeParams.numerator;
-  $scope.denumerator = $routeParams.denumerator;
-  $scope.targetPencapaian = $routeParams.targetPencapaian;
-  $scope.periodeAnalisa = $routeParams.periode_analisa;
-  $scope.idx = $routeParams.idx;
+  
+  $scope.judulIndikator = "";
+  $scope.numerator = "";
+  $scope.denumerator = "";
+  $scope.targetPencapaian = "";
+  $scope.periodeAnalisa = "";
+  $scope.idx ="";
   $scope.id = $routeParams.id;
+  $scope.periode = $routeParams.periode;
+  
+  $scope.units = [];
+  $scope.monthlyNames = [];
+  $scope.dataId = null;
+  $scope.typeSelect = $routeParams.id;
+  var today = new Date();
+  $scope.yearSelect = today.getFullYear() + "";
+  $scope.target = [];
+  $scope.targetHasil = [];
+  $scope.monthNames = pmkpService.getMonthNames();
+  $scope.yearlyData = [];
+
+  pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    if (result) {
+      Object.keys(result.data).forEach((key) => {
+        if (result.data[key]["STATUS_ACC"] == 1)
+          $scope.units.push(result.data[key]["JUDUL_INDIKATOR"]);
+      });
+    } else {
+      console.log("No data or error occurred.");
+    }
+  });
+
+  $scope.onUnitChange = function(selectedUnit) {
+    if (selectedUnit) {
+      console.log('Unit yang dipilih:', selectedUnit);
+      pmkpService.getDynamicData($rootScope.currPage, (result) => {
+        if (result) {
+          for (const key of Object.keys(result.data)) {
+            if (
+              result.data[key]["STATUS_ACC"] == 1 &&
+              result.data[key]["JUDUL_INDIKATOR"] === selectedUnit &&
+              result.data[key]["PROCESS_TYPE"] === $rootScope.currPage
+            ) {
+              $scope.judulIndikator = result.data[key]["JUDUL_INDIKATOR"];
+              $scope.numerator = result.data[key]["NUMERATOR"];
+              $scope.denumerator = result.data[key]["DENUMERATOR"];
+              $scope.targetPencapaian = result.data[key]["TARGET_PENCAPAIAN"];
+              $scope.periodeAnalisa = result.data[key]["PERIODE_ANALISA"];
+              $scope.idx = result.data[key]["ID"];
+              break; // Keluar dari loop setelah ditemukan
+            }
+          }
+        } else {
+          console.log("No data or error occurred.");
+        }
+      });
+    } else {
+      console.log('Tidak ada unit yang dipilih.');
+    }
+  };
+
+  $scope.getData = () => {
+    $rootScope.loading = true;
+    $http
+      .get(
+        SERVER_URL +
+          "/api/pmkp/getByYearAndType/year/" +
+          $scope.yearSelect +
+          "/type/" +
+          $scope.currPage,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then(
+        function (reqRes) {
+          $scope.yearlyData = [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+          ];
+          if (reqRes.data && reqRes.data != "") {
+            for (var i = 0; i < reqRes.data.length; i++) {
+              var dataParsed = reqRes.data[i];
+              if ($scope.yearlyData[dataParsed.month - 1] !== null) continue;
+              dataParsed.dailyData = JSON.parse(dataParsed.dailyData);
+              dataParsed.monthlyData = JSON.parse(dataParsed.monthlyData);
+              $scope.filterMonthly(dataParsed.monthlyData);
+              dataParsed.d = dataParsed.dailyData;
+              dataParsed.m = dataParsed.monthlyData;
+              $scope.yearlyData[dataParsed.month - 1] = dataParsed;
+            }
+          }
+          data = [];
+          for (var i = 0; i < $scope.monthlyNames.length; i++) {
+            //var rowData = [$scope.monthlyNames[i], $scope.target[i]];
+            let urlLink = "";
+            urlLink = $location.protocol() + "://" + $location.host() + 
+                          ($location.port() ? ":" + $location.port() : "") +
+                          "/synergy/main.html#!/analisaIndikator_new/" + $rootScope.currPage +
+                          "?judul=" + encodeURIComponent($scope.monthlyNames[i]) +
+                          "&numerator=" + encodeURIComponent($scope.numerator[i] || "") +
+                          "&denumerator=" + encodeURIComponent($scope.denumerator[i] || "") +
+                          "&target=" + encodeURIComponent($scope.target[i] || "null") +
+                          "&periode_analisa=" + encodeURIComponent($scope.periodeAnalisa[i] || "null") +
+                          "&idx=" + encodeURIComponent($scope.idx[i]);
+
+            var rowData = [
+                '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
+                $scope.target[i]
+            ];
+
+            for (var j = 0; j < 12; j++) {
+              if ($scope.yearlyData[j]) {
+                rowData.push($scope.yearlyData[j].monthlyData[i].hasil);
+              } else {
+                rowData.push("");
+              }
+            }
+            data.push(rowData);
+          }
+          var colHeaders = ["Name", "Standar"];
+          var colWidths = [300, 150];
+          var colAlignments = ["left", "center"];
+          var columns = [
+            {
+              type: "text",
+              wordWrap: true,
+              readOnly: true,
+            },
+            {
+              type: "text",
+              wordWrap: true,
+              readOnly: true,
+            },
+          ];
+          for (var i = 0; i < 12; i++) {
+            colHeaders.push($scope.monthNames[i]);
+            colWidths.push(100);
+            colAlignments.push("center");
+            columns.push({
+              type: "text",
+              wordWrap: true,
+              readOnly: true,
+            });
+          }
+          $("#tableRekap").jexcel("destroyAll");
+          $("#tableRekap").jexcel({
+            data: data,
+            colHeaders,
+            colWidths,
+            colAlignments,
+            columns,
+            tableOverflow: true,
+            tableHeight: "500px",
+          });
+          $("#tableRekap").jexcel("updateSettings", {
+            table: function (instance, cell, col, row, val, id) {
+              if (col >= 2) {
+                if (
+                  $scope.yearlyData[col - 2] &&
+                  val !== null &&
+                  val !== ""
+                ) {
+                  var type =
+                    $scope.yearlyData[col - 2].monthlyData[row].type_hasil;
+                  switch (type) {
+                    case "laporan":
+                      $(cell).html(val + " Laporan");
+                      break;
+                    case "mg/l":
+                      $(cell).html(val + " mg/l");
+                      break;
+                    case "ph69":
+                      $(cell).html(val);
+                      break;
+                    case "menit":
+                      $(cell).html(val + " Menit");
+                      break;
+                    case "jam":
+                      $(cell).html(val + " Jam");
+                      break;
+                    case "hari":
+                      $(cell).html(val + " Hari");
+                      break;
+                    case "number":
+                      $(cell).html(val + "");
+                      break;
+                    case "percent":
+                      $(cell).html(val + "%");
+                      break;
+                    case "permil":
+                      $(cell).html(val + "‰");
+                      break;
+                    case "ya/tidak":
+                      if (val === 100 || val === "100") {
+                        $(cell).html("Memenuhi");
+                      } else {
+                        $(cell).html("Tidak Memenuhi");
+                      }
+                      break;
+                    default:
+                      $(cell).html(val);
+                  }
+                } else {
+                  $(cell).html(val);
+                }
+              }
+            },
+          });
+
+          $rootScope.loading = false;
+          
+        },
+        function () {
+          $rootScope.loading = false;
+          $.toast({
+            heading: "Error",
+            text:
+              "Error happen when trying to get data on " +
+              yearSelect +
+              ", please try again or contact support.",
+            position: "top-right",
+            loaderBg: "#ff6849",
+            icon: "error",
+            hideAfter: 4000,
+            stack: 6,
+          });
+        }
+      );
+  };
 
   $scope.save = () => {
 
@@ -163,10 +415,12 @@ sikatApp.controller("analisaIndikatorNewController", function(
         return;
     }
 
+    /*
     if (!$scope.monthSelect) {
       Swal.fire("Error!", "Periode Analisa tidak boleh kosong.", "error");
       return;
     }
+    */
     
     $http
       .post(
@@ -175,7 +429,8 @@ sikatApp.controller("analisaIndikatorNewController", function(
           idx: $scope.idx,
           analisa: $scope.analisa,
           rekomendasi : $scope.rekomendasi,
-          monthSelect : $scope.monthSelect,
+          periode : $scope.periode,
+          unit : $rootScope.currPage
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
@@ -231,16 +486,119 @@ sikatApp.controller("analisaIndikatorEditController", function(
   console.log("Parameter URL saat ini:", $routeParams);
   
   $scope.dataId = null;
-  $scope.judulIndikator = $routeParams.judul;
-  $scope.numerator = $routeParams.numerator;
-  $scope.denumerator = $routeParams.denumerator;
-  $scope.targetPencapaian = $routeParams.targetPencapaian;
-  $scope.analisa = $routeParams.analisa;
-  $scope.rekomendasi = $routeParams.rekomendasi;
-  $scope.periodeAnalisa = $routeParams.periodeAnalisa;
+  $scope.judulIndikator = "";
+  $scope.numerator = "";
+  $scope.denumerator = "";
+  $scope.targetPencapaian = "";
+  $scope.analisa = "";
+  $scope.rekomendasi = "";
+  $scope.periodeAnalisa = "";
   $scope.monthSelect = $routeParams.monthSelect;
   $scope.idx = $routeParams.idx;
   $scope.id = $routeParams.id;
+  $scope.analisa = "";
+  $scope.rekomendasi = "";
+
+  $scope.id = $routeParams.id;
+  $scope.periode = $routeParams.periode;
+  
+  $scope.units = [];
+  $scope.monthlyNames = [];
+  $scope.dataId = null;
+  $scope.typeSelect = $routeParams.id;
+  var today = new Date();
+  $scope.yearSelect = today.getFullYear() + "";
+  $scope.target = [];
+  $scope.targetHasil = [];
+  $scope.monthNames = pmkpService.getMonthNames();
+  $scope.yearlyData = [];
+
+  pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    if (result) {
+      Object.keys(result.data).forEach((key) => {
+        if (result.data[key]["STATUS_ACC"] == 1)
+          $scope.units.push(result.data[key]["JUDUL_INDIKATOR"]);
+      });
+    } else {
+      console.log("No data or error occurred.");
+    }
+  });
+
+  $scope.onUnitChange = function(selectedUnit) {
+    if (selectedUnit) {
+      console.log('Unit yang dipilih:', selectedUnit);
+
+      var url = SERVER_URL + "/api/analisaIndikator/getByQuery?q=0";
+      url += "&unit=" + $rootScope.currPage;
+      
+      $http
+        .get(url, { headers: { Authorization: localStorage.getItem("token") } })
+        .then(
+          function(result) {
+            if (result.data && result.data != "") {
+              for (const key of Object.keys(result.data)) {
+                if (
+                  result.data[key]["STATUS_ACC"] == 1 &&
+                  result.data[key]["JUDUL_INDIKATOR"] === selectedUnit &&
+                  result.data[key]["PROCESS_TYPE"] === $rootScope.currPage
+                ) {
+
+                  $scope.judulIndikator = result.data[key]["JUDUL_INDIKATOR"];
+                  $scope.numerator = result.data[key]["NUMERATOR"];
+                  $scope.denumerator = result.data[key]["DENUMERATOR"];
+                  $scope.targetPencapaian = result.data[key]["TARGET_PENCAPAIAN"];
+                  $scope.periodeAnalisa = result.data[key]["PERIODE_ANALISA"];
+                  $scope.idx = result.data[key]["ID"];
+                  $scope.analisa = result.data[key]["analisa"];
+                  $scope.rekomendasi = result.data[key]["rekomendasi"];
+                  break;
+                }else{
+
+                  pmkpService.getDynamicData($rootScope.currPage, (result) => {
+                    if (result) {
+                      for (const key of Object.keys(result.data)) {
+                        if (
+                          result.data[key]["STATUS_ACC"] == 1 &&
+                          result.data[key]["JUDUL_INDIKATOR"] === selectedUnit &&
+                          result.data[key]["PROCESS_TYPE"] === $rootScope.currPage
+                        ) {
+                          $scope.judulIndikator = result.data[key]["JUDUL_INDIKATOR"];
+                          $scope.numerator = result.data[key]["NUMERATOR"];
+                          $scope.denumerator = result.data[key]["DENUMERATOR"];
+                          $scope.targetPencapaian = result.data[key]["TARGET_PENCAPAIAN"];
+                          $scope.periodeAnalisa = result.data[key]["PERIODE_ANALISA"];
+                          $scope.idx = result.data[key]["ID"];
+                          $scope.analisa = "";
+                          $scope.rekomendasi = "";
+                          break; // Keluar dari loop setelah ditemukan
+                        }
+                      }
+                    } else {
+                      console.log("No data or error occurred.");
+                    }
+                  });
+
+                }
+              }
+            }
+          },
+          function() {
+            $.toast({
+              heading: "Error",
+              text:
+                "Error happen when trying to get data on " +
+                url +
+                ", please try again or contact support.",
+              position: "top-right",
+              loaderBg: "#ff6849",
+              icon: "error",
+              hideAfter: 4000,
+              stack: 6
+            });
+          }
+        );
+    }
+  };
 
   pmkpService.getDynamicData($rootScope.currPage, (result) => {
     if (result) {
@@ -315,10 +673,10 @@ sikatApp.controller("analisaIndikatorEditController", function(
         return;
     }
 
-    if (!$scope.monthSelect) {
+    /*if (!$scope.monthSelect) {
       Swal.fire("Error!", "Periode Analisa tidak boleh kosong.", "error");
       return;
-    }
+    }*/
     
     $http
       .put(
@@ -327,7 +685,8 @@ sikatApp.controller("analisaIndikatorEditController", function(
           idx: $scope.idx,
           analisa: $scope.analisa,
           rekomendasi : $scope.rekomendasi,
-          monthSelect : $scope.monthSelect,
+          periode : $scope.periode,
+          unit : $rootScope.currPage
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
