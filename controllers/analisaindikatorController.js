@@ -41,6 +41,7 @@ sikatApp.controller("analisaIndikatorController", function(
     $location.url("/indikatorMutu_new");
   };
 
+  /*
   $scope.showAnalisaIndikatorEdit = (
     judul,
     numerator,
@@ -63,6 +64,15 @@ sikatApp.controller("analisaIndikatorController", function(
       "&rekomendasi="+rekomendasi + 
       "&periodeAnalisa="+periodeAnalisa +
       "&monthSelect="+monthSelect
+    );
+  };
+  */
+  $scope.showAnalisaIndikatorEdit = (
+    id
+  ) => {
+    $location.url(
+      "/analisaIndikator_edit/"+$rootScope.currPage+"?idAnalisaUnit=" +
+      id
     );
   };
 
@@ -498,9 +508,11 @@ sikatApp.controller("analisaIndikatorEditController", function(
   $scope.id = $routeParams.id;
   $scope.analisa = "";
   $scope.rekomendasi = "";
+  $scope.idAnalisa = "";
 
   $scope.id = $routeParams.id;
   $scope.periode = $routeParams.periode;
+  $scope.idAnalisaUnit = $routeParams.idAnalisaUnit;
   
   $scope.units = [];
   $scope.monthlyNames = [];
@@ -549,6 +561,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
                   $scope.targetPencapaian = result.data[key]["TARGET_PENCAPAIAN"];
                   $scope.periodeAnalisa = result.data[key]["PERIODE_ANALISA"];
                   $scope.idx = result.data[key]["ID"];
+                  $scope.idAnalisa = result.data[key]["id"];
                   $scope.analisa = result.data[key]["analisa"];
                   $scope.rekomendasi = result.data[key]["rekomendasi"];
                   break;
@@ -682,7 +695,9 @@ sikatApp.controller("analisaIndikatorEditController", function(
       .put(
         SERVER_URL + "/api/analisaIndikator",
         {
-          idx: $scope.idx,
+          idx: $scope.idAnalisaUnit,
+          idProfileIndikator: $scope.idx,
+          idAnalisa:$scope.idAnalisa,
           analisa: $scope.analisa,
           rekomendasi : $scope.rekomendasi,
           periode : $scope.periode,
@@ -746,8 +761,8 @@ sikatApp.controller("analisaIndikatorEditController", function(
           }
           data = [];
           for (var i = 0; i < $scope.monthlyNames.length; i++) {
-            //var rowData = [$scope.monthlyNames[i], $scope.target[i]];
-            let urlLink = "";
+            var rowData = [$scope.monthlyNames[i], $scope.target[i]];
+            /*let urlLink = "";
             urlLink = $location.protocol() + "://" + $location.host() + 
                           ($location.port() ? ":" + $location.port() : "") +
                           "/synergy/main.html#!/analisaIndikator_new/" + $rootScope.currPage +
@@ -762,6 +777,7 @@ sikatApp.controller("analisaIndikatorEditController", function(
                 '<a href="' + urlLink + '">' + $scope.monthlyNames[i] + '</a>',
                 $scope.target[i]
             ];
+            */
 
             for (var j = 0; j < 12; j++) {
               if ($scope.yearlyData[j]) {
