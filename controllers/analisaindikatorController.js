@@ -953,6 +953,7 @@ sikatApp.controller(
                               result.data[key]["PROCESS_TYPE"] ===
                                 $rootScope.currPage
                             ) {
+                              
                               $scope.judulIndikator =
                                 result.data[key]["JUDUL_INDIKATOR"];
                               $scope.numerator = result.data[key]["NUMERATOR"];
@@ -963,11 +964,12 @@ sikatApp.controller(
                               $scope.periodeAnalisa =
                                 result.data[key]["PERIODE_ANALISA"];
                               $scope.idx = result.data[key]["ID"];
+                              
                               $scope.analisa = "";
                               $scope.rekomendasi = "";
-
-
+                              $scope.idAnalisa = "";
                               $scope.monthlyNamesSelected = "";
+                              
                               $scope.monthlyNamesSelected =
                                 result.data[key]["JUDUL_INDIKATOR"];
                               $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
