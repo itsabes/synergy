@@ -301,15 +301,12 @@
                     <select
                       class="form-control custom-select"
                       ng-model="periodeAnalisa"
-                      ng-init="periodeAnalisa = ''"
+                      ng-init="periodeAnalisa = 'Triwulan'"
                       ng-disabled="isAuthorized(user_role)"
-                      >
-                      <option value="">Pilih Periode Analisis dan Pelaporan</option>
-                      <option value="Bulanan">Bulanan</option>
-                      <option value="Triwulan">Triwulan</option>
-                      <option value="Semester">Semester</option>
+                    >
+                      <option value="Triwulan" selected>Triwulan</option>
                     </select>
-                  </div>
+                  </div>  
                   <div class="form-group">
                     <label class="control-label">Penanggung Jawab</label>
                     <!-- <input type="text" ng-model="penanggungJawab" class="form-control" /> -->
