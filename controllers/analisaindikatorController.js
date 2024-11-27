@@ -747,6 +747,12 @@ sikatApp.controller(
     };
 
     $scope.save = () => {
+
+      if (!$scope.unit) {
+        Swal.fire("Error!", "Unit tidak boleh kosong.", "error");
+        return;
+      }
+      
       if (!$scope.analisa) {
         Swal.fire("Error!", "Analisa tidak boleh kosong.", "error");
         return;
@@ -1547,6 +1553,12 @@ sikatApp.controller(
     };
 
     $scope.update = () => {
+
+      if (!$scope.unit) {
+        Swal.fire("Error!", "Unit tidak boleh kosong.", "error");
+        return;
+      }
+
       if (!$scope.analisa) {
         Swal.fire("Error!", "Analisa tidak boleh kosong.", "error");
         return;
