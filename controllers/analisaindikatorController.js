@@ -65,9 +65,9 @@ sikatApp.controller(
     );
   };
   */
-    $scope.showAnalisaIndikatorEdit = (id) => {
+    $scope.showAnalisaIndikatorEdit = (id,periode) => {
       $location.url(
-        "/analisaIndikator_edit/" + $rootScope.currPage + "?idAnalisaUnit=" + id
+        "/analisaIndikator_edit/" + $rootScope.currPage + "?idAnalisaUnit=" + id + "&periodeAnalisa="+periode
       );
     };
 
@@ -183,8 +183,6 @@ sikatApp.controller(
     $scope.yearSelect = today.getFullYear() + "";
     $scope.target = [];
     $scope.targetHasil = [];
-    $scope.numeratorHasil = "";
-    $scope.denumeratorHasil = "";
     $scope.monthNames = pmkpService.getMonthNames();
     $scope.yearlyData = [];
     $scope.listChart = "";
@@ -204,8 +202,6 @@ sikatApp.controller(
             $scope.monthlyNames.push(JUDUL_INDIKATOR);
             $scope.target.push(TARGET_PENCAPAIAN);
             $scope.targetHasil.push(TARGET_PENCAPAIAN);
-            //$scope.numeratorHasil.push(NUMERATOR);
-            //$scope.denumeratorHasil.push(DENUMERATOR);
 
             console.log(
               "status_acc:" + result.data[key]["STATUS_ACC"],
@@ -828,11 +824,14 @@ sikatApp.controller(
     $scope.idAnalisa = "";
 
     $scope.id = $routeParams.id;
-    $scope.periode = $routeParams.periode;
+    $scope.periode = $routeParams.periodeAnalisa;
     $scope.idAnalisaUnit = $routeParams.idAnalisaUnit;
+
+    console.log("periode:"+$scope.periode);
 
     $scope.units = [];
     $scope.monthlyNames = [];
+    $scope.monthlyNamesSelected = "";
     $scope.dataId = null;
     $scope.typeSelect = $routeParams.id;
     var today = new Date();
@@ -841,17 +840,59 @@ sikatApp.controller(
     $scope.targetHasil = [];
     $scope.monthNames = pmkpService.getMonthNames();
     $scope.yearlyData = [];
+    $scope.listChart = "";
 
+    
     pmkpService.getDynamicData($rootScope.currPage, (result) => {
       if (result) {
         Object.keys(result.data).forEach((key) => {
-          if (result.data[key]["STATUS_ACC"] == 1)
-            $scope.units.push(result.data[key]["JUDUL_INDIKATOR"]);
+          if (
+            result.data[key]["STATUS_ACC"] == "1" &&
+            !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
+          ) {
+            const { JUDUL_INDIKATOR, TARGET_PENCAPAIAN,NUMERATOR,DENUMERATOR } = result.data[key];
+            $scope.units.push(JUDUL_INDIKATOR);
+            $scope.monthlyNames.push(JUDUL_INDIKATOR);
+            $scope.target.push(TARGET_PENCAPAIAN);
+            $scope.targetHasil.push(TARGET_PENCAPAIAN);
+
+            console.log(
+              "status_acc:" + result.data[key]["STATUS_ACC"],
+              " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
+            );
+          }
         });
       } else {
         console.log("No data or error occurred.");
       }
     });
+    
+    /*
+    pmkpService.getDynamicData($rootScope.currPage, (result) => {
+      if (result) {
+        let iterator = 1;
+        Object.keys(result.data).forEach((key) => {
+          if (
+            result.data[key]["STATUS_ACC"] == 1 &&
+            result.data[key]["analisa_id"] == $scope.idx
+          ) {
+            if (
+              !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
+            ) {
+
+              $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+              $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
+              $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+            }
+            
+            iterator++;
+          }
+        });
+      } else {
+        console.log("No data or error occurred.");
+      }
+    });
+    */
 
     $scope.onUnitChange = function (selectedUnit) {
       if (selectedUnit) {
@@ -883,6 +924,21 @@ sikatApp.controller(
                     $scope.idAnalisa = result.data[key]["id"];
                     $scope.analisa = result.data[key]["analisa"];
                     $scope.rekomendasi = result.data[key]["rekomendasi"];
+
+                    $scope.monthlyNamesSelected = "";
+                    $scope.monthlyNamesSelected =
+                      result.data[key]["JUDUL_INDIKATOR"];
+                    $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
+                    $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+    
+                    console.log(
+                      "status_acc:" + result.data[key]["STATUS_ACC"],
+                      " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
+                    );
+    
+                    $scope.getData();
+                    $scope.downloadChart($scope.periode);
+
                     break;
                   } else {
                     pmkpService.getDynamicData(
@@ -909,6 +965,22 @@ sikatApp.controller(
                               $scope.idx = result.data[key]["ID"];
                               $scope.analisa = "";
                               $scope.rekomendasi = "";
+
+
+                              $scope.monthlyNamesSelected = "";
+                              $scope.monthlyNamesSelected =
+                                result.data[key]["JUDUL_INDIKATOR"];
+                              $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
+                              $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+              
+                              console.log(
+                                "status_acc:" + result.data[key]["STATUS_ACC"],
+                                " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
+                              );
+              
+                              $scope.getData();
+                              $scope.downloadChart($scope.periode);
+
                               break; // Keluar dari loop setelah ditemukan
                             }
                           }
@@ -938,30 +1010,6 @@ sikatApp.controller(
           );
       }
     };
-
-    pmkpService.getDynamicData($rootScope.currPage, (result) => {
-      if (result) {
-        let iterator = 1;
-        Object.keys(result.data).forEach((key) => {
-          if (
-            result.data[key]["STATUS_ACC"] == 1 &&
-            result.data[key]["analisa_id"] == $scope.idx
-          ) {
-            if (
-              !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
-            ) {
-              $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
-            }
-            $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
-            $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
-
-            iterator++;
-          }
-        });
-      } else {
-        console.log("No data or error occurred.");
-      }
-    });
 
     $scope.filterMonthly = (monthlyData) => {
       for (var i = monthlyData.length; i < $scope.monthlyNames.length; i++) {
@@ -1045,6 +1093,7 @@ sikatApp.controller(
         );
     };
 
+
     $scope.getData = () => {
       $rootScope.loading = true;
       $http
@@ -1079,19 +1128,22 @@ sikatApp.controller(
             if (reqRes.data && reqRes.data != "") {
               for (var i = 0; i < reqRes.data.length; i++) {
                 var dataParsed = reqRes.data[i];
+               
                 if ($scope.yearlyData[dataParsed.month - 1] !== null) continue;
                 dataParsed.dailyData = JSON.parse(dataParsed.dailyData);
                 dataParsed.monthlyData = JSON.parse(dataParsed.monthlyData);
+                dataParsed.monthData = JSON.parse(dataParsed.month);
                 $scope.filterMonthly(dataParsed.monthlyData);
                 dataParsed.d = dataParsed.dailyData;
                 dataParsed.m = dataParsed.monthlyData;
                 $scope.yearlyData[dataParsed.month - 1] = dataParsed;
+
+                //console.log("year"+JSON.stringify($scope.yearlyData));
               }
             }
             data = [];
             for (var i = 0; i < $scope.monthlyNames.length; i++) {
               var rowData = [$scope.monthlyNames[i], $scope.target[i]];
-
               for (var j = 0; j < 12; j++) {
                 if ($scope.yearlyData[j]) {
                   rowData.push($scope.yearlyData[j].monthlyData[i].hasil);
@@ -1211,6 +1263,50 @@ sikatApp.controller(
         );
     };
 
+    $scope.filterMonthly = (monthlyData) => {
+      for (var i = monthlyData.length; i < $scope.monthlyNames.length; i++) {
+        monthlyData[i] = {
+          numerator: "",
+          denumerator: "",
+          hasil: "",
+          analisa: "",
+          month:"",
+        };
+      }
+
+      /*
+    var mappingArr = pmkpService.getMonthlyMapping($scope.currPage);
+    for (var i = 0; i < mappingArr.length; i++) {
+      var mappingUnit = mappingArr[i];
+      monthlyData[mappingUnit[0] - 1]["disable_hasil"] = true;
+    }
+    */
+      for (var i = 0; i < $scope.monthlyNames.length; i++) {
+        var target = $scope.target[i].toLowerCase();
+        if (target.includes("laporan")) {
+          monthlyData[i]["type_hasil"] = "laporan";
+        } else if (target.includes("mg/l")) {
+          monthlyData[i]["type_hasil"] = "mg/l";
+        } else if (target.includes("ph 6-9")) {
+          monthlyData[i]["type_hasil"] = "ph69";
+        } else if (target.includes("menit")) {
+          monthlyData[i]["type_hasil"] = "menit";
+        } else if (target.includes("jam")) {
+          monthlyData[i]["type_hasil"] = "jam";
+        } else if (target.includes("hari")) {
+          monthlyData[i]["type_hasil"] = "hari";
+        } else if (target.startsWith(" ") && target.endsWith(" ")) {
+          monthlyData[i]["type_hasil"] = "number";
+        } else if (target.includes("%")) {
+          monthlyData[i]["type_hasil"] = "percent";
+        } else if (target.includes("‰")) {
+          monthlyData[i]["type_hasil"] = "permil";
+        } else {
+          monthlyData[i]["type_hasil"] = "ya/tidak";
+        }
+      }
+    };
+
     $scope.downloadPdf = (idx) => {
       const data = {
         direkturName: localStorage.getItem("nama_direktur"),
@@ -1222,11 +1318,50 @@ sikatApp.controller(
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
     };
 
-    $scope.downloadChart = (idx, monthSelect) => {
+    $scope.downloadChart = (part) => {
+
+      let monthlyData = [];
+      let monthDataIndex = [];
+      let arrayPeriod;
+      console.log('period'+$scope.periode);
+      switch ($scope.periode) {
+        case "0":
+          arrayPeriod = [1, 2, 3];
+          break;
+        case "1":
+          arrayPeriod = [1, 2, 3, 4, 5, 6];
+          break;
+        case "2":
+          arrayPeriod = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+          break;
+        case "3":
+          arrayPeriod = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+          break;
+        default:
+          arrayPeriod = []; // default kosong jika nilai $scope.periode tidak valid
+      }
+
       for (var h = 0; h < $scope.yearlyData.length; h++) {
-        let monthlyData = [];
-        if ($scope.yearlyData[h]) monthlyData = $scope.yearlyData[h].m;
+       
+        if ($scope.yearlyData[h]) {
+          monthlyData = $scope.yearlyData[h].m;
+          let monthData = $scope.yearlyData[h].monthData;
+          /*console.log("monthData:"+monthData);
+          console.log("iterator:"+h);
+          console.log("arrayPeriod"+arrayPeriod);
+          console.log("arrayPeriodincludes"+arrayPeriod.includes(monthData));*/
+          if(arrayPeriod.includes(monthData)){
+            monthDataIndex = monthlyData;
+            //console.log("monthlyDataOri"+JSON.stringify(monthlyData));
+          }
+        }
+
         for (var i = 0; i < $scope.monthlyNames.length; i++) {
+
+          //console.log("$scope.monthlyNames"+$scope.monthlyNames[i]);
+          //console.log("$scope.numerator"+monthlyData[i].numerator);
+          //console.log("$scope.denumerator"+monthlyData[i].denumerator);
+          //console.log(JSON.stringify(monthlyData));
           var target = $scope.target[i].toLowerCase();
           if (!monthlyData[i])
             monthlyData[i] = {
@@ -1282,134 +1417,167 @@ sikatApp.controller(
           }
         }
       }
+
       const dataList = [];
       for (let i = 0; i < $scope.monthlyNames.length; i++) {
+
         let criteriaName = $scope.monthlyNames[i];
         let target = $scope.target[i].toLowerCase();
         let targetHasil = $scope.targetHasil[i];
         let axisName = "";
         let isYaTidak = false;
-        if (target.includes("laporan")) {
-          axisName = "Laporan";
-        } else if (target.includes("mg/l")) {
-          axisName = "mg/l";
-        } else if (target.includes("ph 6-9")) {
-          axisName = "PH";
-        } else if (target.includes("menit")) {
-          axisName = "Menit";
-        } else if (target.includes("jam")) {
-          axisName = "Jam";
-        } else if (target.includes("hari")) {
-          axisName = "Hari";
-        } else if (target.startsWith(" ") && target.endsWith(" ")) {
-          axisName = "Jumlah";
-        } else if (target.includes("%")) {
-          axisName = "Persen(%)";
-        } else if (target.includes("‰")) {
-          axisName = "Permil(‰)";
-        } else {
-          axisName = $scope.target[i];
-          isYaTidak = true;
-        }
-        let dataPencapaian = [];
-        let dataStandarBawah = [];
-        let dataStandarAtas = [];
-        let standarBawah = targetHasil[0];
-        let standarAtas = targetHasil[1];
-        let minTarget = 0;
-        let maxTarget = 0;
 
-        for (let i = 1; i <= 12; i++) {
-          if (monthSelect == i) minTarget = 0;
-          maxTarget = i;
-          break;
-        }
+        /*console.log("monthlyData:"+monthDataIndex);
+        console.log("arrayPeriod:"+arrayPeriod);
+        console.log("$scope.periode:"+$scope.periode);*/
+        
+        if (
+          $scope.monthlyNamesSelected != null &&
+          criteriaName == $scope.monthlyNamesSelected
+        ) {
+        
 
-        if (monthSelect == "TW_1") {
-          minTarget = 0;
-          maxTarget = 3;
-        } else if (monthSelect == "TW_2") {
-          //minTarget=3;
-          minTarget = 0;
-          maxTarget = 6;
-        } else if (monthSelect == "TW_3") {
-          //minTarget=6;
-          minTarget = 0;
-          maxTarget = 9;
-        } else if (monthSelect == "TW_4") {
-          //minTarget=9;
-          minTarget = 0;
-          maxTarget = 12;
-        } else if (monthSelect == "SM_1") {
-          minTarget = 0;
-          maxTarget = 6;
-        } else if (monthSelect == "SM_2") {
-          //minTarget=6;
-          minTarget = 0;
-          maxTarget = 12;
-        }
+          if (target.includes("laporan")) {
+            axisName = "Laporan";
+          } else if (target.includes("mg/l")) {
+            axisName = "mg/l";
+          } else if (target.includes("ph 6-9")) {
+            axisName = "PH";
+          } else if (target.includes("menit")) {
+            axisName = "Menit";
+          } else if (target.includes("jam")) {
+            axisName = "Jam";
+          } else if (target.includes("hari")) {
+            axisName = "Hari";
+          } else if (target.startsWith(" ") && target.endsWith(" ")) {
+            axisName = "Jumlah";
+          } else if (target.includes("%")) {
+            axisName = "Persen(%)";
+          } else if (target.includes("‰")) {
+            axisName = "Permil(‰)";
+          } else {
+            axisName = $scope.target[i];
+            isYaTidak = true;
+          }
 
-        for (let monthIdx = minTarget; monthIdx < maxTarget; monthIdx++) {
-          let val = $scope.yearlyData[monthIdx]
-            ? $scope.yearlyData[monthIdx].m[i].hasil
+          let dataPencapaian = [];
+          let dataStandarBawah = [];
+          let dataStandarAtas = [];
+          let standarBawah =  monthDataIndex[i].denumerator;
+          let standarAtas = monthDataIndex[i].numerator;
+          /*console.log('standarBawah'+standarBawah);
+          console.log('standarAtas'+standarAtas);
+          console.log("monthlyDAta"+JSON.stringify(monthlyData));*/
+          for (let monthIdx = 0; monthIdx < (part + 1) * 3; monthIdx++) {
+            let val = $scope.yearlyData[monthIdx]
               ? $scope.yearlyData[monthIdx].m[i].hasil
-              : 0
-            : 0;
-          dataPencapaian.push({
-            x: $scope.monthNames[monthIdx].toUpperCase(),
-            y: val,
-          });
-          dataStandarBawah.push({
-            x: $scope.monthNames[monthIdx].toUpperCase(),
-            y: standarBawah,
-          });
-          dataStandarAtas.push({
-            x: $scope.monthNames[monthIdx].toUpperCase(),
-            y: standarAtas,
-          });
-        }
+                ? $scope.yearlyData[monthIdx].m[i].hasil
+                : 0
+              : 0;
+            dataPencapaian.push({
+              x:
+                part > 1
+                  ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
+                  : $scope.monthNames[monthIdx].toUpperCase(),
+              y: val,
+            });
+            dataStandarBawah.push({
+              x:
+                part > 1
+                  ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
+                  : $scope.monthNames[monthIdx].toUpperCase(),
+              y: standarBawah,
+            });
+            dataStandarAtas.push({
+              x:
+                part > 1
+                  ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
+                  : $scope.monthNames[monthIdx].toUpperCase(),
+              y: standarAtas,
+            });
+          }
 
-        let lines = [];
+          let lines = [];
 
-        lines.push({
-          name: "PENCAPAIAN",
-          data: dataPencapaian,
-        });
-        if (standarAtas !== undefined && standarAtas !== null) {
           lines.push({
-            name: "STANDAR",
-            data: dataStandarAtas,
+            name: "PENCAPAIAN",
+            data: dataPencapaian,
           });
-        }
-        if (standarBawah != undefined && standarBawah != null) {
-          lines.push({
-            name: "STANDAR",
-            data: dataStandarBawah,
-          });
-        }
+          if (standarAtas !== undefined && standarAtas !== null) {
+            lines.push({
+              name: "STANDAR",
+              data: dataStandarAtas,
+            });
+          }
+          if (standarBawah != undefined && standarBawah != null) {
+            lines.push({
+              name: "STANDAR",
+              data: dataStandarBawah,
+            });
+          }
 
-        dataList.push({
-          idx: i,
-          kriteria: criteriaName,
-          chart: {
-            options: {
-              xTitle: axisName,
+          dataList.push({
+            idx: i,
+            kriteria: criteriaName,
+            chart: {
+              options: {
+                xTitle: axisName,
+              },
+              lines: lines,
             },
-            lines: lines,
-          },
-        });
+          });
+        }
       }
 
-      const data = {
-        direkturName: localStorage.getItem("nama_direktur"),
-        direkturNip: localStorage.getItem("nip_direktur"),
-        rsName: localStorage.getItem("nama_rumah_sakit"),
-        dataList: dataList,
-        monthSelect: monthSelect,
-      };
-      const url =
-        REPORT_URL + "/analisa_indikator/" + $scope.currPage + "/" + idx;
-      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+      var partString = "";
+      switch (part) {
+        case 0:
+          partString = "Januari-Maret";
+          break;
+        case 1:
+          partString = "Januari-Juni";
+          break;
+        case 2:
+          partString = "Januari-September";
+          break;
+        case 3:
+          partString = "Januari-Desember";
+          break;
+      }
+
+      $http
+        .post(
+          REPORT_URL + "/analisa_indikator/" + $scope.currPage,
+          {
+            direkturName: localStorage.getItem("nama_direktur"),
+            direkturNip: localStorage.getItem("nip_direktur"),
+            rsName: localStorage.getItem("nama_rumah_sakit"),
+            unit: $scope.currPage,
+            tahun: $scope.yearSelect,
+            part: partString,
+            dataList: dataList,
+            unit: $rootScope.currPage,
+          },
+          { headers: { Authorization: localStorage.getItem("token") } }
+        )
+        .then((response) => {
+          // Ambil data dari respons
+          const result = response.data;
+          console.log("get chart..." + result.listChart);
+          $scope.listChart = result.listChart;
+        })
+        .catch((error) => {
+          // Tangani error
+          $.toast({
+            heading: "Error",
+            text: "Error terjadi saat mencoba mendapatkan data. Silakan coba lagi atau hubungi tim dukungan.",
+            position: "top-right",
+            loaderBg: "#ff6849",
+            icon: "error",
+            hideAfter: 4000,
+            stack: 6,
+          });
+        });
     };
 
     $scope.delete = () => {

@@ -55,7 +55,7 @@
           <tr ng-repeat="row in $data track by $index">
             <td title="'Periode'" sortable="'periode'">
               <a style="display: block;" href="javascript:void(0)"
-                ng-click="showAnalisaIndikatorEdit(row.id)"> {{getPeriodeAnalisa(row.periode_analisa) }}
+                ng-click="showAnalisaIndikatorEdit(row.id,row.periode_analisa)"> {{getPeriodeAnalisa(row.periode_analisa) }}
               </a>
             </td>
             <td title="'Create Date'" sortable="'createDate'">
