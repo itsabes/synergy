@@ -1522,17 +1522,17 @@ sikatApp.controller(
           partString = "Januari-Desember";
           break;
       }
-      const data = {
-        direkturName: localStorage.getItem("nama_direktur"),
-        direkturNip: localStorage.getItem("nip_direktur"),
-        rsName: localStorage.getItem("nama_rumah_sakit"),
-        unit: $scope.currPage,
-        tahun: $scope.yearSelect,
-        part: partString,
-        dataList: dataList,
-        unit: $rootScope.currPage,
+        const data = {
+          direkturName: localStorage.getItem("nama_direktur"),
+          direkturNip: localStorage.getItem("nip_direktur"),
+          rsName: localStorage.getItem("nama_rumah_sakit"),
+          unit: $scope.currPage,
+          tahun: $scope.yearSelect,
+          part: partString,
+          dataList: dataList,
+          unit: $rootScope.currPage,
 
-      };
+        };
 
       const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage;
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
