@@ -604,7 +604,15 @@ sikatApp.controller("indikatorMutuEditController", function(
       id: id,
     };
     const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
-    pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+    pmkpService.postDownload(url, data, "Profile Indikator "+ $scope.formatString($scope.currPage) + ".pdf");
+  }
+
+  $scope.formatString = (input) => {
+    return input
+      .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
+      .split(" ") // Pisahkan kata-kata berdasarkan spasi
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+      .join(" "); // Gabungkan kembali dengan spasi
   }
   
   $scope.update = () => {

@@ -271,6 +271,14 @@ sikatApp.controller(
       );
     };
 
+    $scope.formatString = (input) => {
+      return input
+        .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
+        .split(" ") // Pisahkan kata-kata berdasarkan spasi
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .join(" "); // Gabungkan kembali dengan spasi
+    }
+
     $scope.downloadExcel = () => {
       for (var i = 0; i < $scope.dailyData.length; i += 1) {
         for (var j = 0; j < $scope.dailyData[i].length; j += 1) {
@@ -299,7 +307,7 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
       const url = REPORT_URL + "/pdf_a/" + $scope.currPage;
-      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+      pmkpService.postDownload(url, data, "Report Form A "+ $scope.formatString($scope.currPage) + ".pdf");
     };
     $scope.getData();
   }
@@ -890,6 +898,14 @@ sikatApp.controller(
       );
     };
 
+    $scope.formatString = (input) => {
+      return input
+        .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
+        .split(" ") // Pisahkan kata-kata berdasarkan spasi
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .join(" "); // Gabungkan kembali dengan spasi
+    }
+
     $scope.downloadExcel = () => {
       for (var i = 0; i < $scope.dailyData.length; i += 1) {
         for (var j = 0; j < $scope.dailyData[i].length; j += 1) {
@@ -972,7 +988,7 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
       const url = REPORT_URL + "/pdf_b/" + $scope.currPage;
-      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+      pmkpService.postDownload(url, data, "Report Form B "+ $scope.formatString($scope.currPage) + ".pdf");
     };
     $scope.getData();
   }
@@ -1274,6 +1290,14 @@ sikatApp.controller(
         );
     };
 
+    $scope.formatString = (input) => {
+      return input
+        .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
+        .split(" ") // Pisahkan kata-kata berdasarkan spasi
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .join(" "); // Gabungkan kembali dengan spasi
+    }
+
     $scope.downloadExcel = () => {
       for (var h = 0; h < $scope.yearlyData.length; h++) {
         let monthlyData = [];
@@ -1350,7 +1374,7 @@ sikatApp.controller(
       };
 
       const url = REPORT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
-      pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+      pmkpService.postDownload(url, data, "Report Form C "+ $scope.formatString($scope.currPage) + ".pdf");
 
     };
 
