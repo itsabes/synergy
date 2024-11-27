@@ -378,7 +378,7 @@ sikatApp.controller(
         let dataStandarAtas = [];
         let standarBawah = monthDataIndex[i].denumerator;
         let standarAtas = monthDataIndex[i].numerator;
-        for (let monthIdx = 0; monthIdx < (part + 1) * 3; monthIdx++) {
+        for (let monthIdx = 0; monthIdx < (parseInt(part, 10) + 1) * 3; monthIdx++) {
           let val = $scope.yearlyData[monthIdx]
             ? $scope.yearlyData[monthIdx].m[i].hasil
               ? $scope.yearlyData[monthIdx].m[i].hasil
@@ -752,7 +752,7 @@ sikatApp.controller(
         Swal.fire("Error!", "Unit tidak boleh kosong.", "error");
         return;
       }
-      
+
       if (!$scope.analisa) {
         Swal.fire("Error!", "Analisa tidak boleh kosong.", "error");
         return;
@@ -1152,7 +1152,7 @@ sikatApp.controller(
           /*console.log('standarBawah'+standarBawah);
           console.log('standarAtas'+standarAtas);
           console.log("monthlyDAta"+JSON.stringify(monthlyData));*/
-          for (let monthIdx = 0; monthIdx < (part + 1) * 3; monthIdx++) {
+          for (let monthIdx = 0; monthIdx < (parseInt(part, 10) + 1) * 3; monthIdx++) {
             let val = $scope.yearlyData[monthIdx]
               ? $scope.yearlyData[monthIdx].m[i].hasil
                 ? $scope.yearlyData[monthIdx].m[i].hasil
@@ -1950,7 +1950,8 @@ sikatApp.controller(
           let dataStandarAtas = [];
           let standarBawah = monthDataIndex[i].denumerator;
           let standarAtas = monthDataIndex[i].numerator;
-          for (let monthIdx = 0; monthIdx < (part + 1) * 3; monthIdx++) {
+          for (let monthIdx = 0; monthIdx < (parseInt(part, 10) + 1) * 3; monthIdx++) {
+            console.log("monthindx"+monthIdx);
             let val = $scope.yearlyData[monthIdx]
               ? $scope.yearlyData[monthIdx].m[i].hasil
                 ? $scope.yearlyData[monthIdx].m[i].hasil
