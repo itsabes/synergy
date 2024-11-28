@@ -100,11 +100,18 @@
                 {{ row.STATUS_ACC === '1' ? 'Acc' : 'Pending' }}
               </button>
             </td>
-            <td title="'Action'" width="130px">
+            <td title="'Action'" width="130px" ng-if="!isAuthorized(user_role)">
               <button type="button"
                 class="btn btn-success waves-effect waves-light"
                 ng-click="showIndikatorMutu(row.ID)">
                 <i class="fa fa-edit"></i> Update
+              </button>
+            </td>
+            <td title="'Action'" width="200px" ng-if="isAuthorized(user_role)">
+              <button type="button"
+                class="btn btn-success waves-effect waves-light"
+                ng-click="showIndikatorMutu(row.ID)">
+                <i class="fa fa-edit"></i> Tombol Acc
               </button>
             </td>
           </tr>

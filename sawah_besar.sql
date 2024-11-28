@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Nov 2024 pada 11.21
--- Versi server: 10.3.15-MariaDB
--- Versi PHP: 7.3.6
+-- Generation Time: Nov 28, 2024 at 04:57 AM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_analisa_indikator`
+-- Table structure for table `sikat_analisa_indikator`
 --
 
 CREATE TABLE `sikat_analisa_indikator` (
@@ -33,23 +33,49 @@ CREATE TABLE `sikat_analisa_indikator` (
   `id_profile_indikator` int(11) NOT NULL,
   `analisa` text NOT NULL,
   `periode_analisa` varchar(20) NOT NULL,
+  `unit` varchar(255) NOT NULL,
   `rekomendasi` text NOT NULL,
   `create_date` datetime DEFAULT current_timestamp(),
   `update_date` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sikat_analisa_indikator`
+-- Dumping data for table `sikat_analisa_indikator`
 --
 
-INSERT INTO `sikat_analisa_indikator` (`id`, `id_profile_indikator`, `analisa`, `periode_analisa`, `rekomendasi`, `create_date`, `update_date`) VALUES
-(8, 302, 'analisa dari dokter', '', 'rekomendasi dari dokter', '2024-11-09 04:55:08', '2024-11-09 10:55:08'),
-(9, 302, 'tess', 'TW_1', 'test', '2024-11-14 19:17:44', '2024-11-15 01:17:44');
+INSERT INTO `sikat_analisa_indikator` (`id`, `id_profile_indikator`, `analisa`, `periode_analisa`, `unit`, `rekomendasi`, `create_date`, `update_date`) VALUES
+(15, 302, 'ab', '0', 'rawatJalan', 'ab', '2024-11-24 19:03:21', '2024-11-28 00:17:41'),
+(18, 303, 'c', '0', 'rawatJalan', 'c', '2024-11-26 03:19:16', '2024-11-28 00:17:45'),
+(19, 304, 'df', '0', 'rawatJalan', 'df', '2024-11-27 07:46:52', '2024-11-28 00:17:48'),
+(20, 305, 'ffs', '0', 'rawatJalan', 'ffs', '2024-11-27 07:47:34', '2024-11-28 00:17:49'),
+(21, 302, 'test', '3', 'rawatJalan', 'test', '2024-11-27 19:14:12', '2024-11-28 01:14:12');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_b3rs`
+-- Table structure for table `sikat_analisa_unit`
+--
+
+CREATE TABLE `sikat_analisa_unit` (
+  `id` int(11) NOT NULL,
+  `unit` varchar(100) NOT NULL,
+  `periode_analisa` varchar(30) NOT NULL,
+  `create_date` varchar(50) NOT NULL,
+  `update_date` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sikat_analisa_unit`
+--
+
+INSERT INTO `sikat_analisa_unit` (`id`, `unit`, `periode_analisa`, `create_date`, `update_date`) VALUES
+(4, 'rawatJalan', '0', '2024-11-24 19:03:21', '2024-11-27 16:52:15'),
+(5, 'rawatJalan', '3', '2024-11-27 19:14:12', '2024-11-27 19:14:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sikat_b3rs`
 --
 
 CREATE TABLE `sikat_b3rs` (
@@ -66,7 +92,7 @@ CREATE TABLE `sikat_b3rs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_b3rs`
+-- Dumping data for table `sikat_b3rs`
 --
 
 INSERT INTO `sikat_b3rs` (`tgl_kejadian`, `jam_kejadian`, `jenis_bahan`, `fasa`, `lokasi`, `jumlah`, `liter`, `penanganan`, `kondisi_setelah`, `nm_pelapor`) VALUES
@@ -80,7 +106,7 @@ INSERT INTO `sikat_b3rs` (`tgl_kejadian`, `jam_kejadian`, `jenis_bahan`, `fasa`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_frekuensi_kejadian`
+-- Table structure for table `sikat_frekuensi_kejadian`
 --
 
 CREATE TABLE `sikat_frekuensi_kejadian` (
@@ -90,7 +116,7 @@ CREATE TABLE `sikat_frekuensi_kejadian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_frekuensi_kejadian`
+-- Dumping data for table `sikat_frekuensi_kejadian`
 --
 
 INSERT INTO `sikat_frekuensi_kejadian` (`id`, `nama`, `deskripsi`) VALUES
@@ -103,7 +129,7 @@ INSERT INTO `sikat_frekuensi_kejadian` (`id`, `nama`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_ikp`
+-- Table structure for table `sikat_ikp`
 --
 
 CREATE TABLE `sikat_ikp` (
@@ -129,7 +155,7 @@ CREATE TABLE `sikat_ikp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_ikp`
+-- Dumping data for table `sikat_ikp`
 --
 
 INSERT INTO `sikat_ikp` (`tgl_kejadian`, `jam_kejadian`, `no_rawat`, `pertama_melaporkan`, `unit_penyebab`, `kejadian_sebelumnya`, `pencegahan_terulang`, `nm_pembuat`, `tgl_terima`, `nm_penerima`, `grading_risiko`, `created_date`, `jenis_insiden`, `nama_insiden`, `skor_dampak`, `tipe_insiden`, `subtipe_insiden`, `frekuensi_kejadian`, `tindakan_oleh`) VALUES
@@ -455,7 +481,7 @@ INSERT INTO `sikat_ikp` (`tgl_kejadian`, `jam_kejadian`, `no_rawat`, `pertama_me
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_ikp_inves`
+-- Table structure for table `sikat_ikp_inves`
 --
 
 CREATE TABLE `sikat_ikp_inves` (
@@ -475,7 +501,7 @@ CREATE TABLE `sikat_ikp_inves` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_ikp_inves`
+-- Dumping data for table `sikat_ikp_inves`
 --
 
 INSERT INTO `sikat_ikp_inves` (`tgl_kejadian`, `jam_kejadian`, `no_rawat`, `penyebab_langsung`, `latar_belakang`, `rekomendasi`, `tindakan_akan`, `tgl_mulai`, `tgl_selesai`, `penanggung_jawab`, `lengkap`, `inves_lanjut`, `grading_risiko`) VALUES
@@ -585,7 +611,7 @@ INSERT INTO `sikat_ikp_inves` (`tgl_kejadian`, `jam_kejadian`, `no_rawat`, `peny
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_jenis_insiden`
+-- Table structure for table `sikat_jenis_insiden`
 --
 
 CREATE TABLE `sikat_jenis_insiden` (
@@ -595,7 +621,7 @@ CREATE TABLE `sikat_jenis_insiden` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_jenis_insiden`
+-- Dumping data for table `sikat_jenis_insiden`
 --
 
 INSERT INTO `sikat_jenis_insiden` (`id`, `nama`, `deskripsi`) VALUES
@@ -608,7 +634,7 @@ INSERT INTO `sikat_jenis_insiden` (`id`, `nama`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_k3rs`
+-- Table structure for table `sikat_k3rs`
 --
 
 CREATE TABLE `sikat_k3rs` (
@@ -627,7 +653,7 @@ CREATE TABLE `sikat_k3rs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_k3rs`
+-- Dumping data for table `sikat_k3rs`
 --
 
 INSERT INTO `sikat_k3rs` (`tgl_kejadian`, `jam_kejadian`, `no_rkm_medis`, `lokasi`, `pekerjaan`, `kronologi`, `kerusakan_aset`, `cidera`, `nm_saksi`, `penanganan`, `nm_pelapor`, `penanggung_jawab`) VALUES
@@ -653,7 +679,7 @@ INSERT INTO `sikat_k3rs` (`tgl_kejadian`, `jam_kejadian`, `no_rkm_medis`, `lokas
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_k3rs_inves`
+-- Table structure for table `sikat_k3rs_inves`
 --
 
 CREATE TABLE `sikat_k3rs_inves` (
@@ -695,7 +721,7 @@ CREATE TABLE `sikat_k3rs_inves` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_k3rs_inves`
+-- Dumping data for table `sikat_k3rs_inves`
 --
 
 INSERT INTO `sikat_k3rs_inves` (`tgl_kejadian`, `jam_kejadian`, `no_rkm_medis`, `kondisi`, `tindakan`, `pribadi`, `kurang_prosedur`, `kurang_sarana`, `kurang_taat`, `rencana_tindakan1`, `rencana_tindakan2`, `rencana_tindakan3`, `rencana_tindakan4`, `rencana_tindakan5`, `rencana_tindakan6`, `rencana_tindakan7`, `target1`, `target2`, `target3`, `target4`, `target5`, `target6`, `target7`, `wewenang1`, `wewenang2`, `wewenang3`, `wewenang4`, `wewenang5`, `wewenang6`, `wewenang7`, `nm_penanggung`, `nm_kasir`, `tgl_paraf_saksi`, `tgl_paraf_penanggung`, `tgl_paraf_kasir`) VALUES
@@ -721,7 +747,7 @@ INSERT INTO `sikat_k3rs_inves` (`tgl_kejadian`, `jam_kejadian`, `no_rkm_medis`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_lembar_pdsa`
+-- Table structure for table `sikat_lembar_pdsa`
 --
 
 CREATE TABLE `sikat_lembar_pdsa` (
@@ -748,16 +774,17 @@ CREATE TABLE `sikat_lembar_pdsa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sikat_lembar_pdsa`
+-- Dumping data for table `sikat_lembar_pdsa`
 --
 
 INSERT INTO `sikat_lembar_pdsa` (`ID`, `JUDUL_PROYEK`, `KETUA_TIM`, `ANGGOTA_1`, `ANGGOTA_2`, `ANGGOTA_3`, `JABATAN_1`, `JABATAN_2`, `JABATAN_3`, `BENEFIT`, `MASALAH`, `TUJUAN`, `UKURAN`, `PERBAIKAN`, `PERIODE_WAKTU`, `TANGGAL_MULAI`, `TANGGAL_SELESAI`, `ANGGARAN`, `CREATE_DATE`, `UPDATE_DATE`) VALUES
-(3, 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'struktur', 'test', 'test', '2024-11-12', '2024-11-19', 'test', '2024-11-12 20:24:00', NULL);
+(64, 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'proses', 'a', 'a', '2024-11-24', '2024-11-30', 'a', '2024-11-24 04:54:01', NULL),
+(65, 'a', 'a', 'a', 'a', 'a', 's', 'a', 'a', 'a', 'a', 'a', 'struktur', 'a', 'a', '2024-11-24', '2024-11-28', 'a', '2024-11-24 05:02:13', '2024-11-24 05:22:26');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_nama_insiden`
+-- Table structure for table `sikat_nama_insiden`
 --
 
 CREATE TABLE `sikat_nama_insiden` (
@@ -768,7 +795,7 @@ CREATE TABLE `sikat_nama_insiden` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_nama_insiden`
+-- Dumping data for table `sikat_nama_insiden`
 --
 
 INSERT INTO `sikat_nama_insiden` (`id`, `jenis_insiden`, `nama`, `deskripsi`) VALUES
@@ -911,7 +938,7 @@ INSERT INTO `sikat_nama_insiden` (`id`, `jenis_insiden`, `nama`, `deskripsi`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_pmkp`
+-- Table structure for table `sikat_pmkp`
 --
 
 CREATE TABLE `sikat_pmkp` (
@@ -924,7 +951,7 @@ CREATE TABLE `sikat_pmkp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_pmkp`
+-- Dumping data for table `sikat_pmkp`
 --
 
 INSERT INTO `sikat_pmkp` (`id`, `type`, `year`, `month`, `dailyData`, `monthlyData`) VALUES
@@ -1522,12 +1549,14 @@ INSERT INTO `sikat_pmkp` (`id`, `type`, `year`, `month`, `dailyData`, `monthlyDa
 (583, 'igd', 2020, 2, '[[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]', '[{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"percent\"},{\"numerator\":744,\"denumerator\":31,\"hasil\":24,\"analisa\":\"\",\"type_hasil\":\"jam\"},{\"numerator\":16,\"denumerator\":17,\"hasil\":94.1176,\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":1,\"denumerator\":\"\",\"hasil\":100,\"analisa\":\"\",\"type_hasil\":\"ya/tidak\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"menit\"},{\"numerator\":50,\"denumerator\":50,\"hasil\":100,\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"percent\"},{\"numerator\":929,\"denumerator\":929,\"hasil\":100,\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"menit\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"percent\"},{\"numerator\":1,\"denumerator\":\"\",\"hasil\":100,\"analisa\":\"\",\"type_hasil\":\"ya/tidak\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"menit\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"disable_hasil\":true,\"type_hasil\":\"percent\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"type_hasil\":\"percent\"}]'),
 (4483, 'rawatJalan', 2024, 10, '[[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]', '[{\"numerator\":0,\"denumerator\":0,\"hasil\":0,\"analisa\":\"test1234\",\"type_hasil\":\"percent\",\"disable_hasil\":true},{\"numerator\":0,\"denumerator\":0,\"hasil\":0,\"analisa\":\"\",\"type_hasil\":\"percent\",\"disable_hasil\":true},{\"numerator\":10,\"denumerator\":\"\",\"hasil\":100,\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":0,\"denumerator\":0,\"hasil\":0,\"analisa\":\"\",\"type_hasil\":\"percent\",\"disable_hasil\":true}]'),
 (4484, 'rawatJalan', 2024, 6, '[[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]', '[{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":0,\"denumerator\":108,\"hasil\":0,\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":\"\",\"denumerator\":\"\",\"hasil\":\"\",\"analisa\":\"\",\"type_hasil\":\"percent\"}]'),
-(4500, 'rawatJalan', 2024, 11, '[[10,10,10,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[1,1,1,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[2,2,2,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[3,3,3,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]', '[{\"numerator\":30,\"denumerator\":3,\"hasil\":1000},{\"numerator\":0,\"denumerator\":0,\"hasil\":0},{\"numerator\":6,\"denumerator\":9,\"hasil\":66.6667}]');
+(4500, 'rawatJalan', 2024, 11, '[[10,10,10,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[1,1,1,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[10,9,8,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[20,20,20,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[2,2,2,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[3,3,3,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]', '[{\"numerator\":30,\"denumerator\":3,\"hasil\":1000,\"type_hasil\":\"percent\"},{\"numerator\":30,\"denumerator\":3,\"hasil\":10,\"type_hasil\":\"percent\"},{\"numerator\":27,\"denumerator\":60,\"hasil\":0.45,\"type_hasil\":\"percent\"},{\"numerator\":6,\"denumerator\":9,\"hasil\":0.6667,\"analisa\":\"\",\"type_hasil\":\"percent\"}]'),
+(4501, '2024', 11, 0, '[{\"numerator\":30,\"denumerator\":3,\"hasil\":1000},{\"numerator\":30,\"denumerator\":3,\"hasil\":10},{\"numerator\":27,\"denumerator\":0,\"hasil\":100},{\"numerator\":6,\"denumerator\":9,\"hasil\":0.6667,\"analisa\":\"\"}]', ''),
+(4502, 'rawatJalan', 2024, 1, '[[10,10,10,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[1,1,1,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[20,20,20,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[2,2,2,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[30,30,30,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],[3,3,3,\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]]', '[{\"numerator\":80,\"denumerator\":80,\"hasil\":100,\"analisa\":\"\",\"type_hasil\":\"percent\"},{\"numerator\":30,\"denumerator\":3,\"hasil\":1000},{\"numerator\":60,\"denumerator\":6,\"hasil\":1000},{\"numerator\":90,\"denumerator\":9,\"hasil\":1000}]');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_ppi`
+-- Table structure for table `sikat_ppi`
 --
 
 CREATE TABLE `sikat_ppi` (
@@ -1542,7 +1571,7 @@ CREATE TABLE `sikat_ppi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_ppi`
+-- Dumping data for table `sikat_ppi`
 --
 
 INSERT INTO `sikat_ppi` (`tanggal`, `no_rawat`, `tgl_sampel`, `tgl_kirim`, `tgl_hasil`, `MDR`, `DIFTERI`, `KONSENTRAT`) VALUES
@@ -29988,7 +30017,7 @@ INSERT INTO `sikat_ppi` (`tanggal`, `no_rawat`, `tgl_sampel`, `tgl_kirim`, `tgl_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_profile_dimensi_mutu`
+-- Table structure for table `sikat_profile_dimensi_mutu`
 --
 
 CREATE TABLE `sikat_profile_dimensi_mutu` (
@@ -29999,7 +30028,7 @@ CREATE TABLE `sikat_profile_dimensi_mutu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sikat_profile_dimensi_mutu`
+-- Dumping data for table `sikat_profile_dimensi_mutu`
 --
 
 INSERT INTO `sikat_profile_dimensi_mutu` (`id`, `name`, `create_date`, `update_date`) VALUES
@@ -30014,7 +30043,7 @@ INSERT INTO `sikat_profile_dimensi_mutu` (`id`, `name`, `create_date`, `update_d
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_profile_indikator`
+-- Table structure for table `sikat_profile_indikator`
 --
 
 CREATE TABLE `sikat_profile_indikator` (
@@ -30035,7 +30064,7 @@ CREATE TABLE `sikat_profile_indikator` (
   `ACC_DATE` varchar(50) NOT NULL,
   `TUJUAN` varchar(100) NOT NULL,
   `DEFINISI_PEMIKIRAN` text NOT NULL,
-  `TIPE_INDIKATOR` int(11) NOT NULL,
+  `TIPE_INDIKATOR` varchar(50) NOT NULL,
   `UKURAN_INDIKATOR` varchar(100) NOT NULL,
   `NUMERATOR` text NOT NULL,
   `DENUMERATOR` text NOT NULL,
@@ -30062,533 +30091,534 @@ CREATE TABLE `sikat_profile_indikator` (
   `isIMPRs` int(11) NOT NULL,
   `isIMPUnit` int(11) NOT NULL,
   `CREATE_DATE` date DEFAULT NULL,
+  `REVIEW_ULANG` text NOT NULL,
   `UPDATE_DATE` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sikat_profile_indikator`
+-- Dumping data for table `sikat_profile_indikator`
 --
 
-INSERT INTO `sikat_profile_indikator` (`ID`, `LEVEL`, `JUDUL_INDIKATOR`, `TAHUN`, `ISI_POPULASI`, `USER_ACC`, `DASAR_PEMIKIRAN`, `IS_EFEKTIF`, `IS_EFISIEN`, `IS_TEPAT_WAKTU`, `IS_AMAN`, `IS_ADIL`, `IS_BERPASIEN`, `IS_INTEGRASI`, `ACC_DATE`, `TUJUAN`, `DEFINISI_PEMIKIRAN`, `TIPE_INDIKATOR`, `UKURAN_INDIKATOR`, `NUMERATOR`, `DENUMERATOR`, `KRITERIA`, `FORMULA`, `SUMBER_DATA`, `FREK_PENGUMPULAN`, `PERIODE_PELAPORAN`, `PERIODE_ANALISA`, `METODE_PENGUMPULAN`, `POPULASI_SAMPEL`, `ISI_SAMPLE`, `RENCANA_ANALISIS`, `INSTRUMEN_PENGAMBILAN`, `PENANGGUNG_JAWAB`, `TYPE`, `TARGET_PENCAPAIAN`, `STATUS_ACC`, `PROCESS_TYPE`, `DAILY_MONTHLY_SPECIAL`, `ISI_INSTRUMEN`, `BESAR_SAMPEL`, `isINM`, `isIMPRs`, `isIMPUnit`, `CREATE_DATE`, `UPDATE_DATE`) VALUES
-(1, 0, 'Jumlah pasien yang mendapat pertolongan life saving', '2023', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(2, 0, 'Jumlah pasien yang membutuhkan penanganan life saving', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(3, 0, 'Jumlah Pemberi pelayanan kegawatdaruratan yang bersertifikat BLS/GELS/ALS/BTCLS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(4, 0, 'Jumlah Pemberi pelayanan kegawatdaruratan di UGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(5, 0, 'Jumlah waktu yang diperlukan sejak kedatangan pasien sampai mendapat pelayanan dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(6, 0, 'Jumlah pasien yang disampling (min n=50)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(7, 0, 'Jumlah pasien yang meninggal <24 jam sejak pasien datang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(8, 0, 'Jumlah seluruh pasien di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(9, 0, 'Jumlah pasien observasi di UGD > 6 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(10, 0, 'Jumlah pasien jatuh di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(11, 0, 'Jumlah pasien yang pulang paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(12, 0, 'Jumlah waktu yang diperlukan sejak kedatangan pasien (kegawatan pada geriatri) sampai mendapat pelayanan dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(13, 0, 'Jumlah pasien geriatri di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(14, 0, 'Jumlah hari ada penumpukan pasien di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(15, 0, 'Jumlah hari dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(16, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(17, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(18, 0, 'Jumlah pasien yang puas terhadap pelayanan Gawat Darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(19, 0, 'Jumlah seluruh pasien di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(20, 1, 'Jumlah pelayanan rawat jalan spesialistik yang buka sesuai jadwal yang sudah di tentukan test', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '2024-11-14'),
-(21, 1, 'Jumlah pelayanan rawat jalan spesialistik di hari tersebut', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '2024-11-02'),
-(22, 2, 'Jumlah pasien rawat jalan yang waktu tunggu <= 60 menit', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '2024-11-02'),
-(23, 2, 'Jumlah pasien rawat jalan yang diobservasi', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '2024-11-02'),
-(24, 4, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '2024-11-02'),
-(25, 4, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '2024-11-02'),
-(38, 0, 'Jumlah pasien yang divisite dokter pada pukul 06.00-14.00', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(39, 0, 'Jumlah seluruh pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(40, 0, 'Jumlah pasien rawat inap yang terkena infeksi nosokomial dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(41, 0, 'Jumlah pasien rawat inap dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(42, 0, 'Jumlah kejadian kematian pasien rawat inap > 48 jam dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(43, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(44, 0, 'Jumlah pasien pulang paksa dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(45, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(46, 0, 'Jumlah kejadian reaksi transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(47, 0, 'Jumlah seluruh pasien yang mendapat transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(48, 0, 'Jumlah pasien rawat inap dengan assessment awal medis dan keperawatan lengkap di EMR dalam waktu 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(49, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(50, 0, 'Jumlah instruksi DPJP yang telah dilakukan oleh petugas medis dan paramedis (Pelaksanaannya maksimal 1 Shift)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(51, 0, 'Jumlah seluruh instruksi DPJP yang harus dilakukan sesuai dengan waktunya', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(52, 0, 'Jumlah pasien rawat inap yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(53, 0, 'Jumlah seluruh Pasien Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(54, 0, 'Jumlah pasien yang divisite dokter pada pukul 06.00-14.00', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(55, 0, 'Jumlah seluruh pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(56, 0, 'Jumlah pasien rawat inap yang terkena infeksi nosokomial dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(57, 0, 'Jumlah pasien rawat inap dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(58, 0, 'Jumlah kejadian kematian pasien rawat inap > 48 jam dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(59, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(60, 0, 'Jumlah pasien pulang paksa dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(61, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(62, 0, 'Jumlah kejadian reaksi transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(63, 0, 'Jumlah seluruh pasien yang mendapat transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(64, 0, 'Jumlah pasien rawat inap dengan assessment awal medis dan keperawatan lengkap di EMR dalam waktu 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(65, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(66, 0, 'Jumlah instruksi DPJP yang telah dilakukan oleh petugas medis dan paramedis (Pelaksanaannya maksimal 1 Shift)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(67, 0, 'Jumlah seluruh instruksi DPJP yang harus dilakukan sesuai dengan waktunya', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(68, 0, 'Jumlah pasien rawat inap yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(69, 0, 'Jumlah seluruh Pasien Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(70, 0, 'Waktu tunggu operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(71, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(72, 0, 'Kejadian Kematian di meja Operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(73, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(74, 0, 'Tidak adanya kejadian operasi salah Sisi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(75, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(76, 0, 'Tidak adanya kejadian Operasi salah Orang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(77, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(78, 0, 'Tidak adanya kejadian salah tindakan pada operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(79, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(80, 0, 'Tidak adanya kejadian tertinggalnya benda asing/lain pada tubuh pasien setelah operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(81, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(82, 0, 'Komplikasi anestesi karena overdosis, reaksi anestesi, dan salah penempatan anestesi endotracheal tube', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(83, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(84, 0, 'Penundaan Operasi Elektif', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(85, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(86, 0, 'Tersedianya pelayanan anastesi sedasi moderate 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(87, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(88, 0, 'Kejadian diskrepansi diagnosis pre dan post operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(89, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(90, 0, 'Konversi tindakan anastesi dari lokal , Regional menjadi general', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(91, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(92, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(93, 0, 'Jumlah pemberi pelayanan yang di observasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(94, 0, 'Jumlah pasien perina yang terkena infeksi nosokomial dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(95, 0, 'Jumlah pasien Perina dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(96, 0, 'Jumlah pasien pulang paksa dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(97, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(98, 0, 'Jumlah pasien dengan BBLR yang mengalami peningkatan BB (25-30g/hr) dan pulang sesuai dengan standard kenaikan BB', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(99, 0, 'Jumlah seluruh pasien yang dirawat dengan BBLR dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(100, 0, 'Jumlah pasien dengan assessment awal lengkap < 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(101, 0, 'Jumlah pasien baru di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(102, 0, 'Jumlah pasien dengan perbaikan saturasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(103, 0, 'Jumlah seluruh pasien yang menggunakan CPAP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(104, 0, 'Jumlah pasien yang kembali keperawatan intensif dengan kasus yang sama < 72 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(105, 0, 'Jumlah seluruh pasien yang di rawat di perawatan intensif dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(106, 0, 'Jumlah kasus infeksi Ventilator Associated Pneumonia (VAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(107, 0, 'Jumlah pasien yang dirawat dengan ventilator > 48 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(108, 0, 'Jumlah pasien yang menerima dosis obat high alert yang tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(109, 0, 'Jumlah seluruh pasien yang menerima obat high alert', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(110, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(111, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(112, 0, 'Jumlah visite dokter spesialis antara jam 08.00 sampai dengan 14.00 yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(113, 0, 'Jumlah pelaksanaan visite dokter spesialis yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(114, 0, 'Jumlah kejadian kematian pasien ruang Intensif < 48 jam dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(115, 0, 'Jumlah seluruh pasien ruang Intensif dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(116, 0, 'Jumlah Ibu Meninggal Karena Perdarahan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(117, 0, 'Jumlah Ibu Melahirkan Dengan Perdarahan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(118, 0, 'Jumlah Ibu Meninggal Karena Pre eklampsia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(119, 0, 'Jumlah Ibu Dengan Pre eklampsia di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(120, 0, 'Jumlah Ibu melahirkan yang meninggal karena sepsis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(121, 0, 'Jumlah Ibu melahirkan dengan sepsis di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(122, 0, 'Jumlah bayi dengan asfiksia yang berhasil ditangani', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(123, 0, 'Jumlah bayi dengan asfiksia di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(124, 0, 'Jumlah persalinan dengan sectio caesaria di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(125, 0, 'Jumlah seluruh persalinan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(126, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(127, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(128, 0, 'Jumlah pasien yang mendapatkan tindakan sectio cesaria < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(129, 0, 'Jumlah pasien yang diputuskan tindakan sectio cesaria emergency', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(130, 0, 'Jumlah Instruksi DPJP yang dilaksanakan secara tepat waktu (Pelaksanaannya maksimal dalam 1 Shift)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(131, 0, 'Jumlah Seluruh Instruksi DPJP dalam 1 Shift', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(132, 0, 'Jumlah kumulatif waktu tunggu thorax foto', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(133, 0, 'Jumlah seluruh pemeriksaan thorax foto di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(134, 0, 'Jumlah hasil yang dikirim dalam bentuk soft file dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(135, 0, 'jumlah pemeriksaan foto rontgen dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(136, 0, 'Jumlah Kesalahan Penyerahan Hasil Radiologi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(137, 0, 'Jumlah Pemeriksaan Radiologi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(138, 0, 'Jumlah kumulatif waktu tunggu foto rontgen cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(139, 0, 'Jumlah seluruh pemeriksaan foto rontgen cito dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(140, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(141, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(142, 0, 'Jumlah kumulatif waktu tunggu pelayanan laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(143, 0, 'Jumlah pasien yang disurvey di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(144, 0, 'jumlah seluruh pasien yang diperiksa di hari tersebut dikurangi jumlah penyerahan laboratorium salah orang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(145, 0, 'Jumlah pasien pemeriksaan laboratorium di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(146, 0, 'jumlah seluruh spesimen yang diperiksa di hari tersebut dikurangi jumlah spesimen yang tertukar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(147, 0, 'jumlah spesimen di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(148, 0, 'Jumlah kumulatif waktu tunggu pelayanan laboratorium cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(149, 0, 'Jumlah pemeriksaan cito di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(150, 0, 'Semua hasil laboratorium kritis yang dilaporkan < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(151, 0, 'Jumlah semua hasil laboratorium kritis di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(152, 0, 'Jumlah kesesuaian pemeriksaan baku mutu eksternal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(153, 0, 'Jumlah pemeriksaan baku mutu eksternal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(154, 0, 'Jumlah pasien laboratorium yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(155, 0, 'Jumlah seluruh Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(156, 0, 'Jumlah Kumulatif Waktu tunggu hasil pemeriksaan laboratorium yang dirujuk', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(157, 0, 'jumlah sampel yang dirujuk', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(158, 0, 'Jumlah kumulatif waktu tunggu obat jadi pasien yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(159, 0, 'Jumlah pasien yang disurvey di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(160, 0, 'Jumlah kumulatif waktu tunggu obat racikan pasien yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(161, 0, 'Jumlah pasien yang disurvey di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(162, 0, 'Jumlah Kesalahan pemberian obat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(163, 0, 'Jumlah seluruh permintaan resep', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(164, 0, 'Jumlah pasien yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(165, 0, 'Jumlah seluruh pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(166, 0, 'Jumlah resep polifamasi yang dikaji sesuai standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(167, 0, 'Jumlah seluruh resep polifamasi yang dikaji', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(168, 0, 'Jumlah pasien rawat inap yang disurvei yang mendapat makanan tepat waktu dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(169, 0, 'Jumlah seluruh pasien rawat inap yang disurvei', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(170, 0, 'Jumlah pemberian makan yang sesuai dengan jenis diet', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(171, 0, 'Jumlah pemberian makan pasien di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(172, 0, 'Jumlah Pasien Yang Menyisakan Makan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(173, 0, 'Jumlah Pasien Rawat Inap Yang Bisa Makan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(174, 0, 'Jumlah pelaksanaan edukasi kelompok (penyuluhan gizi)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(175, 0, 'Jumlah jadwal penyuluhan kelompok yang telah ditetapkan selama satu TW', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(176, 0, 'Jumlah pasien yang di survey dikurangi jumlah pasien yang tidak puas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(177, 0, 'Jumlah pasien yang di survey dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(178, 0, 'Jumlah rekam medis unit rawat inap yang diisi lengkap 24 jam setelah selesai pelayanan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(179, 0, 'Jumlah rekam medis unit rawat inap di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(180, 0, 'Jumlah rekam medis unit rawat jalan yang diisi lengkap 24 jam setelah selesai pelayanan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(181, 0, 'Jumlah rekam medis unit rawat jalan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(182, 0, 'Jumlah rekam medis unit IGD yang diisi lengkap 24 jam setelah selesai pelayanan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(183, 0, 'Jumlah rekam medis unit IGD di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(184, 0, 'Jumlah pasien yang mendapat informasi jelas dan Informed consent yang diisi lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(185, 0, 'Jumlah pasien yang mendapat tindakan medis di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(186, 0, 'Jumlah rekam medis yang hilang di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(187, 0, 'Jumlah berkas rekam medis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(188, 0, 'Jumlah berkas rekam medis in aktif yang dipilah', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(189, 0, 'Jumlah target rekam medis inaktif 150 berkas rm /minggu', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(190, 0, 'Jumlah berkas rekam medis yg discan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(191, 0, 'Jumlah Berkas Rekam Medis Manual yang tersedia pada hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(192, 0, 'Jumlah limbah padat yang dikelola sesuai dengan Standar Prosedur Operasional', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(193, 0, 'Jumlah proses pengolahan limbah padat yang diamati di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(194, 0, 'Hasil pengukuran pencahayaan dan kelembaban disesuaikan dengan baku mutu', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(195, 0, 'Jumlah seluruh pengukuran pencahayaan dan kelembaban ruang di rumah sakit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(196, 0, 'Jumlah seluruh alat yang disterilkan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(197, 0, 'Jumlah alat steril yang didistribusikan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(198, 0, 'Jumlah alat reuse yang ditandai dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(199, 0, 'Jumlah seluruh alat reuse yang disterilkan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(200, 0, 'No data available for Linen', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(201, 0, 'Jumlah laporan kerusakan alat yang ditanggapi ? 15 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(202, 0, 'Jumlah laporan kerusakan alat hari ini tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(203, 0, 'Pelaksanaan Standar Penanganan Tertusuk Jarum', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(204, 0, 'Jumlah seluruh kejadian tertusuk jarum', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(205, 0, 'Pelaksanaan Standar Penanganan Kecelakaan Kerja Terkait Fasilitas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(206, 0, 'Jumlah seluruh kejadian kecelakaan kerja', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(207, 0, 'Ketepatan Pengecekan Sarana Proteksi Kebakaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20');
-INSERT INTO `sikat_profile_indikator` (`ID`, `LEVEL`, `JUDUL_INDIKATOR`, `TAHUN`, `ISI_POPULASI`, `USER_ACC`, `DASAR_PEMIKIRAN`, `IS_EFEKTIF`, `IS_EFISIEN`, `IS_TEPAT_WAKTU`, `IS_AMAN`, `IS_ADIL`, `IS_BERPASIEN`, `IS_INTEGRASI`, `ACC_DATE`, `TUJUAN`, `DEFINISI_PEMIKIRAN`, `TIPE_INDIKATOR`, `UKURAN_INDIKATOR`, `NUMERATOR`, `DENUMERATOR`, `KRITERIA`, `FORMULA`, `SUMBER_DATA`, `FREK_PENGUMPULAN`, `PERIODE_PELAPORAN`, `PERIODE_ANALISA`, `METODE_PENGUMPULAN`, `POPULASI_SAMPEL`, `ISI_SAMPLE`, `RENCANA_ANALISIS`, `INSTRUMEN_PENGAMBILAN`, `PENANGGUNG_JAWAB`, `TYPE`, `TARGET_PENCAPAIAN`, `STATUS_ACC`, `PROCESS_TYPE`, `DAILY_MONTHLY_SPECIAL`, `ISI_INSTRUMEN`, `BESAR_SAMPEL`, `isINM`, `isIMPRs`, `isIMPUnit`, `CREATE_DATE`, `UPDATE_DATE`) VALUES
-(208, 0, 'Jumlah sarana prasarana yang dilakukan pengecekan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(209, 0, 'Ketersediaan TIM penanggulangan Bencana', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(210, 0, 'TIM penanggulangan Bencana', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(211, 0, 'Kecepatan waktu pemberian informasi tentang tagihan pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(212, 0, 'jumlah pasien rawat inap yang pulang di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(213, 0, 'Kejadian bad debt pada pelayanan rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(214, 0, 'Jumlah pasien rawat jalan yang berobat di tanggal tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(215, 0, 'Kesesuaian antara pasien yang bayar dengan yang seharusnya membayar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(216, 0, 'Jumlah pasien rawat jalan (pembayaran umum) di hari terebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(217, 0, 'Kesesuaian input dari unit dengan billing pembayaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(218, 0, 'Jumlah semua billingan pembayaran dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(219, 0, 'Presentase bilingan yang belum close dihari yang sama', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(220, 0, 'Jumlah pasien rawat jalan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(221, 0, 'Jumlah pasien dengan penginputan data simRS lengkap dan tepat di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(222, 0, 'Jumlah pasien yang diinput di simRS di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(223, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(224, 0, 'Jumlah pemberi pelayanan yang di observasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(225, 0, 'Jumlah Pasien yang terdaftar pada pukul 06.30 - 08.30', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(226, 0, 'Jumlah pasien yang telah ditentukan sampai pukul 08.30 (40 Pasien/hari)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(227, 0, 'jumlah pasien yang dilayani < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(228, 0, 'jumlah pasien yang dilayani di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(229, 0, 'Jumlah pasien yang terinfeksi plebitis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(230, 0, 'Jumlah hari pemasangan infuse perifer', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(231, 0, 'Jumlah pasien yang terinfeksi saluran nafas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(232, 0, 'Jumlah hari tirah baring', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(233, 0, 'Jumlah pasien yang terinfeksi kateter urine', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(234, 0, 'Jumlah hari terpasang kateter urine', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(235, 0, 'Jumlah pasien yang terinfeksi IDO', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(236, 0, 'Jumlah pasien yang dioperasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(237, 0, 'Jumlah petugas yang patuh menggunakan APD sesuai indikasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(238, 0, 'Jumlah seluruh petugas yang terindikasi menggunakan APD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(239, 0, 'Jumlah kegiatan cuci tangan yang dilakukan dengan tepat dan benar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(240, 0, 'Jumlah peluang kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(241, 0, 'Jumlah pasien yang mengalami infeksi VAP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(242, 0, 'Jumlah hari pemasangan ventilator', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(243, 0, 'Jumlah pasien yang terinfeksi clabsi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(244, 0, 'Jumlah hari pemasangan Central Vena line', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(245, 0, 'Jumlah pasien yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(246, 0, 'Jumlah seluruh Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(247, 0, 'Jumlah hasil laboratorium kritis pasien yang dilaporkan < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(248, 0, 'Jumlah hasil laboratorium kritis pasien dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(249, 0, 'Jumlah obat yang diberikan tepat sesuai ketentuan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(250, 0, 'Jumlah seluruh pemberian obat high alert yang dipantau', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(251, 0, 'Seluruh lembar surgery safety checklist yang ditulis lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(252, 0, 'Seluruh pasien yang mendapat pembedahan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(253, 0, 'Jumlah tindakan kebersihan tangan tenaga medis yang dilakukan dengan benar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(254, 0, 'Jumlah total peluang kebersihan tangan tenaga medis yang seharusnya dilakukan dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(255, 0, 'Jumlah pasien rawat inap beresiko tinggi jatuh yang mendapatkan ketiga upaya pencegahan risiko jatuh', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(256, 0, 'Jumlah pasien rawat inap berisiko tinggi jatuh yang diobservasi', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-30'),
-(257, 0, 'Jumlah pasien jatuh dalam 1 bulan', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-30'),
-(258, 0, 'Jumlah pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(259, 0, 'Angka di Lakukan Kredensial Perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(260, 0, 'Jumlah Perawat dan Bidan yang akan di lakukan Kredensial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(261, 0, 'Kelengkapan Asuhan Keperawatan Berbasis EMR', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(262, 0, 'Jumlah Kelengkapan Status EMR yang di Isi Pada setiap Unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(263, 0, 'Angka Pelanggaran Etik, disiplin perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(264, 0, 'Jumlah Perawat dan Bidan yang Melakukan Pelanggaran Etik, disiplin Perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(265, 0, 'Jumlah pemakaian antibiotik lini ketiga pada pasien rawat inap yang sesuai prosedur', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '29', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(266, 0, 'Jumlah seluruh pemakaian antibiotik lini ketiga pada pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '29', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(267, 0, 'Jumlah pasien TB rujukan yang tertangani', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '32', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(268, 0, 'Jumlah seluruh pasien TB rujukan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '32', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(269, 0, 'Jumlah pasien bersalin di RSUD Sawah Besar yang mendapatkan pelayanan KB pasca Salin', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(270, 0, 'Jumlah seluruh pasien yang bersalin di RSUD Sawah Besar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(271, 0, 'Jumlah seluruh pasien yang sudah diberi konseling KB dan terdokumentasi pada Rekam Medis pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(272, 0, 'Jumlah seluruh pasien yang berkunjung ke RSUD Sawah Besar dengan kriteria Ibu hamil TM 3 dan Ibu nifas (yang belum menjadi Aseptor KB)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(273, 0, 'Jumlah barang aset yang baru diterima dan telah diberi label nomor inventaris', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(274, 0, 'Jumlah barang aset yang baru diterima', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(275, 0, 'Jumlah pasien stunting wasting yang mengalami kenaikan status gizi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(276, 0, 'Jumlah seluruh pasien stunting wasting yang ada di rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(277, 0, 'Jumlah pasien rujukan dari PKM Sawah Besar yang mendapatkan PKMK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(278, 0, 'Jumlah pasien rujukan dari PKM Sawah Besar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(279, 0, 'Jumlah berkas klaim rawat inap pasien BPJS Kesehatan dari setiap unit yang lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(280, 0, 'Jumlah berkas klaim rawat inap pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(281, 0, 'Jumlah berkas klaim rawat jalan pasien BPJS Kesehatan dari setiap unit yang lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(282, 0, 'Jumlah berkas klaim rawat jalan pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(283, 0, 'Jumlah berkas pengajuan klaim Rawat Jalan & Rawat Inap yang dipending oleh BPJS yang lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(284, 0, 'Jumlah berkas pengajuan klaim Rawat Jalan & Rawat Inap yang dipending oleh BPJS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(285, 0, 'Jumlah pasien beresiko HIV/AIDS yang dilakukan skrining HIV/AIDS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(286, 0, 'Jumlah seluruh pasien beresiko HIV/AIDS di wilayah RS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(287, 0, 'Jumlah promkes yang dilakukan dan terdokumentasi selama 3 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(288, 0, 'Jumlah promkes yang ditargetkan selama 3 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(289, 0, 'Jumlah laporan kerusakan Perangkat IT yang ditanggapi ? 15 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '40', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(290, 0, 'Jumlah laporan kerusakan Perangkat IT hari ini tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '40', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(291, 0, 'Kemampuan menangani life saving anak dan dewasa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(292, 0, 'Pemberi pelayanan kegawat daruratan yang bersertifikat BLS/PPGD/GELS/ALS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(293, 0, 'Waktu tanggap Pelayanan Dokter di Gawat Darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '<= 5 menit', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(294, 0, 'Kematian Pasien <= 24 jam di Gawat Darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '<= 0,2 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(295, 0, 'Lama observasi pasien di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '5 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(296, 0, 'Jumlah pasien jatuh di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(297, 0, 'Kejadian pulang paksa di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '<= 5 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(298, 0, 'Respon time penanganan kegawatdaruratan pasien geriatri di gawat darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5 menit', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(299, 0, 'Tidak ada Penumpukan pasien di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(300, 0, 'Ketepatan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(301, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(302, 31, 'Buka pelayanan sesuai ketentuan test', '2024', '', 'admin', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', 0, 'Presentase', 'test', 'test', 'test', 'test', 'Data Primer', '', 'Bulanan', 'Triwulan', 'Retrospektif', 'Probability Sampling', '', '', 'Lainnya', 'rawatJalan', 2, '100%', 1, 'rawatJalan', '', 'test', 'test ah', 1, 0, 0, '2024-10-20', '2024-11-14'),
-(303, 16, 'Waktu tunggu di Rawat Jalan', '2024', '', 'admin', 'TEST', 0, 1, 0, 0, 0, 0, 0, '', 'test', 't', 0, 'Presentase', '', '', 't', 't', 'Data Primer', '', 'Harian', 'Triwulan', 'Retrospektif', 'Probability Sampling', '', '', 'Formulir', 'rawatJalan', 2, '>= 80%', 1, 'rawatJalan', '', '', 't', 1, 0, 0, '2024-10-20', '2024-11-03'),
-(304, 15, 'Kepuasan Pelanggan di Rawat Jalan', '2024', '', 'admin', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Presentase', 'num', 'num', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Retrospektif', 'Non Probability Sampling', '', '', 'Formulir', 'rawatJalan', 2, '>= 90%', 1, 'rawatJalan', '', '', 't', 1, 1, 0, '2024-10-20', '2024-11-03'),
-(305, 9, 'Ketepatan identifikasi pasien', '2024', '', 'admin', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Waktu', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Retrospektif', 'Probability Sampling', '', '', 'EMR', 'rawatJalan', 2, '100%', 1, 'rawatJalan', '', '', 't', 1, 0, 0, '2024-10-20', '2024-11-02'),
-(306, 0, 'Kepatuhan Waktu Visite Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(307, 0, 'Angka kejadian infeksi nosokomial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1,5%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(308, 0, 'Kematian pasien > 48 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2,5%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(309, 0, 'Kejadian Pulang Paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(310, 0, 'Kejadian Reaksi infeksi setelah transfusi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,01%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(311, 0, 'Kelengkapan pengisian assessment awal sesudah masuk Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(312, 0, 'Ketepatan Pelaksanaan Instruksi DPJP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(313, 0, 'Ketepatan Identifikasi Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(314, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(315, 0, 'Kepatuhan Waktu Visite Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(316, 0, 'Angka kejadian infeksi nosokomial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1,5%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(317, 0, 'Kematian pasien > 48 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2,5%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(318, 0, 'Kejadian Pulang Paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(319, 0, 'Kejadian Reaksi infeksi setelah transfusi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,01%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(320, 0, 'Kelengkapan pengisian assessment awal sesudah masuk Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(321, 0, 'Ketepatan Pelaksanaan Instruksi DPJP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(322, 0, 'Ketepatan Identifikasi Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(323, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(324, 0, 'Waktu tunggu operasi elektif', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2 hari', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(325, 0, 'Kejadian kematian dimeja operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(326, 0, 'Tidak adanya kejadian operasi salah sisi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(327, 0, 'Tidak adanya kejadian operasi salah orang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(328, 0, 'Tidak adanya kejadian salah tindakan pada operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(329, 0, 'Tidak adanya kejadian tertinggalnya benda asing pada tubuh pasien setelah operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(330, 0, 'Komplikasi anastesi karena over dosis, reaksi anastesi dan salah penempatan endotracheal tube', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 6 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(331, 0, 'Penundaan Operasi Elektif', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(332, 0, 'Tersedianya pelayanan anastesi sedasi moderate 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(333, 0, 'Kejadian diskrepansi diagnosis pre dan post operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(334, 0, 'Konversi tindakan anastesi dari lokal menjadi general', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(335, 0, 'Ketepatan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(336, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(337, 0, 'Angka kejadian infeksi nosokomial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1,5 %', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(338, 0, 'Angka Kejadian pulang paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5 %', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(339, 0, 'Angka keberhasilan perawatan bayi dengan BBLR (1500 gram-2500 gram)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(340, 0, 'Kelengkapan asessment awal medis dan keperawatan pasien di perinatologi < 24 Jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(341, 0, 'Angka keberhasilan penggunaan CPAP pada pasien Perina', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(342, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(343, 0, 'Rata-rata pasien yang kembali ke perawatan intensif dengan kasus yang sama <72 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 3 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(344, 0, 'Kejadian VAP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5,8 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(345, 0, 'Ketepatan pemberian dosis obat High Alert pada pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(346, 0, 'Kepatuhan Visit Dokter Spesialis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(347, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(348, 0, 'Kematian pasien < 48 jam sejak masuk RS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,24 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(349, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(350, 0, 'Kejadian kematian ibu karena persalinan akibat perdarahan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(351, 0, 'Kejadian kematian ibu karena persalinan akibat pre eklampsia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 30 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(352, 0, 'Kejadian kematian ibu karena persalinan akibat sepsis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,2 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(353, 0, 'Pemberi pelayanan persalinan normal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(354, 0, 'Pemberi pelayanan persalinan dengan penyulit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '1 tim', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(355, 0, 'Kemampuan menangani bayi dengan asfiksia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(356, 0, 'Pertolongan persalinan melalui seksio caesaria', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 20 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(357, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(358, 0, 'Kepatuhan Identifikasi Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(359, 0, 'Rerata waktu tanggap emergency sectio caesaria', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(360, 0, 'Ketepatan Pelaksanaan Instruksi DPJP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(361, 0, 'Waktu tunggu hasil pelayanan thorax foto', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 180 menit', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(362, 0, 'Digitalisasi hasil radiologi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 60 %', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(363, 0, 'Kesalahan penyerahan hasil radiologi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(364, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(365, 0, 'Ketepatan waktu pembacaan foto cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 60 menit', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(366, 0, 'Ketepatan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(367, 0, 'Waktu tunggu hasil pelayanan laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 140 menit', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(368, 0, 'Tidak adanya kesalahan pemberian hasil pemeriksaan laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(369, 0, 'Tidak adanya kejadian tertukar spesimen', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(370, 0, 'Waktu tunggu hasil pelayanan laboratorium cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 60 Menit', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(371, 0, 'Pelaporan hasil kritis laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(372, 0, 'Kesesuaian baku mutu eksternal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(373, 0, 'Ketepatan identifikasi pasien di laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(374, 0, 'Ketepatan Hasil Pemeriksaan yang Dirujuk', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 48 jam', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(375, 0, 'Waktu tunggu pelayanan obat jadi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 30 menit', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(376, 0, 'Waktu tunggu pelayanan obat racikan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 60 menit', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(377, 0, 'Tidak adanya kejadian kesalahan pemberian obat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(378, 0, 'Penulisan resep sesuai formularium nasional untuk pasien JKN', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(379, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(380, 0, 'Ketepatan identifikasi pasien di farmasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(381, 0, 'Pemberian label obat high alert', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(382, 0, 'Persentase Ketersediaan Bahan Medis Habis Pakai Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 10%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(383, 0, 'Persentase Ketersediaan Obat Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(384, 0, 'Persentase Pengkajian Resep Polifarmasi Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(385, 0, 'Persentase Laporan Konseling Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 10%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(386, 0, 'Persentase Pelayanan Informasi Obat Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 25%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(387, 0, 'Ketepatan Waktu Pemberian Makanan Kepada Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '> 90 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(388, 0, 'Tidak Adanya Kesalahan Dalam Pemberian Diet Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(389, 0, 'Sisa Makanan Yang Tidak Termakan Oleh Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 20 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(390, 0, 'Capaian Edukasi Kelompok (Penyuluhan Gizi) Minimal 1x/TW', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(391, 0, 'Kepuasan Pelanggan Makanan Rumah Sakit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '> 80 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(392, 0, 'Kelengkapan pengisian rekam medik 24 jam setelah selesai pelayanan unit rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(393, 0, 'Kelengkapan pengisian rekam medik 24 jam setelah selesai pelayanan unit rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(394, 0, 'Kelengkapan pengisian rekam medik 24 jam setelah selesai pelayanan unit igd', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(395, 0, 'Kelengkapan informed concent setelah mendapatkan informasi yang jelas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(396, 0, 'Berkas rekam medis yang hilang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(397, 0, 'Retensi berkas rekam medis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(398, 0, 'Hybrid rekam medis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(399, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(400, 0, 'Baku mutu limbah cair BOD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'BOD ? 30 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(401, 0, 'Baku mutu limbah cair COD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'COD ? 100 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(402, 0, 'Baku mutu limbah cair TSS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'TSS ? 30 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(403, 0, 'Baku mutu limbah cair PH', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'PH 6-9', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(404, 0, 'Baku mutu limbah cair Ammonia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'Ammonia ? 10 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(405, 0, 'Baku mutu limbah cair Coliform', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'Total coliform ? 3000 jumlah/100 ml', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20');
-INSERT INTO `sikat_profile_indikator` (`ID`, `LEVEL`, `JUDUL_INDIKATOR`, `TAHUN`, `ISI_POPULASI`, `USER_ACC`, `DASAR_PEMIKIRAN`, `IS_EFEKTIF`, `IS_EFISIEN`, `IS_TEPAT_WAKTU`, `IS_AMAN`, `IS_ADIL`, `IS_BERPASIEN`, `IS_INTEGRASI`, `ACC_DATE`, `TUJUAN`, `DEFINISI_PEMIKIRAN`, `TIPE_INDIKATOR`, `UKURAN_INDIKATOR`, `NUMERATOR`, `DENUMERATOR`, `KRITERIA`, `FORMULA`, `SUMBER_DATA`, `FREK_PENGUMPULAN`, `PERIODE_PELAPORAN`, `PERIODE_ANALISA`, `METODE_PENGUMPULAN`, `POPULASI_SAMPEL`, `ISI_SAMPLE`, `RENCANA_ANALISIS`, `INSTRUMEN_PENGAMBILAN`, `PENANGGUNG_JAWAB`, `TYPE`, `TARGET_PENCAPAIAN`, `STATUS_ACC`, `PROCESS_TYPE`, `DAILY_MONTHLY_SPECIAL`, `ISI_INSTRUMEN`, `BESAR_SAMPEL`, `isINM`, `isIMPRs`, `isIMPUnit`, `CREATE_DATE`, `UPDATE_DATE`) VALUES
-(406, 0, 'Baku mutu limbah cair Minyak', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'Minyak dan lemak ? 5 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(407, 0, 'Pengolahan limbah padat berbahaya sesuai dengan aturan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(408, 0, 'Kelembaban Ruangan Sesuai Dengan Aturan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(409, 0, 'Ketepatan pendistribusian alat steril', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(410, 0, 'Kepuasan Pelanggan Unit CSSD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(411, 0, 'Penandaan Frekuensi Alat reUse', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(412, 0, 'Tidak adanya kejadian linen yang hilang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(413, 0, 'Ketepatan pengelolaan linen infeksius', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(414, 0, 'Hasil pemeriksaan angka kuman pada linen yang dicuci memenuhi standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(415, 0, 'Ketetapan pemilahan linen infeksius dan linen non infeksius', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(416, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(417, 0, 'Kecepatan waktu menanggapi kerusakan sarana dan prasarana Rumah Sakit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(418, 0, 'Peralatan Laboratorium (dan alat ukur yang lain) yang terkalibrasi tepat waktu sesuai dengan ketentuan kalibrasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(419, 0, 'Pelaksanaan Standar Penanganan Tertusuk Jarum', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(420, 0, 'Pelaksanaan Standar Penanganan Kecelakaan Kerja Terkait Fasilitas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(421, 0, 'Ketepatan Pengecekan Sarana Proteksi Kebakaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(422, 0, 'Ketersediaan TIM penanggulangan Bencana', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(423, 0, 'Kecepatan waktu pemberian informasi tentang tagihan pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 120 Menit', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(424, 0, 'Kejadian bad debt pada pelayanan rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(425, 0, 'Kesesuaian antara pasien yang bayar dengan yang seharusnya membayar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(426, 0, 'Kesesuaian input layanan dari unit dengan billing pembayaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(427, 0, 'Presentase billing yang belum close dihari yang sama', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(428, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(429, 0, 'Kelengkapan Penginputan Data di SIMRS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(430, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(431, 0, 'Kecepatan Petugas dalam melakukan pendaftaran pasien di SIMRS (06.30 - 08.30)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(432, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(433, 0, 'Kecepatan Pelayanan Ambulance di RS < 30 Menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(434, 0, 'Tidak Adanya Kecelakaan Ambulans Yang Menimbulkan Kecacatan atau Kematian', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(435, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(436, 0, 'Tersedianya anggota Tim PPI yang terlatih', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(437, 0, 'Infeksi luka infus/flebistis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(438, 0, 'Hospital-acquired pneumonia (HAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(439, 0, 'Catheter Associated Urinary Tract Infection (CAUTI) / ISK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 4.7 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(440, 0, 'Surgical Site Infection (SSI) /IDO', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2 %', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(441, 0, 'Penggunaan Penggunaan APD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(442, 0, 'Kepatuhan kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(443, 0, 'Ventilator Associated Pneumonia ( VAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5,8 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(444, 0, 'central line bloodstream infection (CLABSI)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(445, 0, 'Kelengkapan Penginputan Data di SIMRS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(446, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(447, 0, 'Kecepatan Petugas dalam melakukan pendaftaran pasien di SIMRS (06.30 - 08.30)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(448, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(449, 0, 'Kecepatan Pelayanan Ambulance di RS < 30 Menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(450, 0, 'Tidak Adanya Kecelakaan Ambulans Yang Menimbulkan Kecacatan atau Kematian', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(451, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(452, 0, 'Tersedianya anggota Tim PPI yang terlatih', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(453, 0, 'Infeksi luka infus/flebistis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(454, 0, 'Hospital-acquired pneumonia (HAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(455, 0, 'Catheter Associated Urinary Tract Infection (CAUTI) / ISK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 4.7 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(456, 0, 'Surgical Site Infection (SSI) /IDO', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2 %', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(457, 0, 'Penggunaan Penggunaan APD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(458, 0, 'Kepatuhan kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(459, 0, 'Ventilator Associated Pneumonia ( VAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5,8 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(460, 0, 'central line bloodstream infection (CLABSI)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(461, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(462, 0, 'Pelaporan hasil kritis laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(463, 0, 'Ketepatan pemberian obat high alert sesuai prosedur', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(464, 0, 'Kelengkapan pengisian surgery safety checklist pasien operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(465, 0, 'Kepatuhan kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(466, 0, 'Kepatuhan upaya pencegahan resiko pasien jatuh', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(467, 0, 'Kejadian pasien jatuh', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(468, 0, 'Kepatuhan terhadap Alur Klinis (Clinical Pathway)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(469, 0, 'Angka Kedensial Dokter Baru', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(470, 0, 'Re-kredensial Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(471, 0, 'Kelengkapan STR dan SIP Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(472, 0, 'Terselenggaranya Audit Medik', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(473, 0, 'Tersusunnya minimal 5 PPK penyakit terbanyak setiap SMF (PD, Anak, Obgyn, Bedah, Saraf dan Anestesi)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(474, 0, 'Angka di Lakukan Kredensial Perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(475, 0, 'Kelengkapan Asuhan Keperawatan Berbasis EMR', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(476, 0, 'Angka Pelangaran Etik, disiplin perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(477, 0, 'Kepatuhan tenaga kesehatan dalam pelaksanaan proses kredensial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '26', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(478, 0, 'Kepatuhan pelaksanaan OPPE dan FPPE', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '26', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(479, 0, 'Dilakukannya sosialisasi mengenai etik', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '27', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(480, 0, 'Penilaian kepuasan pasien terhadap pelaksanaan komunikasi dan edukasi di Rawat Jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(481, 0, 'Penilaian kepuasan pasien terhadap pelaksanaan komunikasi dan edukasi di Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(482, 0, 'Keterlaksanaan Pendidikan Kesehatan Internal (Penyuluhan Kelompok)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(483, 0, 'Keterlaksanaan Pendidikan Kesehatan Eksternal (Penyuluhan Kelompok)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(484, 0, 'Pemakaian Antibiotik Lini Ketiga Sesuai Prosedur', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '29', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(485, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '88.5%', 1, '30', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(486, 0, 'Kecepatan Waktu Tanggap Komplain', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '30', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(487, 0, 'Terselenggaranya pembahasan Audit Maternal Perinatal per tahun dan atau by case', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '31', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(488, 0, 'Jejaring pelayanan TB di wilayah Sawah Besar dengan penyakit penyerta', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '32', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(489, 0, 'Pelatihan Staf Minimal 20 jam/tahun', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '190 orang', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(490, 0, 'Kepatuhan Administrasi Cuti Pegawai', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '95%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(491, 0, 'Pegawai Kesehatan yang melakukan pelayanan kesehatan memiliki STR', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '95%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(492, 0, 'Kepatuhan pegawai terhadap peraturan jam kerja', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '95%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(493, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(494, 0, 'Kelengkapan Laporan Akuntabilitas Kinerja', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(495, 0, 'Cost Recovery Rate', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 40%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(496, 0, 'Ketepatan Waktu Penyusunan Laporan Keuangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(497, 0, 'Ketepatan Waktu Pemberian Gaji dan tunjangan pegawai non PNS Sesuai Kesepakatan Waktu', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(498, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(499, 0, 'Pelayanan KB (Keluarga Berencana) Pasca Salin', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '50%', 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(500, 0, 'Kepatuhan dalam pemeberian Pelayanan Konseling KB (Keluarga Berencana)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(501, 0, 'Kepatuhan pengumpulan hasil stok opname dari unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(502, 0, 'Labelisasi barang aset', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '90%', 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(503, 0, 'Kesesuaian stok di Laporan dengan stok fisik', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '90%', 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(504, 0, 'Cakupan pasien stunting wasting di rawat jalan Yang Mengalami Peningkatan Status Gizi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '50%', 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(505, 0, 'Cakupan Rujukan Pasien Stunting yang mendapatkan PKMK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '50%', 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(506, 0, 'Ketepatan waktu pengajuan berkas klaim JKN per bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(507, 0, 'Kelengkapan berkas klaim rawat inap pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(508, 0, 'Kelengkapan berkas klaim rawat jalan pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(509, 0, 'Jumlah berkas pengajuan klaim Rawat Jalan & Rawat Inap yang diajukan ke BPJS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(510, 0, 'Terlaksananya pelayanan kesehatan pasien dengan resiko terinfeksi penyakit HIV/AIDS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(511, 0, 'Terlaksananya promkes HIV/AIDS di unit rawat jalan atau media sosial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(512, 0, 'Terselenggaranya pemeliharaan jaringan berfungsi dengan baik di semua unit', '2024', '', '', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 0, '40', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-30'),
-(513, 0, 'Waktu tanggap pelaporan kerusakan Perangkat IT', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 0, '40', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-30'),
-(514, 0, 'Terlaksananya target bridging dengan pihak eksternal prioritas (Satu Sehat)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '40', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(515, 0, 'Ketepatan Waktu Pembayaran Dokumen SPJ', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '41', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(516, 0, 'Kesesuaian Pembayaran dengan Target SPS Pengadaan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 90%', 1, '41', '', '', '', 0, 0, 0, '2024-10-20', '2024-10-20'),
-(517, 1, 'test', '2023', '', '', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', 0, '', 'test', 'test', 'test', 'test', 'test', 'Harian', 'test', 'Semester', 'Concurent', 'Populasi', 'test', '', 'test', 'test', NULL, 'test', 0, NULL, '', '', '', 0, 0, 0, NULL, NULL),
-(518, 5, 'tets', '2024', '', '', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', 0, '', 'test', 'test', 'test', 'tets', 'tes', 'Triwulan', 't', 'Triwulan', 'Concurent', 'Populasi', 'test', '', 'test', 'test', NULL, 'test', 0, 'rawatJalan', '', '', '', 0, 0, 0, NULL, NULL),
-(520, 1, 'test', '2023', '', '', 'test', 0, 1, 1, 0, 0, 0, 0, '', 't', 't', 0, '', 't', 't', 't', 't', 't', 'Triwulan', 't', 'Triwulan', 'Concurent', 'Populasi', 'test', '', 't', 't', NULL, 'tt', 0, 'indikatorMutu', '', '', '', 0, 0, 0, '2024-10-30', '2024-10-30'),
-(522, 1, 'test', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Presentase', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Triwulan', 'Retrospektif', 'Non Probability Sampling', '', '', 'Formulir', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 0, 1, 0, '2024-11-02', '2024-11-02'),
-(523, 2, 't', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Waktu', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Retrospektif', 'Probability Sampling', '', '', 'EMR', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 1, 0, 1, '2024-11-02', '2024-11-02'),
-(524, 3, 't', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Presentase', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Triwulan', 'Observasi', 'Probability Sampling', '', '', 'Formulir', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 1, 1, 0, '2024-11-02', '2024-11-02'),
-(525, 4, 't', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Presentase', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Observasi', 'Probability Sampling', '', '', 'Formulir', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 1, 0, 0, '2024-11-02', '2024-11-02'),
-(527, 34, 't', '2024', '', 'pmkp@rsudsawahbesar.com', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', 0, 'Presentase', 't', '', 't', 't', 'Data Sekunder', '', 'Harian', 'Bulanan', 'Observasi', 'Lainnya', '', '', 'Lainnya', 'rawatJalan', NULL, 'M', NULL, 'rawatJalan', '', 'tes', 't', 1, 0, 0, '2024-11-14', '2024-11-16');
+INSERT INTO `sikat_profile_indikator` (`ID`, `LEVEL`, `JUDUL_INDIKATOR`, `TAHUN`, `ISI_POPULASI`, `USER_ACC`, `DASAR_PEMIKIRAN`, `IS_EFEKTIF`, `IS_EFISIEN`, `IS_TEPAT_WAKTU`, `IS_AMAN`, `IS_ADIL`, `IS_BERPASIEN`, `IS_INTEGRASI`, `ACC_DATE`, `TUJUAN`, `DEFINISI_PEMIKIRAN`, `TIPE_INDIKATOR`, `UKURAN_INDIKATOR`, `NUMERATOR`, `DENUMERATOR`, `KRITERIA`, `FORMULA`, `SUMBER_DATA`, `FREK_PENGUMPULAN`, `PERIODE_PELAPORAN`, `PERIODE_ANALISA`, `METODE_PENGUMPULAN`, `POPULASI_SAMPEL`, `ISI_SAMPLE`, `RENCANA_ANALISIS`, `INSTRUMEN_PENGAMBILAN`, `PENANGGUNG_JAWAB`, `TYPE`, `TARGET_PENCAPAIAN`, `STATUS_ACC`, `PROCESS_TYPE`, `DAILY_MONTHLY_SPECIAL`, `ISI_INSTRUMEN`, `BESAR_SAMPEL`, `isINM`, `isIMPRs`, `isIMPUnit`, `CREATE_DATE`, `REVIEW_ULANG`, `UPDATE_DATE`) VALUES
+(1, 0, 'Jumlah pasien yang mendapat pertolongan life saving', '2023', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(2, 0, 'Jumlah pasien yang membutuhkan penanganan life saving', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(3, 0, 'Jumlah Pemberi pelayanan kegawatdaruratan yang bersertifikat BLS/GELS/ALS/BTCLS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(4, 0, 'Jumlah Pemberi pelayanan kegawatdaruratan di UGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(5, 0, 'Jumlah waktu yang diperlukan sejak kedatangan pasien sampai mendapat pelayanan dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(6, 0, 'Jumlah pasien yang disampling (min n=50)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(7, 0, 'Jumlah pasien yang meninggal <24 jam sejak pasien datang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(8, 0, 'Jumlah seluruh pasien di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(9, 0, 'Jumlah pasien observasi di UGD > 6 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(10, 0, 'Jumlah pasien jatuh di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(11, 0, 'Jumlah pasien yang pulang paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(12, 0, 'Jumlah waktu yang diperlukan sejak kedatangan pasien (kegawatan pada geriatri) sampai mendapat pelayanan dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(13, 0, 'Jumlah pasien geriatri di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(14, 0, 'Jumlah hari ada penumpukan pasien di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(15, 0, 'Jumlah hari dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(16, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(17, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(18, 0, 'Jumlah pasien yang puas terhadap pelayanan Gawat Darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(19, 0, 'Jumlah seluruh pasien di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(20, 1, 'Jumlah pelayanan rawat jalan spesialistik yang buka sesuai jadwal yang sudah di tentukan test', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-11-24'),
+(21, 1, 'Jumlah pelayanan rawat jalan spesialistik di hari tersebut', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-11-24'),
+(22, 2, 'Jumlah pasien rawat jalan yang waktu tunggu <= 60 menit', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-11-24'),
+(23, 2, 'Jumlah pasien rawat jalan yang diobservasi', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-11-24'),
+(24, 4, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-11-24'),
+(25, 4, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', 'pmkp@rsudsawahbesar.com', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 0, 'rawatJalan', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-11-24'),
+(38, 0, 'Jumlah pasien yang divisite dokter pada pukul 06.00-14.00', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(39, 0, 'Jumlah seluruh pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(40, 0, 'Jumlah pasien rawat inap yang terkena infeksi nosokomial dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(41, 0, 'Jumlah pasien rawat inap dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(42, 0, 'Jumlah kejadian kematian pasien rawat inap > 48 jam dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(43, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(44, 0, 'Jumlah pasien pulang paksa dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(45, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(46, 0, 'Jumlah kejadian reaksi transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(47, 0, 'Jumlah seluruh pasien yang mendapat transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(48, 0, 'Jumlah pasien rawat inap dengan assessment awal medis dan keperawatan lengkap di EMR dalam waktu 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(49, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(50, 0, 'Jumlah instruksi DPJP yang telah dilakukan oleh petugas medis dan paramedis (Pelaksanaannya maksimal 1 Shift)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(51, 0, 'Jumlah seluruh instruksi DPJP yang harus dilakukan sesuai dengan waktunya', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(52, 0, 'Jumlah pasien rawat inap yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(53, 0, 'Jumlah seluruh Pasien Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(54, 0, 'Jumlah pasien yang divisite dokter pada pukul 06.00-14.00', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(55, 0, 'Jumlah seluruh pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(56, 0, 'Jumlah pasien rawat inap yang terkena infeksi nosokomial dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(57, 0, 'Jumlah pasien rawat inap dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(58, 0, 'Jumlah kejadian kematian pasien rawat inap > 48 jam dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(59, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(60, 0, 'Jumlah pasien pulang paksa dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(61, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(62, 0, 'Jumlah kejadian reaksi transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(63, 0, 'Jumlah seluruh pasien yang mendapat transfusi dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(64, 0, 'Jumlah pasien rawat inap dengan assessment awal medis dan keperawatan lengkap di EMR dalam waktu 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(65, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(66, 0, 'Jumlah instruksi DPJP yang telah dilakukan oleh petugas medis dan paramedis (Pelaksanaannya maksimal 1 Shift)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(67, 0, 'Jumlah seluruh instruksi DPJP yang harus dilakukan sesuai dengan waktunya', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(68, 0, 'Jumlah pasien rawat inap yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(69, 0, 'Jumlah seluruh Pasien Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(70, 0, 'Waktu tunggu operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(71, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(72, 0, 'Kejadian Kematian di meja Operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(73, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(74, 0, 'Tidak adanya kejadian operasi salah Sisi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(75, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(76, 0, 'Tidak adanya kejadian Operasi salah Orang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(77, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(78, 0, 'Tidak adanya kejadian salah tindakan pada operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(79, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(80, 0, 'Tidak adanya kejadian tertinggalnya benda asing/lain pada tubuh pasien setelah operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(81, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(82, 0, 'Komplikasi anestesi karena overdosis, reaksi anestesi, dan salah penempatan anestesi endotracheal tube', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(83, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(84, 0, 'Penundaan Operasi Elektif', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(85, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(86, 0, 'Tersedianya pelayanan anastesi sedasi moderate 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(87, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(88, 0, 'Kejadian diskrepansi diagnosis pre dan post operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(89, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(90, 0, 'Konversi tindakan anastesi dari lokal , Regional menjadi general', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(91, 0, 'Jumlah Pasien yang dioperasi di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(92, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(93, 0, 'Jumlah pemberi pelayanan yang di observasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(94, 0, 'Jumlah pasien perina yang terkena infeksi nosokomial dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(95, 0, 'Jumlah pasien Perina dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(96, 0, 'Jumlah pasien pulang paksa dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(97, 0, 'Jumlah seluruh pasien yang dirawat dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(98, 0, 'Jumlah pasien dengan BBLR yang mengalami peningkatan BB (25-30g/hr) dan pulang sesuai dengan standard kenaikan BB', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(99, 0, 'Jumlah seluruh pasien yang dirawat dengan BBLR dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(100, 0, 'Jumlah pasien dengan assessment awal lengkap < 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(101, 0, 'Jumlah pasien baru di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(102, 0, 'Jumlah pasien dengan perbaikan saturasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(103, 0, 'Jumlah seluruh pasien yang menggunakan CPAP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(104, 0, 'Jumlah pasien yang kembali keperawatan intensif dengan kasus yang sama < 72 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(105, 0, 'Jumlah seluruh pasien yang di rawat di perawatan intensif dalam 1 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(106, 0, 'Jumlah kasus infeksi Ventilator Associated Pneumonia (VAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(107, 0, 'Jumlah pasien yang dirawat dengan ventilator > 48 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(108, 0, 'Jumlah pasien yang menerima dosis obat high alert yang tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(109, 0, 'Jumlah seluruh pasien yang menerima obat high alert', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(110, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(111, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(112, 0, 'Jumlah visite dokter spesialis antara jam 08.00 sampai dengan 14.00 yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(113, 0, 'Jumlah pelaksanaan visite dokter spesialis yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(114, 0, 'Jumlah kejadian kematian pasien ruang Intensif < 48 jam dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(115, 0, 'Jumlah seluruh pasien ruang Intensif dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(116, 0, 'Jumlah Ibu Meninggal Karena Perdarahan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(117, 0, 'Jumlah Ibu Melahirkan Dengan Perdarahan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(118, 0, 'Jumlah Ibu Meninggal Karena Pre eklampsia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(119, 0, 'Jumlah Ibu Dengan Pre eklampsia di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(120, 0, 'Jumlah Ibu melahirkan yang meninggal karena sepsis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(121, 0, 'Jumlah Ibu melahirkan dengan sepsis di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(122, 0, 'Jumlah bayi dengan asfiksia yang berhasil ditangani', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(123, 0, 'Jumlah bayi dengan asfiksia di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(124, 0, 'Jumlah persalinan dengan sectio caesaria di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(125, 0, 'Jumlah seluruh persalinan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(126, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(127, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(128, 0, 'Jumlah pasien yang mendapatkan tindakan sectio cesaria < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(129, 0, 'Jumlah pasien yang diputuskan tindakan sectio cesaria emergency', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(130, 0, 'Jumlah Instruksi DPJP yang dilaksanakan secara tepat waktu (Pelaksanaannya maksimal dalam 1 Shift)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(131, 0, 'Jumlah Seluruh Instruksi DPJP dalam 1 Shift', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(132, 0, 'Jumlah kumulatif waktu tunggu thorax foto', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(133, 0, 'Jumlah seluruh pemeriksaan thorax foto di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(134, 0, 'Jumlah hasil yang dikirim dalam bentuk soft file dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(135, 0, 'jumlah pemeriksaan foto rontgen dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(136, 0, 'Jumlah Kesalahan Penyerahan Hasil Radiologi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(137, 0, 'Jumlah Pemeriksaan Radiologi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(138, 0, 'Jumlah kumulatif waktu tunggu foto rontgen cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(139, 0, 'Jumlah seluruh pemeriksaan foto rontgen cito dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(140, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(141, 0, 'Jumlah pemberi pelayanan yang diobservasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(142, 0, 'Jumlah kumulatif waktu tunggu pelayanan laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(143, 0, 'Jumlah pasien yang disurvey di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(144, 0, 'jumlah seluruh pasien yang diperiksa di hari tersebut dikurangi jumlah penyerahan laboratorium salah orang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(145, 0, 'Jumlah pasien pemeriksaan laboratorium di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(146, 0, 'jumlah seluruh spesimen yang diperiksa di hari tersebut dikurangi jumlah spesimen yang tertukar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(147, 0, 'jumlah spesimen di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(148, 0, 'Jumlah kumulatif waktu tunggu pelayanan laboratorium cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(149, 0, 'Jumlah pemeriksaan cito di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(150, 0, 'Semua hasil laboratorium kritis yang dilaporkan < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(151, 0, 'Jumlah semua hasil laboratorium kritis di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(152, 0, 'Jumlah kesesuaian pemeriksaan baku mutu eksternal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(153, 0, 'Jumlah pemeriksaan baku mutu eksternal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(154, 0, 'Jumlah pasien laboratorium yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(155, 0, 'Jumlah seluruh Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(156, 0, 'Jumlah Kumulatif Waktu tunggu hasil pemeriksaan laboratorium yang dirujuk', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(157, 0, 'jumlah sampel yang dirujuk', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(158, 0, 'Jumlah kumulatif waktu tunggu obat jadi pasien yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(159, 0, 'Jumlah pasien yang disurvey di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(160, 0, 'Jumlah kumulatif waktu tunggu obat racikan pasien yang disurvey', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(161, 0, 'Jumlah pasien yang disurvey di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(162, 0, 'Jumlah Kesalahan pemberian obat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(163, 0, 'Jumlah seluruh permintaan resep', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(164, 0, 'Jumlah pasien yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(165, 0, 'Jumlah seluruh pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(166, 0, 'Jumlah resep polifamasi yang dikaji sesuai standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(167, 0, 'Jumlah seluruh resep polifamasi yang dikaji', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(168, 0, 'Jumlah pasien rawat inap yang disurvei yang mendapat makanan tepat waktu dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(169, 0, 'Jumlah seluruh pasien rawat inap yang disurvei', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(170, 0, 'Jumlah pemberian makan yang sesuai dengan jenis diet', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(171, 0, 'Jumlah pemberian makan pasien di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(172, 0, 'Jumlah Pasien Yang Menyisakan Makan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(173, 0, 'Jumlah Pasien Rawat Inap Yang Bisa Makan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(174, 0, 'Jumlah pelaksanaan edukasi kelompok (penyuluhan gizi)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(175, 0, 'Jumlah jadwal penyuluhan kelompok yang telah ditetapkan selama satu TW', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(176, 0, 'Jumlah pasien yang di survey dikurangi jumlah pasien yang tidak puas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(177, 0, 'Jumlah pasien yang di survey dalam satu bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(178, 0, 'Jumlah rekam medis unit rawat inap yang diisi lengkap 24 jam setelah selesai pelayanan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(179, 0, 'Jumlah rekam medis unit rawat inap di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(180, 0, 'Jumlah rekam medis unit rawat jalan yang diisi lengkap 24 jam setelah selesai pelayanan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(181, 0, 'Jumlah rekam medis unit rawat jalan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(182, 0, 'Jumlah rekam medis unit IGD yang diisi lengkap 24 jam setelah selesai pelayanan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(183, 0, 'Jumlah rekam medis unit IGD di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(184, 0, 'Jumlah pasien yang mendapat informasi jelas dan Informed consent yang diisi lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(185, 0, 'Jumlah pasien yang mendapat tindakan medis di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(186, 0, 'Jumlah rekam medis yang hilang di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(187, 0, 'Jumlah berkas rekam medis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(188, 0, 'Jumlah berkas rekam medis in aktif yang dipilah', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(189, 0, 'Jumlah target rekam medis inaktif 150 berkas rm /minggu', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(190, 0, 'Jumlah berkas rekam medis yg discan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(191, 0, 'Jumlah Berkas Rekam Medis Manual yang tersedia pada hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, NULL, '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(192, 0, 'Jumlah limbah padat yang dikelola sesuai dengan Standar Prosedur Operasional', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(193, 0, 'Jumlah proses pengolahan limbah padat yang diamati di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(194, 0, 'Hasil pengukuran pencahayaan dan kelembaban disesuaikan dengan baku mutu', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(195, 0, 'Jumlah seluruh pengukuran pencahayaan dan kelembaban ruang di rumah sakit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(196, 0, 'Jumlah seluruh alat yang disterilkan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(197, 0, 'Jumlah alat steril yang didistribusikan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(198, 0, 'Jumlah alat reuse yang ditandai dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(199, 0, 'Jumlah seluruh alat reuse yang disterilkan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(200, 0, 'No data available for Linen', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(201, 0, 'Jumlah laporan kerusakan alat yang ditanggapi ? 15 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(202, 0, 'Jumlah laporan kerusakan alat hari ini tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20');
+INSERT INTO `sikat_profile_indikator` (`ID`, `LEVEL`, `JUDUL_INDIKATOR`, `TAHUN`, `ISI_POPULASI`, `USER_ACC`, `DASAR_PEMIKIRAN`, `IS_EFEKTIF`, `IS_EFISIEN`, `IS_TEPAT_WAKTU`, `IS_AMAN`, `IS_ADIL`, `IS_BERPASIEN`, `IS_INTEGRASI`, `ACC_DATE`, `TUJUAN`, `DEFINISI_PEMIKIRAN`, `TIPE_INDIKATOR`, `UKURAN_INDIKATOR`, `NUMERATOR`, `DENUMERATOR`, `KRITERIA`, `FORMULA`, `SUMBER_DATA`, `FREK_PENGUMPULAN`, `PERIODE_PELAPORAN`, `PERIODE_ANALISA`, `METODE_PENGUMPULAN`, `POPULASI_SAMPEL`, `ISI_SAMPLE`, `RENCANA_ANALISIS`, `INSTRUMEN_PENGAMBILAN`, `PENANGGUNG_JAWAB`, `TYPE`, `TARGET_PENCAPAIAN`, `STATUS_ACC`, `PROCESS_TYPE`, `DAILY_MONTHLY_SPECIAL`, `ISI_INSTRUMEN`, `BESAR_SAMPEL`, `isINM`, `isIMPRs`, `isIMPUnit`, `CREATE_DATE`, `REVIEW_ULANG`, `UPDATE_DATE`) VALUES
+(203, 0, 'Pelaksanaan Standar Penanganan Tertusuk Jarum', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(204, 0, 'Jumlah seluruh kejadian tertusuk jarum', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(205, 0, 'Pelaksanaan Standar Penanganan Kecelakaan Kerja Terkait Fasilitas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(206, 0, 'Jumlah seluruh kejadian kecelakaan kerja', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(207, 0, 'Ketepatan Pengecekan Sarana Proteksi Kebakaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(208, 0, 'Jumlah sarana prasarana yang dilakukan pengecekan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(209, 0, 'Ketersediaan TIM penanggulangan Bencana', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(210, 0, 'TIM penanggulangan Bencana', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(211, 0, 'Kecepatan waktu pemberian informasi tentang tagihan pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(212, 0, 'jumlah pasien rawat inap yang pulang di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(213, 0, 'Kejadian bad debt pada pelayanan rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(214, 0, 'Jumlah pasien rawat jalan yang berobat di tanggal tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(215, 0, 'Kesesuaian antara pasien yang bayar dengan yang seharusnya membayar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(216, 0, 'Jumlah pasien rawat jalan (pembayaran umum) di hari terebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(217, 0, 'Kesesuaian input dari unit dengan billing pembayaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(218, 0, 'Jumlah semua billingan pembayaran dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(219, 0, 'Presentase bilingan yang belum close dihari yang sama', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(220, 0, 'Jumlah pasien rawat jalan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(221, 0, 'Jumlah pasien dengan penginputan data simRS lengkap dan tepat di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(222, 0, 'Jumlah pasien yang diinput di simRS di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(223, 0, 'Jumlah pemberi pelayanan yang melakukan identifikasi pasien secara benar dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(224, 0, 'Jumlah pemberi pelayanan yang di observasi dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(225, 0, 'Jumlah Pasien yang terdaftar pada pukul 06.30 - 08.30', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(226, 0, 'Jumlah pasien yang telah ditentukan sampai pukul 08.30 (40 Pasien/hari)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(227, 0, 'jumlah pasien yang dilayani < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(228, 0, 'jumlah pasien yang dilayani di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(229, 0, 'Jumlah pasien yang terinfeksi plebitis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(230, 0, 'Jumlah hari pemasangan infuse perifer', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(231, 0, 'Jumlah pasien yang terinfeksi saluran nafas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(232, 0, 'Jumlah hari tirah baring', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(233, 0, 'Jumlah pasien yang terinfeksi kateter urine', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(234, 0, 'Jumlah hari terpasang kateter urine', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(235, 0, 'Jumlah pasien yang terinfeksi IDO', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(236, 0, 'Jumlah pasien yang dioperasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(237, 0, 'Jumlah petugas yang patuh menggunakan APD sesuai indikasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(238, 0, 'Jumlah seluruh petugas yang terindikasi menggunakan APD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(239, 0, 'Jumlah kegiatan cuci tangan yang dilakukan dengan tepat dan benar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(240, 0, 'Jumlah peluang kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(241, 0, 'Jumlah pasien yang mengalami infeksi VAP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(242, 0, 'Jumlah hari pemasangan ventilator', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(243, 0, 'Jumlah pasien yang terinfeksi clabsi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(244, 0, 'Jumlah hari pemasangan Central Vena line', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(245, 0, 'Jumlah pasien yang dilakukan identifikasi dengan tepat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(246, 0, 'Jumlah seluruh Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(247, 0, 'Jumlah hasil laboratorium kritis pasien yang dilaporkan < 30 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(248, 0, 'Jumlah hasil laboratorium kritis pasien dihari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(249, 0, 'Jumlah obat yang diberikan tepat sesuai ketentuan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(250, 0, 'Jumlah seluruh pemberian obat high alert yang dipantau', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(251, 0, 'Seluruh lembar surgery safety checklist yang ditulis lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(252, 0, 'Seluruh pasien yang mendapat pembedahan di hari tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(253, 0, 'Jumlah tindakan kebersihan tangan tenaga medis yang dilakukan dengan benar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(254, 0, 'Jumlah total peluang kebersihan tangan tenaga medis yang seharusnya dilakukan dalam periode observasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(255, 0, 'Jumlah pasien rawat inap beresiko tinggi jatuh yang mendapatkan ketiga upaya pencegahan risiko jatuh', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(256, 0, 'Jumlah pasien rawat inap berisiko tinggi jatuh yang diobservasi', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-30'),
+(257, 0, 'Jumlah pasien jatuh dalam 1 bulan', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-30'),
+(258, 0, 'Jumlah pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(259, 0, 'Angka di Lakukan Kredensial Perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(260, 0, 'Jumlah Perawat dan Bidan yang akan di lakukan Kredensial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(261, 0, 'Kelengkapan Asuhan Keperawatan Berbasis EMR', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(262, 0, 'Jumlah Kelengkapan Status EMR yang di Isi Pada setiap Unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(263, 0, 'Angka Pelanggaran Etik, disiplin perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(264, 0, 'Jumlah Perawat dan Bidan yang Melakukan Pelanggaran Etik, disiplin Perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(265, 0, 'Jumlah pemakaian antibiotik lini ketiga pada pasien rawat inap yang sesuai prosedur', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '29', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(266, 0, 'Jumlah seluruh pemakaian antibiotik lini ketiga pada pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '29', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(267, 0, 'Jumlah pasien TB rujukan yang tertangani', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '32', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(268, 0, 'Jumlah seluruh pasien TB rujukan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '32', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(269, 0, 'Jumlah pasien bersalin di RSUD Sawah Besar yang mendapatkan pelayanan KB pasca Salin', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(270, 0, 'Jumlah seluruh pasien yang bersalin di RSUD Sawah Besar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(271, 0, 'Jumlah seluruh pasien yang sudah diberi konseling KB dan terdokumentasi pada Rekam Medis pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(272, 0, 'Jumlah seluruh pasien yang berkunjung ke RSUD Sawah Besar dengan kriteria Ibu hamil TM 3 dan Ibu nifas (yang belum menjadi Aseptor KB)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(273, 0, 'Jumlah barang aset yang baru diterima dan telah diberi label nomor inventaris', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(274, 0, 'Jumlah barang aset yang baru diterima', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(275, 0, 'Jumlah pasien stunting wasting yang mengalami kenaikan status gizi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(276, 0, 'Jumlah seluruh pasien stunting wasting yang ada di rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(277, 0, 'Jumlah pasien rujukan dari PKM Sawah Besar yang mendapatkan PKMK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(278, 0, 'Jumlah pasien rujukan dari PKM Sawah Besar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(279, 0, 'Jumlah berkas klaim rawat inap pasien BPJS Kesehatan dari setiap unit yang lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(280, 0, 'Jumlah berkas klaim rawat inap pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(281, 0, 'Jumlah berkas klaim rawat jalan pasien BPJS Kesehatan dari setiap unit yang lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(282, 0, 'Jumlah berkas klaim rawat jalan pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(283, 0, 'Jumlah berkas pengajuan klaim Rawat Jalan & Rawat Inap yang dipending oleh BPJS yang lengkap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(284, 0, 'Jumlah berkas pengajuan klaim Rawat Jalan & Rawat Inap yang dipending oleh BPJS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(285, 0, 'Jumlah pasien beresiko HIV/AIDS yang dilakukan skrining HIV/AIDS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(286, 0, 'Jumlah seluruh pasien beresiko HIV/AIDS di wilayah RS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(287, 0, 'Jumlah promkes yang dilakukan dan terdokumentasi selama 3 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(288, 0, 'Jumlah promkes yang ditargetkan selama 3 bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(289, 0, 'Jumlah laporan kerusakan Perangkat IT yang ditanggapi ? 15 menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '40', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(290, 0, 'Jumlah laporan kerusakan Perangkat IT hari ini tersebut', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, NULL, 1, '40', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(291, 0, 'Kemampuan menangani life saving anak dan dewasa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(292, 0, 'Pemberi pelayanan kegawat daruratan yang bersertifikat BLS/PPGD/GELS/ALS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(293, 0, 'Waktu tanggap Pelayanan Dokter di Gawat Darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '<= 5 menit', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(294, 0, 'Kematian Pasien <= 24 jam di Gawat Darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '<= 0,2 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(295, 0, 'Lama observasi pasien di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '5 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(296, 0, 'Jumlah pasien jatuh di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(297, 0, 'Kejadian pulang paksa di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '<= 5 %', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(298, 0, 'Respon time penanganan kegawatdaruratan pasien geriatri di gawat darurat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5 menit', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(299, 0, 'Tidak ada Penumpukan pasien di IGD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(300, 0, 'Ketepatan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(301, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '1', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(302, 31, 'Buka pelayanan sesuai ketentuan test', '2024', '', 'pmkp@rsudsawahbesar.com', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', '0', 'Presentase', 'test', 'test', 'test', 'test', 'Data Primer', '', 'Bulanan', 'Triwulan', 'Retrospektif', 'Probability Sampling', '', '', 'Lainnya', 'rawatJalan', 2, '100%', 1, 'rawatJalan', '', 'test', 'test ah', 1, 0, 0, '2024-10-20', '', '2024-11-24'),
+(303, 16, 'Waktu tunggu di Rawat Jalan', '2024', '', 'admin', 'TEST', 0, 1, 0, 0, 0, 0, 0, '', 'test', 't', '0', 'Presentase', '', '', 't', 't', 'Data Primer', '', 'Harian', 'Triwulan', 'Retrospektif', 'Probability Sampling', '', '', 'Formulir', 'rawatJalan', 2, '>= 80%', 1, 'rawatJalan', '', '', 't', 1, 0, 0, '2024-10-20', '', '2024-11-03'),
+(304, 15, 'Kepuasan Pelanggan di Rawat Jalan', '2024', '', 'admin', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', '0', 'Presentase', 'num', 'num', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Retrospektif', 'Non Probability Sampling', '', '', 'Formulir', 'rawatJalan', 2, '>= 90%', 1, 'rawatJalan', '', '', 't', 1, 1, 0, '2024-10-20', '', '2024-11-03'),
+(305, 9, 'Ketepatan identifikasi pasien', '2024', '', 'admin', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', '0', 'Waktu', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Retrospektif', 'Probability Sampling', '', '', 'EMR', 'rawatJalan', 2, '100%', 1, 'rawatJalan', '', '', 't', 1, 0, 0, '2024-10-20', '', '2024-11-02'),
+(306, 0, 'Kepatuhan Waktu Visite Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(307, 0, 'Angka kejadian infeksi nosokomial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1,5%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(308, 0, 'Kematian pasien > 48 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2,5%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(309, 0, 'Kejadian Pulang Paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(310, 0, 'Kejadian Reaksi infeksi setelah transfusi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,01%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(311, 0, 'Kelengkapan pengisian assessment awal sesudah masuk Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(312, 0, 'Ketepatan Pelaksanaan Instruksi DPJP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(313, 0, 'Ketepatan Identifikasi Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(314, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '3', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(315, 0, 'Kepatuhan Waktu Visite Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(316, 0, 'Angka kejadian infeksi nosokomial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1,5%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(317, 0, 'Kematian pasien > 48 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2,5%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(318, 0, 'Kejadian Pulang Paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(319, 0, 'Kejadian Reaksi infeksi setelah transfusi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,01%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(320, 0, 'Kelengkapan pengisian assessment awal sesudah masuk Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(321, 0, 'Ketepatan Pelaksanaan Instruksi DPJP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(322, 0, 'Ketepatan Identifikasi Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(323, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '4', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(324, 0, 'Waktu tunggu operasi elektif', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2 hari', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(325, 0, 'Kejadian kematian dimeja operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(326, 0, 'Tidak adanya kejadian operasi salah sisi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(327, 0, 'Tidak adanya kejadian operasi salah orang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(328, 0, 'Tidak adanya kejadian salah tindakan pada operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(329, 0, 'Tidak adanya kejadian tertinggalnya benda asing pada tubuh pasien setelah operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(330, 0, 'Komplikasi anastesi karena over dosis, reaksi anastesi dan salah penempatan endotracheal tube', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 6 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(331, 0, 'Penundaan Operasi Elektif', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(332, 0, 'Tersedianya pelayanan anastesi sedasi moderate 24 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(333, 0, 'Kejadian diskrepansi diagnosis pre dan post operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(334, 0, 'Konversi tindakan anastesi dari lokal menjadi general', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 %', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(335, 0, 'Ketepatan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(336, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '5', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(337, 0, 'Angka kejadian infeksi nosokomial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1,5 %', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(338, 0, 'Angka Kejadian pulang paksa', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5 %', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(339, 0, 'Angka keberhasilan perawatan bayi dengan BBLR (1500 gram-2500 gram)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(340, 0, 'Kelengkapan asessment awal medis dan keperawatan pasien di perinatologi < 24 Jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(341, 0, 'Angka keberhasilan penggunaan CPAP pada pasien Perina', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(342, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '6', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(343, 0, 'Rata-rata pasien yang kembali ke perawatan intensif dengan kasus yang sama <72 jam', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 3 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(344, 0, 'Kejadian VAP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 5,8 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(345, 0, 'Ketepatan pemberian dosis obat High Alert pada pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(346, 0, 'Kepatuhan Visit Dokter Spesialis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(347, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(348, 0, 'Kematian pasien < 48 jam sejak masuk RS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,24 %', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(349, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '7', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(350, 0, 'Kejadian kematian ibu karena persalinan akibat perdarahan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(351, 0, 'Kejadian kematian ibu karena persalinan akibat pre eklampsia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 30 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(352, 0, 'Kejadian kematian ibu karena persalinan akibat sepsis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 0,2 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(353, 0, 'Pemberi pelayanan persalinan normal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(354, 0, 'Pemberi pelayanan persalinan dengan penyulit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '1 tim', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(355, 0, 'Kemampuan menangani bayi dengan asfiksia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(356, 0, 'Pertolongan persalinan melalui seksio caesaria', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 20 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(357, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(358, 0, 'Kepatuhan Identifikasi Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(359, 0, 'Rerata waktu tanggap emergency sectio caesaria', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(360, 0, 'Ketepatan Pelaksanaan Instruksi DPJP', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '8', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(361, 0, 'Waktu tunggu hasil pelayanan thorax foto', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 180 menit', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(362, 0, 'Digitalisasi hasil radiologi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 60 %', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(363, 0, 'Kesalahan penyerahan hasil radiologi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(364, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(365, 0, 'Ketepatan waktu pembacaan foto cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 60 menit', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(366, 0, 'Ketepatan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '9', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(367, 0, 'Waktu tunggu hasil pelayanan laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 140 menit', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(368, 0, 'Tidak adanya kesalahan pemberian hasil pemeriksaan laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(369, 0, 'Tidak adanya kejadian tertukar spesimen', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(370, 0, 'Waktu tunggu hasil pelayanan laboratorium cito', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 60 Menit', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(371, 0, 'Pelaporan hasil kritis laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(372, 0, 'Kesesuaian baku mutu eksternal', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(373, 0, 'Ketepatan identifikasi pasien di laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(374, 0, 'Ketepatan Hasil Pemeriksaan yang Dirujuk', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 48 jam', 1, '10', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(375, 0, 'Waktu tunggu pelayanan obat jadi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 30 menit', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(376, 0, 'Waktu tunggu pelayanan obat racikan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 60 menit', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(377, 0, 'Tidak adanya kejadian kesalahan pemberian obat', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(378, 0, 'Penulisan resep sesuai formularium nasional untuk pasien JKN', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(379, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(380, 0, 'Ketepatan identifikasi pasien di farmasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(381, 0, 'Pemberian label obat high alert', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(382, 0, 'Persentase Ketersediaan Bahan Medis Habis Pakai Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 10%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(383, 0, 'Persentase Ketersediaan Obat Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(384, 0, 'Persentase Pengkajian Resep Polifarmasi Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(385, 0, 'Persentase Laporan Konseling Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 10%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(386, 0, 'Persentase Pelayanan Informasi Obat Sesuai Standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 25%', 1, '11', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(387, 0, 'Ketepatan Waktu Pemberian Makanan Kepada Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '> 90 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(388, 0, 'Tidak Adanya Kesalahan Dalam Pemberian Diet Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(389, 0, 'Sisa Makanan Yang Tidak Termakan Oleh Pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 20 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(390, 0, 'Capaian Edukasi Kelompok (Penyuluhan Gizi) Minimal 1x/TW', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(391, 0, 'Kepuasan Pelanggan Makanan Rumah Sakit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '> 80 %', 1, '12', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(392, 0, 'Kelengkapan pengisian rekam medik 24 jam setelah selesai pelayanan unit rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(393, 0, 'Kelengkapan pengisian rekam medik 24 jam setelah selesai pelayanan unit rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(394, 0, 'Kelengkapan pengisian rekam medik 24 jam setelah selesai pelayanan unit igd', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(395, 0, 'Kelengkapan informed concent setelah mendapatkan informasi yang jelas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20');
+INSERT INTO `sikat_profile_indikator` (`ID`, `LEVEL`, `JUDUL_INDIKATOR`, `TAHUN`, `ISI_POPULASI`, `USER_ACC`, `DASAR_PEMIKIRAN`, `IS_EFEKTIF`, `IS_EFISIEN`, `IS_TEPAT_WAKTU`, `IS_AMAN`, `IS_ADIL`, `IS_BERPASIEN`, `IS_INTEGRASI`, `ACC_DATE`, `TUJUAN`, `DEFINISI_PEMIKIRAN`, `TIPE_INDIKATOR`, `UKURAN_INDIKATOR`, `NUMERATOR`, `DENUMERATOR`, `KRITERIA`, `FORMULA`, `SUMBER_DATA`, `FREK_PENGUMPULAN`, `PERIODE_PELAPORAN`, `PERIODE_ANALISA`, `METODE_PENGUMPULAN`, `POPULASI_SAMPEL`, `ISI_SAMPLE`, `RENCANA_ANALISIS`, `INSTRUMEN_PENGAMBILAN`, `PENANGGUNG_JAWAB`, `TYPE`, `TARGET_PENCAPAIAN`, `STATUS_ACC`, `PROCESS_TYPE`, `DAILY_MONTHLY_SPECIAL`, `ISI_INSTRUMEN`, `BESAR_SAMPEL`, `isINM`, `isIMPRs`, `isIMPUnit`, `CREATE_DATE`, `REVIEW_ULANG`, `UPDATE_DATE`) VALUES
+(396, 0, 'Berkas rekam medis yang hilang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(397, 0, 'Retensi berkas rekam medis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(398, 0, 'Hybrid rekam medis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(399, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '13', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(400, 0, 'Baku mutu limbah cair BOD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'BOD ? 30 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(401, 0, 'Baku mutu limbah cair COD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'COD ? 100 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(402, 0, 'Baku mutu limbah cair TSS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'TSS ? 30 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(403, 0, 'Baku mutu limbah cair PH', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'PH 6-9', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(404, 0, 'Baku mutu limbah cair Ammonia', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'Ammonia ? 10 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(405, 0, 'Baku mutu limbah cair Coliform', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'Total coliform ? 3000 jumlah/100 ml', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(406, 0, 'Baku mutu limbah cair Minyak', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, 'Minyak dan lemak ? 5 mg/l', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(407, 0, 'Pengolahan limbah padat berbahaya sesuai dengan aturan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(408, 0, 'Kelembaban Ruangan Sesuai Dengan Aturan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '14', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(409, 0, 'Ketepatan pendistribusian alat steril', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(410, 0, 'Kepuasan Pelanggan Unit CSSD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(411, 0, 'Penandaan Frekuensi Alat reUse', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '15', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(412, 0, 'Tidak adanya kejadian linen yang hilang', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(413, 0, 'Ketepatan pengelolaan linen infeksius', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(414, 0, 'Hasil pemeriksaan angka kuman pada linen yang dicuci memenuhi standar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(415, 0, 'Ketetapan pemilahan linen infeksius dan linen non infeksius', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(416, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '16', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(417, 0, 'Kecepatan waktu menanggapi kerusakan sarana dan prasarana Rumah Sakit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(418, 0, 'Peralatan Laboratorium (dan alat ukur yang lain) yang terkalibrasi tepat waktu sesuai dengan ketentuan kalibrasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '17', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(419, 0, 'Pelaksanaan Standar Penanganan Tertusuk Jarum', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(420, 0, 'Pelaksanaan Standar Penanganan Kecelakaan Kerja Terkait Fasilitas', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(421, 0, 'Ketepatan Pengecekan Sarana Proteksi Kebakaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(422, 0, 'Ketersediaan TIM penanggulangan Bencana', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '18', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(423, 0, 'Kecepatan waktu pemberian informasi tentang tagihan pasien rawat inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 120 Menit', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(424, 0, 'Kejadian bad debt pada pelayanan rawat jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(425, 0, 'Kesesuaian antara pasien yang bayar dengan yang seharusnya membayar', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(426, 0, 'Kesesuaian input layanan dari unit dengan billing pembayaran', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(427, 0, 'Presentase billing yang belum close dihari yang sama', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(428, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '19', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(429, 0, 'Kelengkapan Penginputan Data di SIMRS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(430, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(431, 0, 'Kecepatan Petugas dalam melakukan pendaftaran pasien di SIMRS (06.30 - 08.30)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(432, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(433, 0, 'Kecepatan Pelayanan Ambulance di RS < 30 Menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(434, 0, 'Tidak Adanya Kecelakaan Ambulans Yang Menimbulkan Kecacatan atau Kematian', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(435, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(436, 0, 'Tersedianya anggota Tim PPI yang terlatih', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(437, 0, 'Infeksi luka infus/flebistis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(438, 0, 'Hospital-acquired pneumonia (HAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(439, 0, 'Catheter Associated Urinary Tract Infection (CAUTI) / ISK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 4.7 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(440, 0, 'Surgical Site Infection (SSI) /IDO', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2 %', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(441, 0, 'Penggunaan Penggunaan APD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(442, 0, 'Kepatuhan kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(443, 0, 'Ventilator Associated Pneumonia ( VAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5,8 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(444, 0, 'central line bloodstream infection (CLABSI)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(445, 0, 'Kelengkapan Penginputan Data di SIMRS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(446, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(447, 0, 'Kecepatan Petugas dalam melakukan pendaftaran pasien di SIMRS (06.30 - 08.30)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(448, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '20', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(449, 0, 'Kecepatan Pelayanan Ambulance di RS < 30 Menit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(450, 0, 'Tidak Adanya Kecelakaan Ambulans Yang Menimbulkan Kecacatan atau Kematian', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(451, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80 %', 1, '21', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(452, 0, 'Tersedianya anggota Tim PPI yang terlatih', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(453, 0, 'Infeksi luka infus/flebistis', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(454, 0, 'Hospital-acquired pneumonia (HAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 1 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(455, 0, 'Catheter Associated Urinary Tract Infection (CAUTI) / ISK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 4.7 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(456, 0, 'Surgical Site Infection (SSI) /IDO', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 2 %', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(457, 0, 'Penggunaan Penggunaan APD', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(458, 0, 'Kepatuhan kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(459, 0, 'Ventilator Associated Pneumonia ( VAP)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5,8 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(460, 0, 'central line bloodstream infection (CLABSI)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '< 5 ‰', 1, '22', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(461, 0, 'Kepatuhan identifikasi pasien', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(462, 0, 'Pelaporan hasil kritis laboratorium', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(463, 0, 'Ketepatan pemberian obat high alert sesuai prosedur', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(464, 0, 'Kelengkapan pengisian surgery safety checklist pasien operasi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(465, 0, 'Kepatuhan kebersihan tangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(466, 0, 'Kepatuhan upaya pencegahan resiko pasien jatuh', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(467, 0, 'Kejadian pasien jatuh', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '23', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(468, 0, 'Kepatuhan terhadap Alur Klinis (Clinical Pathway)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(469, 0, 'Angka Kedensial Dokter Baru', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(470, 0, 'Re-kredensial Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(471, 0, 'Kelengkapan STR dan SIP Dokter', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(472, 0, 'Terselenggaranya Audit Medik', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(473, 0, 'Tersusunnya minimal 5 PPK penyakit terbanyak setiap SMF (PD, Anak, Obgyn, Bedah, Saraf dan Anestesi)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '24', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(474, 0, 'Angka di Lakukan Kredensial Perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(475, 0, 'Kelengkapan Asuhan Keperawatan Berbasis EMR', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(476, 0, 'Angka Pelangaran Etik, disiplin perawat dan Bidan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '0%', 1, '25', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(477, 0, 'Kepatuhan tenaga kesehatan dalam pelaksanaan proses kredensial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '26', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(478, 0, 'Kepatuhan pelaksanaan OPPE dan FPPE', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '26', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(479, 0, 'Dilakukannya sosialisasi mengenai etik', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '27', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(480, 0, 'Penilaian kepuasan pasien terhadap pelaksanaan komunikasi dan edukasi di Rawat Jalan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(481, 0, 'Penilaian kepuasan pasien terhadap pelaksanaan komunikasi dan edukasi di Rawat Inap', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 75%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(482, 0, 'Keterlaksanaan Pendidikan Kesehatan Internal (Penyuluhan Kelompok)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(483, 0, 'Keterlaksanaan Pendidikan Kesehatan Eksternal (Penyuluhan Kelompok)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 80%', 1, '28', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(484, 0, 'Pemakaian Antibiotik Lini Ketiga Sesuai Prosedur', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '29', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(485, 0, 'Kepuasan pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '88.5%', 1, '30', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(486, 0, 'Kecepatan Waktu Tanggap Komplain', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '30', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(487, 0, 'Terselenggaranya pembahasan Audit Maternal Perinatal per tahun dan atau by case', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '31', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(488, 0, 'Jejaring pelayanan TB di wilayah Sawah Besar dengan penyakit penyerta', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '32', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(489, 0, 'Pelatihan Staf Minimal 20 jam/tahun', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '190 orang', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(490, 0, 'Kepatuhan Administrasi Cuti Pegawai', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '95%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(491, 0, 'Pegawai Kesehatan yang melakukan pelayanan kesehatan memiliki STR', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '95%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(492, 0, 'Kepatuhan pegawai terhadap peraturan jam kerja', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '95%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(493, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '33', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(494, 0, 'Kelengkapan Laporan Akuntabilitas Kinerja', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(495, 0, 'Cost Recovery Rate', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 40%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(496, 0, 'Ketepatan Waktu Penyusunan Laporan Keuangan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(497, 0, 'Ketepatan Waktu Pemberian Gaji dan tunjangan pegawai non PNS Sesuai Kesepakatan Waktu', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(498, 0, 'Kepuasan Pelanggan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '34', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(499, 0, 'Pelayanan KB (Keluarga Berencana) Pasca Salin', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '50%', 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(500, 0, 'Kepatuhan dalam pemeberian Pelayanan Konseling KB (Keluarga Berencana)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '35', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(501, 0, 'Kepatuhan pengumpulan hasil stok opname dari unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(502, 0, 'Labelisasi barang aset', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '90%', 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(503, 0, 'Kesesuaian stok di Laporan dengan stok fisik', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '90%', 1, '36', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(504, 0, 'Cakupan pasien stunting wasting di rawat jalan Yang Mengalami Peningkatan Status Gizi', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '50%', 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(505, 0, 'Cakupan Rujukan Pasien Stunting yang mendapatkan PKMK', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '50%', 1, '37', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(506, 0, 'Ketepatan waktu pengajuan berkas klaim JKN per bulan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(507, 0, 'Kelengkapan berkas klaim rawat inap pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(508, 0, 'Kelengkapan berkas klaim rawat jalan pasien BPJS Kesehatan dari setiap unit', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(509, 0, 'Jumlah berkas pengajuan klaim Rawat Jalan & Rawat Inap yang diajukan ke BPJS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '38', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(510, 0, 'Terlaksananya pelayanan kesehatan pasien dengan resiko terinfeksi penyakit HIV/AIDS', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(511, 0, 'Terlaksananya promkes HIV/AIDS di unit rawat jalan atau media sosial', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '75%', 1, '39', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(512, 0, 'Terselenggaranya pemeliharaan jaringan berfungsi dengan baik di semua unit', '2024', '', '', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 0, '40', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-30'),
+(513, 0, 'Waktu tanggap pelaporan kerusakan Perangkat IT', '2024', '', 'admin', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 85%', 0, '40', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-30'),
+(514, 0, 'Terlaksananya target bridging dengan pihak eksternal prioritas (Satu Sehat)', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '100%', 1, '40', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(515, 0, 'Ketepatan Waktu Pembayaran Dokumen SPJ', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '80%', 1, '41', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(516, 0, 'Kesesuaian Pembayaran dengan Target SPS Pengadaan', '2024', '', '0', '', 0, 0, 0, 0, 0, 0, 0, '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 2, '? 90%', 1, '41', '', '', '', 0, 0, 0, '2024-10-20', '', '2024-10-20'),
+(517, 1, 'test', '2023', '', '', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', '0', '', 'test', 'test', 'test', 'test', 'test', 'Harian', 'test', 'Semester', 'Concurent', 'Populasi', 'test', '', 'test', 'test', NULL, 'test', 0, NULL, '', '', '', 0, 0, 0, NULL, '', NULL),
+(518, 5, 'tets', '2024', '', '', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', '0', '', 'test', 'test', 'test', 'tets', 'tes', 'Triwulan', 't', 'Triwulan', 'Concurent', 'Populasi', 'test', '', 'test', 'test', NULL, 'test', 0, 'rawatJalan', '', '', '', 0, 0, 0, NULL, '', NULL),
+(520, 1, 'test', '2023', '', '', 'test', 0, 1, 1, 0, 0, 0, 0, '', 't', 't', '0', '', 't', 't', 't', 't', 't', 'Triwulan', 't', 'Triwulan', 'Concurent', 'Populasi', 'test', '', 't', 't', NULL, 'tt', 0, 'indikatorMutu', '', '', '', 0, 0, 0, '2024-10-30', '', '2024-10-30'),
+(522, 1, 'test', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', '0', 'Presentase', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Triwulan', 'Retrospektif', 'Non Probability Sampling', '', '', 'Formulir', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 0, 1, 0, '2024-11-02', '', '2024-11-02'),
+(523, 2, 't', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', '0', 'Waktu', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Retrospektif', 'Probability Sampling', '', '', 'EMR', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 1, 0, 1, '2024-11-02', '', '2024-11-02'),
+(524, 3, 't', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', '0', 'Presentase', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Triwulan', 'Observasi', 'Probability Sampling', '', '', 'Formulir', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 1, 1, 0, '2024-11-02', '', '2024-11-02'),
+(525, 4, 't', '2024', '', '', 't', 0, 1, 0, 0, 0, 0, 0, '', 't', 't', '0', 'Presentase', 't', 't', 't', 't', 'Data Primer', '', 'Harian', 'Bulanan', 'Observasi', 'Probability Sampling', '', '', 'Formulir', 'indikatorMutu', NULL, 't', 0, 'indikatorMutu', '', '', 't', 1, 0, 0, '2024-11-02', '', '2024-11-02'),
+(532, 35, 'test', '2024', '', 'pmkp@rsudsawahbesar.com', 'test', 0, 1, 0, 0, 0, 0, 0, '', 'test', 'test', 'Proses', 'Presentase', 'test', '', 'test', 'test', 'Data Primer', '', 'Harian', 'Triwulan', 'Retrospektif', 'Probability Sampling', 'test', '', 'Lainnya', 'rawatJalan', NULL, 'test', 0, 'rawatJalan', '', 'test', 'test', 1, 0, 0, '2024-11-20', 'test review upd', '2024-11-23');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_profile_type`
+-- Table structure for table `sikat_profile_type`
 --
 
 CREATE TABLE `sikat_profile_type` (
@@ -30599,7 +30629,7 @@ CREATE TABLE `sikat_profile_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sikat_profile_type`
+-- Dumping data for table `sikat_profile_type`
 --
 
 INSERT INTO `sikat_profile_type` (`ID`, `TYPE`, `CREATE_DATE`, `UPDATE_DATE`) VALUES
@@ -30648,7 +30678,7 @@ INSERT INTO `sikat_profile_type` (`ID`, `TYPE`, `CREATE_DATE`, `UPDATE_DATE`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_settings`
+-- Table structure for table `sikat_settings`
 --
 
 CREATE TABLE `sikat_settings` (
@@ -30663,7 +30693,7 @@ CREATE TABLE `sikat_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_settings`
+-- Dumping data for table `sikat_settings`
 --
 
 INSERT INTO `sikat_settings` (`id`, `nama_direktur`, `nip_direktur`, `nama_rumah_sakit`, `waktu_kunci_pmkp`, `waktu_sembunyi_ikp`, `notif_email_ikp`, `notif_email_k3rs`) VALUES
@@ -30672,32 +30702,36 @@ INSERT INTO `sikat_settings` (`id`, `nama_direktur`, `nip_direktur`, `nama_rumah
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_siklus`
+-- Table structure for table `sikat_siklus`
 --
 
 CREATE TABLE `sikat_siklus` (
   `ID` int(11) NOT NULL,
   `LEMBAR_PDSA_ID` int(11) DEFAULT NULL,
   `RENCANA` text DEFAULT NULL,
+  `TANGGAL_MULAI` date NOT NULL,
+  `TANGGAL_SELESAI` date NOT NULL,
   `BERHARAP` text DEFAULT NULL,
   `TINDAKAN` text DEFAULT NULL,
   `DIAMATI` text DEFAULT NULL,
   `PELAJARI` text DEFAULT NULL,
-  `TINDAKAN_SELANJUTNYA` text DEFAULT NULL
+  `TINDAKAN_SELANJUTNYA` text DEFAULT NULL,
+  `FILE_PATH` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sikat_siklus`
+-- Dumping data for table `sikat_siklus`
 --
 
-INSERT INTO `sikat_siklus` (`ID`, `LEMBAR_PDSA_ID`, `RENCANA`, `BERHARAP`, `TINDAKAN`, `DIAMATI`, `PELAJARI`, `TINDAKAN_SELANJUTNYA`) VALUES
-(5, 3, 'test', 'test', 'test', 'test', 'test', 'test'),
-(6, 3, 'test', 'test', 'test', 'test', 'test', 'test');
+INSERT INTO `sikat_siklus` (`ID`, `LEMBAR_PDSA_ID`, `RENCANA`, `TANGGAL_MULAI`, `TANGGAL_SELESAI`, `BERHARAP`, `TINDAKAN`, `DIAMATI`, `PELAJARI`, `TINDAKAN_SELANJUTNYA`, `FILE_PATH`) VALUES
+(74, 64, 'a', '2024-11-24', '2024-11-27', 'a', 'a', 'a', 'a', 'a', '/uploads/siklus/6742a32196a36_(HiFiSnap_co)_wp4470264.jpg'),
+(75, 64, 'b', '2024-11-24', '2024-11-27', 'b', 'b', 'b', 'b', 'bbbb', '/uploads/siklus/6742a3597e541_5e320045-3784-4ea4-aef0-7343ac2615ba.png'),
+(76, 65, 'a', '2024-11-26', '2024-11-28', 'a', 'a', 'a', 'a', 'a', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_skor_dampak`
+-- Table structure for table `sikat_skor_dampak`
 --
 
 CREATE TABLE `sikat_skor_dampak` (
@@ -30707,7 +30741,7 @@ CREATE TABLE `sikat_skor_dampak` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_skor_dampak`
+-- Dumping data for table `sikat_skor_dampak`
 --
 
 INSERT INTO `sikat_skor_dampak` (`id`, `nama`, `deskripsi`) VALUES
@@ -30720,7 +30754,7 @@ INSERT INTO `sikat_skor_dampak` (`id`, `nama`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_subtipe_insiden`
+-- Table structure for table `sikat_subtipe_insiden`
 --
 
 CREATE TABLE `sikat_subtipe_insiden` (
@@ -30731,7 +30765,7 @@ CREATE TABLE `sikat_subtipe_insiden` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_subtipe_insiden`
+-- Dumping data for table `sikat_subtipe_insiden`
 --
 
 INSERT INTO `sikat_subtipe_insiden` (`id`, `tipe_insiden`, `nama`, `deskripsi`) VALUES
@@ -30922,7 +30956,7 @@ INSERT INTO `sikat_subtipe_insiden` (`id`, `tipe_insiden`, `nama`, `deskripsi`) 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_table`
+-- Table structure for table `sikat_table`
 --
 
 CREATE TABLE `sikat_table` (
@@ -30946,7 +30980,7 @@ CREATE TABLE `sikat_table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_table`
+-- Dumping data for table `sikat_table`
 --
 
 INSERT INTO `sikat_table` (`id`, `nm_menu`, `nm_table`, `is_minggu`, `is_bulan`, `is_tahun`, `is_unit`, `is_dokter`, `is_ruang`, `is_umum_bpjs`, `is_start_date`, `is_end_date`, `span_header1`, `span_header2`, `column_title`, `column_key`, `query`) VALUES
@@ -30990,7 +31024,7 @@ INSERT INTO `sikat_table` (`id`, `nm_menu`, `nm_table`, `is_minggu`, `is_bulan`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_tindakan_oleh`
+-- Table structure for table `sikat_tindakan_oleh`
 --
 
 CREATE TABLE `sikat_tindakan_oleh` (
@@ -31000,7 +31034,7 @@ CREATE TABLE `sikat_tindakan_oleh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_tindakan_oleh`
+-- Dumping data for table `sikat_tindakan_oleh`
 --
 
 INSERT INTO `sikat_tindakan_oleh` (`id`, `nama`, `deskripsi`) VALUES
@@ -31011,7 +31045,7 @@ INSERT INTO `sikat_tindakan_oleh` (`id`, `nama`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_tipe_insiden`
+-- Table structure for table `sikat_tipe_insiden`
 --
 
 CREATE TABLE `sikat_tipe_insiden` (
@@ -31021,7 +31055,7 @@ CREATE TABLE `sikat_tipe_insiden` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_tipe_insiden`
+-- Dumping data for table `sikat_tipe_insiden`
 --
 
 INSERT INTO `sikat_tipe_insiden` (`id`, `nama`, `deskripsi`) VALUES
@@ -31044,7 +31078,7 @@ INSERT INTO `sikat_tipe_insiden` (`id`, `nama`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sikat_users`
+-- Table structure for table `sikat_users`
 --
 
 CREATE TABLE `sikat_users` (
@@ -31057,7 +31091,7 @@ CREATE TABLE `sikat_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `sikat_users`
+-- Dumping data for table `sikat_users`
 --
 
 INSERT INTO `sikat_users` (`id`, `username`, `password`, `name`, `email`, `role`) VALUES
@@ -31119,256 +31153,268 @@ INSERT INTO `sikat_users` (`id`, `username`, `password`, `name`, `email`, `role`
 --
 
 --
--- Indeks untuk tabel `sikat_analisa_indikator`
+-- Indexes for table `sikat_analisa_indikator`
 --
 ALTER TABLE `sikat_analisa_indikator`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_profile_indikator` (`id_profile_indikator`);
 
 --
--- Indeks untuk tabel `sikat_b3rs`
+-- Indexes for table `sikat_analisa_unit`
+--
+ALTER TABLE `sikat_analisa_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sikat_b3rs`
 --
 ALTER TABLE `sikat_b3rs`
   ADD PRIMARY KEY (`tgl_kejadian`,`jam_kejadian`,`jenis_bahan`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_frekuensi_kejadian`
+-- Indexes for table `sikat_frekuensi_kejadian`
 --
 ALTER TABLE `sikat_frekuensi_kejadian`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_ikp`
+-- Indexes for table `sikat_ikp`
 --
 ALTER TABLE `sikat_ikp`
   ADD PRIMARY KEY (`tgl_kejadian`,`jam_kejadian`,`no_rawat`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_ikp_inves`
+-- Indexes for table `sikat_ikp_inves`
 --
 ALTER TABLE `sikat_ikp_inves`
   ADD PRIMARY KEY (`tgl_kejadian`,`jam_kejadian`,`no_rawat`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_jenis_insiden`
+-- Indexes for table `sikat_jenis_insiden`
 --
 ALTER TABLE `sikat_jenis_insiden`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_k3rs`
+-- Indexes for table `sikat_k3rs`
 --
 ALTER TABLE `sikat_k3rs`
   ADD PRIMARY KEY (`tgl_kejadian`,`jam_kejadian`,`no_rkm_medis`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_k3rs_inves`
+-- Indexes for table `sikat_k3rs_inves`
 --
 ALTER TABLE `sikat_k3rs_inves`
   ADD PRIMARY KEY (`tgl_kejadian`,`jam_kejadian`,`no_rkm_medis`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_lembar_pdsa`
+-- Indexes for table `sikat_lembar_pdsa`
 --
 ALTER TABLE `sikat_lembar_pdsa`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indeks untuk tabel `sikat_nama_insiden`
+-- Indexes for table `sikat_nama_insiden`
 --
 ALTER TABLE `sikat_nama_insiden`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_pmkp`
+-- Indexes for table `sikat_pmkp`
 --
 ALTER TABLE `sikat_pmkp`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_ppi`
+-- Indexes for table `sikat_ppi`
 --
 ALTER TABLE `sikat_ppi`
   ADD PRIMARY KEY (`tanggal`,`no_rawat`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_profile_dimensi_mutu`
+-- Indexes for table `sikat_profile_dimensi_mutu`
 --
 ALTER TABLE `sikat_profile_dimensi_mutu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `sikat_profile_indikator`
+-- Indexes for table `sikat_profile_indikator`
 --
 ALTER TABLE `sikat_profile_indikator`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indeks untuk tabel `sikat_profile_type`
+-- Indexes for table `sikat_profile_type`
 --
 ALTER TABLE `sikat_profile_type`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indeks untuk tabel `sikat_settings`
+-- Indexes for table `sikat_settings`
 --
 ALTER TABLE `sikat_settings`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_siklus`
+-- Indexes for table `sikat_siklus`
 --
 ALTER TABLE `sikat_siklus`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indeks untuk tabel `sikat_skor_dampak`
+-- Indexes for table `sikat_skor_dampak`
 --
 ALTER TABLE `sikat_skor_dampak`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_subtipe_insiden`
+-- Indexes for table `sikat_subtipe_insiden`
 --
 ALTER TABLE `sikat_subtipe_insiden`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_table`
+-- Indexes for table `sikat_table`
 --
 ALTER TABLE `sikat_table`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_tindakan_oleh`
+-- Indexes for table `sikat_tindakan_oleh`
 --
 ALTER TABLE `sikat_tindakan_oleh`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_tipe_insiden`
+-- Indexes for table `sikat_tipe_insiden`
 --
 ALTER TABLE `sikat_tipe_insiden`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `sikat_users`
+-- Indexes for table `sikat_users`
 --
 ALTER TABLE `sikat_users`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_analisa_indikator`
+-- AUTO_INCREMENT for table `sikat_analisa_indikator`
 --
 ALTER TABLE `sikat_analisa_indikator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_frekuensi_kejadian`
+-- AUTO_INCREMENT for table `sikat_analisa_unit`
+--
+ALTER TABLE `sikat_analisa_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `sikat_frekuensi_kejadian`
 --
 ALTER TABLE `sikat_frekuensi_kejadian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_jenis_insiden`
+-- AUTO_INCREMENT for table `sikat_jenis_insiden`
 --
 ALTER TABLE `sikat_jenis_insiden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_lembar_pdsa`
+-- AUTO_INCREMENT for table `sikat_lembar_pdsa`
 --
 ALTER TABLE `sikat_lembar_pdsa`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_nama_insiden`
+-- AUTO_INCREMENT for table `sikat_nama_insiden`
 --
 ALTER TABLE `sikat_nama_insiden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_pmkp`
+-- AUTO_INCREMENT for table `sikat_pmkp`
 --
 ALTER TABLE `sikat_pmkp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4501;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4503;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_profile_dimensi_mutu`
+-- AUTO_INCREMENT for table `sikat_profile_dimensi_mutu`
 --
 ALTER TABLE `sikat_profile_dimensi_mutu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_profile_indikator`
+-- AUTO_INCREMENT for table `sikat_profile_indikator`
 --
 ALTER TABLE `sikat_profile_indikator`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=528;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=533;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_profile_type`
+-- AUTO_INCREMENT for table `sikat_profile_type`
 --
 ALTER TABLE `sikat_profile_type`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_settings`
+-- AUTO_INCREMENT for table `sikat_settings`
 --
 ALTER TABLE `sikat_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_siklus`
+-- AUTO_INCREMENT for table `sikat_siklus`
 --
 ALTER TABLE `sikat_siklus`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_skor_dampak`
+-- AUTO_INCREMENT for table `sikat_skor_dampak`
 --
 ALTER TABLE `sikat_skor_dampak`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_subtipe_insiden`
+-- AUTO_INCREMENT for table `sikat_subtipe_insiden`
 --
 ALTER TABLE `sikat_subtipe_insiden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_table`
+-- AUTO_INCREMENT for table `sikat_table`
 --
 ALTER TABLE `sikat_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_tindakan_oleh`
+-- AUTO_INCREMENT for table `sikat_tindakan_oleh`
 --
 ALTER TABLE `sikat_tindakan_oleh`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_tipe_insiden`
+-- AUTO_INCREMENT for table `sikat_tipe_insiden`
 --
 ALTER TABLE `sikat_tipe_insiden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `sikat_users`
+-- AUTO_INCREMENT for table `sikat_users`
 --
 ALTER TABLE `sikat_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `sikat_analisa_indikator`
+-- Constraints for table `sikat_analisa_indikator`
 --
 ALTER TABLE `sikat_analisa_indikator`
   ADD CONSTRAINT `sikat_analisa_indikator_ibfk_1` FOREIGN KEY (`id_profile_indikator`) REFERENCES `sikat_profile_indikator` (`ID`);
