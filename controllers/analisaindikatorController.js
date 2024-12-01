@@ -1403,8 +1403,9 @@ sikatApp.controller(
                 for (const key of Object.keys(result.data)) {
                   if (
                     result.data[key]["STATUS_ACC"] == 1 &&
-                    result.data[key]["JUDUL_INDIKATOR"] === selectedUnit &&
-                    result.data[key]["PROCESS_TYPE"] === $rootScope.currPage
+                    result.data[key]["JUDUL_INDIKATOR"] == selectedUnit &&
+                    result.data[key]["PROCESS_TYPE"] == $rootScope.currPage &&
+                    result.data[key]["period"] == $scope.periode
                   ) {
                     $scope.judulIndikator = result.data[key]["JUDUL_INDIKATOR"];
                     $scope.numerator = result.data[key]["NUMERATOR"];
@@ -1442,10 +1443,8 @@ sikatApp.controller(
                           for (const key of Object.keys(result.data)) {
                             if (
                               result.data[key]["STATUS_ACC"] == 1 &&
-                              result.data[key]["JUDUL_INDIKATOR"] ===
-                                selectedUnit &&
-                              result.data[key]["PROCESS_TYPE"] ===
-                                $rootScope.currPage
+                              result.data[key]["JUDUL_INDIKATOR"] == selectedUnit &&
+                              result.data[key]["PROCESS_TYPE"] == $rootScope.currPage
                             ) {
                               $scope.judulIndikator =
                                 result.data[key]["JUDUL_INDIKATOR"];
