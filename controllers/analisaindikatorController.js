@@ -787,7 +787,7 @@ sikatApp.controller(
             window.history.back();
           },
           function (data) {
-            swal("Error!", "Data is failed to be saved.", "error");
+            swal("Error!",data.data.message, "error");
           }
         );
     };
@@ -1593,7 +1593,7 @@ sikatApp.controller(
             window.history.back();
           },
           function (data) {
-            swal("Error!", "Data is failed to be saved.", "error");
+            swal("Error!",data.data.message, "error");
           }
         );
     };
