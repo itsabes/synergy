@@ -29,13 +29,13 @@
                 <div class="form-group row">
                   <label
                     for="example-month-input"
-                    class="col-xs-12 col-lg-2 col-form-label">Pilih Unit
+                    class="col-xs-12 col-lg-2 col-form-label">Pilih Indikator
                   </label>
                   <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
                   <div class="col-xs-12 col-lg-10">
                     <select
                       class="custom-select col-12" ng-model="unit" ng-init="unit = ''" ng-change="onUnitChange(unit)" >
-                      <option value="">Pilih Unit</option>
+                      <option value="">Pilih Indikator</option>
                       <option ng-repeat="n in units" value="{{ n }}">{{ n }}</option>
                     </select>
                   </div>
