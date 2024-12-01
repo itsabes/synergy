@@ -42,7 +42,7 @@ sikatApp.controller("indikatorMutuListController", function(
   }
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU'];
     return allowedRoles.includes(role);
   };
 
@@ -298,11 +298,14 @@ sikatApp.controller("indikatorMutuNewController", function(
         Swal.fire("Error!", "Ukuran Indikator tidak boleh kosong.", "error");
         return;
     }
-    /*
-    if (!$scope.numerator) {
-        Swal.fire("Error!", "Numerator tidak boleh kosong.", "error");
-        return;
+    
+    if (($scope.numerator && !$scope.denumerator) || (!$scope.numerator && $scope.denumerator)) {
+      // Jika salah satu diisi, validasi bahwa keduanya harus diisi
+      Swal.fire("Error!", "Numerator dan Denumerator harus diisi keduanya.", "error");
+      return;
     }
+  
+    /*
     if (!$scope.denumerator) {
         Swal.fire("Error!", "Denumerator tidak boleh kosong.", "error");
         return;
@@ -394,7 +397,7 @@ sikatApp.controller("indikatorMutuNewController", function(
           tipeIndikator: $scope.tipeIndikator,
           ukuranIndikator: $scope.ukuranIndikator,
           numerator: $scope.numerator != null ? $scope.numerator : "",
-          denumerator: $scope.denumerator = null ? $scope.denumerator : "",
+          denumerator: $scope.denumerator != null ? $scope.denumerator : "",
           targetPencapaian: $scope.targetPencapaian,
           kriteria: $scope.kriteria,
           formula: $scope.formula,
@@ -528,7 +531,7 @@ sikatApp.controller("indikatorMutuEditController", function(
   console.log("$rootScope.currPageParam = $routeParams.param;",$rootScope.currPageParam);
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU'];
     return allowedRoles.includes(role);
   };
 
@@ -658,6 +661,13 @@ sikatApp.controller("indikatorMutuEditController", function(
         Swal.fire("Error!", "Ukuran Indikator tidak boleh kosong.", "error");
         return;
     }
+
+    if (($scope.numerator && !$scope.denumerator) || (!$scope.numerator && $scope.denumerator)) {
+      // Jika salah satu diisi, validasi bahwa keduanya harus diisi
+      Swal.fire("Error!", "Numerator dan Denumerator harus diisi keduanya.", "error");
+      return;
+    }
+  
     /*
     if (!$scope.numerator) {
         Swal.fire("Error!", "Numerator tidak boleh kosong.", "error");
