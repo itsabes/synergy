@@ -22,7 +22,7 @@
               <div class="col">
                 <div class="form-group">
                   <label class="control-label">Tahun Kegiatan</label>
-                  <select class="custom-select col-12" ng-model="tahun">
+                  <select class="custom-select col-12" ng-model="tahun" ng-disabled="isAuthorized(user_role)">
                     <option ng-repeat="(key, n) in yearDynamic" value="{{ n }}" ng-selected="{{n == currentYear}}">{{ n }}</option>
                   </select>
                 </div>
@@ -44,6 +44,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="judulIndikator"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                   <input type="hidden" ng-model="unit" class="form-control" value="currPage"/>
                 </div>
@@ -54,6 +55,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="dasarPemikiran"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -61,37 +63,37 @@
                   <div class="row">
                     <div class="col">
                       <div class="checkbox checkbox-success">
-                        <input id="efisien" type="checkbox" ng-model="isEfisien" />
+                        <input id="efisien" type="checkbox" ng-model="isEfisien" ng-disabled="isAuthorized(user_role)"/>
                         <label for="efisien"> Efisien </label>
                       </div>
                       <div class="checkbox checkbox-success">
-                        <input id="efektif" type="checkbox" ng-model="isEfektif" />
+                        <input id="efektif" type="checkbox" ng-model="isEfektif" ng-disabled="isAuthorized(user_role)"/>
                         <label for="efektif"> Efektif </label>
                       </div>
                     </div>
                     <div class="col">
                       <div class="checkbox checkbox-success">
-                        <input id="tepatWaktu" type="checkbox" ng-model="isTepatWaktu" />
+                        <input id="tepatWaktu" type="checkbox" ng-model="isTepatWaktu" ng-disabled="isAuthorized(user_role)"/>
                         <label for="tepatWaktu"> Tepat Waktu </label>
                       </div>
                       <div class="checkbox checkbox-success">
-                        <input id="aman" type="checkbox" ng-model="isAman" />
+                        <input id="aman" type="checkbox" ng-model="isAman" ng-disabled="isAuthorized(user_role)"/>
                         <label for="aman"> Aman </label>
                       </div>
                     </div>
                     <div class="col">
                       <div class="checkbox checkbox-success">
-                        <input id="adil" type="checkbox" ng-model="isAdil" />
+                        <input id="adil" type="checkbox" ng-model="isAdil" ng-disabled="isAuthorized(user_role)"/>
                         <label for="adil"> Adil </label>
                       </div>
                       <div class="checkbox checkbox-success">
-                        <input id="berPasien" type="checkbox" ng-model="isBerPasien" />
+                        <input id="berPasien" type="checkbox" ng-model="isBerPasien" ng-disabled="isAuthorized(user_role)"/>
                         <label for="berPasien"> Berorientasi Pasien </label>
                       </div>
                     </div>
                     <div class="col">
                       <div class="checkbox checkbox-success">
-                        <input id="integrasi" type="checkbox" ng-model="isIntegrasi" />
+                        <input id="integrasi" type="checkbox" ng-model="isIntegrasi" ng-disabled="isAuthorized(user_role)"/>
                         <label for="integrasi"> Integrasi </label>
                       </div>
                     </div>
@@ -99,7 +101,7 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">Tujuan</label>
-                  <input type="text" ng-model="tujuan" class="form-control" />
+                  <input type="text" ng-model="tujuan" class="form-control" ng-disabled="isAuthorized(user_role)"/>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Definisi Operasional</label>
@@ -107,6 +109,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="defPemikiran"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -117,6 +120,7 @@
                     class="form-control custom-select"
                     ng-model="tipeIndikator"
                     ng-init="tipeIndikator = ''"
+                    ng-disabled="isAuthorized(user_role)"
                   >
                     <option value="">Pilih Jenis Indikator</option>
                     <option value="Input">Input</option>
@@ -133,6 +137,7 @@
                     class="form-control custom-select"
                     ng-model="ukuranIndikator"
                     ng-init="ukuranIndikator = ''"
+                    ng-disabled="isAuthorized(user_role)"
                   >
                     <option value="">Pilih Ukuran Indikator</option>
                     <option value="Presentase">Presentase</option>
@@ -145,6 +150,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="numerator"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -153,11 +159,12 @@
                     class="form-control"
                     rows="5"
                     ng-model="denumerator"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Target Pencapaian</label>
-                  <input type="text" ng-model="targetPencapaian" class="form-control" />
+                  <input type="text" ng-model="targetPencapaian" class="form-control" ng-disabled="isAuthorized(user_role)"/>
                 </div>
               </div>
               <div class="col">
@@ -167,6 +174,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="kriteria"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -175,6 +183,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="formula"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -183,6 +192,7 @@
                     class="form-control custom-select"
                     ng-model="metodePengumpulan"
                     ng-init="metodePengumpulan = ''"
+                    ng-disabled="isAuthorized(user_role)"
                   >
                     <option value="">Pilih Metode Pengumpulan</option>
                     <option value="Retrospektif">Retrospektif</option>
@@ -195,6 +205,7 @@
                     class="form-control custom-select"
                     ng-model="sumberData"
                     ng-init="sumberData = ''"
+                    ng-disabled="isAuthorized(user_role)"
                   >
                     <option value="">Pilih Sumber Data</option>
                     <option value="Data Primer">Data Primer</option>
@@ -208,6 +219,7 @@
                     ng-model="instrumenPengambilan"
                     id="instrumen"
                     ng-init="instrumenPengambilan = ''"
+                    ng-disabled="isAuthorized(user_role)"
                   >
                     <option value="">Pilih Instrumen Pengambilan</option>
                     <option value="Formulir">Formulir</option>
@@ -221,6 +233,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="isiInstrumen"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -229,6 +242,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="besarSampel"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -238,6 +252,7 @@
                     ng-model="populasiSampel"
                     id="sampel"
                     ng-init="populasiSampel = ''"
+                    ng-disabled="isAuthorized(user_role)"
                     >
                     <option value="">Pilih Cara Pengambilan Sampel</option>
                     <option value="Probability Sampling">Probability Sampling</option>
@@ -251,6 +266,7 @@
                     class="form-control"
                     rows="5"
                     ng-model="isiSampel"
+                    ng-readonly="isAuthorized(user_role)"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -259,6 +275,7 @@
                     class="form-control custom-select"
                     ng-model="periodePelaporan"
                     ng-init="periodePelaporan = ''"
+                    ng-disabled="isAuthorized(user_role)"
                     >
                     <option value="">Pilih Periode Pengumpulan Data</option>
                     <option value="Harian">Harian</option>
@@ -275,6 +292,7 @@
                     class="form-control custom-select"
                     ng-model="periodeAnalisa"
                     ng-init="periodeAnalisa = 'Triwulan'"
+                    ng-disabled="isAuthorized(user_role)"
                   >
                     <option value="Triwulan" selected>Triwulan</option>
                   </select>
@@ -294,15 +312,15 @@
                   <div class="row">
                     <div class="col">
                       <div class="checkbox checkbox-success">
-                        <input id="Inm" type="checkbox" ng-model="isINM" />
+                        <input id="Inm" type="checkbox" ng-model="isINM" ng-disabled="isAuthorized(user_role)"/>
                         <label for="Inm"> INM </label>
                       </div>
                       <div class="checkbox checkbox-success">
-                        <input id="ImpRs" type="checkbox" ng-model="isIMPRs" />
+                        <input id="ImpRs" type="checkbox" ng-model="isIMPRs" ng-disabled="isAuthorized(user_role)"/>
                         <label for="ImpRs"> IMP-RS </label>
                       </div>
                       <div class="checkbox checkbox-success">
-                        <input id="ImpUnit" type="checkbox" ng-model="isIMPUnit" />
+                        <input id="ImpUnit" type="checkbox" ng-model="isIMPUnit" ng-disabled="isAuthorized(user_role)"/>
                         <label for="ImpUnit"> IMP-Unit </label>
                       </div>
                     </div>
