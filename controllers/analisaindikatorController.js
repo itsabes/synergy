@@ -784,7 +784,8 @@ sikatApp.controller(
         .then(
           function (data) {
             swal("Success!", "Data is successfully saved.", "success");
-            window.history.back();
+            //window.history.back();
+            window.location.href = window.location.href;
           },
           function (data) {
             swal("Error!",data.data.message, "error");
@@ -1590,7 +1591,9 @@ sikatApp.controller(
         .then(
           function (data) {
             swal("Success!", "Data is successfully saved.", "success");
-            window.history.back();
+            //window.history.back();
+            window.location.href = window.location.href;
+            
           },
           function (data) {
             swal("Error!",data.data.message, "error");
