@@ -1057,6 +1057,7 @@ sikatApp.controller(
         var mappingUnit = mappingArr[i];
         monthlyData[mappingUnit[0] - 1]["disable_hasil"] = true;
       }
+      */
       for (var i = 0; i < $scope.monthlyNames.length; i++) {
         var target = $scope.target[i].toLowerCase();
         if (target.includes("laporan")) {
@@ -1081,7 +1082,7 @@ sikatApp.controller(
           monthlyData[i]["type_hasil"] = "ya/tidak";
         }
       }
-      */
+      
     };
     
     $scope.getData = () => {

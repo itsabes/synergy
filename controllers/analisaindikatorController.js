@@ -255,6 +255,37 @@ sikatApp.controller(
         );
     };
 
+    $scope.validateTarget = (target) => {
+      // Daftar satuan yang valid
+      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰",""];
+
+      // Membersihkan spasi tambahan di sekitar angka dan simbol
+      const cleanedTarget = target.trim();
+
+      // Menghapus satuan menggunakan regex untuk mencocokkan daftar satuan
+      const unit = units.find((u) => cleanedTarget.includes(u)) || null;
+
+      // Menghapus satuan dari target untuk mendapatkan angka
+      const valueWithoutUnit = unit
+        ? cleanedTarget.replace(unit, "").trim()
+        : cleanedTarget;
+
+      let value = null;
+
+      // Ekstrak angka berdasarkan simbol
+      if (valueWithoutUnit.includes("<")) {
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
+        return [null, parseFloat(value)];
+      } else if (valueWithoutUnit.includes(">")) {
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
+        return [parseFloat(value), null];
+      } else {
+        // Jika tidak ada simbol
+        value = valueWithoutUnit.replace(/[%]/g, "").trim();
+        return [parseFloat(value), null];
+      }
+    };
+
     $scope.downloadChart = (part) => {
       let monthlyData = [];
       let monthDataIndex = [];
@@ -346,7 +377,7 @@ sikatApp.controller(
       for (let i = 0; i < $scope.monthlyNames.length; i++) {
         let criteriaName = $scope.monthlyNames[i];
         let target = $scope.target[i].toLowerCase();
-        let targetHasil = $scope.targetHasil[i];
+        let targetHasil = $scope.validateTarget(target);
         let axisName = "";
         let isYaTidak = false;
 
@@ -376,9 +407,15 @@ sikatApp.controller(
         let dataPencapaian = [];
         let dataStandarBawah = [];
         let dataStandarAtas = [];
-        let standarBawah = monthDataIndex[i].denumerator;
-        let standarAtas = monthDataIndex[i].numerator;
-        for (let monthIdx = 0; monthIdx < (parseInt(part, 10) + 1) * 3; monthIdx++) {
+        let standarBawah = targetHasil[0];
+        let standarAtas = targetHasil[1];
+        console.log("standarAtas:" + standarAtas);
+        console.log("standarBawah:" + standarBawah);
+        for (
+          let monthIdx = 0;
+          monthIdx < (parseInt(part, 10) + 1) * 3;
+          monthIdx++
+        ) {
           let val = $scope.yearlyData[monthIdx]
             ? $scope.yearlyData[monthIdx].m[i].hasil
               ? $scope.yearlyData[monthIdx].m[i].hasil
@@ -462,21 +499,25 @@ sikatApp.controller(
         part: partString,
         dataList: dataList,
         unit: $rootScope.currPage,
-
       };
 
       const url = REPORT_URL + "/analisa_indikator_pdf/" + $scope.currPage;
-      pmkpService.postDownload(url, data, 'Report Analisa Indikator '+$scope.formatString($scope.currPage) + ".pdf");
-
+      pmkpService.postDownload(
+        url,
+        data,
+        "Report Analisa Indikator " +
+          $scope.formatString($scope.currPage) +
+          ".pdf"
+      );
     };
 
     $scope.formatString = (input) => {
       return input
         .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
         .split(" ") // Pisahkan kata-kata berdasarkan spasi
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
         .join(" "); // Gabungkan kembali dengan spasi
-    }
+    };
 
     $scope.filterMonthly = (monthlyData) => {
       for (var i = monthlyData.length; i < $scope.monthlyNames.length; i++) {
@@ -725,6 +766,8 @@ sikatApp.controller(
                   result.data[key]["JUDUL_INDIKATOR"];
                 $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
                 $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+                $scope.rekomendasi = "";
+                $scope.analisa = "";
 
                 console.log(
                   "status_acc:" + result.data[key]["STATUS_ACC"],
@@ -747,9 +790,8 @@ sikatApp.controller(
     };
 
     $scope.save = () => {
-
       if (!$scope.unit) {
-        Swal.fire("Error!", "Unit tidak boleh kosong.", "error");
+        Swal.fire("Error!", "Indikator tidak boleh kosong.", "error");
         return;
       }
 
@@ -786,9 +828,11 @@ sikatApp.controller(
             swal("Success!", "Data is successfully saved.", "success");
             //window.history.back();
             window.location.href = window.location.href;
+            //$scope.rekomendasi = "";
+            //$scope.analisa = "";
           },
           function (data) {
-            swal("Error!",data.data.message, "error");
+            swal("Error!", data.data.message, "error");
           }
         );
     };
@@ -1010,6 +1054,37 @@ sikatApp.controller(
       }
     };
 
+    $scope.validateTarget = (target) => {
+      // Daftar satuan yang valid
+      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰",""];
+
+      // Membersihkan spasi tambahan di sekitar angka dan simbol
+      const cleanedTarget = target.trim();
+
+      // Menghapus satuan menggunakan regex untuk mencocokkan daftar satuan
+      const unit = units.find((u) => cleanedTarget.includes(u)) || null;
+
+      // Menghapus satuan dari target untuk mendapatkan angka
+      const valueWithoutUnit = unit
+        ? cleanedTarget.replace(unit, "").trim()
+        : cleanedTarget;
+
+      let value = null;
+
+      // Ekstrak angka berdasarkan simbol
+      if (valueWithoutUnit.includes("<")) {
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
+        return [null, parseFloat(value)];
+      } else if (valueWithoutUnit.includes(">")) {
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
+        return [parseFloat(value), null];
+      } else {
+        // Jika tidak ada simbol
+        value = valueWithoutUnit.replace(/[%]/g, "").trim();
+        return [parseFloat(value), null];
+      }
+    };
+
     $scope.downloadChart = (part) => {
       let monthlyData = [];
       let monthDataIndex = [];
@@ -1110,7 +1185,7 @@ sikatApp.controller(
       for (let i = 0; i < $scope.monthlyNames.length; i++) {
         let criteriaName = $scope.monthlyNames[i];
         let target = $scope.target[i].toLowerCase();
-        let targetHasil = $scope.targetHasil[i];
+        let targetHasil = $scope.validateTarget(target);
         let axisName = "";
         let isYaTidak = false;
 
@@ -1148,12 +1223,18 @@ sikatApp.controller(
           let dataPencapaian = [];
           let dataStandarBawah = [];
           let dataStandarAtas = [];
-          let standarBawah = monthDataIndex[i].denumerator;
-          let standarAtas = monthDataIndex[i].numerator;
+          let standarBawah = targetHasil[0];
+          let standarAtas = targetHasil[1];
+          console.log("standarAtas:" + standarAtas);
+          console.log("standarBawah:" + standarBawah);
           /*console.log('standarBawah'+standarBawah);
           console.log('standarAtas'+standarAtas);
           console.log("monthlyDAta"+JSON.stringify(monthlyData));*/
-          for (let monthIdx = 0; monthIdx < (parseInt(part, 10) + 1) * 3; monthIdx++) {
+          for (
+            let monthIdx = 0;
+            monthIdx < (parseInt(part, 10) + 1) * 3;
+            monthIdx++
+          ) {
             let val = $scope.yearlyData[monthIdx]
               ? $scope.yearlyData[monthIdx].m[i].hasil
                 ? $scope.yearlyData[monthIdx].m[i].hasil
@@ -1443,8 +1524,10 @@ sikatApp.controller(
                           for (const key of Object.keys(result.data)) {
                             if (
                               result.data[key]["STATUS_ACC"] == 1 &&
-                              result.data[key]["JUDUL_INDIKATOR"] == selectedUnit &&
-                              result.data[key]["PROCESS_TYPE"] == $rootScope.currPage
+                              result.data[key]["JUDUL_INDIKATOR"] ==
+                                selectedUnit &&
+                              result.data[key]["PROCESS_TYPE"] ==
+                                $rootScope.currPage
                             ) {
                               $scope.judulIndikator =
                                 result.data[key]["JUDUL_INDIKATOR"];
@@ -1520,42 +1603,41 @@ sikatApp.controller(
         };
       }
       /*
-    var mappingArr = pmkpService.getMonthlyMapping($scope.currPage);
-    for (var i = 0; i < mappingArr.length; i++) {
-      var mappingUnit = mappingArr[i];
-      monthlyData[mappingUnit[0] - 1]["disable_hasil"] = true;
-    }
-    for (var i = 0; i < $scope.monthlyNames.length; i++) {
-      var target = $scope.target[i].toLowerCase();
-      if (target.includes("laporan")) {
-        monthlyData[i]["type_hasil"] = "laporan";
-      } else if (target.includes("mg/l")) {
-        monthlyData[i]["type_hasil"] = "mg/l";
-      } else if (target.includes("ph 6-9")) {
-        monthlyData[i]["type_hasil"] = "ph69";
-      } else if (target.includes("menit")) {
-        monthlyData[i]["type_hasil"] = "menit";
-      } else if (target.includes("jam")) {
-        monthlyData[i]["type_hasil"] = "jam";
-      } else if (target.includes("hari")) {
-        monthlyData[i]["type_hasil"] = "hari";
-      } else if (target.startsWith(" ") && target.endsWith(" ")) {
-        monthlyData[i]["type_hasil"] = "number";
-      } else if (target.includes("%")) {
-        monthlyData[i]["type_hasil"] = "percent";
-      } else if (target.includes("‰")) {
-        monthlyData[i]["type_hasil"] = "permil";
-      } else {
-        monthlyData[i]["type_hasil"] = "ya/tidak";
+      var mappingArr = pmkpService.getMonthlyMapping($scope.currPage);
+      for (var i = 0; i < mappingArr.length; i++) {
+        var mappingUnit = mappingArr[i];
+        monthlyData[mappingUnit[0] - 1]["disable_hasil"] = true;
       }
-    }
       */
+      for (var i = 0; i < $scope.monthlyNames.length; i++) {
+        var target = $scope.target[i].toLowerCase();
+        if (target.includes("laporan")) {
+          monthlyData[i]["type_hasil"] = "laporan";
+        } else if (target.includes("mg/l")) {
+          monthlyData[i]["type_hasil"] = "mg/l";
+        } else if (target.includes("ph 6-9")) {
+          monthlyData[i]["type_hasil"] = "ph69";
+        } else if (target.includes("menit")) {
+          monthlyData[i]["type_hasil"] = "menit";
+        } else if (target.includes("jam")) {
+          monthlyData[i]["type_hasil"] = "jam";
+        } else if (target.includes("hari")) {
+          monthlyData[i]["type_hasil"] = "hari";
+        } else if (target.startsWith(" ") && target.endsWith(" ")) {
+          monthlyData[i]["type_hasil"] = "number";
+        } else if (target.includes("%")) {
+          monthlyData[i]["type_hasil"] = "percent";
+        } else if (target.includes("‰")) {
+          monthlyData[i]["type_hasil"] = "permil";
+        } else {
+          monthlyData[i]["type_hasil"] = "ya/tidak";
+        }
+      }
     };
 
     $scope.update = () => {
-
       if (!$scope.unit) {
-        Swal.fire("Error!", "Unit tidak boleh kosong.", "error");
+        Swal.fire("Error!", "Indikator tidak boleh kosong.", "error");
         return;
       }
 
@@ -1592,10 +1674,11 @@ sikatApp.controller(
             swal("Success!", "Data is successfully saved.", "success");
             //window.history.back();
             window.location.href = window.location.href;
-            
+            //$scope.rekomendasi = "";
+            //$scope.analisa = "";
           },
           function (data) {
-            swal("Error!",data.data.message, "error");
+            swal("Error!", data.data.message, "error");
           }
         );
     };
@@ -1824,6 +1907,37 @@ sikatApp.controller(
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
     };
 
+    $scope.validateTarget = (target) => {
+      // Daftar satuan yang valid
+      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰",""];
+
+      // Membersihkan spasi tambahan di sekitar angka dan simbol
+      const cleanedTarget = target.trim();
+
+      // Menghapus satuan menggunakan regex untuk mencocokkan daftar satuan
+      const unit = units.find((u) => cleanedTarget.includes(u)) || null;
+
+      // Menghapus satuan dari target untuk mendapatkan angka
+      const valueWithoutUnit = unit
+        ? cleanedTarget.replace(unit, "").trim()
+        : cleanedTarget;
+
+      let value = null;
+
+      // Ekstrak angka berdasarkan simbol
+      if (valueWithoutUnit.includes("<")) {
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
+        return [null, parseFloat(value)];
+      } else if (valueWithoutUnit.includes(">")) {
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
+        return [parseFloat(value), null];
+      } else {
+        // Jika tidak ada simbol
+        value = valueWithoutUnit.replace(/[%]/g, "").trim();
+        return [parseFloat(value), null];
+      }
+    };
+
     $scope.downloadChart = (part) => {
       let monthlyData = [];
       let monthDataIndex = [];
@@ -1916,7 +2030,7 @@ sikatApp.controller(
       for (let i = 0; i < $scope.monthlyNames.length; i++) {
         let criteriaName = $scope.monthlyNames[i];
         let target = $scope.target[i].toLowerCase();
-        let targetHasil = $scope.targetHasil[i];
+        let targetHasil = $scope.validateTarget(target);
         let axisName = "";
         let isYaTidak = false;
 
@@ -1950,10 +2064,16 @@ sikatApp.controller(
           let dataPencapaian = [];
           let dataStandarBawah = [];
           let dataStandarAtas = [];
-          let standarBawah = monthDataIndex[i].denumerator;
-          let standarAtas = monthDataIndex[i].numerator;
-          for (let monthIdx = 0; monthIdx < (parseInt(part, 10) + 1) * 3; monthIdx++) {
-            console.log("monthindx"+monthIdx);
+          let standarBawah = targetHasil[0];
+          let standarAtas = targetHasil[1];
+          console.log("standarAtas:" + standarAtas);
+          console.log("standarBawah:" + standarBawah);
+          for (
+            let monthIdx = 0;
+            monthIdx < (parseInt(part, 10) + 1) * 3;
+            monthIdx++
+          ) {
+            console.log("monthindx" + monthIdx);
             let val = $scope.yearlyData[monthIdx]
               ? $scope.yearlyData[monthIdx].m[i].hasil
                 ? $scope.yearlyData[monthIdx].m[i].hasil
