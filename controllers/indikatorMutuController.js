@@ -22,7 +22,7 @@ sikatApp.controller("indikatorMutuListController", function(
   $scope.profileType = {};
 
   var today = new Date();
-  $scope.tahun = today.getFullYear() + "";
+  $scope.tahun = $routeParams.tahun ? $routeParams.tahun : today.getFullYear() + "";
 
   // $scope.tahun = "";
   // if ($routeParams.tahun) 
@@ -91,6 +91,13 @@ sikatApp.controller("indikatorMutuListController", function(
     };
     const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
     pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
+  }
+
+  $scope.onYearChange = (tahun) => {
+    $location.url(
+      "/indikatorMutu/"+$rootScope.currPage+"?tahun=" +
+      tahun
+    );
   }
 
   $scope.showStatusAcc = (

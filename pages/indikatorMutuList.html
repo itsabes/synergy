@@ -47,7 +47,8 @@
             <div class="col-xs-12 col-lg-10">
               <select
                 class="custom-select col-12"
-                ng-model="tahun">
+                ng-model="tahun"
+                ng-change="onYearChange(tahun)">
                 <!-- <option ng-repeat="(key, n) in yearDynamic" value="{{ n }}" ng-selected="{{n == currentYear}}">{{ n }}</option> -->
                 <option ng-repeat="n in yearDynamic" value="{{ n }}">{{ n
                   }}</option>
