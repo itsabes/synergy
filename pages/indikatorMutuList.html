@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="form-group row m-b-0">
-            <div class="offset-sm-2 col-sm-9">
+            <div class="offset-sm-2 col-sm-9" ng-if="!isAuthorized(user_role)">
               <!-- <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
                   Cari Data
                 </button> -->
