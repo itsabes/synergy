@@ -311,7 +311,7 @@ sikatApp.controller("indikatorMutuNewController", function(
     
     if (($scope.numerator && !$scope.denumerator) || (!$scope.numerator && $scope.denumerator)) {
       // Jika salah satu diisi, validasi bahwa keduanya harus diisi
-      Swal.fire("Error!", "Numerator dan Denumerator harus diisi keduanya.", "error");
+      Swal.fire("Error!", "Numerator dan denominator harus diisi bersamaan atau dibiarkan kosong keduanya.", "error");
       return;
     }
   
@@ -674,7 +674,7 @@ sikatApp.controller("indikatorMutuEditController", function(
 
     if (($scope.numerator && !$scope.denumerator) || (!$scope.numerator && $scope.denumerator)) {
       // Jika salah satu diisi, validasi bahwa keduanya harus diisi
-      Swal.fire("Error!", "Numerator dan Denumerator harus diisi keduanya.", "error");
+      Swal.fire("Error!", "Numerator dan denominator harus diisi bersamaan atau dibiarkan kosong keduanya.", "error");
       return;
     }
   
