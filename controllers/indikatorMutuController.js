@@ -320,10 +320,33 @@ sikatApp.controller("indikatorMutuNewController", function(
         Swal.fire("Error!", "Denumerator tidak boleh kosong.", "error");
         return;
     }*/
+    /*
     if (!$scope.targetPencapaian) {
         Swal.fire("Error!", "Target Pencapaian tidak boleh kosong.", "error");
         return;
+    }*/
+
+    if (!$scope.targetValue) {
+        Swal.fire("Error!", "Target Value tidak boleh kosong.", "error");
+        return;
     }
+
+    if (!Number.isInteger(Number($scope.targetValue))) {
+        Swal.fire("Error!", "Target Value harus berupa angka bilangan bulat.", "error");
+        return;
+    }
+
+    $scope.targetPencapaian = 
+    $scope.targetValue !== 'N' 
+    ? [
+        $scope.targetSimbol !== 'N' ? $scope.targetSimbol : '',
+        $scope.targetValue,
+        $scope.targetSatuan !== 'N' ? $scope.targetSatuan : ''
+      ].filter(Boolean).join(" ") 
+    : '';
+
+  
+     
     if (!$scope.kriteria) {
         Swal.fire("Error!", "Kriteria tidak boleh kosong.", "error");
         return;
@@ -570,7 +593,7 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.ukuranIndikator = reqRes.data.UKURAN_INDIKATOR,
             $scope.numerator = reqRes.data.NUMERATOR,
             $scope.denumerator = reqRes.data.DENUMERATOR,
-            $scope.targetPencapaian = reqRes.data.TARGET_PENCAPAIAN,
+            //$scope.targetPencapaian = reqRes.data.TARGET_PENCAPAIAN,
             $scope.kriteria = reqRes.data.KRITERIA,
             $scope.formula = reqRes.data.FORMULA,
             $scope.sumberData = reqRes.data.SUMBER_DATA,
@@ -589,6 +612,35 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.isINM = reqRes.data.isINM != null ? reqRes.data.isINM == 1 : false,
             $scope.isIMPRs = reqRes.data.isIMPRs != null ? reqRes.data.isIMPRs == 1 : false,
             $scope.isIMPUnit = reqRes.data.isIMPUnit != null ? reqRes.data.isIMPUnit == 1 : false
+
+            const targetPencapaian = reqRes.data.TARGET_PENCAPAIAN || ""; // Contoh: "100" atau ">= 100" atau "100 %"
+            const splitValues = targetPencapaian.trim().split(" "); // Trim untuk menghapus spasi berlebih
+
+            // Default values
+            let operator = "";
+            let value = "";
+            let unit = "";
+
+            // Tangani berbagai kemungkinan format
+            if (splitValues.length === 3) {
+                operator = splitValues[0]; // Contoh: ">="
+                value = splitValues[1];    // Contoh: "100"
+                unit = splitValues[2];     // Contoh: "%"
+            } else if (splitValues.length === 2) {
+                if (isNaN(splitValues[0])) {
+                    operator = splitValues[0]; // Contoh: ">="
+                    value = splitValues[1];    // Contoh: "100"
+                } else {
+                    value = splitValues[0];    // Contoh: "100"
+                    unit = splitValues[1];     // Contoh: "%"
+                }
+            } else if (splitValues.length === 1) {
+                value = splitValues[0];        // Contoh: "100"
+            }
+
+            $scope.targetSimbol = operator;
+            $scope.targetValue = value;
+            $scope.targetSatuan = unit;
 
           }
         },
@@ -688,10 +740,31 @@ sikatApp.controller("indikatorMutuEditController", function(
         return;
     }
     */
+    /*
     if (!$scope.targetPencapaian) {
         Swal.fire("Error!", "Target Pencapaian tidak boleh kosong.", "error");
         return;
     }
+    */
+    if (!$scope.targetValue) {
+        Swal.fire("Error!", "Target Value tidak boleh kosong.", "error");
+        return;
+    }
+
+    if (!Number.isInteger(Number($scope.targetValue))) {
+        Swal.fire("Error!", "Target Value harus berupa angka bilangan bulat.", "error");
+        return;
+    }
+
+    $scope.targetPencapaian = 
+    $scope.targetValue !== 'N' 
+    ? [
+        $scope.targetSimbol !== 'N' ? $scope.targetSimbol : '',
+        $scope.targetValue,
+        $scope.targetSatuan !== 'N' ? $scope.targetSatuan : ''
+      ].filter(Boolean).join(" ") 
+    : '';
+
     if (!$scope.kriteria) {
         Swal.fire("Error!", "Kriteria tidak boleh kosong.", "error");
         return;
