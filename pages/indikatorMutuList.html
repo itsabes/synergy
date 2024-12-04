@@ -1,8 +1,8 @@
 <style>
-   .disabled-link {
-      pointer-events: none;
-      color: gray;
-    }
+  .disabled-link {
+    pointer-events: none;
+    color: gray;
+  }
 </style>
 
 <div class="row page-titles">
@@ -23,35 +23,25 @@
       <div class="card-body">
         <form class="form-horizontal">
           <div class="form-group row">
-            <label
-              for="example-text-input"
-              class="col-xs-12 col-lg-2 col-form-label">Unit
+            <label for="example-text-input" class="col-xs-12 col-lg-2 col-form-label">Unit
             </label>
             <div class="col-xs-12 col-lg-10">
               <!-- <select class="custom-select col-12" ng-model="unit" aria-label="label for the select">
                     <option ng-repeat="(key, value) in profileType" ng-value="{{value.ID}}" ng-selected="{{unit === value.ID}}"> {{ value.TYPE }}</option>
                   </select> -->
-              <input
-                class="form-control"
-                type="text"
-                ng-model="currPage"
-                disabled />
+              <input class="form-control" type="text" ng-model="currPage" disabled />
             </div>
           </div>
           <div class="form-group row">
-            <label
-              for="example-month-input"
-              class="col-xs-12 col-lg-2 col-form-label">Year
+            <label for="example-month-input" class="col-xs-12 col-lg-2 col-form-label">Year
             </label>
-            <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
+            <div class="hidden-lg-up" style="height: 5px">&nbsp;</div>
             <div class="col-xs-12 col-lg-10">
-              <select
-                class="custom-select col-12"
-                ng-model="tahun"
-                ng-change="onYearChange(tahun)">
+              <select class="custom-select col-12" ng-model="tahun" ng-change="onYearChange(tahun)">
                 <!-- <option ng-repeat="(key, n) in yearDynamic" value="{{ n }}" ng-selected="{{n == currentYear}}">{{ n }}</option> -->
-                <option ng-repeat="n in yearDynamic" value="{{ n }}">{{ n
-                  }}</option>
+                <option ng-repeat="n in yearDynamic" value="{{ n }}">
+                  {{ n }}
+                </option>
               </select>
             </div>
           </div>
@@ -60,8 +50,7 @@
               <!-- <button type="button" class="btn btn-success waves-effect waves-light" ng-click="loadData()">
                   Cari Data
                 </button> -->
-              <a class="btn btn-success waves-effect waves-light"
-                href="#!/indikatorMutu_new/{{currPage}}"><i
+              <a class="btn btn-success waves-effect waves-light" href="#!/indikatorMutu_new/{{currPage}}"><i
                   class="fa fa-plus"></i> Pengajuan Indikator Mutu</a>
               <!-- <button type="button" class="btn btn-success waves-effect waves-light" ng-click="addIndikatorMutu()">
                   <i class="fa fa-plus"></i> Pengajuan Indikator Mutu
@@ -70,13 +59,10 @@
           </div>
         </form>
         <br />
-        <table ng-table="tableParams"
-          class="table table-condensed table-bordered table-striped table-responsive"
+        <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
           show-filter="false">
           <tr ng-repeat="row in $data track by $index">
-            <td title="'Judul'" sortable="'judul'">
-              {{row.JUDUL_INDIKATOR}}
-            </td>
+            <td title="'Judul'" sortable="'judul'">{{row.JUDUL_INDIKATOR}}</td>
             <td title="'Registrasi'" sortable="'tgl_registrasi'">
               {{ row.CREATE_DATE }}
             </td>
@@ -94,24 +80,23 @@
             </td>
             <td title="'Status'">
               <h3>
-                <span
-                  ng-class="{'badge badge-info inactive': row.STATUS_ACC === '0'}">
-                  <i class="fa"
-                    ng-class="{'fa fa-clock': row.STATUS_ACC === '0', 'fa-check': row.STATUS_ACC === '1', 'fa-check': row.STATUS_ACC === '2'}"></i>
-                  {{ row.STATUS_ACC === '1' ? 'Acc' : 'Baru' }}
+                <span>
+                  <i class="fa" ng-class="{
+                      'fa-clock': row.STATUS_ACC === '0',
+                      'fa-check': row.STATUS_ACC === '1',
+                      'fa-plus': row.STATUS_ACC === '2'
+                    }"></i>{{ row.STATUS_ACC === '1' ? ' Acc' : (row.STATUS_ACC === '2' ? ' Pending' : ' Baru') }}
                 </span>
               </h3>
             </td>
             <td title="'Action'" width="130px" ng-if="!isAuthorized(user_role)">
-              <button type="button"
-                class="btn btn-success waves-effect waves-light"
+              <button type="button" class="btn btn-success waves-effect waves-light"
                 ng-click="showIndikatorMutu(row.ID)">
                 <i class="fa fa-edit"></i> Update
               </button>
             </td>
             <td title="'Action'" width="200px" ng-if="isAuthorized(user_role)">
-              <button type="button"
-                class="btn btn-success waves-effect waves-light"
+              <button type="button" class="btn btn-success waves-effect waves-light"
                 ng-click="showIndikatorMutu(row.ID)">
                 <i class="fa fa-edit"></i> Tombol Acc
               </button>
