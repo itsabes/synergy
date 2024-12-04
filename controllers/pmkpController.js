@@ -183,7 +183,7 @@ sikatApp.controller(
                   }
                 }
 
-                var columnRefNo = value.LEVEL;
+                var columnRefNo = value.ORDERS;
                 var rowData = [columnRefNo, value.JUDUL];
                 for (var j = 0; j < 31; j++) {
                   if (j < $scope.dailyData[i].length) {
