@@ -42,26 +42,61 @@ sikatApp.controller(
 
           let numeratorIdx = 0;
           let denumeratorIdx = 1;
+          let indexTemp = 0;
+
           Object.keys(result.data).forEach((key) => {
             if (result.data[key]["STATUS_ACC"] == "1") {
-              //var specialCalc = result.data[key]['DAILYMONTHLYSPECIAL'];
-              //console.log("specialCalc", specialCalc);
-
               if (monthlyData[key] === undefined) monthlyData[key] = {};
+              console.log("indexTemp:"+indexTemp);
 
-              // Penugasan untuk numerator dan denumerator
-              if (dailyData[numeratorIdx] !== undefined) {
-                monthlyData[key].numerator = utils.sumArray(
-                  dailyData[numeratorIdx],
-                  31
-                );
-              }
+              if (
+                result.data[key]["NUMERATOR"] !== "" &&
+                result.data[key]["DENUMERATOR"] !== ""
+              ) {
 
-              if (dailyData[denumeratorIdx] !== undefined) {
-                monthlyData[key].denumerator = utils.sumArray(
-                  dailyData[denumeratorIdx],
-                  31
-                );
+                if(indexTemp > 0){
+                 
+                    monthlyData[key].numerator = utils.sumArray(
+                      dailyData[indexTemp],
+                      31
+                    );
+    
+                    monthlyData[key].denumerator = utils.sumArray(
+                      dailyData[indexTemp+1],
+                      31
+                    );
+
+                    indexTemp = 0;
+                  
+                }else{
+
+                  if (dailyData[numeratorIdx] !== undefined) {
+                    monthlyData[key].numerator = utils.sumArray(
+                      dailyData[numeratorIdx],
+                      31
+                    );
+                  }
+  
+                  if (dailyData[denumeratorIdx] !== undefined) {
+                    monthlyData[key].denumerator = utils.sumArray(
+                      dailyData[denumeratorIdx],
+                      31
+                    );
+                  }
+                }
+              }else{
+                
+                console.log("indexTemp update :"+ result.data[key]["JUDUL_INDIKATOR"]);
+                /*console.log("dailyData[numeratorIdx] :"+ dailyData[numeratorIdx]);
+                console.log("dailyData[denumeratorIdx] :"+ dailyData[denumeratorIdx]);
+                console.log("numeratorIdx :"+ numeratorIdx);
+                console.log("denumeratorIdx :"+ denumeratorIdx);*/
+
+                  monthlyData[key].numerator = 0;
+                  monthlyData[key].denumerator = 0;
+                  if((dailyData[numeratorIdx] !== undefined) && (dailyData[denumeratorIdx] !== undefined)) {
+                    indexTemp = numeratorIdx;
+                  }
               }
 
               if (
@@ -74,9 +109,6 @@ sikatApp.controller(
                 monthlyData[key].denumerator == 0
               ) {
                 monthlyData[key].hasil = 0;
-                //if (specialCalc && specialCalc.includes("zeroDenumeratorIsHundred")) {
-                //  monthlyData[key].hasil = 100;
-                //}
                 if ($rootScope.currPage == "hcu") {
                   if ($scope.monthSelect == "3") {
                     monthlyData[key].hasil = 100;
@@ -123,8 +155,15 @@ sikatApp.controller(
                 }
               }
 
-              numeratorIdx += 2;
-              denumeratorIdx += 2;
+              if (
+                result.data[key]["NUMERATOR"] !== "" &&
+                result.data[key]["DENUMERATOR"] !== ""
+              ) {
+
+                numeratorIdx += 2;
+                denumeratorIdx += 2;
+              }
+
             }
           });
         } else {
@@ -275,9 +314,9 @@ sikatApp.controller(
       return input
         .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
         .split(" ") // Pisahkan kata-kata berdasarkan spasi
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
         .join(" "); // Gabungkan kembali dengan spasi
-    }
+    };
 
     $scope.downloadExcel = () => {
       for (var i = 0; i < $scope.dailyData.length; i += 1) {
@@ -307,7 +346,11 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
       const url = REPORT_URL + "/pdf_a/" + $scope.currPage;
-      pmkpService.postDownload(url, data, "Report Form A "+ $scope.formatString($scope.currPage) + ".pdf");
+      pmkpService.postDownload(
+        url,
+        data,
+        "Report Form A " + $scope.formatString($scope.currPage) + ".pdf"
+      );
     };
     $scope.getData();
   }
@@ -902,9 +945,9 @@ sikatApp.controller(
       return input
         .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
         .split(" ") // Pisahkan kata-kata berdasarkan spasi
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
         .join(" "); // Gabungkan kembali dengan spasi
-    }
+    };
 
     $scope.downloadExcel = () => {
       for (var i = 0; i < $scope.dailyData.length; i += 1) {
@@ -919,7 +962,7 @@ sikatApp.controller(
       }
       const monthlyData = $scope.monthlyData;
       for (var i = 0; i < $scope.monthlyNames.length; i++) {
-        if($scope.target[i] !=null){
+        if ($scope.target[i] != null) {
           var target = $scope.target[i].toLowerCase();
           if (target.includes("laporan")) {
             monthlyData[i].hasil_text =
@@ -988,7 +1031,11 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
       const url = REPORT_URL + "/pdf_b/" + $scope.currPage;
-      pmkpService.postDownload(url, data, "Report Form B "+ $scope.formatString($scope.currPage) + ".pdf");
+      pmkpService.postDownload(
+        url,
+        data,
+        "Report Form B " + $scope.formatString($scope.currPage) + ".pdf"
+      );
     };
     $scope.getData();
   }
@@ -996,20 +1043,20 @@ sikatApp.controller(
 
 sikatApp.controller(
   "rekapController",
-  function ($scope, $rootScope, $routeParams, $http, pmkpService,$location) {
+  function ($scope, $rootScope, $routeParams, $http, pmkpService, $location) {
     $rootScope.currPage = $routeParams.id;
     $rootScope.currForm = "rekap";
-    $scope.monthlyNames = [];//pmkpService.getMonthlyNames($scope.currPage);
+    $scope.monthlyNames = []; //pmkpService.getMonthlyNames($scope.currPage);
     $scope.dataId = null;
     $scope.typeSelect = $routeParams.id;
     var today = new Date();
     $scope.yearSelect = today.getFullYear() + "";
-    $scope.target = [];//pmkpService.getMonthlyTarget($scope.currPage);
-    $scope.targetHasil = [];//pmkpService.getMonthlyTargetHasil($scope.currPage);
+    $scope.target = []; //pmkpService.getMonthlyTarget($scope.currPage);
+    $scope.targetHasil = []; //pmkpService.getMonthlyTargetHasil($scope.currPage);
     $scope.monthNames = pmkpService.getMonthNames();
     $scope.yearlyData = [];
     $scope.numerator = [];
-    $scope.denumerator=[];
+    $scope.denumerator = [];
     $scope.idx = [];
     $scope.analisaId = [];
     $scope.analisa = [];
@@ -1021,7 +1068,9 @@ sikatApp.controller(
         let iterator = 1;
         Object.keys(result.data).forEach((key) => {
           if (result.data[key]["STATUS_ACC"] == 1) {
-            if (!$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])) {
+            if (
+              !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
+            ) {
               $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
             }
             $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
@@ -1082,9 +1131,8 @@ sikatApp.controller(
           monthlyData[i]["type_hasil"] = "ya/tidak";
         }
       }
-      
     };
-    
+
     $scope.getData = () => {
       $rootScope.loading = true;
       $http
@@ -1295,9 +1343,9 @@ sikatApp.controller(
       return input
         .replace(/([a-z])([A-Z])/g, "$1 $2") // Tambahkan spasi sebelum huruf kapital
         .split(" ") // Pisahkan kata-kata berdasarkan spasi
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Kapitalisasi huruf pertama tiap kata
         .join(" "); // Gabungkan kembali dengan spasi
-    }
+    };
 
     $scope.downloadExcel = () => {
       for (var h = 0; h < $scope.yearlyData.length; h++) {
@@ -1371,7 +1419,7 @@ sikatApp.controller(
           " " +
           today.getFullYear(),
         y: $scope.yearlyData,
-        unit: $rootScope.currPage
+        unit: $rootScope.currPage,
       };
 
       /*
@@ -1550,17 +1598,16 @@ sikatApp.controller(
           partString = "Januari-Desember";
           break;
       }
-        const data = {
-          direkturName: localStorage.getItem("nama_direktur"),
-          direkturNip: localStorage.getItem("nip_direktur"),
-          rsName: localStorage.getItem("nama_rumah_sakit"),
-          unit: $scope.currPage,
-          tahun: $scope.yearSelect,
-          part: partString,
-          dataList: dataList,
-          unit: $rootScope.currPage,
-
-        };
+      const data = {
+        direkturName: localStorage.getItem("nama_direktur"),
+        direkturNip: localStorage.getItem("nip_direktur"),
+        rsName: localStorage.getItem("nama_rumah_sakit"),
+        unit: $scope.currPage,
+        tahun: $scope.yearSelect,
+        part: partString,
+        dataList: dataList,
+        unit: $rootScope.currPage,
+      };
 
       const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage;
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
