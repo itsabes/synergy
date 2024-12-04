@@ -34,7 +34,7 @@ sikatApp.controller(
     };
 
     $scope.dailyToMonthly = (dailyData, monthlyData, utils) => {
-      pmkpService.getDynamicData($rootScope.currPage, (result) => {
+      pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
         if (result) {
           console.log("Received data:", result.data);
           console.log("Received dailyData:", dailyData);
@@ -208,7 +208,7 @@ sikatApp.controller(
           $scope.monthlyData = result.monthlyData;
           data = [];
 
-          pmkpService.getDynamicDataFormA($rootScope.currPage, (result) => {
+          pmkpService.getDynamicDataFormA($rootScope.currPage, $scope.yearSelect, (result) => {
             if (result) {
               const size = Object.keys(result.data).length;
               const entries = Object.entries(result.data);
@@ -374,7 +374,7 @@ sikatApp.controller(
     $scope.yearSelect = today.getFullYear() + "";
     $scope.target = [];
 
-    pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
       if (result) {
         let iterator = 1;
         Object.keys(result.data).forEach((key) => {
@@ -1063,7 +1063,7 @@ sikatApp.controller(
     $scope.rekomendasi = [];
     $scope.periodeAnalisa = [];
 
-    pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
       if (result) {
         let iterator = 1;
         Object.keys(result.data).forEach((key) => {

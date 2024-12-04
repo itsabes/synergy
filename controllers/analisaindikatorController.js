@@ -55,7 +55,7 @@ sikatApp.controller(
       $scope.periode = periode;
       console.log("periode:" + periode);
 
-      pmkpService.getDynamicData($rootScope.currPage, (result) => {
+      pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
         if (result) {
           Object.keys(result.data).forEach((key) => {
             if (
@@ -712,7 +712,7 @@ sikatApp.controller(
 
     console.log("Parameter URL saat ini:", $scope.periode);
 
-    pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
       if (result) {
         Object.keys(result.data).forEach((key) => {
           if (
@@ -744,7 +744,7 @@ sikatApp.controller(
     $scope.onUnitChange = function (selectedUnit) {
       if (selectedUnit) {
         console.log("Unit yang dipilih:", selectedUnit);
-        pmkpService.getDynamicData($rootScope.currPage, (result) => {
+        pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
           if (result) {
             for (const key of Object.keys(result.data)) {
               if (
@@ -1411,7 +1411,7 @@ sikatApp.controller(
     $scope.yearlyData = [];
     $scope.listChart = "";
 
-    pmkpService.getDynamicData($rootScope.currPage, (result) => {
+    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
       if (result) {
         Object.keys(result.data).forEach((key) => {
           if (
@@ -1519,6 +1519,7 @@ sikatApp.controller(
                   } else {
                     pmkpService.getDynamicData(
                       $rootScope.currPage,
+                      $scope.yearSelect,
                       (result) => {
                         if (result) {
                           for (const key of Object.keys(result.data)) {
