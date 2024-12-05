@@ -16,7 +16,9 @@ sikatApp.controller(
     $scope.typeSelect = $routeParams.id;
     var today = new Date();
     $scope.monthSelect = today.getMonth() + 1 + "";
-    $scope.yearSelect = today.getFullYear() + "";
+    $scope.yearSelect = $routeParams.yearSelect
+      ? $routeParams.yearSelect
+      : today.getFullYear() + "";
     $scope.dailyData = [];
     $scope.monthlyData = [];
     // FUNCTIONS
@@ -33,143 +35,151 @@ sikatApp.controller(
       return total;
     };
 
+    $scope.yearDynamic = [];
+    const currentYear = new Date().getFullYear(); // Tahun berjalan
+    $scope.currentYear = currentYear;
+    $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
+    console.log("$scope.yearDynamic:" + $scope.yearDynamic);
+
     $scope.dailyToMonthly = (dailyData, monthlyData, utils) => {
-      pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
-        if (result) {
-          console.log("Received data:", result.data);
-          console.log("Received dailyData:", dailyData);
-          console.log("Received monthlyData:", monthlyData);
+      pmkpService.getDynamicData(
+        $rootScope.currPage,
+        $scope.yearSelect,
+        (result) => {
+          if (result) {
+            console.log("Received data:", result.data);
+            console.log("Received dailyData:", dailyData);
+            console.log("Received monthlyData:", monthlyData);
 
-          let numeratorIdx = 0;
-          let denumeratorIdx = 1;
-          let indexTemp = 0;
+            let numeratorIdx = 0;
+            let denumeratorIdx = 1;
+            let indexTemp = 0;
 
-          Object.keys(result.data).forEach((key) => {
-            if (result.data[key]["STATUS_ACC"] == "1") {
-              if (monthlyData[key] === undefined) monthlyData[key] = {};
-              console.log("indexTemp:"+indexTemp);
+            Object.keys(result.data).forEach((key) => {
+              if (result.data[key]["STATUS_ACC"] == "1") {
+                if (monthlyData[key] === undefined) monthlyData[key] = {};
+                console.log("indexTemp:" + indexTemp);
 
-              if (
-                result.data[key]["NUMERATOR"] !== "" &&
-                result.data[key]["DENUMERATOR"] !== ""
-              ) {
-
-                if(indexTemp > 0){
-                 
+                if (
+                  result.data[key]["NUMERATOR"] !== "" &&
+                  result.data[key]["DENUMERATOR"] !== ""
+                ) {
+                  if (indexTemp > 0) {
                     monthlyData[key].numerator = utils.sumArray(
                       dailyData[indexTemp],
                       31
                     );
-    
+
                     monthlyData[key].denumerator = utils.sumArray(
-                      dailyData[indexTemp+1],
+                      dailyData[indexTemp + 1],
                       31
                     );
 
                     indexTemp = 0;
-                  
-                }else{
+                  } else {
+                    if (dailyData[numeratorIdx] !== undefined) {
+                      monthlyData[key].numerator = utils.sumArray(
+                        dailyData[numeratorIdx],
+                        31
+                      );
+                    }
 
-                  if (dailyData[numeratorIdx] !== undefined) {
-                    monthlyData[key].numerator = utils.sumArray(
-                      dailyData[numeratorIdx],
-                      31
-                    );
+                    if (dailyData[denumeratorIdx] !== undefined) {
+                      monthlyData[key].denumerator = utils.sumArray(
+                        dailyData[denumeratorIdx],
+                        31
+                      );
+                    }
                   }
-  
-                  if (dailyData[denumeratorIdx] !== undefined) {
-                    monthlyData[key].denumerator = utils.sumArray(
-                      dailyData[denumeratorIdx],
-                      31
-                    );
-                  }
-                }
-              }else{
-                
-                console.log("indexTemp update :"+ result.data[key]["JUDUL_INDIKATOR"]);
-                /*console.log("dailyData[numeratorIdx] :"+ dailyData[numeratorIdx]);
+                } else {
+                  console.log(
+                    "indexTemp update :" + result.data[key]["JUDUL_INDIKATOR"]
+                  );
+                  /*console.log("dailyData[numeratorIdx] :"+ dailyData[numeratorIdx]);
                 console.log("dailyData[denumeratorIdx] :"+ dailyData[denumeratorIdx]);
                 console.log("numeratorIdx :"+ numeratorIdx);
                 console.log("denumeratorIdx :"+ denumeratorIdx);*/
 
                   monthlyData[key].numerator = 0;
                   monthlyData[key].denumerator = 0;
-                  if((dailyData[numeratorIdx] !== undefined) && (dailyData[denumeratorIdx] !== undefined)) {
+                  if (
+                    dailyData[numeratorIdx] !== undefined &&
+                    dailyData[denumeratorIdx] !== undefined
+                  ) {
                     indexTemp = numeratorIdx;
                   }
-              }
-
-              if (
-                monthlyData[key].denumerator == 0 &&
-                monthlyData[key].numerator != 0
-              ) {
-                monthlyData[key].hasil = 100;
-              } else if (
-                monthlyData[key].numerator == 0 &&
-                monthlyData[key].denumerator == 0
-              ) {
-                monthlyData[key].hasil = 0;
-                if ($rootScope.currPage == "hcu") {
-                  if ($scope.monthSelect == "3") {
-                    monthlyData[key].hasil = 100;
-                  }
-                } else if ($rootScope.currPage == "kamarBersalin") {
-                  if (
-                    $scope.monthSelect == "6" ||
-                    $scope.monthSelect == "7" ||
-                    $scope.monthSelect == "8"
-                  ) {
-                    monthlyData[key].hasil = 100;
-                  }
-                } else if ($rootScope.currPage == "k3rs") {
-                  if (
-                    $scope.monthSelect == "1" ||
-                    $scope.monthSelect == "2" ||
-                    $scope.monthSelect == "3"
-                  ) {
-                    monthlyData[key].hasil = 100;
-                  }
-                } else if ($rootScope.currPage == "timPonek") {
-                  if ($scope.monthSelect == "1") {
-                    monthlyData[key].hasil = 100;
-                  }
                 }
-              } else {
-                monthlyData[key].hasil =
-                  monthlyData[key].numerator / monthlyData[key].denumerator;
-                var target =
-                  result.data[key]["TARGET_PENCAPAIAN"] !== null &&
-                  result.data[key]["TARGET_PENCAPAIAN"] !== undefined
-                    ? result.data[key]["TARGET_PENCAPAIAN"].toLowerCase()
-                    : "";
 
-                if (target.includes("%")) {
-                  monthlyData[key].hasil =
-                    Math.round(monthlyData[key].hasil * 100 * 10000) / 10000;
-                } else if (target.includes("‰")) {
-                  monthlyData[key].hasil =
-                    Math.round(monthlyData[key].hasil * 1000 * 10000) / 10000;
+                if (
+                  monthlyData[key].denumerator == 0 &&
+                  monthlyData[key].numerator != 0
+                ) {
+                  monthlyData[key].hasil = 100;
+                } else if (
+                  monthlyData[key].numerator == 0 &&
+                  monthlyData[key].denumerator == 0
+                ) {
+                  monthlyData[key].hasil = 0;
+                  if ($rootScope.currPage == "hcu") {
+                    if ($scope.monthSelect == "3") {
+                      monthlyData[key].hasil = 100;
+                    }
+                  } else if ($rootScope.currPage == "kamarBersalin") {
+                    if (
+                      $scope.monthSelect == "6" ||
+                      $scope.monthSelect == "7" ||
+                      $scope.monthSelect == "8"
+                    ) {
+                      monthlyData[key].hasil = 100;
+                    }
+                  } else if ($rootScope.currPage == "k3rs") {
+                    if (
+                      $scope.monthSelect == "1" ||
+                      $scope.monthSelect == "2" ||
+                      $scope.monthSelect == "3"
+                    ) {
+                      monthlyData[key].hasil = 100;
+                    }
+                  } else if ($rootScope.currPage == "timPonek") {
+                    if ($scope.monthSelect == "1") {
+                      monthlyData[key].hasil = 100;
+                    }
+                  }
                 } else {
                   monthlyData[key].hasil =
-                    Math.round(monthlyData[key].hasil * 10000) / 10000;
+                    monthlyData[key].numerator / monthlyData[key].denumerator;
+                  var target =
+                    result.data[key]["TARGET_PENCAPAIAN"] !== null &&
+                    result.data[key]["TARGET_PENCAPAIAN"] !== undefined
+                      ? result.data[key]["TARGET_PENCAPAIAN"].toLowerCase()
+                      : "";
+
+                  if (target.includes("%")) {
+                    monthlyData[key].hasil =
+                      Math.round(monthlyData[key].hasil * 100 * 10000) / 10000;
+                  } else if (target.includes("‰")) {
+                    monthlyData[key].hasil =
+                      Math.round(monthlyData[key].hasil * 1000 * 10000) / 10000;
+                  } else {
+                    monthlyData[key].hasil =
+                      Math.round(monthlyData[key].hasil * 10000) / 10000;
+                  }
+                }
+
+                if (
+                  result.data[key]["NUMERATOR"] !== "" &&
+                  result.data[key]["DENUMERATOR"] !== ""
+                ) {
+                  numeratorIdx += 2;
+                  denumeratorIdx += 2;
                 }
               }
-
-              if (
-                result.data[key]["NUMERATOR"] !== "" &&
-                result.data[key]["DENUMERATOR"] !== ""
-              ) {
-
-                numeratorIdx += 2;
-                denumeratorIdx += 2;
-              }
-
-            }
-          });
-        } else {
-          console.log("No data or error occurred.");
+            });
+          } else {
+            console.log("No data or error occurred.");
+          }
         }
-      });
+      );
     };
 
     $scope.save = () => {
@@ -208,103 +218,107 @@ sikatApp.controller(
           $scope.monthlyData = result.monthlyData;
           data = [];
 
-          pmkpService.getDynamicDataFormA($rootScope.currPage, $scope.yearSelect, (result) => {
-            if (result) {
-              const size = Object.keys(result.data).length;
-              const entries = Object.entries(result.data);
+          pmkpService.getDynamicDataFormA(
+            $rootScope.currPage,
+            $scope.yearSelect,
+            (result) => {
+              if (result) {
+                const size = Object.keys(result.data).length;
+                const entries = Object.entries(result.data);
 
-              for (var i = 0; i < size; i++) {
-                const [key, value] = entries[i];
-                if (!$scope.dailyData[i]) {
-                  $scope.dailyData[i] = [];
-                  for (var j = 0; j < 31; j++) {
-                    $scope.dailyData[i].push("");
-                  }
-                }
-
-                var columnRefNo = value.ORDERS;
-                var rowData = [columnRefNo, value.JUDUL];
-                for (var j = 0; j < 31; j++) {
-                  if (j < $scope.dailyData[i].length) {
-                    if (
-                      $scope.dailyData[i][j] !== undefined &&
-                      $scope.dailyData[i][j] !== ""
-                    ) {
-                      $scope.dailyData[i][j] = isNaN($scope.dailyData[i][j])
-                        ? 0
-                        : Number($scope.dailyData[i][j]);
+                for (var i = 0; i < size; i++) {
+                  const [key, value] = entries[i];
+                  if (!$scope.dailyData[i]) {
+                    $scope.dailyData[i] = [];
+                    for (var j = 0; j < 31; j++) {
+                      $scope.dailyData[i].push("");
                     }
-                    rowData.push($scope.dailyData[i][j]);
-                  } else {
-                    rowData.push("");
                   }
+
+                  var columnRefNo = value.ORDERS;
+                  var rowData = [columnRefNo, value.JUDUL];
+                  for (var j = 0; j < 31; j++) {
+                    if (j < $scope.dailyData[i].length) {
+                      if (
+                        $scope.dailyData[i][j] !== undefined &&
+                        $scope.dailyData[i][j] !== ""
+                      ) {
+                        $scope.dailyData[i][j] = isNaN($scope.dailyData[i][j])
+                          ? 0
+                          : Number($scope.dailyData[i][j]);
+                      }
+                      rowData.push($scope.dailyData[i][j]);
+                    } else {
+                      rowData.push("");
+                    }
+                  }
+                  rowData.push("=SUM(C" + (i + 1) + ":AG" + (i + 1) + ")");
+                  data.push(rowData);
                 }
-                rowData.push("=SUM(C" + (i + 1) + ":AG" + (i + 1) + ")");
-                data.push(rowData);
-              }
 
-              var colHeaders = ["Form B No.", "Name"];
-              var colWidths = [110, 300];
-              var colAlignments = ["center", "left"];
-              var columns = [
-                {
-                  type: "numeric",
-                  readOnly: true,
-                },
-                {
-                  type: "text",
-                  wordWrap: true,
-                  readOnly: true,
-                },
-              ];
-              for (var i = 0; i < 31; i++) {
-                colHeaders.push(i + 1 + "");
-                colWidths.push(30);
-                colAlignments.push("center");
-
-                var loopDate = moment({
-                  year: parseInt($scope.yearSelect),
-                  month: $scope.monthSelect - 1,
-                  date: i + 1,
-                });
-                if (loopDate.isAfter($scope.latestDateToInput)) {
-                  columns.push({
-                    type: "numeric",
-                  });
-                } else {
-                  columns.push({
+                var colHeaders = ["Form B No.", "Name"];
+                var colWidths = [110, 300];
+                var colAlignments = ["center", "left"];
+                var columns = [
+                  {
                     type: "numeric",
                     readOnly: true,
+                  },
+                  {
+                    type: "text",
+                    wordWrap: true,
+                    readOnly: true,
+                  },
+                ];
+                for (var i = 0; i < 31; i++) {
+                  colHeaders.push(i + 1 + "");
+                  colWidths.push(30);
+                  colAlignments.push("center");
+
+                  var loopDate = moment({
+                    year: parseInt($scope.yearSelect),
+                    month: $scope.monthSelect - 1,
+                    date: i + 1,
                   });
+                  if (loopDate.isAfter($scope.latestDateToInput)) {
+                    columns.push({
+                      type: "numeric",
+                    });
+                  } else {
+                    columns.push({
+                      type: "numeric",
+                      readOnly: true,
+                    });
+                  }
                 }
+                colHeaders.push("Total");
+                colWidths.push(70);
+                colAlignments.push("center");
+                columns.push({
+                  type: "numeric",
+                  readOnly: true,
+                });
+                $("#tableFormA").jexcel("destroyAll");
+                $("#tableFormA").jexcel({
+                  data: data,
+                  colHeaders,
+                  colWidths,
+                  colAlignments,
+                  columns,
+                  tableOverflow: true,
+                  tableHeight: "500px",
+                  onchange: function (obj, cel, val) {
+                    var colRow = $(cel).prop("id").split("-");
+                    $scope.dailyData[colRow[1] - 0][colRow[0] - 2] = val;
+                  },
+                });
+                $rootScope.loading = false;
+                // });
+              } else {
+                console.log("No data or error occurred.");
               }
-              colHeaders.push("Total");
-              colWidths.push(70);
-              colAlignments.push("center");
-              columns.push({
-                type: "numeric",
-                readOnly: true,
-              });
-              $("#tableFormA").jexcel("destroyAll");
-              $("#tableFormA").jexcel({
-                data: data,
-                colHeaders,
-                colWidths,
-                colAlignments,
-                columns,
-                tableOverflow: true,
-                tableHeight: "500px",
-                onchange: function (obj, cel, val) {
-                  var colRow = $(cel).prop("id").split("-");
-                  $scope.dailyData[colRow[1] - 0][colRow[0] - 2] = val;
-                },
-              });
-              $rootScope.loading = false;
-              // });
-            } else {
-              console.log("No data or error occurred.");
             }
-          });
+          );
         },
         () => ($rootScope.loading = false)
       );
@@ -371,38 +385,55 @@ sikatApp.controller(
     $scope.typeSelect = $routeParams.id;
     var today = new Date();
     $scope.monthSelect = today.getMonth() + 1 + "";
-    $scope.yearSelect = today.getFullYear() + "";
+    $scope.yearSelect = $routeParams.yearSelect
+      ? $routeParams.yearSelect
+      : today.getFullYear() + "";
     $scope.target = [];
 
-    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
-      if (result) {
-        let iterator = 1;
-        Object.keys(result.data).forEach((key) => {
-          if (result.data[key]["STATUS_ACC"] == 1) {
-            $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
-            $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
+    $scope.getDynamicData = () => {
+      pmkpService.getDynamicData(
+        $rootScope.currPage,
+        $scope.yearSelect,
+        (result) => {
+          if (result && Array.isArray(result.data) && result.data.length > 0) {
+            let iterator = 1;
+            Object.keys(result.data).forEach((key) => {
+              if (result.data[key]["STATUS_ACC"] == 1) {
+                $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+                $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
 
-            // Cek apakah numerator dan denumerator kosong
-            if (
-              result.data[key]["NUMERATOR"] &&
-              result.data[key]["DENUMERATOR"]
-            ) {
-              // Jika kosong, set monthlyDisable dengan format [iterator, "numerator", "denumerator", "hasil"]
-              $scope.monthlyDisable.push([
-                iterator,
-                "numerator",
-                "denumerator",
-                "hasil",
-              ]);
-            }
+                // Cek apakah numerator dan denumerator kosong
+                if (
+                  result.data[key]["NUMERATOR"] &&
+                  result.data[key]["DENUMERATOR"]
+                ) {
+                  // Jika kosong, set monthlyDisable dengan format [iterator, "numerator", "denumerator", "hasil"]
+                  $scope.monthlyDisable.push([
+                    iterator,
+                    "numerator",
+                    "denumerator",
+                    "hasil",
+                  ]);
+                }
 
-            iterator++;
+                iterator++;
+              }
+            });
+          } else {
+            // Reset arrays if no data is returned
+            $scope.monthlyNames = [];
+            $scope.target = [];
+            $scope.monthlyDisable = [];
+            console.log("No data or error occurred.");
           }
-        });
-      } else {
-        console.log("No data or error occurred.");
-      }
-    });
+        }
+      );
+    };
+
+    $scope.yearDynamic = [];
+    const currentYear = new Date().getFullYear(); // Tahun berjalan
+    $scope.currentYear = currentYear;
+    $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
 
     $scope.filterMonthly = (monthlyData) => {
       for (var i = 0; i < $scope.monthlyNames.length; i++) {
@@ -479,6 +510,8 @@ sikatApp.controller(
 
     $scope.getData = () => {
       $rootScope.loading = true;
+      $scope.getDynamicData();
+
       pmkpService.getData(
         $scope.currPage,
         $scope.yearSelect,
@@ -1050,7 +1083,9 @@ sikatApp.controller(
     $scope.dataId = null;
     $scope.typeSelect = $routeParams.id;
     var today = new Date();
-    $scope.yearSelect = today.getFullYear() + "";
+    $scope.yearSelect = $routeParams.yearSelect
+      ? $routeParams.yearSelect
+      : today.getFullYear() + "";
     $scope.target = []; //pmkpService.getMonthlyTarget($scope.currPage);
     $scope.targetHasil = []; //pmkpService.getMonthlyTargetHasil($scope.currPage);
     $scope.monthNames = pmkpService.getMonthNames();
@@ -1063,33 +1098,59 @@ sikatApp.controller(
     $scope.rekomendasi = [];
     $scope.periodeAnalisa = [];
 
-    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
-      if (result) {
-        let iterator = 1;
-        Object.keys(result.data).forEach((key) => {
-          if (result.data[key]["STATUS_ACC"] == 1) {
-            if (
-              !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
-            ) {
-              $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
-            }
-            $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
-            $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
-            $scope.idx.push(result.data[key]["ID"]);
-            $scope.numerator.push(result.data[key]["NUMERATOR"]);
-            $scope.denumerator.push(result.data[key]["DENUMERATOR"]);
-            $scope.analisaId.push(result.data[key]["analisa_id"]);
-            $scope.analisa.push(result.data[key]["analisa"]);
-            $scope.rekomendasi.push(result.data[key]["rekomendasi"]);
-            $scope.periodeAnalisa.push(result.data[key]["PERIODE_ANALISA"]);
+    $scope.yearDynamic = [];
+    const currentYear = new Date().getFullYear(); // Tahun berjalan
+    $scope.currentYear = currentYear;
+    $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
 
-            iterator++;
+    $scope.getDynamicData = () => {
+      pmkpService.getDynamicData(
+        $rootScope.currPage,
+        $scope.yearSelect,
+        (result) => {
+          if (result && Array.isArray(result.data) && result.data.length > 0) {
+            let iterator = 1;
+            Object.keys(result.data).forEach((key) => {
+              if (result.data[key]["STATUS_ACC"] == 1) {
+                if (
+                  !$scope.monthlyNames.includes(
+                    result.data[key]["JUDUL_INDIKATOR"]
+                  )
+                ) {
+                  $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+                }
+                $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
+                $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
+                $scope.idx.push(result.data[key]["ID"]);
+                $scope.numerator.push(result.data[key]["NUMERATOR"]);
+                $scope.denumerator.push(result.data[key]["DENUMERATOR"]);
+                $scope.analisaId.push(result.data[key]["analisa_id"]);
+                $scope.analisa.push(result.data[key]["analisa"]);
+                $scope.rekomendasi.push(result.data[key]["rekomendasi"]);
+                $scope.periodeAnalisa.push(result.data[key]["PERIODE_ANALISA"]);
+
+                iterator++;
+              }
+            });
+          } else {
+
+            $scope.monthlyNames = [];
+            $scope.target = [];
+            $scope.targetHasil = [];
+            $scope.numerator = [];
+            $scope.denumerator = [];
+            $scope.idx = [];
+            $scope.analisaId = [];
+            $scope.analisa = [];
+            $scope.rekomendasi = [];
+            $scope.periodeAnalisa = [];
+        
+            console.log("No data or error occurred.");
           }
-        });
-      } else {
-        console.log("No data or error occurred.");
-      }
-    });
+        }
+      );
+    }
+      
 
     $scope.filterMonthly = (monthlyData) => {
       for (var i = monthlyData.length; i < $scope.monthlyNames.length; i++) {
@@ -1135,6 +1196,7 @@ sikatApp.controller(
 
     $scope.getData = () => {
       $rootScope.loading = true;
+      $scope.getDynamicData();
       $http
         .get(
           SERVER_URL +
