@@ -892,7 +892,7 @@ sikatApp.controller("indikatorMutuEditController", function(
       {
         id : id,
         statusAcc: statusAcc,
-        userAcc: localStorage.getItem("user_email"),
+        userAcc: localStorage.getItem("user_name"),
         reviewUlang: reviewUlang
       },
       { headers: { Authorization: localStorage.getItem("token") } }
