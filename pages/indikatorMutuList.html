@@ -82,9 +82,9 @@
               <h3>
                 <span>
                   <i class="fa" ng-class="{
-                      'fa-clock': row.STATUS_ACC === '0',
+                      'fa-plus': row.STATUS_ACC === '0',
                       'fa-check': row.STATUS_ACC === '1',
-                      'fa-plus': row.STATUS_ACC === '2'
+                      'fa-clock': row.STATUS_ACC === '2'
                     }"></i>{{ row.STATUS_ACC === '1' ? ' Acc' : (row.STATUS_ACC === '2' ? ' Pending' : ' Baru') }}
                 </span>
               </h3>
