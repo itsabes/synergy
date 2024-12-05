@@ -80,7 +80,11 @@
             </td>
             <td title="'Status'">
               <h3>
-                <span>
+                <span ng-class="{
+                  'badge badge-info': row.STATUS_ACC === '0',
+                  'badge badge-success': row.STATUS_ACC === '1',
+                  'badge badge-warning': row.STATUS_ACC === '2'
+                }">
                   <i class="fa" ng-class="{
                       'fa-plus': row.STATUS_ACC === '0',
                       'fa-check': row.STATUS_ACC === '1',
