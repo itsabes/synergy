@@ -391,6 +391,11 @@ sikatApp.controller(
     $scope.target = [];
 
     $scope.getDynamicData = () => {
+      // Reset arrays at the beginning
+      $scope.monthlyNames = [];
+      $scope.target = [];
+      $scope.monthlyDisable = [];
+    
       pmkpService.getDynamicData(
         $rootScope.currPage,
         $scope.yearSelect,
@@ -401,7 +406,7 @@ sikatApp.controller(
               if (result.data[key]["STATUS_ACC"] == 1) {
                 $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
                 $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
-
+    
                 // Cek apakah numerator dan denumerator kosong
                 if (
                   result.data[key]["NUMERATOR"] &&
@@ -415,20 +420,18 @@ sikatApp.controller(
                     "hasil",
                   ]);
                 }
-
+    
                 iterator++;
               }
             });
           } else {
-            // Reset arrays if no data is returned
-            $scope.monthlyNames = [];
-            $scope.target = [];
-            $scope.monthlyDisable = [];
+            // Jika tidak ada data, log pesan
             console.log("No data or error occurred.");
           }
         }
       );
     };
+    
 
     $scope.yearDynamic = [];
     const currentYear = new Date().getFullYear(); // Tahun berjalan
