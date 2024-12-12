@@ -42,7 +42,7 @@ sikatApp.controller("indikatorMutuListController", function(
   }
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU',''];
     return allowedRoles.includes(role);
   };
 
@@ -243,6 +243,7 @@ sikatApp.controller("indikatorMutuNewController", function(
   $scope.dataId = null;
   $scope.typeSelect = $routeParams.id;
   $scope.profileType = {};
+  $scope.currentUserLogin = localStorage.getItem("user_name");
 
   var today = new Date();
   $scope.tahun = today.getFullYear() + "";
@@ -262,7 +263,7 @@ sikatApp.controller("indikatorMutuNewController", function(
   };
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU',''];
     return allowedRoles.includes(role);
   };
 
@@ -445,7 +446,7 @@ sikatApp.controller("indikatorMutuNewController", function(
           instrumenPengambilan: $scope.instrumenPengambilan,
           isiInstrumen: $scope.isiInstrumen != null ? $scope.isiInstrumen : "",
           besarSampel: $scope.besarSampel,
-          penanggungJawab: $rootScope.currPage,
+          penanggungJawab: localStorage.getItem("user_name"),
           isNasional: $scope.isNasional != null ? $scope.isNasional : 0,
           isUnit: $scope.isUnit != null ? $scope.isUnit : 0,
           isPrioritasUnit: $scope.isPrioritasUnit != null ? $scope.isPrioritasUnit : 0,
@@ -559,12 +560,13 @@ sikatApp.controller("indikatorMutuEditController", function(
   $scope.id = $routeParams.uniqIdx;
   $rootScope.currPage = $routeParams.id;
   $rootScope.currForm = "indikatorMutu";
+  $scope.currentUserLogin = localStorage.getItem("user_name");
   
   console.log("$scope.id",$scope.id);
   console.log("$rootScope.currPageParam = $routeParams.param;",$rootScope.currPageParam);
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU',''];
     return allowedRoles.includes(role);
   };
 
@@ -863,7 +865,7 @@ sikatApp.controller("indikatorMutuEditController", function(
           instrumenPengambilan: $scope.instrumenPengambilan,
           isiInstrumen: $scope.isiInstrumen != null ? $scope.isiInstrumen : "",
           besarSampel: $scope.besarSampel,
-          penanggungJawab: $rootScope.currPage,
+          penanggungJawab: $scope.currentUserLogin,
           isINM : $scope.isINM != null ? $scope.isINM : 0,
           isIMPRs : $scope.isIMPRs != null ? $scope.isIMPRs : 0,
           isIMPUnit : $scope.isIMPUnit != null ? $scope.isIMPUnit : 0,
