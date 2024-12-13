@@ -35,7 +35,7 @@ sikatApp.controller("indikatorMutuListController", function(
   $scope.yearDynamic = [];
   const currentYear = new Date().getFullYear();
   $scope.currentYear = currentYear;
-  const startYear = 2020; // Tahun awal tetap
+  const startYear = currentYear; // Tahun awal tetap
   const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
   for (let year = startYear; year <= endYear; year++) {
       $scope.yearDynamic.push(year);
