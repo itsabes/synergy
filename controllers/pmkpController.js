@@ -1120,8 +1120,9 @@ sikatApp.controller(
                     result.data[key]["JUDUL_INDIKATOR"]
                   )
                 ) {
-                  $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
+                 // $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
                 }
+                $scope.monthlyNames.push(result.data[key]["JUDUL_INDIKATOR"]);
                 $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
                 $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
                 $scope.idx.push(result.data[key]["ID"]);
