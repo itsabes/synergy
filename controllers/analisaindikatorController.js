@@ -279,6 +279,9 @@ sikatApp.controller(
       } else if (valueWithoutUnit.includes(">")) {
         value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
         return [parseFloat(value), null];
+      } else if (valueWithoutUnit.includes("=")) {
+        value = valueWithoutUnit.replace(/[=]/g, "").trim();
+        return [parseFloat(value),null];
       } else {
         // Jika tidak ada simbol
         value = valueWithoutUnit.replace(/[%]/g, "").trim();
@@ -1078,7 +1081,10 @@ sikatApp.controller(
       } else if (valueWithoutUnit.includes(">")) {
         value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
         return [parseFloat(value), null];
-      } else {
+      } else if (valueWithoutUnit.includes("=")) {
+        value = valueWithoutUnit.replace(/[=]/g, "").trim();
+        return [parseFloat(value), null];
+      }else {
         // Jika tidak ada simbol
         value = valueWithoutUnit.replace(/[%]/g, "").trim();
         return [parseFloat(value), null];
@@ -1932,7 +1938,10 @@ sikatApp.controller(
       } else if (valueWithoutUnit.includes(">")) {
         value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
         return [parseFloat(value), null];
-      } else {
+      } else if (valueWithoutUnit.includes("=")) {
+        value = valueWithoutUnit.replace(/[=]/g, "").trim();
+        return [parseFloat(value), null];
+      }else {
         // Jika tidak ada simbol
         value = valueWithoutUnit.replace(/[%]/g, "").trim();
         return [parseFloat(value), null];
