@@ -337,6 +337,11 @@ sikatApp.controller("indikatorMutuNewController", function(
         return;
     }
 
+    if ($scope.targetSatuan == 'N') {
+      Swal.fire("Error!", "Target Satuan tidak boleh kosong.", "error");
+      return;
+    }
+
     $scope.targetPencapaian = 
     $scope.targetValue !== 'N' 
     ? [
@@ -756,6 +761,11 @@ sikatApp.controller("indikatorMutuEditController", function(
     if (!Number.isInteger(Number($scope.targetValue))) {
         Swal.fire("Error!", "Target Value harus berupa angka bilangan bulat.", "error");
         return;
+    }
+
+    if ($scope.targetSatuan == 'N') {
+      Swal.fire("Error!", "Target Satuan tidak boleh kosong.", "error");
+      return;
     }
 
     $scope.targetPencapaian = 
