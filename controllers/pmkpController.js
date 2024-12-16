@@ -1492,7 +1492,7 @@ sikatApp.controller(
       const url = REPORT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
       pmkpService.postDownload(url, data, "Report Form C "+ $scope.formatString($scope.currPage) + ".pdf");
       */
-      const url = REPORT_URL + "/xlsx/" + $scope.currPage;
+      const url = REPORT_CURRENT_URL + "/xlsx/" + $scope.currPage;
       pmkpService.postDownload(url, data, $scope.currPage + ".xlsx");
     };
 
