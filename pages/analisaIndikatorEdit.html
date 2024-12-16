@@ -29,6 +29,19 @@
                 <div class="form-group row">
                   <label
                     for="example-month-input"
+                    class="col-xs-12 col-lg-2 col-form-label">Tahun Kegiatan
+                  </label>
+                  <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
+                  <div class="col-xs-12 col-lg-10">
+                    <select class="custom-select col-12" ng-model="tahun" ng-init="tahun = ''">
+                      <option value="">Pilih Tahun Kegiatan</option>
+                      <option ng-repeat="(key, n) in yearDynamic" value="{{ n }}" ng-selected="{{n == currentYear}}">{{ n }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label
+                    for="example-month-input"
                     class="col-xs-12 col-lg-2 col-form-label">Pilih Indikator
                   </label>
                   <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
@@ -40,6 +53,11 @@
                     </select>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="control-label">Periode</label>
+                  <input type="text" ng-value="getPeriodeAnalisa(periode)" class="form-control" readonly/>
+                </div>
+
                 <div class="form-group">
                   <label class="control-label">Judul Indikator</label>
                   <input type="text" ng-model="judulIndikator" class="form-control" readonly/>

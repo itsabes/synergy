@@ -246,7 +246,7 @@ sikatApp.controller("indikatorMutuNewController", function(
   $scope.currentUserLogin = localStorage.getItem("user_name");
 
   var today = new Date();
-  $scope.tahun = today.getFullYear() + "";
+  $scope.tahun = $routeParams.tahun;
 
    // Initialize the models
    $scope.instrumenPengambilan = '';
@@ -555,7 +555,7 @@ sikatApp.controller("indikatorMutuEditController", function(
 ) {
 
   var today = new Date();
-  $scope.tahun = today.getFullYear() + "";
+  $scope.tahun = $routeParams.tahun;
 
   $scope.yearDynamic = [];
   const currentYear = new Date().getFullYear(); // Tahun berjalan
