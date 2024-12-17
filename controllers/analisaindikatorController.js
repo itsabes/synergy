@@ -23,7 +23,7 @@ sikatApp.controller(
     $scope.yearlyData = [];
     $scope.listChart = "";
     $scope.periode = "";
-    $scope.tahun = $routeParams.tahun;
+    $scope.tahun = $routeParams.tahun || $scope.yearSelect;
 
     // Tambahkan log halaman saat ini
     console.log("Halaman saat ini:", $rootScope.currPage);
@@ -36,7 +36,7 @@ sikatApp.controller(
     const startYear = currentYear; // Tahun awal tetap
     const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
     for (let year = startYear; year <= endYear; year++) {
-        $scope.yearDynamic.push(year);
+      $scope.yearDynamic.push(year);
     }
 
     $scope.dataId = null;
@@ -61,40 +61,46 @@ sikatApp.controller(
       $location.url("/indikatorMutu_new");
     };
 
-    $scope.downloadPerUnit = (periode,tahun) => {
+    $scope.downloadPerUnit = (periode, tahun) => {
       $scope.periode = periode;
       $scope.tahun = tahun;
-      console.log("periode:" + periode +" tahun:"+tahun);
+      console.log("periode:" + periode + " tahun:" + tahun);
 
-      pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
-        if (result) {
-          Object.keys(result.data).forEach((key) => {
-            if (
-              result.data[key]["STATUS_ACC"] == "1" &&
-              !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
-            ) {
-              const {
-                JUDUL_INDIKATOR,
-                TARGET_PENCAPAIAN,
-                NUMERATOR,
-                DENUMERATOR,
-              } = result.data[key];
-              $scope.monthlyNames.push(JUDUL_INDIKATOR);
-              $scope.target.push(TARGET_PENCAPAIAN);
-              $scope.targetHasil.push(TARGET_PENCAPAIAN);
+      pmkpService.getDynamicData(
+        $rootScope.currPage,
+        $scope.tahun,
+        (result) => {
+          if (result) {
+            Object.keys(result.data).forEach((key) => {
+              if (
+                result.data[key]["STATUS_ACC"] == "1" &&
+                !$scope.monthlyNames.includes(
+                  result.data[key]["JUDUL_INDIKATOR"]
+                )
+              ) {
+                const {
+                  JUDUL_INDIKATOR,
+                  TARGET_PENCAPAIAN,
+                  NUMERATOR,
+                  DENUMERATOR,
+                } = result.data[key];
+                $scope.monthlyNames.push(JUDUL_INDIKATOR);
+                $scope.target.push(TARGET_PENCAPAIAN);
+                $scope.targetHasil.push(TARGET_PENCAPAIAN);
 
-              console.log(
-                "status_acc:" + result.data[key]["STATUS_ACC"],
-                " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
-              );
-            }
-          });
-        } else {
-          console.log("No data or error occurred.");
+                console.log(
+                  "status_acc:" + result.data[key]["STATUS_ACC"],
+                  " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
+                );
+              }
+            });
+          } else {
+            console.log("No data or error occurred.");
+          }
         }
-      });
+      );
 
-      $scope.downloadChart($scope.periode,$scope.tahun);
+      $scope.downloadChart($scope.periode, $scope.tahun);
     };
 
     $scope.getDataChartUnit = () => {
@@ -268,7 +274,7 @@ sikatApp.controller(
 
     $scope.validateTarget = (target) => {
       // Daftar satuan yang valid
-      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰",""];
+      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰", ""];
 
       // Membersihkan spasi tambahan di sekitar angka dan simbol
       const cleanedTarget = target.trim();
@@ -292,7 +298,7 @@ sikatApp.controller(
         return [parseFloat(value), null];
       } else if (valueWithoutUnit.includes("=")) {
         value = valueWithoutUnit.replace(/[=]/g, "").trim();
-        return [parseFloat(value),null];
+        return [parseFloat(value), null];
       } else {
         // Jika tidak ada simbol
         value = valueWithoutUnit.replace(/[%]/g, "").trim();
@@ -300,7 +306,7 @@ sikatApp.controller(
       }
     };
 
-    $scope.downloadChart = (part,tahun) => {
+    $scope.downloadChart = (part, tahun) => {
       let monthlyData = [];
       let monthDataIndex = [];
       let arrayPeriod;
@@ -515,7 +521,8 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
 
-      const url = REPORT_URL + "/analisa_indikator_pdf/" + $scope.currPage + "/" + tahun;
+      const url =
+        REPORT_URL + "/analisa_indikator_pdf/" + $scope.currPage + "/" + tahun;
       pmkpService.postDownload(
         url,
         data,
@@ -716,7 +723,6 @@ sikatApp.controller(
     $scope.monthlyNamesSelected = "";
     $scope.dataId = null;
     $scope.typeSelect = $routeParams.id;
-    $scope.tahun = $routeParams.tahun;
     var today = new Date();
     $scope.yearSelect = today.getFullYear() + "";
     $scope.target = [];
@@ -725,13 +731,19 @@ sikatApp.controller(
     $scope.yearlyData = [];
     $scope.listChart = "";
 
+    $scope.tahun =
+      typeof $routeParams.tahun === "undefined"
+        ? $scope.yearSelect
+        : $routeParams.tahun;
+    console.log("tahun::" + $scope.tahun);
+
     $scope.yearDynamic = [];
     const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
     const startYear = currentYear; // Tahun awal tetap
     const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
     for (let year = startYear; year <= endYear; year++) {
-        $scope.yearDynamic.push(year);
+      $scope.yearDynamic.push(year);
     }
 
     $scope.getPeriodeAnalisa = function (periodeAnalisa) {
@@ -751,39 +763,54 @@ sikatApp.controller(
 
     console.log("Parameter URL saat ini:", $scope.periode);
 
-    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
-      if (result) {
-        Object.keys(result.data).forEach((key) => {
-          if (
-            result.data[key]["STATUS_ACC"] == "1" &&
-            !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
-          ) {
-            const {
-              JUDUL_INDIKATOR,
-              TARGET_PENCAPAIAN,
-              NUMERATOR,
-              DENUMERATOR,
-            } = result.data[key];
-            $scope.units.push(JUDUL_INDIKATOR);
-            $scope.monthlyNames.push(JUDUL_INDIKATOR);
-            $scope.target.push(TARGET_PENCAPAIAN);
-            $scope.targetHasil.push(TARGET_PENCAPAIAN);
+    $scope.getDynamicData = () => {
 
-            console.log(
-              "status_acc:" + result.data[key]["STATUS_ACC"],
-              " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
-            );
+      $scope.units = [];
+      $scope.monthlyNames = [];
+      $scope.target = [];
+      $scope.targetHasil = [];
+
+      pmkpService.getDynamicData(
+        $rootScope.currPage,
+        $scope.tahun,
+        (result) => {
+          if (result) {
+            Object.keys(result.data).forEach((key) => {
+              if (
+                result.data[key]["STATUS_ACC"] == "1" &&
+                !$scope.monthlyNames.includes(
+                  result.data[key]["JUDUL_INDIKATOR"]
+                )
+              ) {
+                const {
+                  JUDUL_INDIKATOR,
+                  TARGET_PENCAPAIAN,
+                  NUMERATOR,
+                  DENUMERATOR,
+                } = result.data[key];
+                $scope.units.push(JUDUL_INDIKATOR);
+                $scope.monthlyNames.push(JUDUL_INDIKATOR);
+                $scope.target.push(TARGET_PENCAPAIAN);
+                $scope.targetHasil.push(TARGET_PENCAPAIAN);
+
+                console.log(
+                  "status_acc:" + result.data[key]["STATUS_ACC"],
+                  " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
+                );
+              }
+            });
+          } else {
+            console.log("No data or error occurred.");
           }
-        });
-      } else {
-        console.log("No data or error occurred.");
-      }
-    });
+        }
+      );
+    };
 
-    $scope.onUnitChange = function (selectedUnit) {
+    $scope.onUnitChange = function (selectedUnit, year) {
       if (selectedUnit) {
+       
         console.log("Unit yang dipilih:", selectedUnit);
-        pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
+        pmkpService.getDynamicData($rootScope.currPage, year, (result) => {
           if (result) {
             for (const key of Object.keys(result.data)) {
               if (
@@ -801,7 +828,7 @@ sikatApp.controller(
                 $scope.monthlyNamesSelected = "";
                 //$scope.target = [];
                 //$scope.targetHasil = [];
-                $scope.monthlyNamesSelected =
+                $scope.monthlyNamesSelected = 
                   result.data[key]["JUDUL_INDIKATOR"];
                 $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
                 $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
@@ -814,7 +841,7 @@ sikatApp.controller(
                 );
 
                 $scope.getData();
-                $scope.showChart($scope.periode,$scope.tahun);
+                $scope.showChart($scope.periode, $scope.tahun);
 
                 break; // Keluar dari loop setelah ditemukan
               }
@@ -824,6 +851,7 @@ sikatApp.controller(
           }
         });
       } else {
+        $scope.listChart = "";
         console.log("Tidak ada unit yang dipilih.");
       }
     };
@@ -887,6 +915,8 @@ sikatApp.controller(
     };
 
     $scope.getData = () => {
+
+      $scope.getDynamicData();
       $rootScope.loading = true;
       $http
         .get(
@@ -1101,7 +1131,7 @@ sikatApp.controller(
 
     $scope.validateTarget = (target) => {
       // Daftar satuan yang valid
-      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰",""];
+      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰", ""];
 
       // Membersihkan spasi tambahan di sekitar angka dan simbol
       const cleanedTarget = target.trim();
@@ -1126,14 +1156,14 @@ sikatApp.controller(
       } else if (valueWithoutUnit.includes("=")) {
         value = valueWithoutUnit.replace(/[=]/g, "").trim();
         return [parseFloat(value), null];
-      }else {
+      } else {
         // Jika tidak ada simbol
         value = valueWithoutUnit.replace(/[%]/g, "").trim();
         return [parseFloat(value), null];
       }
     };
 
-    $scope.showChart = (part,tahun) => {
+    $scope.showChart = (part, tahun) => {
       let monthlyData = [];
       let monthDataIndex = [];
       let arrayPeriod;
@@ -1431,7 +1461,7 @@ sikatApp.controller(
     const startYear = currentYear; // Tahun awal tetap
     const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
     for (let year = startYear; year <= endYear; year++) {
-        $scope.yearDynamic.push(year);
+      $scope.yearDynamic.push(year);
     }
 
     $scope.getPeriodeAnalisa = function (periodeAnalisa) {
@@ -1460,7 +1490,6 @@ sikatApp.controller(
     $scope.monthSelect = $routeParams.monthSelect;
     $scope.idx = $routeParams.idx;
     $scope.id = $routeParams.id;
-    $scope.tahun = $routeParams.tahun;
     $scope.analisa = "";
     $scope.rekomendasi = "";
     $scope.idAnalisa = "";
@@ -1484,34 +1513,54 @@ sikatApp.controller(
     $scope.yearlyData = [];
     $scope.listChart = "";
 
-    pmkpService.getDynamicData($rootScope.currPage,$scope.yearSelect, (result) => {
-      if (result) {
-        Object.keys(result.data).forEach((key) => {
-          if (
-            result.data[key]["STATUS_ACC"] == "1" &&
-            !$scope.monthlyNames.includes(result.data[key]["JUDUL_INDIKATOR"])
-          ) {
-            const {
-              JUDUL_INDIKATOR,
-              TARGET_PENCAPAIAN,
-              NUMERATOR,
-              DENUMERATOR,
-            } = result.data[key];
-            $scope.units.push(JUDUL_INDIKATOR);
-            $scope.monthlyNames.push(JUDUL_INDIKATOR);
-            $scope.target.push(TARGET_PENCAPAIAN);
-            $scope.targetHasil.push(TARGET_PENCAPAIAN);
+    $scope.tahun =
+    typeof $routeParams.tahun === "undefined"
+      ? $scope.yearSelect
+      : $routeParams.tahun;
+    console.log("tahun::" + $scope.tahun);
 
-            console.log(
-              "status_acc:" + result.data[key]["STATUS_ACC"],
-              " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
-            );
+    $scope.getDynamicData = () => {
+
+      $scope.units = [];
+      $scope.monthlyNames = [];
+      $scope.target = [];
+      $scope.targetHasil = [];
+
+      pmkpService.getDynamicData(
+        $rootScope.currPage,
+        $scope.tahun,
+        (result) => {
+          if (result) {
+            Object.keys(result.data).forEach((key) => {
+              if (
+                result.data[key]["STATUS_ACC"] == "1" &&
+                !$scope.monthlyNames.includes(
+                  result.data[key]["JUDUL_INDIKATOR"]
+                )
+              ) {
+                const {
+                  JUDUL_INDIKATOR,
+                  TARGET_PENCAPAIAN,
+                  NUMERATOR,
+                  DENUMERATOR,
+                } = result.data[key];
+                $scope.units.push(JUDUL_INDIKATOR);
+                $scope.monthlyNames.push(JUDUL_INDIKATOR);
+                $scope.target.push(TARGET_PENCAPAIAN);
+                $scope.targetHasil.push(TARGET_PENCAPAIAN);
+
+                console.log(
+                  "status_acc:" + result.data[key]["STATUS_ACC"],
+                  " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
+                );
+              }
+            });
+          } else {
+            console.log("No data or error occurred.");
           }
-        });
-      } else {
-        console.log("No data or error occurred.");
-      }
-    });
+        }
+      );
+    };
 
     /*
     pmkpService.getDynamicData($rootScope.currPage, (result) => {
@@ -1540,12 +1589,13 @@ sikatApp.controller(
     });
     */
 
-    $scope.onUnitChange = function (selectedUnit) {
+    $scope.onUnitChange = function (selectedUnit,year) {
       if (selectedUnit) {
         console.log("Unit yang dipilih:", selectedUnit);
+        $scope.listChart = "";
 
         var url = SERVER_URL + "/api/analisaIndikator/getByQuery?q=0";
-        url += "&unit=" + $rootScope.currPage + "&tahun=" + $scope.tahun;
+        url += "&unit=" + $rootScope.currPage + "&tahun=" + year;
 
         $http
           .get(url, {
@@ -1586,13 +1636,13 @@ sikatApp.controller(
                     );
 
                     $scope.getData();
-                    $scope.showChart($scope.periode,$scope.tahun);
+                    $scope.showChart($scope.periode, $scope.tahun);
 
                     break;
                   } else {
                     pmkpService.getDynamicData(
                       $rootScope.currPage,
-                      $scope.yearSelect,
+                      year,
                       (result) => {
                         if (result) {
                           for (const key of Object.keys(result.data)) {
@@ -1635,7 +1685,7 @@ sikatApp.controller(
                               );
 
                               $scope.getData();
-                              $scope.showChart($scope.periode,$scope.tahun);
+                              $scope.showChart($scope.periode, $scope.tahun);
 
                               break; // Keluar dari loop setelah ditemukan
                             }
@@ -1764,6 +1814,8 @@ sikatApp.controller(
     };
 
     $scope.getData = () => {
+
+      $scope.getDynamicData();
       $rootScope.loading = true;
       $http
         .get(
@@ -1989,7 +2041,7 @@ sikatApp.controller(
 
     $scope.validateTarget = (target) => {
       // Daftar satuan yang valid
-      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰",""];
+      const units = ["%", "menit", "jam", "hari", "laporan", "mg/l", "‰", ""];
 
       // Membersihkan spasi tambahan di sekitar angka dan simbol
       const cleanedTarget = target.trim();
@@ -2014,14 +2066,14 @@ sikatApp.controller(
       } else if (valueWithoutUnit.includes("=")) {
         value = valueWithoutUnit.replace(/[=]/g, "").trim();
         return [parseFloat(value), null];
-      }else {
+      } else {
         // Jika tidak ada simbol
         value = valueWithoutUnit.replace(/[%]/g, "").trim();
         return [parseFloat(value), null];
       }
     };
 
-    $scope.showChart = (part,tahun) => {
+    $scope.showChart = (part, tahun) => {
       let monthlyData = [];
       let monthDataIndex = [];
       let arrayPeriod;

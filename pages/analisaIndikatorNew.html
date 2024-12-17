@@ -33,7 +33,7 @@
                     </label>
                     <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
                     <div class="col-xs-12 col-lg-10">
-                      <select class="custom-select col-12" ng-model="tahun" ng-init="tahun = ''">
+                      <select class="custom-select col-12" ng-model="tahun" ng-init="tahun = ''" ng-change="getData()">
                         <option value="">Pilih Tahun Kegiatan</option>
                         <option ng-repeat="(key, n) in yearDynamic" value="{{ n }}" ng-selected="{{n == currentYear}}">{{ n }}</option>
                       </select>
@@ -47,7 +47,7 @@
                     <div class="hidden-lg-up" style="height: 5px;">&nbsp;</div>
                     <div class="col-xs-12 col-lg-10">
                       <select
-                        class="custom-select col-12" ng-model="unit" ng-init="unit = ''" ng-change="onUnitChange(unit)" >
+                        class="custom-select col-12" ng-model="unit" ng-init="unit = ''" ng-change="onUnitChange(unit,tahun)" >
                         <option value="">Pilih Indikator</option>
                         <option ng-repeat="n in units" value="{{ n }}">{{ n }}</option>
                       </select>
