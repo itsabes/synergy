@@ -1154,7 +1154,7 @@ sikatApp.controller(
         value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
         return [parseFloat(value), null];
       } else if (valueWithoutUnit.includes("=")) {
-        value = valueWithoutUnit.replace(/[=]/g, "").trim();
+        value = valueWithoutUnit.replace(/[<>=]/g, "").trim();
         return [parseFloat(value), null];
       } else {
         // Jika tidak ada simbol
