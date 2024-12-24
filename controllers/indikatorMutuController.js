@@ -332,10 +332,11 @@ sikatApp.controller("indikatorMutuNewController", function(
         return;
     }
 
-    if (!Number.isInteger(Number($scope.targetValue))) {
-        Swal.fire("Error!", "Target Value harus berupa angka bilangan bulat.", "error");
-        return;
+    if (isNaN(Number($scope.targetValue)) || Number($scope.targetValue) < 0) {
+      Swal.fire("Error!", "Target Value harus berupa angka valid.", "error");
+      return;
     }
+  
 
     if ($scope.targetSatuan == 'N') {
       Swal.fire("Error!", "Target Satuan tidak boleh kosong.", "error");
@@ -758,11 +759,11 @@ sikatApp.controller("indikatorMutuEditController", function(
         return;
     }
 
-    if (!Number.isInteger(Number($scope.targetValue))) {
-        Swal.fire("Error!", "Target Value harus berupa angka bilangan bulat.", "error");
-        return;
+    if (isNaN(Number($scope.targetValue)) || Number($scope.targetValue) < 0) {
+      Swal.fire("Error!", "Target Value harus berupa angka valid.", "error");
+      return;
     }
-
+  
     if ($scope.targetSatuan == 'N') {
       Swal.fire("Error!", "Target Satuan tidak boleh kosong.", "error");
       return;
