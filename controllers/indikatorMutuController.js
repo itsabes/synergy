@@ -89,7 +89,7 @@ sikatApp.controller("indikatorMutuListController", function(
       rsName: localStorage.getItem("nama_rumah_sakit"),
       id: id,
     };
-    const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
+    const url = REPORT_CURRENT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
     pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
   }
 
@@ -676,7 +676,7 @@ sikatApp.controller("indikatorMutuEditController", function(
       rsName: localStorage.getItem("nama_rumah_sakit"),
       id: id,
     };
-    const url = REPORT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
+    const url = REPORT_CURRENT_URL + "/profile_indikator/" + $scope.currPage + "/" + id;
     pmkpService.postDownload(url, data, "Profile Indikator "+ $scope.formatString($scope.currPage) + ".pdf");
   }
 

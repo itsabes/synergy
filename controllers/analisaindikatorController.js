@@ -522,7 +522,7 @@ sikatApp.controller(
       };
 
       const url =
-        REPORT_URL + "/analisa_indikator_pdf/" + $scope.currPage + "/" + tahun;
+        REPORT_CURRENT_URL + "/analisa_indikator_pdf/" + $scope.currPage + "/" + tahun;
       pmkpService.postDownload(
         url,
         data,
@@ -1390,7 +1390,7 @@ sikatApp.controller(
 
       $http
         .post(
-          REPORT_URL + "/analisa_indikator/" + $scope.currPage,
+          REPORT_CURRENT_URL + "/analisa_indikator/" + $scope.currPage,
           {
             direkturName: localStorage.getItem("nama_direktur"),
             direkturNip: localStorage.getItem("nip_direktur"),
@@ -2035,7 +2035,7 @@ sikatApp.controller(
         rsName: localStorage.getItem("nama_rumah_sakit"),
       };
       const url =
-        REPORT_URL + "/analisa_indikator/" + $scope.currPage + "/" + idx;
+        REPORT_CURRENT_URL + "/analisa_indikator/" + $scope.currPage + "/" + idx;
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
     };
 
@@ -2287,7 +2287,7 @@ sikatApp.controller(
 
       $http
         .post(
-          REPORT_URL + "/analisa_indikator/" + $scope.currPage,
+          REPORT_CURRENT_URL + "/analisa_indikator/" + $scope.currPage,
           {
             direkturName: localStorage.getItem("nama_direktur"),
             direkturNip: localStorage.getItem("nip_direktur"),

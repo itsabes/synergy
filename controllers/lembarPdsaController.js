@@ -847,7 +847,7 @@ sikatApp.controller(
         rsName: localStorage.getItem("nama_rumah_sakit"),
       };
       const url =
-        REPORT_URL + "/lembar_pdsa/" + $scope.currPage + "/" + idx;
+        REPORT_CURRENT_URL + "/lembar_pdsa/" + $scope.currPage + "/" + idx;
       pmkpService.postDownload(url, data, "Lembar Pdsa "+ $scope.formatString($scope.currPage) + ".pdf");
     };
 

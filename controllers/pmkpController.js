@@ -359,7 +359,7 @@ sikatApp.controller(
         m: $scope.monthlyData,
         unit: $rootScope.currPage,
       };
-      const url = REPORT_URL + "/pdf_a/" + $scope.currPage;
+      const url = REPORT_CURRENT_URL + "/pdf_a/" + $scope.currPage;
       pmkpService.postDownload(
         url,
         data,
@@ -1066,7 +1066,7 @@ sikatApp.controller(
         m: $scope.monthlyData,
         unit: $rootScope.currPage,
       };
-      const url = REPORT_URL + "/pdf_b/" + $scope.currPage;
+      const url = REPORT_CURRENT_URL + "/pdf_b/" + $scope.currPage;
       pmkpService.postDownload(
         url,
         data,
@@ -1489,10 +1489,10 @@ sikatApp.controller(
       };
 
       /*
-      const url = REPORT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
+      const url = REPORT_CURRENT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
       pmkpService.postDownload(url, data, "Report Form C "+ $scope.formatString($scope.currPage) + ".pdf");
       */
-      const url = REPORT_CURRENT_URL + "/xlsx/" + $scope.currPage;
+      const url = REPORT_URL + "/xlsx/" + $scope.currPage;
       pmkpService.postDownload(url, data, $scope.currPage + ".xlsx");
     };
 
@@ -1675,7 +1675,7 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
 
-      const url = REPORT_URL + "/analisa_indikator/" + $scope.currPage;
+      const url = REPORT_CURRENT_URL + "/analisa_indikator/" + $scope.currPage;
       pmkpService.postDownload(url, data, $scope.currPage + ".pdf");
     };
     $scope.getData();
