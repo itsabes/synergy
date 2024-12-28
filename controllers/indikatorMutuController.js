@@ -42,7 +42,7 @@ sikatApp.controller("indikatorMutuListController", function(
   }
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN','KASIE_YANMED','KASIE_PENUNJANG'];
     return allowedRoles.includes(role);
   };
 
@@ -263,7 +263,7 @@ sikatApp.controller("indikatorMutuNewController", function(
   };
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN','KASIE_YANMED','KASIE_PENUNJANG'];
     return allowedRoles.includes(role);
   };
 
@@ -572,7 +572,7 @@ sikatApp.controller("indikatorMutuEditController", function(
   console.log("$rootScope.currPageParam = $routeParams.param;",$rootScope.currPageParam);
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN','KASIE_YANMED','KASIE_PENUNJANG'];
     return allowedRoles.includes(role);
   };
 
