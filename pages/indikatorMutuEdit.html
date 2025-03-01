@@ -407,9 +407,15 @@
               <button type="button" class="btn btn-success pull-right m-l-10" ng-click="showStatusAcc(id,1,reviewUlang)">
                 <i class="fa fa-check"></i> Acc
               </button>
+              <!--
               <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="showStatusAcc(id, 2,reviewUlang)">
                   <i class="fa fa-edit"></i> Pending
-                </button>
+                </button>-->
+              <button type="button" class="btn btn-warning pull-right m-l-10" 
+                      ng-click="showStatusAcc(id, 2, reviewUlang)" 
+                      ng-disabled="true">
+                <i class="fa fa-edit"></i> Pending
+              </button>
               <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
                 Cancel
               </button>
