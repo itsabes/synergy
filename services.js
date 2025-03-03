@@ -221,7 +221,7 @@ sikatApp.service("pmkpService", function($http) {
       "Jumlah alat reuse yang ditandai dengan tepat",
       "Jumlah seluruh alat reuse yang disterilkan"
     ],
-    Linen: [],
+    Linen: [""],
     ipsrs: [
       "Jumlah laporan kerusakan alat yang ditanggapi ≤ 15 menit",
       "Jumlah laporan kerusakan alat hari ini tersebut"
@@ -295,7 +295,7 @@ sikatApp.service("pmkpService", function($http) {
     "Jumlah pasien rawat inap"
 
     ],
-    komiteMedis: [],
+    komiteMedis: ["",""],
     komiteKeperawatan: [
       "Angka di Lakukan Kredensial Perawat dan Bidan", 
       "Jumlah Perawat dan Bidan  yang akan di lakukan Kredensial", 
@@ -304,21 +304,21 @@ sikatApp.service("pmkpService", function($http) {
       "Angka Pelangaran Etik, disiplin perawat dan Bidan", 
       "Jumlah Perawat dan Bidan yang Melakukan Pelangaran Etik, disiplin Perawat dan Bidan"   
     ],
-    komiteNakesLain: [],
-    komiteEtik: [],
-    timPkrs: [],
+    komiteNakesLain: [""],
+    komiteEtik: [""],
+    timPkrs: [""],
     timPpra: [
       "Jumlah pemakaian antibiotik lini ketiga pada pasien rawat inap yang sesuai prosedur",
       "Jumlah seluruh pemakaian antibiotik lini ketiga pada pasien rawat inap"
       ],
-    timKomplain: [],
-    timPonek: [],
+    timKomplain: [""],
+    timPonek: [""],
     timTb: [
       "Jumlah pasien TB rujukan yang tertangani",
       "Jumlah seluruh pasien TB rujukan"
     ],
-    manajemenKepegawaian: [],
-    keuangan: [],
+    manajemenKepegawaian: [""],
+    keuangan: [""],
     timKb: [
       "Jumlah pasien bersalin di RSUD Sawah Besar yang mendapatkan pelayanan KB  pasca Salin",
       "Jumlah seluruh pasien yang bersalin di RSUD Sawah Besar",
@@ -353,7 +353,7 @@ sikatApp.service("pmkpService", function($http) {
       "Jumlah laporan kerusakan Perangkat IT yang ditanggapi ≤ 15 menit",
       "Jumlah laporan kerusakan Perangkat IT hari ini tersebut"
     ],
-    pengadaan: []
+    pengadaan: [""]
   };
   var monthlyNames = {
     igd: [
