@@ -42,7 +42,7 @@ sikatApp.controller("indikatorMutuListController", function(
   }
 
   $scope.isAuthorized = function (role) {
-    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','ADMIN','KASIE_YANMED','KASIE_PENUNJANG'];
+    const allowedRoles = ['KOORD_RAJALIGD', 'KOORD_RANAP', 'KOORD_RANAPKHUSUS', 'KOORD_PENUNJANG', 'DIREKTUR','KATU','','KASIE_YANMED','KASIE_PENUNJANG'];
     return allowedRoles.includes(role);
   };
 
@@ -617,6 +617,7 @@ sikatApp.controller("indikatorMutuEditController", function(
             $scope.besarSampel = reqRes.data.BESAR_SAMPEL,
             $scope.penanggungJawab = reqRes.data.PENANGGUNG_JAWAB,
             $scope.reviewUlang = reqRes.data.REVIEW_ULANG,
+            $scope.statusAcc = reqRes.data.STATUS_ACC,
             $scope.isINM = reqRes.data.isINM != null ? reqRes.data.isINM == 1 : false,
             $scope.isIMPRs = reqRes.data.isIMPRs != null ? reqRes.data.isIMPRs == 1 : false,
             $scope.isIMPUnit = reqRes.data.isIMPUnit != null ? reqRes.data.isIMPUnit == 1 : false

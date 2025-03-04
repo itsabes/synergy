@@ -404,8 +404,10 @@
               </button>
             </div>
             <div class="form-actions m-t-10 " ng-if="isAuthorized(user_role)">
-              <button type="button" class="btn btn-success pull-right m-l-10" ng-click="showStatusAcc(id,1,reviewUlang)">
-                <i class="fa fa-check"></i> Acc
+              <button type="button" class="btn btn-success pull-right m-l-10" 
+                      ng-click="showStatusAcc(id, 1, reviewUlang)" 
+                      ng-disabled="statusAcc == 1">
+                  <i class="fa fa-check"></i> Acc
               </button>
               <!--
               <button type="button" class="btn btn-warning pull-right m-l-10" ng-click="showStatusAcc(id, 2,reviewUlang)">
@@ -413,7 +415,7 @@
                 </button>-->
               <button type="button" class="btn btn-warning pull-right m-l-10" 
                       ng-click="showStatusAcc(id, 2, reviewUlang)" 
-                      ng-disabled="true">
+                      ng-disabled="statusAcc == 1">
                 <i class="fa fa-edit"></i> Pending
               </button>
               <button type="button" class="btn btn-inverse pull-right" ng-click="backToList()">
