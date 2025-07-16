@@ -1472,270 +1472,7 @@
                   ><span class="hide-menu">Peningkatan Mutu</span></a
                 >
                 <ul aria-expanded="true" class="collapse">
-                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'">
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Rawat Jalan</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('rawatJalan')">
-                        <a
-                          href="#!/forma/rawatJalan"
-                          ng-class="[{active: currForm=='formA' && currPage == 'rawatJalan'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/rawatJalan"
-                          ng-class="[{active: currForm=='formB' && currPage == 'rawatJalan'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/rawatJalan"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'rawatJalan'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/rawatJalan"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rawatJalan'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAP' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Rawat Inap</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('rawatInap')">
-                        <a
-                          href="#!/forma/rawatInap"
-                          ng-class="[{active: currForm=='formA' && currPage == 'rawatInap'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/rawatInap"
-                          ng-class="[{active: currForm=='formB' && currPage == 'rawatInap'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/rawatInap"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'rawatInap'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/rawatInap"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rawatInap'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAPANAK' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Rawat Inap Lt.3</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('rawatInapAnak')">
-                        <a
-                          href="#!/forma/rawatInapAnak"
-                          ng-class="[{active: currForm=='formA' && currPage == 'rawatInapAnak'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/rawatInapAnak"
-                          ng-class="[{active: currForm=='formB' && currPage == 'rawatInapAnak'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/rawatInapAnak"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'rawatInapAnak'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/rawatInapAnak"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rawatInapAnak'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMAROPERASI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Kamar Operasi</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('kamarOperasi')">
-                        <a
-                          href="#!/forma/kamarOperasi"
-                          ng-class="[{active: currForm=='formA' && currPage == 'kamarOperasi'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/kamarOperasi"
-                          ng-class="[{active: currForm=='formB' && currPage == 'kamarOperasi'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/kamarOperasi"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'kamarOperasi'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/kamarOperasi"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kamarOperasi'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='PERINATOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Perinatologi</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('perinatologi')">
-                        <a
-                          href="#!/forma/perinatologi"
-                          ng-class="[{active: currForm=='formA' && currPage == 'perinatologi'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/perinatologi"
-                          ng-class="[{active: currForm=='formB' && currPage == 'perinatologi'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/perinatologi"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'perinatologi'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/perinatologi"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'perinatologi'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMARBERSALIN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Kamar Bersalin</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('kamarBersalin')">
-                        <a
-                          href="#!/forma/kamarBersalin"
-                          ng-class="[{active: currForm=='formA' && currPage == 'kamarBersalin'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                       <a
-                          href="#!/formb/kamarBersalin"
-                          ng-class="[{active: currForm=='formB' && currPage == 'kamarBersalin'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/kamarBersalin"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'kamarBersalin'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/kamarBersalin"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kamarBersalin'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='HCU' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >ICU</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('hcu')">
-                        <a
-                          href="#!/forma/hcu"
-                          ng-class="[{active: currForm=='formA' && currPage == 'hcu'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/hcu"
-                          ng-class="[{active: currForm=='formB' && currPage == 'hcu'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/hcu"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'hcu'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/hcu"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'hcu'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+                  <!-- IGD -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='IGD' || user_role ==='KAKPRS' || user_role ==='KPRS'"
                   >
@@ -1774,918 +1511,286 @@
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Rawat Jalan -->
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'">
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Rawat Jalan</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('rawatJalan')">
+                        <a
+                          href="#!/forma/rawatJalan"
+                          ng-class="[{active: currForm=='formA' && currPage == 'rawatJalan'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/rawatJalan"
+                          ng-class="[{active: currForm=='formB' && currPage == 'rawatJalan'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/rawatJalan"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'rawatJalan'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/rawatJalan"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rawatJalan'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Rawat Inap -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='RADIOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAP' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                  > 
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Radiologi</a
+                      >Rawat Inap</a
                     >
                     <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('radiologi')">
+                      <li ng-if="formAExist('rawatInap')">
                         <a
-                          href="#!/forma/radiologi"
-                          ng-class="[{active: currForm=='formA' && currPage == 'radiologi'}]"
+                          href="#!/forma/rawatInap"
+                          ng-class="[{active: currForm=='formA' && currPage == 'rawatInap'}]"
                           >Form A</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/formb/radiologi"
-                          ng-class="[{active: currForm=='formB' && currPage == 'radiologi'}]"
+                          href="#!/formb/rawatInap"
+                          ng-class="[{active: currForm=='formB' && currPage == 'rawatInap'}]"
                           >Form B</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/rekap/radiologi"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'radiologi'}]"
+                          href="#!/rekap/rawatInap"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'rawatInap'}]"
                           >Rekap Bulanan</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/analisaIndikator/radiologi"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'radiologi'}]"
+                          href="#!/analisaIndikator/rawatInap"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rawatInap'}]"
                           >Analisa Indikator</a
                         >
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Rawat Inap Anak -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LABORATORIUM' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAPANAK' || user_role ==='KAKPRS' || user_role ==='KPRS'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Laboratorium</a
+                      >Rawat Inap Anak</a
                     >
                     <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('laboratorium')">
+                      <li ng-if="formAExist('rawatInapAnak')">
                         <a
-                          href="#!/forma/laboratorium"
-                          ng-class="[{active: currForm=='formA' && currPage == 'laboratorium'}]"
+                          href="#!/forma/rawatInapAnak"
+                          ng-class="[{active: currForm=='formA' && currPage == 'rawatInapAnak'}]"
                           >Form A</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/formb/laboratorium"
-                          ng-class="[{active: currForm=='formB' && currPage == 'laboratorium'}]"
+                          href="#!/formb/rawatInapAnak"
+                          ng-class="[{active: currForm=='formB' && currPage == 'rawatInapAnak'}]"
                           >Form B</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/rekap/laboratorium"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'laboratorium'}]"
+                          href="#!/rekap/rawatInapAnak"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'rawatInapAnak'}]"
                           >Rekap Bulanan</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/analisaIndikator/laboratorium"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'laboratorium'}]"
+                          href="#!/analisaIndikator/rawatInapAnak"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rawatInapAnak'}]"
                           >Analisa Indikator</a
                         >
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Kamar Bersalin -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='FARMASI'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMARBERSALIN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Farmasi</a
+                      >Kamar Bersalin</a
                     >
                     <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('farmasi')">
+                      <li ng-if="formAExist('kamarBersalin')">
                         <a
-                          href="#!/forma/farmasi"
-                          ng-class="[{active: currForm=='formA' && currPage == 'farmasi'}]"
+                          href="#!/forma/kamarBersalin"
+                          ng-class="[{active: currForm=='formA' && currPage == 'kamarBersalin'}]"
                           >Form A</a
                         >
                       </li>
                       <li>
-                        <a
-                          href="#!/formb/farmasi"
-                          ng-class="[{active: currForm=='formB' && currPage == 'farmasi'}]"
+                       <a
+                          href="#!/formb/kamarBersalin"
+                          ng-class="[{active: currForm=='formB' && currPage == 'kamarBersalin'}]"
                           >Form B</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/rekap/farmasi"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'farmasi'}]"
+                          href="#!/rekap/kamarBersalin"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'kamarBersalin'}]"
                           >Rekap Bulanan</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/analisaIndikator/farmasi"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'farmasi'}]"
+                          href="#!/analisaIndikator/kamarBersalin"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kamarBersalin'}]"
                           >Analisa Indikator</a
                         >
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Kamar Operasi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='GIZI'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMAROPERASI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Gizi</a
+                      >Kamar Operasi</a
                     >
                     <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('gizi')">
+                      <li ng-if="formAExist('kamarOperasi')">
                         <a
-                          href="#!/forma/gizi"
-                          ng-class="[{active: currForm=='formA' && currPage == 'gizi'}]"
+                          href="#!/forma/kamarOperasi"
+                          ng-class="[{active: currForm=='formA' && currPage == 'kamarOperasi'}]"
                           >Form A</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/formb/gizi"
-                          ng-class="[{active: currForm=='formB' && currPage == 'gizi'}]"
+                          href="#!/formb/kamarOperasi"
+                          ng-class="[{active: currForm=='formB' && currPage == 'kamarOperasi'}]"
                           >Form B</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/rekap/gizi"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'gizi'}]"
+                          href="#!/rekap/kamarOperasi"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'kamarOperasi'}]"
                           >Rekap Bulanan</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/analisaIndikator/gizi"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'gizi'}]"
+                          href="#!/analisaIndikator/kamarOperasi"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kamarOperasi'}]"
                           >Analisa Indikator</a
                         >
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Perinatologi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='REKAMMEDIS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='PERINATOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Rekam Medis</a
+                      >Perinatologi</a
                     >
                     <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('rekamMedis')">
+                      <li ng-if="formAExist('perinatologi')">
                         <a
-                          href="#!/forma/rekamMedis"
-                          ng-class="[{active: currForm=='formA' && currPage == 'rekamMedis'}]"
+                          href="#!/forma/perinatologi"
+                          ng-class="[{active: currForm=='formA' && currPage == 'perinatologi'}]"
                           >Form A</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/formb/rekamMedis"
-                          ng-class="[{active: currForm=='formB' && currPage == 'rekamMedis'}]"
+                          href="#!/formb/perinatologi"
+                          ng-class="[{active: currForm=='formB' && currPage == 'perinatologi'}]"
                           >Form B</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/rekap/rekamMedis"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'rekamMedis'}]"
+                          href="#!/rekap/perinatologi"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'perinatologi'}]"
                           >Rekap Bulanan</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/analisaIndikator/rekamMedis"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rekamMedis'}]"
+                          href="#!/analisaIndikator/perinatologi"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'perinatologi'}]"
                           >Analisa Indikator</a
                         >
                       </li>
                     </ul>
                   </li>
+
+                  <!-- HCU - ICU -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='KESLING'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='HCU' || user_role ==='KAKPRS' || user_role ==='KPRS'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Kesling</a
+                      >HCU - ICU</a
                     >
                     <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('kesling')">
+                      <li ng-if="formAExist('hcu')">
                         <a
-                          href="#!/forma/kesling"
-                          ng-class="[{active: currForm=='formA' && currPage == 'kesling'}]"
+                          href="#!/forma/hcu"
+                          ng-class="[{active: currForm=='formA' && currPage == 'hcu'}]"
                           >Form A</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/formb/kesling"
-                          ng-class="[{active: currForm=='formB' && currPage == 'kesling'}]"
+                          href="#!/formb/hcu"
+                          ng-class="[{active: currForm=='formB' && currPage == 'hcu'}]"
                           >Form B</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/rekap/kesling"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'kesling'}]"
+                          href="#!/rekap/hcu"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'hcu'}]"
                           >Rekap Bulanan</a
                         >
                       </li>
                       <li>
                         <a
-                          href="#!/analisaIndikator/kesling"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kesling'}]"
+                          href="#!/analisaIndikator/hcu"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'hcu'}]"
                           >Analisa Indikator</a
                         >
                       </li>
                     </ul>
                   </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='CSSDLINEN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >CSSD</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('cssdLinen')">
-                        <a
-                          href="#!/forma/cssdLinen"
-                          ng-class="[{active: currForm=='formA' && currPage == 'cssdLinen'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/cssdLinen"
-                          ng-class="[{active: currForm=='formB' && currPage == 'cssdLinen'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/cssdLinen"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'cssdLinen'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/cssdLinen"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'cssdLinen'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-				          <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LINEN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Linen</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('Linen')">
-                        <a
-                          href="#!/forma/Linen"
-                          ng-class="[{active: currForm=='formA' && currPage == 'Linen'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/Linen"
-                          ng-class="[{active: currForm=='formB' && currPage == 'Linen'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/Linen"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'Linen'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/Linen"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'Linen'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='K3RS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >K3RS</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('k3rs')">
-                        <a
-                          href="#!/forma/k3rs"
-                          ng-class="[{active: currForm=='formA' && currPage == 'k3rs'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/k3rs"
-                          ng-class="[{active: currForm=='formB' && currPage == 'k3rs'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/k3rs"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'k3rs'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/k3rs"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'k3rs'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='MANAJEMENKEPEGAWAIAN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Manajemen & Kepegawaian</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('manajemenKepegawaian')">
-                        <a
-                          href="#!/forma/manajemenKepegawaian"
-                          ng-class="[{active: currForm=='formA' && currPage == 'manajemenKepegawaian'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/manajemenKepegawaian"
-                          ng-class="[{active: currForm=='formB' && currPage == 'manajemenKepegawaian'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/manajemenKepegawaian"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'manajemenKepegawaian'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/manajemenKepegawaian"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'manajemenKepegawaian'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-				          <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEUANGAN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Keuangan</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('keuangan')">
-                        <a
-                          href="#!/forma/keuangan"
-                          ng-class="[{active: currForm=='formA' && currPage == 'keuangan'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/keuangan"
-                          ng-class="[{active: currForm=='formB' && currPage == 'keuangan'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/keuangan"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'keuangan'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/keuangan"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'keuangan'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='IPSRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >IPSRS</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('ipsrs')">
-                        <a
-                          href="#!/forma/ipsrs"
-                          ng-class="[{active: currForm=='formA' && currPage == 'ipsrs'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/ipsrs"
-                          ng-class="[{active: currForm=='formB' && currPage == 'ipsrs'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/ipsrs"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'ipsrs'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/ipsrs"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'ipsrs'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='LOKETPENDAFTARAN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Loket Pendaftaran</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('loketPendaftaran')">
-                        <a
-                          href="#!/forma/loketPendaftaran"
-                          ng-class="[{active: currForm=='formA' && currPage == 'loketPendaftaran'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/loketPendaftaran"
-                          ng-class="[{active: currForm=='formB' && currPage == 'loketPendaftaran'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/loketPendaftaran"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'loketPendaftaran'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/loketPendaftaran"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'loketPendaftaran'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='AMBULANCE'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Ambulance</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('ambulance')">
-                        <a
-                          href="#!/forma/ambulance"
-                          ng-class="[{active: currForm=='formA' && currPage == 'ambulance'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/ambulance"
-                          ng-class="[{active: currForm=='formB' && currPage == 'ambulance'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/ambulance"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'ambulance'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/ambulance"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'ambulance'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEUANGAN' || user_role ==='KASIR'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Kasir</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('kasir')">
-                        <a
-                          href="#!/forma/kasir"
-                          ng-class="[{active: currForm=='formA' && currPage == 'kasir'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/kasir"
-                          ng-class="[{active: currForm=='formB' && currPage == 'kasir'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/kasir"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'kasir'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/kasir"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kasir'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPPI' || user_role ==='PPI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >PPI</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('ppi')">
-                        <a
-                          href="#!/forma/ppi"
-                          ng-class="[{active: currForm=='formA' && currPage == 'ppi'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/ppi"
-                          ng-class="[{active: currForm=='formB' && currPage == 'ppi'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/ppi"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'ppi'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/ppi"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'ppi'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAMEDIS' || user_role ==='MEDIS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Komite Medis</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('komiteMedis')">
-                        <a
-                          href="#!/forma/komiteMedis"
-                          ng-class="[{active: currForm=='formA' && currPage == 'komiteMedis'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/komiteMedis"
-                          ng-class="[{active: currForm=='formB' && currPage == 'komiteMedis'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/komiteMedis"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteMedis'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/komiteMedis"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteMedis'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPERAWATAN' || user_role ==='KEPERAWATAN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Komite Keperawatan</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('komiteKeperawatan')">
-                        <a
-                          href="#!/forma/komiteKeperawatan"
-                          ng-class="[{active: currForm=='formA' && currPage == 'komiteKeperawatan'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/komiteKeperawatan"
-                          ng-class="[{active: currForm=='formB' && currPage == 'komiteKeperawatan'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/komiteKeperawatan"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteKeperawatan'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/komiteKeperawatan"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteKeperawatan'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KANAKESLAIN' || user_role ==='NAKESLAIN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Komite Nakes Lain</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('komiteNakesLain')">
-                        <a
-                          href="#!/forma/komiteNakesLain"
-                          ng-class="[{active: currForm=='formA' && currPage == 'komiteNakesLain'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/komiteNakesLain"
-                          ng-class="[{active: currForm=='formB' && currPage == 'komiteNakesLain'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/komiteNakesLain"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteNakesLain'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/komiteNakesLain"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteNakesLain'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAETIK' || user_role ==='ETIK'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Komite Etik</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('komiteEtik')">
-                        <a
-                          href="#!/forma/komiteEtik"
-                          ng-class="[{active: currForm=='formA' && currPage == 'komiteEtik'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/komiteEtik"
-                          ng-class="[{active: currForm=='formB' && currPage == 'komiteEtik'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/komiteEtik"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteEtik'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/komiteEtik"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteEtik'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Tim KPRS</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('timKprs')">
-                        <a
-                          href="#!/forma/timKprs"
-                          ng-class="[{active: currForm=='formA' && currPage == 'timKprs'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/timKprs"
-                          ng-class="[{active: currForm=='formB' && currPage == 'timKprs'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/timKprs"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'timKprs'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/timKprs"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timKprs'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPKRS' || user_role ==='PKRS'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Tim PKRS</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('timPkrs')">
-                        <a
-                          href="#!/forma/timPkrs"
-                          ng-class="[{active: currForm=='formA' && currPage == 'timPkrs'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/timPkrs"
-                          ng-class="[{active: currForm=='formB' && currPage == 'timPkrs'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/timPkrs"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'timPkrs'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/timPkrs"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timPkrs'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPPRA' || user_role ==='PPRA'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Tim PPRA</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('timPpra')">
-                        <a
-                          href="#!/forma/timPpra"
-                          ng-class="[{active: currForm=='formA' && currPage == 'timPpra'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/timPpra"
-                          ng-class="[{active: currForm=='formB' && currPage == 'timPpra'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/timPpra"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'timPpra'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/timPpra"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timPpra'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAKOMPLAIN' || user_role ==='KOMPLAIN'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Tim Komplain</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('timKomplain')">
-                        <a
-                          href="#!/forma/timKomplain"
-                          ng-class="[{active: currForm=='formA' && currPage == 'timKomplain'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/timKomplain"
-                          ng-class="[{active: currForm=='formB' && currPage == 'timKomplain'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/timKomplain"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'timKomplain'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/timKomplain"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timKomplain'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+
+                  <!-- Tim Ponek -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='KAPONEK' || user_role ==='PONEK'"
                   >
@@ -2724,6 +1829,8 @@
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Tim TB -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='KATB' || user_role ==='TB'"
                   >
@@ -2762,6 +1869,8 @@
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Tim KB -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='KAKB' || user_role ==='KB'"
                   >
@@ -2800,6 +1909,48 @@
                       </li>
                     </ul>
                   </li>
+
+                  <!-- Tim Stunting Wasting -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KASTUNTING' || user_role ==='STUNTING'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Tim Stunting Wasting</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('stunting')">
+                        <a
+                          href="#!/forma/stunting"
+                          ng-class="[{active: currForm=='formA' && currPage == 'stunting'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/stunting"
+                          ng-class="[{active: currForm=='formB' && currPage == 'stunting'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/stunting"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'stunting'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/stunting"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'stunting'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Tim HIV -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='KAHIV' || user_role ==='HIV'"
                   >
@@ -2838,6 +1989,608 @@
                       </li>
                     </ul>
                   </li>
+
+                  <!-- TIM PPRA -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPPRA' || user_role ==='PPRA'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Tim PPRA</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('timPpra')">
+                        <a
+                          href="#!/forma/timPpra"
+                          ng-class="[{active: currForm=='formA' && currPage == 'timPpra'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/timPpra"
+                          ng-class="[{active: currForm=='formB' && currPage == 'timPpra'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/timPpra"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'timPpra'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/timPpra"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timPpra'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Laboratorium -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LABORATORIUM' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Laboratorium</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('laboratorium')">
+                        <a
+                          href="#!/forma/laboratorium"
+                          ng-class="[{active: currForm=='formA' && currPage == 'laboratorium'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/laboratorium"
+                          ng-class="[{active: currForm=='formB' && currPage == 'laboratorium'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/laboratorium"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'laboratorium'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/laboratorium"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'laboratorium'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Radiologi -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='RADIOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Radiologi</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('radiologi')">
+                        <a
+                          href="#!/forma/radiologi"
+                          ng-class="[{active: currForm=='formA' && currPage == 'radiologi'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/radiologi"
+                          ng-class="[{active: currForm=='formB' && currPage == 'radiologi'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/radiologi"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'radiologi'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/radiologi"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'radiologi'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Kesehatan Lingkungan -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='KESLING'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Kesehatan Lingkungan</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('kesling')">
+                        <a
+                          href="#!/forma/kesling"
+                          ng-class="[{active: currForm=='formA' && currPage == 'kesling'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/kesling"
+                          ng-class="[{active: currForm=='formB' && currPage == 'kesling'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/kesling"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'kesling'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/kesling"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kesling'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Gizi -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='GIZI'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Gizi</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('gizi')">
+                        <a
+                          href="#!/forma/gizi"
+                          ng-class="[{active: currForm=='formA' && currPage == 'gizi'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/gizi"
+                          ng-class="[{active: currForm=='formB' && currPage == 'gizi'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/gizi"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'gizi'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/gizi"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'gizi'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  
+                  <!-- Unit Farmasi -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='FARMASI'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Farmasi</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('farmasi')">
+                        <a
+                          href="#!/forma/farmasi"
+                          ng-class="[{active: currForm=='formA' && currPage == 'farmasi'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/farmasi"
+                          ng-class="[{active: currForm=='formB' && currPage == 'farmasi'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/farmasi"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'farmasi'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/farmasi"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'farmasi'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Rekam Medis -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='REKAMMEDIS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Rekam Medis</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('rekamMedis')">
+                        <a
+                          href="#!/forma/rekamMedis"
+                          ng-class="[{active: currForm=='formA' && currPage == 'rekamMedis'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/rekamMedis"
+                          ng-class="[{active: currForm=='formB' && currPage == 'rekamMedis'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/rekamMedis"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'rekamMedis'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/rekamMedis"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'rekamMedis'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Loket Pendaftaran -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='LOKETPENDAFTARAN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Loket Pendaftaran</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('loketPendaftaran')">
+                        <a
+                          href="#!/forma/loketPendaftaran"
+                          ng-class="[{active: currForm=='formA' && currPage == 'loketPendaftaran'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/loketPendaftaran"
+                          ng-class="[{active: currForm=='formB' && currPage == 'loketPendaftaran'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/loketPendaftaran"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'loketPendaftaran'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/loketPendaftaran"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'loketPendaftaran'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Laundry & Binatu -->
+				          <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LINEN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Laundry & Binatu</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('Linen')">
+                        <a
+                          href="#!/forma/Linen"
+                          ng-class="[{active: currForm=='formA' && currPage == 'Linen'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/Linen"
+                          ng-class="[{active: currForm=='formB' && currPage == 'Linen'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/Linen"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'Linen'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/Linen"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'Linen'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit CSSD -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='CSSDLINEN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit CSSD</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('cssdLinen')">
+                        <a
+                          href="#!/forma/cssdLinen"
+                          ng-class="[{active: currForm=='formA' && currPage == 'cssdLinen'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/cssdLinen"
+                          ng-class="[{active: currForm=='formB' && currPage == 'cssdLinen'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/cssdLinen"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'cssdLinen'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/cssdLinen"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'cssdLinen'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Ambulance -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='AMBULANCE'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Ambulance</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('ambulance')">
+                        <a
+                          href="#!/forma/ambulance"
+                          ng-class="[{active: currForm=='formA' && currPage == 'ambulance'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/ambulance"
+                          ng-class="[{active: currForm=='formB' && currPage == 'ambulance'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/ambulance"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'ambulance'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/ambulance"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'ambulance'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Manajemen & Kepegawaian -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='MANAJEMENKEPEGAWAIAN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Manajemen & Kepegawaian</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('manajemenKepegawaian')">
+                        <a
+                          href="#!/forma/manajemenKepegawaian"
+                          ng-class="[{active: currForm=='formA' && currPage == 'manajemenKepegawaian'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/manajemenKepegawaian"
+                          ng-class="[{active: currForm=='formB' && currPage == 'manajemenKepegawaian'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/manajemenKepegawaian"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'manajemenKepegawaian'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/manajemenKepegawaian"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'manajemenKepegawaian'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Keuangan -->
+				          <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEUANGAN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Keuangan</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('keuangan')">
+                        <a
+                          href="#!/forma/keuangan"
+                          ng-class="[{active: currForm=='formA' && currPage == 'keuangan'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/keuangan"
+                          ng-class="[{active: currForm=='formB' && currPage == 'keuangan'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/keuangan"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'keuangan'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/keuangan"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'keuangan'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Casemix -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KACASEMIX' || user_role ==='CASEMIX'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Casemix</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('casemix')">
+                        <a
+                          href="#!/forma/casemix"
+                          ng-class="[{active: currForm=='formA' && currPage == 'casemix'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/casemix"
+                          ng-class="[{active: currForm=='formB' && currPage == 'casemix'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/casemix"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'casemix'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/casemix"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'casemix'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit Kasir -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEUANGAN' || user_role ==='KASIR'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit Kasir</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('kasir')">
+                        <a
+                          href="#!/forma/kasir"
+                          ng-class="[{active: currForm=='formA' && currPage == 'kasir'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/kasir"
+                          ng-class="[{active: currForm=='formB' && currPage == 'kasir'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/kasir"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'kasir'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/kasir"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'kasir'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Pengurus Barang -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='BARANG' || user_role ==='BARANG'"
                   >
@@ -2876,120 +2629,8 @@
                       </li>
                     </ul>
                   </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KASTUNTING' || user_role ==='STUNTING'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Stunting</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('stunting')">
-                        <a
-                          href="#!/forma/stunting"
-                          ng-class="[{active: currForm=='formA' && currPage == 'stunting'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/stunting"
-                          ng-class="[{active: currForm=='formB' && currPage == 'stunting'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/stunting"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'stunting'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/stunting"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'stunting'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KACASEMIX' || user_role ==='CASEMIX'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >Casemix</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('casemix')">
-                        <a
-                          href="#!/forma/casemix"
-                          ng-class="[{active: currForm=='formA' && currPage == 'casemix'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/casemix"
-                          ng-class="[{active: currForm=='formB' && currPage == 'casemix'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/casemix"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'casemix'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/casemix"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'casemix'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAIT' || user_role ==='IT'"
-                  >
-                    <a href="#" class="has-arrow"
-                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
-                      >IT</a
-                    >
-                    <ul aria-expanded="false" class="collapse">
-                      <li ng-if="formAExist('it')">
-                        <a
-                          href="#!/forma/it"
-                          ng-class="[{active: currForm=='formA' && currPage == 'it'}]"
-                          >Form A</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/formb/it"
-                          ng-class="[{active: currForm=='formB' && currPage == 'it'}]"
-                          >Form B</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/rekap/it"
-                          ng-class="[{active: currForm=='rekap' && currPage == 'it'}]"
-                          >Rekap Bulanan</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#!/analisaIndikator/it"
-                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'it'}]"
-                          >Analisa Indikator</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+
+                  <!-- Pengadaan -->
                   <li
                     ng-if="user_role ==='ADMIN' || user_role ==='KAPENGADAAN' || user_role ==='PENGADAAN'"
                   >
@@ -3023,6 +2664,446 @@
                         <a
                           href="#!/analisaIndikator/pengadaan"
                           ng-class="[{active: currForm=='analisaIndikator' && currPage == 'pengadaan'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit IT -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAIT' || user_role ==='IT'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit IT</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('it')">
+                        <a
+                          href="#!/forma/it"
+                          ng-class="[{active: currForm=='formA' && currPage == 'it'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/it"
+                          ng-class="[{active: currForm=='formB' && currPage == 'it'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/it"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'it'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/it"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'it'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit IPSRS -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPEGAWAIAN' || user_role ==='IPSRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit IPSRS</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('ipsrs')">
+                        <a
+                          href="#!/forma/ipsrs"
+                          ng-class="[{active: currForm=='formA' && currPage == 'ipsrs'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/ipsrs"
+                          ng-class="[{active: currForm=='formB' && currPage == 'ipsrs'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/ipsrs"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'ipsrs'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/ipsrs"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'ipsrs'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Unit K3RS -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='K3RS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Unit K3RS</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('k3rs')">
+                        <a
+                          href="#!/forma/k3rs"
+                          ng-class="[{active: currForm=='formA' && currPage == 'k3rs'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/k3rs"
+                          ng-class="[{active: currForm=='formB' && currPage == 'k3rs'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/k3rs"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'k3rs'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/k3rs"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'k3rs'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Tim PPI -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPPI' || user_role ==='PPI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Tim PPI</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('ppi')">
+                        <a
+                          href="#!/forma/ppi"
+                          ng-class="[{active: currForm=='formA' && currPage == 'ppi'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/ppi"
+                          ng-class="[{active: currForm=='formB' && currPage == 'ppi'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/ppi"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'ppi'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/ppi"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'ppi'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Tim Handling Komplain -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKOMPLAIN' || user_role ==='KOMPLAIN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Tim Handling Komplain</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('timKomplain')">
+                        <a
+                          href="#!/forma/timKomplain"
+                          ng-class="[{active: currForm=='formA' && currPage == 'timKomplain'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/timKomplain"
+                          ng-class="[{active: currForm=='formB' && currPage == 'timKomplain'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/timKomplain"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'timKomplain'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/timKomplain"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timKomplain'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Tim KPRS -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Tim KPRS</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('timKprs')">
+                        <a
+                          href="#!/forma/timKprs"
+                          ng-class="[{active: currForm=='formA' && currPage == 'timKprs'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/timKprs"
+                          ng-class="[{active: currForm=='formB' && currPage == 'timKprs'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/timKprs"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'timKprs'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/timKprs"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timKprs'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Komite Medik -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAMEDIS' || user_role ==='MEDIS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Komite Medik</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('komiteMedis')">
+                        <a
+                          href="#!/forma/komiteMedis"
+                          ng-class="[{active: currForm=='formA' && currPage == 'komiteMedis'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/komiteMedis"
+                          ng-class="[{active: currForm=='formB' && currPage == 'komiteMedis'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/komiteMedis"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteMedis'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/komiteMedis"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteMedis'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Komite Keperawatan -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAKEPERAWATAN' || user_role ==='KEPERAWATAN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Komite Keperawatan</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('komiteKeperawatan')">
+                        <a
+                          href="#!/forma/komiteKeperawatan"
+                          ng-class="[{active: currForm=='formA' && currPage == 'komiteKeperawatan'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/komiteKeperawatan"
+                          ng-class="[{active: currForm=='formB' && currPage == 'komiteKeperawatan'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/komiteKeperawatan"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteKeperawatan'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/komiteKeperawatan"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteKeperawatan'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Komite Tenaga Kesehatan Lainnya -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KANAKESLAIN' || user_role ==='NAKESLAIN'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Komite Tenaga Kesehatan Lainnya</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('komiteNakesLain')">
+                        <a
+                          href="#!/forma/komiteNakesLain"
+                          ng-class="[{active: currForm=='formA' && currPage == 'komiteNakesLain'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/komiteNakesLain"
+                          ng-class="[{active: currForm=='formB' && currPage == 'komiteNakesLain'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/komiteNakesLain"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteNakesLain'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/komiteNakesLain"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteNakesLain'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- Komite Etik -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAETIK' || user_role ==='ETIK'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Komite Etik</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('komiteEtik')">
+                        <a
+                          href="#!/forma/komiteEtik"
+                          ng-class="[{active: currForm=='formA' && currPage == 'komiteEtik'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/komiteEtik"
+                          ng-class="[{active: currForm=='formB' && currPage == 'komiteEtik'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/komiteEtik"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'komiteEtik'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/komiteEtik"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'komiteEtik'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- TIM PKRS -->
+                  <li
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPKRS' || user_role ==='PKRS'"
+                  >
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Tim PKRS</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('timPkrs')">
+                        <a
+                          href="#!/forma/timPkrs"
+                          ng-class="[{active: currForm=='formA' && currPage == 'timPkrs'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/timPkrs"
+                          ng-class="[{active: currForm=='formB' && currPage == 'timPkrs'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/timPkrs"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'timPkrs'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/timPkrs"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timPkrs'}]"
                           >Analisa Indikator</a
                         >
                       </li>
