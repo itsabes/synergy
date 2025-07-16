@@ -120,31 +120,31 @@ sikatApp.controller(
                   monthlyData[key].denumerator == 0
                 ) {
                   monthlyData[key].hasil = 0;
-                  if ($rootScope.currPage == "hcu") {
-                    if ($scope.monthSelect == "3") {
-                      monthlyData[key].hasil = 100;
-                    }
-                  } else if ($rootScope.currPage == "kamarBersalin") {
-                    if (
-                      $scope.monthSelect == "6" ||
-                      $scope.monthSelect == "7" ||
-                      $scope.monthSelect == "8"
-                    ) {
-                      monthlyData[key].hasil = 100;
-                    }
-                  } else if ($rootScope.currPage == "k3rs") {
-                    if (
-                      $scope.monthSelect == "1" ||
-                      $scope.monthSelect == "2" ||
-                      $scope.monthSelect == "3"
-                    ) {
-                      monthlyData[key].hasil = 100;
-                    }
-                  } else if ($rootScope.currPage == "timPonek") {
-                    if ($scope.monthSelect == "1") {
-                      monthlyData[key].hasil = 100;
-                    }
-                  }
+                  // if ($rootScope.currPage == "hcu") {
+                  //   if ($scope.monthSelect == "3") {
+                  //     monthlyData[key].hasil = 100;
+                  //   }
+                  // } else if ($rootScope.currPage == "kamarBersalin") {
+                  //   if (
+                  //     $scope.monthSelect == "6" ||
+                  //     $scope.monthSelect == "7" ||
+                  //     $scope.monthSelect == "8"
+                  //   ) {
+                  //     monthlyData[key].hasil = 100;
+                  //   }
+                  // } else if ($rootScope.currPage == "k3rs") {
+                  //   if (
+                  //     $scope.monthSelect == "1" ||
+                  //     $scope.monthSelect == "2" ||
+                  //     $scope.monthSelect == "3"
+                  //   ) {
+                  //     monthlyData[key].hasil = 100;
+                  //   }
+                  // } else if ($rootScope.currPage == "timPonek") {
+                  //   if ($scope.monthSelect == "1") {
+                  //     monthlyData[key].hasil = 100;
+                  //   }
+                  // }
                 } else {
                   monthlyData[key].hasil =
                     monthlyData[key].numerator / monthlyData[key].denumerator;
