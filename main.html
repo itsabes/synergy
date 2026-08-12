@@ -564,7 +564,7 @@
                   ><span class="hide-menu">Manajemen <br>Data Mutu</span></a
                 >
                 <ul aria-expanded="true" class="collapse">
-                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KOORD_RAJALIGD'">
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KOORD_RAJALIGD' || user_role ==='ADMINKES'">
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
                       >Rawat Jalan</a
@@ -587,7 +587,7 @@
                     </ul>
                   </li>
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAP' || user_role ==='KOORD_RANAP'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAP' || user_role ==='KOORD_RANAP' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -612,7 +612,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAPANAK' || user_role ==='KOORD_RANAP'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAPANAK' || user_role ==='KOORD_RANAP' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Rawat Inap Lt.3
@@ -634,7 +634,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMAROPERASI' || user_role ==='KOORD_RANAPKHUSUS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMAROPERASI' || user_role ==='KOORD_RANAPKHUSUS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kamar Operasi
@@ -656,7 +656,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='PERINATOLOGI' || user_role ==='KOORD_RANAPKHUSUS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='PERINATOLOGI' || user_role ==='KOORD_RANAPKHUSUS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Perinatologi
@@ -678,7 +678,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMARBERSALIN' || user_role ==='KOORD_RANAP'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMARBERSALIN' || user_role ==='KOORD_RANAP' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kamar Bersalin
@@ -700,7 +700,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='HCU' || user_role ==='KOORD_RANAPKHUSUS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='HCU' || user_role ==='KOORD_RANAPKHUSUS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> ICU
@@ -722,7 +722,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='IGD' || user_role ==='KOORD_RAJALIGD'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='IGD' || user_role ==='KOORD_RAJALIGD' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> IGD
@@ -744,7 +744,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='RADIOLOGI' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='RADIOLOGI' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Radiologi
@@ -765,7 +765,7 @@
                     </ul>
                   </li>
                   
-                  <li ng-if="user_role === 'ADMIN' || user_role ==='LABORATORIUM' || user_role ==='KOORD_PENUNJANG'">
+                  <li ng-if="user_role === 'ADMIN' || user_role ==='LABORATORIUM' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'">
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Laboratorium
                     </a>
@@ -786,7 +786,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='FARMASI' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='FARMASI' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Farmasi
@@ -808,7 +808,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='GIZI' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='GIZI' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Gizi
@@ -830,7 +830,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='REKAMMEDIS' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='REKAMMEDIS' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Rekam Medis
@@ -852,7 +852,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KESLING' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KESLING' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Kesling
@@ -874,7 +874,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='CSSDLINEN' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='CSSDLINEN' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> CSSD
@@ -896,7 +896,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='LINEN' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='LINEN' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Linen
@@ -1006,7 +1006,7 @@
                   </li>
 
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='LOKETPENDAFTARAN' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='LOKETPENDAFTARAN' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Loket Pendaftaran
@@ -1028,7 +1028,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='AMBULANCE' || user_role ==='KOORD_PENUNJANG'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='AMBULANCE' || user_role ==='KOORD_PENUNJANG' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Ambulance
@@ -1270,7 +1270,7 @@
                   </li>
                   
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPONEK' || user_role ==='PONEK' || user_role ==='KASIE_YANMED'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPONEK' || user_role ==='PONEK' || user_role ==='KASIE_YANMED' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Tim Ponek
@@ -1443,9 +1443,7 @@
                     </ul>
                   </li>
 
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENGADAAN' || user_role ==='PENGADAAN' || user_role ==='KATU'"
-                  >
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KAPENGADAAN' || user_role ==='PENGADAAN' || user_role ==='KATU'">
                     <a href="#" class="has-arrow">
                       <i class="fas fa-file-medical-alt inner-menu-icon"></i> Pengadaan
                     </a>
@@ -1464,6 +1462,26 @@
                       </li>
                     </ul>
                   </li>
+
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KAELEKTROMEDIS' || user_role ==='ELEKTROMEDIS' || user_role ==='KATU'">
+                    <a href="#" class="has-arrow">
+                      <i class="fas fa-file-medical-alt inner-menu-icon"></i> Elektromedis
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                      <li>
+                        <a
+                          href="#!/indikatorMutu/elektromedis"
+                          ng-class="[{active: currForm=='indikatorMutu' && currPage == 'elektromedis'}]"
+                        >Pengajuan Indikator Mutu</a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!/lembarPdsa/elektromedis"
+                          ng-class="[{active: currForm=='lembarPdsa' && currPage == 'elektromedis'}]"
+                        >Lembar Kerja PDSA</a>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
               <li ng-if="user_role !=='SIYUKO' ">
@@ -1474,7 +1492,7 @@
                 <ul aria-expanded="true" class="collapse">
                   <!-- IGD -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='IGD' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='IGD' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1513,7 +1531,7 @@
                   </li>
 
                   <!-- Rawat Jalan -->
-                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS'">
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KARAWATJALAN' || user_role ==='RAWATJALAN' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'">
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
                       >Rawat Jalan</a
@@ -1552,7 +1570,7 @@
 
                   <!-- Rawat Inap -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAP' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAP' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   > 
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1592,7 +1610,7 @@
 
                   <!-- Rawat Inap Anak -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAPANAK' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='RAWATINAPANAK' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1632,7 +1650,7 @@
 
                   <!-- Kamar Bersalin -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMARBERSALIN' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMARBERSALIN' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1672,7 +1690,7 @@
 
                   <!-- Kamar Operasi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMAROPERASI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='KAMAROPERASI' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1712,7 +1730,7 @@
 
                   <!-- Perinatologi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='PERINATOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KARAWATINAP' || user_role ==='PERINATOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1752,7 +1770,7 @@
 
                   <!-- HCU - ICU -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='HCU' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAIGD' || user_role ==='HCU' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -1792,7 +1810,7 @@
 
                   <!-- Tim Ponek -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPONEK' || user_role ==='PONEK'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPONEK' || user_role ==='PONEK' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2032,7 +2050,7 @@
 
                   <!-- Laboratorium -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LABORATORIUM' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LABORATORIUM' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2072,7 +2090,7 @@
 
                   <!-- Radiologi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='RADIOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='RADIOLOGI' || user_role ==='KAKPRS' || user_role ==='KPRS' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2112,7 +2130,7 @@
 
                   <!-- Kesehatan Lingkungan -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='KESLING'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='KESLING' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2152,7 +2170,7 @@
 
                   <!-- Unit Gizi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='GIZI'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='GIZI' || user_role ==='KASIE_PENUNJANG' || user_role ==='ADMINKES'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2192,7 +2210,7 @@
                   
                   <!-- Unit Farmasi -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='FARMASI'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='FARMASI' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2232,7 +2250,7 @@
 
                   <!-- Unit Rekam Medis -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='REKAMMEDIS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='REKAMMEDIS' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2312,7 +2330,7 @@
 
                   <!-- Unit Laundry & Binatu -->
 				          <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LINEN'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='LINEN' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2352,7 +2370,7 @@
 
                   <!-- Unit CSSD -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='CSSDLINEN'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='CSSDLINEN' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -2752,7 +2770,7 @@
 
                   <!-- Unit K3RS -->
                   <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='K3RS'"
+                    ng-if="user_role ==='ADMIN' || user_role ==='KAPENUNJANG' || user_role ==='K3RS' || user_role ==='KASIE_PENUNJANG'"
                   >
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
@@ -3071,9 +3089,7 @@
                   </li>
 
                   <!-- TIM PKRS -->
-                  <li
-                    ng-if="user_role ==='ADMIN' || user_role ==='KAPKRS' || user_role ==='PKRS'"
-                  >
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KAPKRS' || user_role ==='PKRS'">
                     <a href="#" class="has-arrow"
                       ><i class="fas fa-file-medical-alt inner-menu-icon"></i
                       >Tim PKRS</a
@@ -3104,6 +3120,44 @@
                         <a
                           href="#!/analisaIndikator/timPkrs"
                           ng-class="[{active: currForm=='analisaIndikator' && currPage == 'timPkrs'}]"
+                          >Analisa Indikator</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <!-- ELEKTROMEDIS -->
+                  <li ng-if="user_role ==='ADMIN' || user_role ==='KAELEKTROMEDIS' || user_role ==='ELEKTROMEDIS'">
+                    <a href="#" class="has-arrow"
+                      ><i class="fas fa-file-medical-alt inner-menu-icon"></i
+                      >Elektromedis</a
+                    >
+                    <ul aria-expanded="false" class="collapse">
+                      <li ng-if="formAExist('elektromedis')">
+                        <a
+                          href="#!/forma/elektromedis"
+                          ng-class="[{active: currForm=='formA' && currPage == 'elektromedis'}]"
+                          >Form A</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/formb/elektromedis"
+                          ng-class="[{active: currForm=='formB' && currPage == 'elektromedis'}]"
+                          >Form B</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/rekap/elektromedis"
+                          ng-class="[{active: currForm=='rekap' && currPage == 'elektromedis'}]"
+                          >Rekap Bulanan</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#!/analisaIndikator/elektromedis"
+                          ng-class="[{active: currForm=='analisaIndikator' && currPage == 'elektromedis'}]"
                           >Analisa Indikator</a
                         >
                       </li>

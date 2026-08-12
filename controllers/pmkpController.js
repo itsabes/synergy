@@ -36,9 +36,14 @@ sikatApp.controller(
     };
 
     $scope.yearDynamic = [];
-    const currentYear = new Date().getFullYear(); // Tahun berjalan
+    const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
-    $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
+
+    $scope.yearDynamic.push(
+        currentYear - 1, // tahun sebelumnya
+        currentYear,
+        currentYear + 1  // tahun depan
+    );
     console.log("$scope.yearDynamic:" + $scope.yearDynamic);
 
     $scope.dailyToMonthly = (dailyData, monthlyData, utils) => {
@@ -434,9 +439,14 @@ sikatApp.controller(
     
 
     $scope.yearDynamic = [];
-    const currentYear = new Date().getFullYear(); // Tahun berjalan
+    const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
-    $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
+
+    $scope.yearDynamic.push(
+        currentYear - 1, // tahun sebelumnya
+        currentYear,
+        currentYear + 1  // tahun depan
+    );
 
     $scope.filterMonthly = (monthlyData) => {
       for (var i = 0; i < $scope.monthlyNames.length; i++) {
@@ -1102,9 +1112,14 @@ sikatApp.controller(
     $scope.periodeAnalisa = [];
 
     $scope.yearDynamic = [];
-    const currentYear = new Date().getFullYear(); // Tahun berjalan
+    const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
-    $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
+
+    $scope.yearDynamic.push(
+        currentYear - 1, // tahun sebelumnya
+        currentYear,
+        currentYear + 1  // tahun depan
+    );
 
     $scope.getDynamicData = () => {
       pmkpService.getDynamicData(
@@ -1200,6 +1215,20 @@ sikatApp.controller(
 
     $scope.getData = () => {
       $rootScope.loading = true;
+
+      // 🔥 RESET SEMUA ARRAY DULU
+      $scope.monthlyNames = [];
+      $scope.target = [];
+      $scope.numerator = [];
+      $scope.denumerator = [];
+      $scope.idx = [];
+      $scope.analisa = [];
+      $scope.analisaId = [];
+      $scope.rekomendasi = [];
+      $scope.periodeAnalisa = [];
+
+      $scope.yearlyData = new Array(12).fill(null);
+
       $scope.getDynamicData();
       $http
         .get(
@@ -1488,12 +1517,19 @@ sikatApp.controller(
         unit: $rootScope.currPage,
       };
 
-      /*
-      const url = REPORT_CURRENT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
-      pmkpService.postDownload(url, data, "Report Form C "+ $scope.formatString($scope.currPage) + ".pdf");
-      */
-      const url = REPORT_URL + "/xlsx/" + $scope.currPage;
-      pmkpService.postDownload(url, data, $scope.currPage + ".xlsx");
+      
+      // const url = REPORT_CURRENT_URL + "/pdf_c/" + $scope.currPage + "/Rekap";
+      // pmkpService.postDownload(url, data, "Report Form C "+ $scope.formatString($scope.currPage) + ".pdf");
+      
+      // const url = REPORT_URL + "/xlsx/" + $scope.currPage;
+      // pmkpService.postDownload(url, data, $scope.currPage + ".xlsx");
+
+      const url = REPORT_CURRENT_URL + "/excel_c/" + $scope.currPage + "/Rekap";
+      pmkpService.postDownload(
+          url,
+          data,
+          "Report Form C " + $scope.formatString($scope.currPage) + ".xls"
+      );
     };
 
     $scope.downloadChart = (part) => {

@@ -62,29 +62,28 @@
           </div>
           
           <br /><br />
-          <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive"
-          show-filter="false">
-          <tr ng-repeat="row in $data track by $index">
-            <td title="'Periode'" sortable="'periode'">
-              <a style="display: block;" href="javascript:void(0)"
-                ng-click="showAnalisaIndikatorEdit(row.id,row.periode_analisa)"> {{getPeriodeAnalisa(row.periode_analisa) }}
-              </a>
-            </td>
-            <td title="'Create Date'" sortable="'createDate'">
-              {{ row.create_date }}
-            </td>
-            <td title="'Update Date'" sortable="'updateDate'">
-              {{ row.update_date }}
-            </td>
-            <td title="'Action'">
-              <button type="button"
-                class="btn btn-success waves-effect waves-light"
-                ng-click="downloadPerUnit(row.periode_analisa,row.tahun)">
-                <i class="fas fa-file-pdf"></i> Download Pdf Report
-              </button>
-            </td>
-          </tr>
-        </table>
+          <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-responsive" show-filter="false">
+            <tr ng-repeat="row in $data track by $index">
+              <td title="'Periode'" sortable="'periode'">
+                <a style="display: block;" href="javascript:void(0)"
+                  ng-click="showAnalisaIndikatorEdit(row.id,row.periode_analisa)"> {{getPeriodeAnalisa(row.periode_analisa) }}
+                </a>
+              </td>
+              <td title="'Create Date'" sortable="'createDate'">
+                {{ row.create_date }}
+              </td>
+              <td title="'Update Date'" sortable="'updateDate'">
+                {{ row.update_date }}
+              </td>
+              <td title="'Action'">
+                <button type="button"
+                  class="btn btn-success waves-effect waves-light"
+                  ng-click="downloadPerUnit(row.periode_analisa,row.tahun)">
+                  <i class="fas fa-file-pdf"></i> Download Pdf Report
+                </button>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

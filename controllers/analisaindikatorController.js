@@ -33,10 +33,12 @@ sikatApp.controller(
     $scope.yearDynamic = [];
     const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
-    const startYear = currentYear; // Tahun awal tetap
-    const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
+
+    const startYear = currentYear - 1; // tahun sebelumnya
+    const endYear   = currentYear + 1; // tahun depan
+
     for (let year = startYear; year <= endYear; year++) {
-      $scope.yearDynamic.push(year);
+        $scope.yearDynamic.push(year);
     }
 
     $scope.dataId = null;
@@ -62,45 +64,55 @@ sikatApp.controller(
     };
 
     $scope.downloadPerUnit = (periode, tahun) => {
-      $scope.periode = periode;
+      $scope.periode = String(periode);
       $scope.tahun = tahun;
-      console.log("periode:" + periode + " tahun:" + tahun);
+
+      $scope.monthlyNames = [];
+      $scope.target = [];
 
       pmkpService.getDynamicData(
         $rootScope.currPage,
-        $scope.tahun,
+        tahun,
         (result) => {
-          if (result) {
-            Object.keys(result.data).forEach((key) => {
-              if (
-                result.data[key]["STATUS_ACC"] == "1" &&
-                !$scope.monthlyNames.includes(
-                  result.data[key]["JUDUL_INDIKATOR"]
-                )
-              ) {
-                const {
-                  JUDUL_INDIKATOR,
-                  TARGET_PENCAPAIAN,
-                  NUMERATOR,
-                  DENUMERATOR,
-                } = result.data[key];
-                $scope.monthlyNames.push(JUDUL_INDIKATOR);
-                $scope.target.push(TARGET_PENCAPAIAN);
-                $scope.targetHasil.push(TARGET_PENCAPAIAN);
+          if (!result || !result.data) return;
 
-                console.log(
-                  "status_acc:" + result.data[key]["STATUS_ACC"],
-                  " , indikator:" + result.data[key]["JUDUL_INDIKATOR"]
-                );
-              }
-            });
-          } else {
-            console.log("No data or error occurred.");
-          }
+          Object.values(result.data).forEach(item => {
+            if (item.STATUS_ACC === "1") {
+              $scope.monthlyNames.push(item.JUDUL_INDIKATOR);
+              $scope.target.push(item.TARGET_PENCAPAIAN);
+            }
+          });
+
+          // 🔥 PASTIKAN yearlyData TERISI DULU
+          $scope.getDataChartUnitForDownload(() => {
+            $scope.downloadChart($scope.periode, tahun);
+          });
         }
       );
+    };
 
-      $scope.downloadChart($scope.periode, $scope.tahun);
+    $scope.getDataChartUnitForDownload = (callback) => {
+      $http
+        .get(
+          SERVER_URL +
+            "/api/pmkp/getByYearAndType/year/" +
+            $scope.tahun +
+            "/type/" +
+            $scope.currPage,
+          { headers: { Authorization: localStorage.getItem("token") } }
+        )
+        .then((res) => {
+          $scope.yearlyData = new Array(12).fill(null);
+
+          res.data.forEach(item => {
+            item.monthlyData = JSON.parse(item.monthlyData);
+            $scope.filterMonthly(item.monthlyData);
+            item.m = item.monthlyData;
+            $scope.yearlyData[item.month - 1] = item;
+          });
+
+          callback && callback();
+        });
     };
 
     $scope.getDataChartUnit = () => {
@@ -306,228 +318,116 @@ sikatApp.controller(
       }
     };
 
+    $scope.getNilaiBulan = (bulan, indikatorIndex) => {
+      const data = $scope.yearlyData.find(d => d.month === bulan);
+      if (!data || !data.m[indikatorIndex]) return 0;
+
+      const val = data.m[indikatorIndex].hasil;
+      return val === null || val === undefined ? 0 : val;
+    };
+
     $scope.downloadChart = (part, tahun) => {
-      let monthlyData = [];
-      let monthDataIndex = [];
-      let arrayPeriod;
-      switch ($scope.periode) {
-        case "0":
-          arrayPeriod = [1, 2, 3];
-          break;
-        case "1":
-          arrayPeriod = [1, 2, 3, 4, 5, 6];
-          break;
-        case "2":
-          arrayPeriod = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-          break;
-        case "3":
-          arrayPeriod = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-          break;
-        default:
-          arrayPeriod = []; // default kosong jika nilai $scope.periode tidak valid
-      }
 
-      for (var h = 0; h < $scope.yearlyData.length; h++) {
-        if ($scope.yearlyData[h]) {
-          monthlyData = $scope.yearlyData[h].m;
-          let monthData = $scope.yearlyData[h].monthData;
-          if (arrayPeriod.includes(monthData)) {
-            monthDataIndex = monthlyData;
-          }
-        }
-
-        for (var i = 0; i < $scope.monthlyNames.length; i++) {
-          var target = $scope.target[i].toLowerCase();
-          if (!monthlyData[i])
-            monthlyData[i] = {
-              hasil: null,
-            };
-          if (target.includes("laporan")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " laporan"
-                : "";
-          } else if (target.includes("mg/l")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " mg/l"
-                : "";
-          } else if (target.includes("ph 6-9")) {
-            monthlyData[i].hasil_text = monthlyData[i].hasil;
-          } else if (target.includes("menit")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " menit"
-                : "";
-          } else if (target.includes("jam")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " jam"
-                : "";
-          } else if (target.includes("hari")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " hari"
-                : "";
-          } else if (target.startsWith(" ") && target.endsWith(" ")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + ""
-                : "";
-          } else if (target.includes("%")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " %"
-                : "";
-          } else if (target.includes("‰")) {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil || monthlyData[i].hasil === 0
-                ? monthlyData[i].hasil + " ‰"
-                : "";
-          } else {
-            monthlyData[i].hasil_text =
-              monthlyData[i].hasil && monthlyData[i].hasil === 100
-                ? "Memenuhi"
-                : "Tidak Memenuhi";
-          }
-        }
-      }
-
+      const batasBulan = (parseInt(part, 10) + 1) * 3;
       const dataList = [];
-      for (let i = 0; i < $scope.monthlyNames.length; i++) {
-        let criteriaName = $scope.monthlyNames[i];
-        let target = $scope.target[i].toLowerCase();
-        let targetHasil = $scope.validateTarget(target);
-        let axisName = "";
-        let isYaTidak = false;
+      console.log("YEARLY DATA PDF:", angular.copy($scope.yearlyData));
 
-        if (target.includes("laporan")) {
-          axisName = "Laporan";
-        } else if (target.includes("mg/l")) {
-          axisName = "mg/l";
-        } else if (target.includes("ph 6-9")) {
-          axisName = "PH";
-        } else if (target.includes("menit")) {
-          axisName = "Menit";
-        } else if (target.includes("jam")) {
-          axisName = "Jam";
-        } else if (target.includes("hari")) {
-          axisName = "Hari";
-        } else if (target.startsWith(" ") && target.endsWith(" ")) {
-          axisName = "Jumlah";
-        } else if (target.includes("%")) {
-          axisName = "Persen(%)";
-        } else if (target.includes("‰")) {
-          axisName = "Permil(‰)";
-        } else {
-          axisName = $scope.target[i];
-          isYaTidak = true;
-        }
+      for (let i = 0; i < $scope.monthlyNames.length; i++) {
+
+        const kriteria = $scope.monthlyNames[i];
+        const targetRaw = $scope.target[i].toLowerCase();
+        const [standarBawah, standarAtas] = $scope.validateTarget(targetRaw);
 
         let dataPencapaian = [];
-        let dataStandarBawah = [];
         let dataStandarAtas = [];
-        let standarBawah = targetHasil[0];
-        let standarAtas = targetHasil[1];
-        console.log("standarAtas:" + standarAtas);
-        console.log("standarBawah:" + standarBawah);
-        for (
-          let monthIdx = 0;
-          monthIdx < (parseInt(part, 10) + 1) * 3;
-          monthIdx++
-        ) {
-          let val = $scope.yearlyData[monthIdx]
-            ? $scope.yearlyData[monthIdx].m[i].hasil
-              ? $scope.yearlyData[monthIdx].m[i].hasil
-              : 0
-            : 0;
-          dataPencapaian.push({
-            x:
-              part > 1
-                ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
-                : $scope.monthNames[monthIdx].toUpperCase(),
-            y: val,
-          });
-          dataStandarBawah.push({
-            x:
-              part > 1
-                ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
-                : $scope.monthNames[monthIdx].toUpperCase(),
-            y: standarBawah,
-          });
-          dataStandarAtas.push({
-            x:
-              part > 1
-                ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
-                : $scope.monthNames[monthIdx].toUpperCase(),
-            y: standarAtas,
-          });
+        let dataStandarBawah = [];
+
+        for (let monthIdx = 0; monthIdx < batasBulan; monthIdx++) {
+
+          let nilai = 0;
+
+          if (
+            $scope.yearlyData[monthIdx] &&
+            $scope.yearlyData[monthIdx].m &&
+            $scope.yearlyData[monthIdx].m[i] &&
+            $scope.yearlyData[monthIdx].m[i].hasil !== undefined &&
+            $scope.yearlyData[monthIdx].m[i].hasil !== null
+          ) {
+            nilai = $scope.yearlyData[monthIdx].m[i].hasil;
+          }
+
+          const labelBulan =
+            part > 1
+              ? $scope.monthNames[monthIdx].substr(0, 3).toUpperCase()
+              : $scope.monthNames[monthIdx].toUpperCase();
+
+          dataPencapaian.push({ x: labelBulan, y: nilai });
+
+          if (standarAtas != null) {
+            dataStandarAtas.push({ x: labelBulan, y: standarAtas });
+          }
+
+          if (standarBawah != null) {
+            dataStandarBawah.push({ x: labelBulan, y: standarBawah });
+          }
         }
 
-        let lines = [];
-        lines.push({
-          name: "PENCAPAIAN",
-          data: dataPencapaian,
-        });
-        if (standarAtas !== undefined && standarAtas !== null) {
-          lines.push({
-            name: "STANDAR",
-            data: dataStandarAtas,
-          });
+        let lines = [{ name: "PENCAPAIAN", data: dataPencapaian }];
+
+        if (standarAtas != null) {
+          lines.push({ name: "STANDAR", data: dataStandarAtas });
         }
-        if (standarBawah != undefined && standarBawah != null) {
-          lines.push({
-            name: "STANDAR",
-            data: dataStandarBawah,
-          });
+
+        if (standarBawah != null) {
+          lines.push({ name: "STANDAR", data: dataStandarBawah });
         }
 
         dataList.push({
           idx: i,
-          kriteria: criteriaName,
+          kriteria: kriteria,
           chart: {
-            options: {
-              xTitle: axisName,
-            },
-            lines: lines,
-          },
+            lines: lines
+          }
         });
       }
 
-      var partString = "";
-      switch (part) {
-        case 0:
-          partString = "Januari-Maret";
-          break;
-        case 1:
-          partString = "Januari-Juni";
-          break;
-        case 2:
-          partString = "Januari-September";
-          break;
-        case 3:
-          partString = "Januari-Desember";
-          break;
+      // ====== LANJUT KE PDF (SEPERTI SEMULA) ======
+      let partString = "";
+      switch (parseInt(part, 10)) {
+        case 0: partString = "Januari-Maret"; break;
+        case 1: partString = "Januari-Juni"; break;
+        case 2: partString = "Januari-September"; break;
+        case 3: partString = "Januari-Desember"; break;
       }
+
+      const periode = parseInt(part, 10);
 
       const data = {
         direkturName: localStorage.getItem("nama_direktur"),
         direkturNip: localStorage.getItem("nip_direktur"),
         rsName: localStorage.getItem("nama_rumah_sakit"),
-        unit: $scope.currPage,
+        unit: $rootScope.currPage,
         tahun: tahun,
         part: partString,
         dataList: dataList,
-        unit: $rootScope.currPage,
       };
 
+      console.log('PERIODE DIKIRIM:', periode);
+
       const url =
-        REPORT_CURRENT_URL + "/analisa_indikator_pdf/" + $scope.currPage + "/" + tahun;
+      REPORT_CURRENT_URL +
+      "/analisa_indikator_pdf/" +
+      $rootScope.currPage +
+      "/" +
+      tahun +
+      "/" +
+      periode;
+
       pmkpService.postDownload(
         url,
         data,
         "Report Analisa Indikator " +
-          $scope.formatString($scope.currPage) +
+          $scope.formatString($rootScope.currPage) +
           ".pdf"
       );
     };
@@ -740,11 +640,14 @@ sikatApp.controller(
     $scope.yearDynamic = [];
     const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
-    const startYear = currentYear; // Tahun awal tetap
-    const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
+
+    const startYear = currentYear - 1; // tahun sebelumnya
+    const endYear   = currentYear + 1; // tahun depan
+
     for (let year = startYear; year <= endYear; year++) {
-      $scope.yearDynamic.push(year);
+        $scope.yearDynamic.push(year);
     }
+
 
     $scope.getPeriodeAnalisa = function (periodeAnalisa) {
       switch (periodeAnalisa) {
@@ -1458,10 +1361,12 @@ sikatApp.controller(
     $scope.yearDynamic = [];
     const currentYear = new Date().getFullYear();
     $scope.currentYear = currentYear;
-    const startYear = currentYear; // Tahun awal tetap
-    const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
+
+    const startYear = currentYear - 1; // tahun sebelumnya
+    const endYear   = currentYear + 1; // tahun depan
+
     for (let year = startYear; year <= endYear; year++) {
-      $scope.yearDynamic.push(year);
+        $scope.yearDynamic.push(year);
     }
 
     $scope.getPeriodeAnalisa = function (periodeAnalisa) {
