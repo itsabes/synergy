@@ -35,10 +35,10 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
-    const endYear   = currentYear + 1; // tahun depan
+    const endYear = currentYear + 1; // tahun depan
 
     for (let year = startYear; year <= endYear; year++) {
-        $scope.yearDynamic.push(year);
+      $scope.yearDynamic.push(year);
     }
 
     $scope.dataId = null;
@@ -47,9 +47,9 @@ sikatApp.controller(
     $scope.loadData = () => {
       $location.url(
         "/indikatorMutu?tahun=" +
-          ($scope.tahun ? $scope.tahun : "") +
-          "&unit=" +
-          ($scope.unit ? $scope.unit : "")
+        ($scope.tahun ? $scope.tahun : "") +
+        "&unit=" +
+        ($scope.unit ? $scope.unit : "")
       );
     };
 
@@ -95,10 +95,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-            "/api/pmkp/getByYearAndType/year/" +
-            $scope.tahun +
-            "/type/" +
-            $scope.currPage,
+          "/api/pmkp/getByYearAndType/year/" +
+          $scope.tahun +
+          "/type/" +
+          $scope.currPage,
           { headers: { Authorization: localStorage.getItem("token") } }
         )
         .then((res) => {
@@ -120,10 +120,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-            "/api/pmkp/getByYearAndType/year/" +
-            $scope.tahun +
-            "/type/" +
-            $scope.currPage,
+          "/api/pmkp/getByYearAndType/year/" +
+          $scope.tahun +
+          "/type/" +
+          $scope.currPage,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -415,20 +415,20 @@ sikatApp.controller(
       console.log('PERIODE DIKIRIM:', periode);
 
       const url =
-      REPORT_CURRENT_URL +
-      "/analisa_indikator_pdf/" +
-      $rootScope.currPage +
-      "/" +
-      tahun +
-      "/" +
-      periode;
+        REPORT_CURRENT_URL +
+        "/analisa_indikator_pdf/" +
+        $rootScope.currPage +
+        "/" +
+        tahun +
+        "/" +
+        periode;
 
       pmkpService.postDownload(
         url,
         data,
         "Report Analisa Indikator " +
-          $scope.formatString($rootScope.currPage) +
-          ".pdf"
+        $scope.formatString($rootScope.currPage) +
+        ".pdf"
       );
     };
 
@@ -506,11 +506,11 @@ sikatApp.controller(
     $scope.showAnalisaIndikatorEdit = (id, periode) => {
       $location.url(
         "/analisaIndikator_edit/" +
-          $rootScope.currPage +
-          "?idAnalisaUnit=" +
-          id +
-          "&periodeAnalisa=" +
-          periode
+        $rootScope.currPage +
+        "?idAnalisaUnit=" +
+        id +
+        "&periodeAnalisa=" +
+        periode
       );
     };
 
@@ -524,19 +524,19 @@ sikatApp.controller(
     ) => {
       $location.url(
         "/analisaIndikator_new/" +
-          $rootScope.currPage +
-          "?judul=" +
-          judul +
-          "&numerator=" +
-          numerator +
-          "&denumerator=" +
-          denumerator +
-          "&target=" +
-          target +
-          "&periode_analisa=" +
-          periodeAnalisa +
-          "&idx=" +
-          id
+        $rootScope.currPage +
+        "?judul=" +
+        judul +
+        "&numerator=" +
+        numerator +
+        "&denumerator=" +
+        denumerator +
+        "&target=" +
+        target +
+        "&periode_analisa=" +
+        periodeAnalisa +
+        "&idx=" +
+        id
       );
     };
 
@@ -642,10 +642,10 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
-    const endYear   = currentYear + 1; // tahun depan
+    const endYear = currentYear + 1; // tahun depan
 
     for (let year = startYear; year <= endYear; year++) {
-        $scope.yearDynamic.push(year);
+      $scope.yearDynamic.push(year);
     }
 
 
@@ -711,7 +711,7 @@ sikatApp.controller(
 
     $scope.onUnitChange = function (selectedUnit, year) {
       if (selectedUnit) {
-       
+
         console.log("Unit yang dipilih:", selectedUnit);
         pmkpService.getDynamicData($rootScope.currPage, year, (result) => {
           if (result) {
@@ -731,7 +731,7 @@ sikatApp.controller(
                 $scope.monthlyNamesSelected = "";
                 //$scope.target = [];
                 //$scope.targetHasil = [];
-                $scope.monthlyNamesSelected = 
+                $scope.monthlyNamesSelected =
                   result.data[key]["JUDUL_INDIKATOR"];
                 $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
                 $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
@@ -824,10 +824,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-            "/api/pmkp/getByYearAndType/year/" +
-            $scope.tahun +
-            "/type/" +
-            $scope.currPage,
+          "/api/pmkp/getByYearAndType/year/" +
+          $scope.tahun +
+          "/type/" +
+          $scope.currPage,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -1309,8 +1309,12 @@ sikatApp.controller(
         .then((response) => {
           // Ambil data dari respons
           const result = response.data;
-          console.log("get chart..." + result.listChart);
-          $scope.listChart = result.listChart;
+          let chartVal = result.listChart;
+          if (chartVal !== null && typeof chartVal === 'object') {
+            chartVal = Object.values(chartVal)[0];
+          }
+          console.log("get chart..." + chartVal);
+          $scope.listChart = chartVal;
         })
         .catch((error) => {
           // Tangani error
@@ -1363,10 +1367,10 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
-    const endYear   = currentYear + 1; // tahun depan
+    const endYear = currentYear + 1; // tahun depan
 
     for (let year = startYear; year <= endYear; year++) {
-        $scope.yearDynamic.push(year);
+      $scope.yearDynamic.push(year);
     }
 
     $scope.getPeriodeAnalisa = function (periodeAnalisa) {
@@ -1419,9 +1423,9 @@ sikatApp.controller(
     $scope.listChart = "";
 
     $scope.tahun =
-    typeof $routeParams.tahun === "undefined"
-      ? $scope.yearSelect
-      : $routeParams.tahun;
+      typeof $routeParams.tahun === "undefined"
+        ? $scope.yearSelect
+        : $routeParams.tahun;
     console.log("tahun::" + $scope.tahun);
 
     $scope.getDynamicData = () => {
@@ -1494,7 +1498,7 @@ sikatApp.controller(
     });
     */
 
-    $scope.onUnitChange = function (selectedUnit,year) {
+    $scope.onUnitChange = function (selectedUnit, year) {
       if (selectedUnit) {
         console.log("Unit yang dipilih:", selectedUnit);
         $scope.listChart = "";
@@ -1554,9 +1558,9 @@ sikatApp.controller(
                             if (
                               result.data[key]["STATUS_ACC"] == 1 &&
                               result.data[key]["JUDUL_INDIKATOR"] ==
-                                selectedUnit &&
+                              selectedUnit &&
                               result.data[key]["PROCESS_TYPE"] ==
-                                $rootScope.currPage
+                              $rootScope.currPage
                             ) {
                               $scope.judulIndikator =
                                 result.data[key]["JUDUL_INDIKATOR"];
@@ -1586,7 +1590,7 @@ sikatApp.controller(
                               console.log(
                                 "status_acc:" + result.data[key]["STATUS_ACC"],
                                 " , indikator:" +
-                                  result.data[key]["JUDUL_INDIKATOR"]
+                                result.data[key]["JUDUL_INDIKATOR"]
                               );
 
                               $scope.getData();
@@ -1725,10 +1729,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-            "/api/pmkp/getByYearAndType/year/" +
-            $scope.tahun +
-            "/type/" +
-            $scope.currPage,
+          "/api/pmkp/getByYearAndType/year/" +
+          $scope.tahun +
+          "/type/" +
+          $scope.currPage,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -2208,8 +2212,12 @@ sikatApp.controller(
         .then((response) => {
           // Ambil data dari respons
           const result = response.data;
-          console.log("get chart..." + result.listChart);
-          $scope.listChart = result.listChart;
+          let chartVal = result.listChart;
+          if (chartVal !== null && typeof chartVal === 'object') {
+            chartVal = Object.values(chartVal)[0];
+          }
+          console.log("get chart..." + chartVal);
+          $scope.listChart = chartVal;
         })
         .catch((error) => {
           // Tangani error
