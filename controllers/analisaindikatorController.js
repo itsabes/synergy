@@ -1340,11 +1340,20 @@ sikatApp.controller(
           // Ambil data dari respons
           const result = response.data;
           let chartVal = result.listChart;
+          console.log("Raw result.listChart:", chartVal);
           if (chartVal !== null && typeof chartVal === 'object') {
             chartVal = Object.values(chartVal)[0];
           }
-          console.log("get chart..." + chartVal);
-          $scope.listChart = chartVal;
+          console.log("get chart...", chartVal);
+          // Fallback if chartVal is still an object (e.g. contains URL property)
+          if (chartVal !== null && typeof chartVal === 'object') {
+              if (chartVal.url) $scope.listChart = chartVal.url;
+              else if (chartVal.file) $scope.listChart = chartVal.file;
+              else if (chartVal.path) $scope.listChart = chartVal.path;
+              else $scope.listChart = chartVal; 
+          } else {
+              $scope.listChart = chartVal;
+          }
         })
         .catch((error) => {
           // Tangani error
