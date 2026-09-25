@@ -35,10 +35,14 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
+<<<<<<< HEAD
     const endYear = currentYear + 1; // tahun depan
+=======
+    const endYear   = currentYear + 1; // tahun depan
+>>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
     for (let year = startYear; year <= endYear; year++) {
-      $scope.yearDynamic.push(year);
+        $scope.yearDynamic.push(year);
     }
 
     $scope.dataId = null;
@@ -95,10 +99,17 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
+<<<<<<< HEAD
           "/api/pmkp/getByYearAndType/year/" +
           $scope.tahun +
           "/type/" +
           $scope.currPage,
+=======
+            "/api/pmkp/getByYearAndType/year/" +
+            $scope.tahun +
+            "/type/" +
+            $scope.currPage,
+>>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
           { headers: { Authorization: localStorage.getItem("token") } }
         )
         .then((res) => {
@@ -415,6 +426,7 @@ sikatApp.controller(
       console.log('PERIODE DIKIRIM:', periode);
 
       const url =
+<<<<<<< HEAD
         REPORT_CURRENT_URL +
         "/analisa_indikator_pdf/" +
         $rootScope.currPage +
@@ -422,13 +434,27 @@ sikatApp.controller(
         tahun +
         "/" +
         periode;
+=======
+      REPORT_CURRENT_URL +
+      "/analisa_indikator_pdf/" +
+      $rootScope.currPage +
+      "/" +
+      tahun +
+      "/" +
+      periode;
+>>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
       pmkpService.postDownload(
         url,
         data,
         "Report Analisa Indikator " +
+<<<<<<< HEAD
         $scope.formatString($rootScope.currPage) +
         ".pdf"
+=======
+          $scope.formatString($rootScope.currPage) +
+          ".pdf"
+>>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
       );
     };
 
@@ -642,10 +668,14 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
+<<<<<<< HEAD
     const endYear = currentYear + 1; // tahun depan
+=======
+    const endYear   = currentYear + 1; // tahun depan
+>>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
     for (let year = startYear; year <= endYear; year++) {
-      $scope.yearDynamic.push(year);
+        $scope.yearDynamic.push(year);
     }
 
 
@@ -1367,10 +1397,14 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
+<<<<<<< HEAD
     const endYear = currentYear + 1; // tahun depan
+=======
+    const endYear   = currentYear + 1; // tahun depan
+>>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
     for (let year = startYear; year <= endYear; year++) {
-      $scope.yearDynamic.push(year);
+        $scope.yearDynamic.push(year);
     }
 
     $scope.getPeriodeAnalisa = function (periodeAnalisa) {
