@@ -1811,7 +1811,40 @@ sikatApp.service("pmkpService", function($http) {
 
     // Call the callback function with the result
     callbackFunc(result);
-};
+  };
+
+  this.getDynamicDataByPeriodeAnalisa = function (
+    process_type,
+    year,
+    periode,
+    callbackFunc
+  ) {
+    var result = { data: null };
+    var xhr = new XMLHttpRequest();
+
+    xhr.open(
+      "GET",
+      SERVER_URL +
+        "/api/dynamic/getHeaderDataByPeriodeAnalisa" +
+        "/proc_type/" + process_type +
+        "/year/" + year +
+        "/periode/" + periode,
+      false
+    );
+
+    xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+
+    try {
+      xhr.send();
+      if (xhr.status === 200) {
+        result.data = JSON.parse(xhr.responseText);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    callbackFunc(result);
+  };
 
 this.getDynamicDataFormA = function(process_type,year, callbackFunc) {
   var result = { data: null };

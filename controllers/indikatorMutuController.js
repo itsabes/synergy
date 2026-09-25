@@ -35,8 +35,11 @@ sikatApp.controller("indikatorMutuListController", function(
   $scope.yearDynamic = [];
   const currentYear = new Date().getFullYear();
   $scope.currentYear = currentYear;
-  const startYear = currentYear; // Tahun awal tetap
-  const endYear = new Date().getFullYear() + 1; // Tahun berjalan + 1 (tahun depan)
+
+  // EDIT DI SINI
+  const startYear = currentYear - 1; // tahun sebelumnya
+  const endYear   = currentYear + 1; // tahun depan
+
   for (let year = startYear; year <= endYear; year++) {
       $scope.yearDynamic.push(year);
   }
@@ -537,8 +540,14 @@ sikatApp.controller("indikatorMutuNewController", function(
   };
 
   $scope.yearDynamic = [];
-  const currentYear = new Date().getFullYear(); // Tahun berjalan
-  $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
+  const currentYear = new Date().getFullYear();
+  $scope.currentYear = currentYear;
+
+  $scope.yearDynamic.push(
+      currentYear - 1, // tahun sebelumnya
+      currentYear,
+      currentYear + 1  // tahun depan
+  );
 
   $scope.backToList = () => {
     window.history.back();
@@ -559,8 +568,14 @@ sikatApp.controller("indikatorMutuEditController", function(
   $scope.tahun = $routeParams.tahun;
 
   $scope.yearDynamic = [];
-  const currentYear = new Date().getFullYear(); // Tahun berjalan
-  $scope.yearDynamic.push(currentYear, currentYear + 1); // Tambahkan tahun berjalan dan tahun depan
+  const currentYear = new Date().getFullYear();
+  $scope.currentYear = currentYear;
+
+  $scope.yearDynamic.push(
+      currentYear - 1, // tahun sebelumnya
+      currentYear,
+      currentYear + 1  // tahun depan
+  );
 
   $rootScope.currPageParam = $routeParams.param;
   $scope.id = $routeParams.uniqIdx;
