@@ -35,11 +35,7 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
-<<<<<<< HEAD
-    const endYear = currentYear + 1; // tahun depan
-=======
     const endYear   = currentYear + 1; // tahun depan
->>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
     for (let year = startYear; year <= endYear; year++) {
         $scope.yearDynamic.push(year);
@@ -51,9 +47,9 @@ sikatApp.controller(
     $scope.loadData = () => {
       $location.url(
         "/indikatorMutu?tahun=" +
-        ($scope.tahun ? $scope.tahun : "") +
-        "&unit=" +
-        ($scope.unit ? $scope.unit : "")
+          ($scope.tahun ? $scope.tahun : "") +
+          "&unit=" +
+          ($scope.unit ? $scope.unit : "")
       );
     };
 
@@ -99,17 +95,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-<<<<<<< HEAD
-          "/api/pmkp/getByYearAndType/year/" +
-          $scope.tahun +
-          "/type/" +
-          $scope.currPage,
-=======
             "/api/pmkp/getByYearAndType/year/" +
             $scope.tahun +
             "/type/" +
             $scope.currPage,
->>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
           { headers: { Authorization: localStorage.getItem("token") } }
         )
         .then((res) => {
@@ -131,10 +120,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-          "/api/pmkp/getByYearAndType/year/" +
-          $scope.tahun +
-          "/type/" +
-          $scope.currPage,
+            "/api/pmkp/getByYearAndType/year/" +
+            $scope.tahun +
+            "/type/" +
+            $scope.currPage,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -426,15 +415,6 @@ sikatApp.controller(
       console.log('PERIODE DIKIRIM:', periode);
 
       const url =
-<<<<<<< HEAD
-        REPORT_CURRENT_URL +
-        "/analisa_indikator_pdf/" +
-        $rootScope.currPage +
-        "/" +
-        tahun +
-        "/" +
-        periode;
-=======
       REPORT_CURRENT_URL +
       "/analisa_indikator_pdf/" +
       $rootScope.currPage +
@@ -442,19 +422,13 @@ sikatApp.controller(
       tahun +
       "/" +
       periode;
->>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
       pmkpService.postDownload(
         url,
         data,
         "Report Analisa Indikator " +
-<<<<<<< HEAD
-        $scope.formatString($rootScope.currPage) +
-        ".pdf"
-=======
           $scope.formatString($rootScope.currPage) +
           ".pdf"
->>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
       );
     };
 
@@ -532,11 +506,11 @@ sikatApp.controller(
     $scope.showAnalisaIndikatorEdit = (id, periode) => {
       $location.url(
         "/analisaIndikator_edit/" +
-        $rootScope.currPage +
-        "?idAnalisaUnit=" +
-        id +
-        "&periodeAnalisa=" +
-        periode
+          $rootScope.currPage +
+          "?idAnalisaUnit=" +
+          id +
+          "&periodeAnalisa=" +
+          periode
       );
     };
 
@@ -550,19 +524,19 @@ sikatApp.controller(
     ) => {
       $location.url(
         "/analisaIndikator_new/" +
-        $rootScope.currPage +
-        "?judul=" +
-        judul +
-        "&numerator=" +
-        numerator +
-        "&denumerator=" +
-        denumerator +
-        "&target=" +
-        target +
-        "&periode_analisa=" +
-        periodeAnalisa +
-        "&idx=" +
-        id
+          $rootScope.currPage +
+          "?judul=" +
+          judul +
+          "&numerator=" +
+          numerator +
+          "&denumerator=" +
+          denumerator +
+          "&target=" +
+          target +
+          "&periode_analisa=" +
+          periodeAnalisa +
+          "&idx=" +
+          id
       );
     };
 
@@ -668,11 +642,7 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
-<<<<<<< HEAD
-    const endYear = currentYear + 1; // tahun depan
-=======
     const endYear   = currentYear + 1; // tahun depan
->>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
     for (let year = startYear; year <= endYear; year++) {
         $scope.yearDynamic.push(year);
@@ -741,7 +711,7 @@ sikatApp.controller(
 
     $scope.onUnitChange = function (selectedUnit, year) {
       if (selectedUnit) {
-
+       
         console.log("Unit yang dipilih:", selectedUnit);
         pmkpService.getDynamicData($rootScope.currPage, year, (result) => {
           if (result) {
@@ -761,7 +731,7 @@ sikatApp.controller(
                 $scope.monthlyNamesSelected = "";
                 //$scope.target = [];
                 //$scope.targetHasil = [];
-                $scope.monthlyNamesSelected =
+                $scope.monthlyNamesSelected = 
                   result.data[key]["JUDUL_INDIKATOR"];
                 $scope.target.push(result.data[key]["TARGET_PENCAPAIAN"]);
                 $scope.targetHasil.push(result.data[key]["TARGET_PENCAPAIAN"]);
@@ -854,10 +824,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-          "/api/pmkp/getByYearAndType/year/" +
-          $scope.tahun +
-          "/type/" +
-          $scope.currPage,
+            "/api/pmkp/getByYearAndType/year/" +
+            $scope.tahun +
+            "/type/" +
+            $scope.currPage,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -1339,21 +1309,9 @@ sikatApp.controller(
         .then((response) => {
           // Ambil data dari respons
           const result = response.data;
-          let chartVal = result.listChart;
-          console.log("Raw result.listChart:", chartVal);
-          if (chartVal !== null && typeof chartVal === 'object') {
-            chartVal = Object.values(chartVal)[0];
-          }
-          console.log("get chart...", chartVal);
-          // Fallback if chartVal is still an object (e.g. contains URL property)
-          if (chartVal !== null && typeof chartVal === 'object') {
-              if (chartVal.url) $scope.listChart = chartVal.url;
-              else if (chartVal.file) $scope.listChart = chartVal.file;
-              else if (chartVal.path) $scope.listChart = chartVal.path;
-              else $scope.listChart = chartVal; 
-          } else {
-              $scope.listChart = chartVal;
-          }
+          const chart = result.listChart && result.listChart[$scope.monthlyNamesSelected];
+          console.log("get chart...", chart);
+          $scope.listChart = chart && chart.url ? chart.url : "";
         })
         .catch((error) => {
           // Tangani error
@@ -1406,11 +1364,7 @@ sikatApp.controller(
     $scope.currentYear = currentYear;
 
     const startYear = currentYear - 1; // tahun sebelumnya
-<<<<<<< HEAD
-    const endYear = currentYear + 1; // tahun depan
-=======
     const endYear   = currentYear + 1; // tahun depan
->>>>>>> d80e9df3e71594c4cbf796e4bd2b85d6d7a7ec82
 
     for (let year = startYear; year <= endYear; year++) {
         $scope.yearDynamic.push(year);
@@ -1466,9 +1420,9 @@ sikatApp.controller(
     $scope.listChart = "";
 
     $scope.tahun =
-      typeof $routeParams.tahun === "undefined"
-        ? $scope.yearSelect
-        : $routeParams.tahun;
+    typeof $routeParams.tahun === "undefined"
+      ? $scope.yearSelect
+      : $routeParams.tahun;
     console.log("tahun::" + $scope.tahun);
 
     $scope.getDynamicData = () => {
@@ -1541,7 +1495,7 @@ sikatApp.controller(
     });
     */
 
-    $scope.onUnitChange = function (selectedUnit, year) {
+    $scope.onUnitChange = function (selectedUnit,year) {
       if (selectedUnit) {
         console.log("Unit yang dipilih:", selectedUnit);
         $scope.listChart = "";
@@ -1601,9 +1555,9 @@ sikatApp.controller(
                             if (
                               result.data[key]["STATUS_ACC"] == 1 &&
                               result.data[key]["JUDUL_INDIKATOR"] ==
-                              selectedUnit &&
+                                selectedUnit &&
                               result.data[key]["PROCESS_TYPE"] ==
-                              $rootScope.currPage
+                                $rootScope.currPage
                             ) {
                               $scope.judulIndikator =
                                 result.data[key]["JUDUL_INDIKATOR"];
@@ -1633,7 +1587,7 @@ sikatApp.controller(
                               console.log(
                                 "status_acc:" + result.data[key]["STATUS_ACC"],
                                 " , indikator:" +
-                                result.data[key]["JUDUL_INDIKATOR"]
+                                  result.data[key]["JUDUL_INDIKATOR"]
                               );
 
                               $scope.getData();
@@ -1772,10 +1726,10 @@ sikatApp.controller(
       $http
         .get(
           SERVER_URL +
-          "/api/pmkp/getByYearAndType/year/" +
-          $scope.tahun +
-          "/type/" +
-          $scope.currPage,
+            "/api/pmkp/getByYearAndType/year/" +
+            $scope.tahun +
+            "/type/" +
+            $scope.currPage,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -2255,21 +2209,9 @@ sikatApp.controller(
         .then((response) => {
           // Ambil data dari respons
           const result = response.data;
-          let chartVal = result.listChart;
-          console.log("Raw result.listChart:", chartVal);
-          if (chartVal !== null && typeof chartVal === 'object') {
-            chartVal = Object.values(chartVal)[0];
-          }
-          console.log("get chart...", chartVal);
-          // Fallback if chartVal is still an object (e.g. contains URL property)
-          if (chartVal !== null && typeof chartVal === 'object') {
-              if (chartVal.url) $scope.listChart = chartVal.url;
-              else if (chartVal.file) $scope.listChart = chartVal.file;
-              else if (chartVal.path) $scope.listChart = chartVal.path;
-              else $scope.listChart = chartVal; 
-          } else {
-              $scope.listChart = chartVal;
-          }
+          const chart = result.listChart && result.listChart[$scope.monthlyNamesSelected];
+          console.log("get chart...", chart);
+          $scope.listChart = chart && chart.url ? chart.url : "";
         })
         .catch((error) => {
           // Tangani error
